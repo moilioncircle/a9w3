@@ -1,0 +1,30 @@
+BODY {
+	margin:5px;
+}
+BODY,TD,PRE{
+    font-size: 12px;
+    font-family:Arial, sans-serifarial, Verdana, Helvetica;
+    align:left;
+}
+IFRAME {
+    width:100%;
+    height:100%;
+    margin:0px;
+}
+TEXTAREA
+{
+	font-size:12px;
+	height:28px;
+}
+SELECT,INPUT
+{
+	font-size:12px;
+	height:18px;
+}
+
+.a9w3_edit_text_on {
+	border: 1px solid #44aadd;
+}
+.a9w3_edit_text_off {
+	border: 1px solid #000000;
+}

@@ -1,0 +1,96 @@
+.htmlarea-object-inspector {
+  border: 1px solid #7f9db9;
+}
+
+.htmlarea-object-inspector .content {
+  padding: 0px 0.7em 0.7em 0.7em;
+}
+
+.htmlarea-object-inspector, .htmlarea-object-inspector table,
+.htmlarea-object-inspector select, .htmlarea-object-inspector button {
+  font: 11px tahoma,verdana,sans-serif;
+}
+
+.htmlarea-object-inspector .section {
+  -moz-border-radius: 4px;
+  border: 1px solid #000;
+/*  border: 2px groove ButtonFace; */
+  padding: 0.1em 0.6em;
+}
+
+.htmlarea-object-inspector .section .title {
+  -moz-border-radius: 4px;
+  position: relative;
+  top: -1em;
+  background-color: #555;
+  color: #fff;
+/*  float: left; */
+  padding: 1px 3px;
+  border: 1px solid #000;
+/*  border-color: ButtonShadow ButtonHighlight ButtonHighlight ButtonShadow;
+  background-color: ButtonFace; */
+  font-weight: bold;
+}
+
+.htmlarea-object-inspector .section .title .tooltip {
+  font-weight: normal;
+}
+
+.htmlarea-object-inspector .section .body {
+  clear: both;
+  position: relative;
+  top: -0.5em;
+}
+
+.htmlarea-object-inspector .control-color-selector {
+  width: 3em;
+  border: 1px solid;
+  border-color: ButtonHighlight ButtonShadow ButtonShadow ButtonHighlight;
+  text-align: right;
+}
+
+.htmlarea-object-inspector .control-color-selector.hover {
+  border-color: #00f;
+}
+
+.htmlarea-object-inspector .control-color-nuller {
+  padding: 0px 1px 0px 0px; cursor: default; border-left: 1px solid ButtonShadow;
+  background-color: ButtonFace; color: buttonText;
+}
+.htmlarea-object-inspector .control-color-nuller.hover { background-color: #fff; color: #f00; }
+
+.htmlarea-object-inspector .control-title h1 {
+  overflow: hidden;
+  white-space: nowrap;
+  margin: 0px 0px 1em 0px;
+  font-size: 120%;
+  border-bottom: 1px solid ButtonShadow;
+  padding: 0px 4px 2px 4px;
+}
+
+.htmlarea-object-inspector table.properties {
+  border-collapse: collapse;
+}
+
+.htmlarea-object-inspector table.properties td { white-space: nowrap; }
+
+.htmlarea-object-inspector table.properties td.label {
+  text-align: right;
+  padding-right: 0.5em;
+}
+
+.htmlarea-object-inspector .control-input {
+  display: inline;
+}
+
+.htmlarea-object-inspector input, .htmlarea-object-inspector select {
+  border: 1px solid;
+  border-color: ButtonShadow ButtonHighlight ButtonHighlight ButtonShadow;
+  padding: 0px;
+  margin: 0px;
+  font: 11px tahoma,verdana,sans-serif;
+}
+.htmlarea-object-inspector input.active {
+  border-color: #00f;
+  background-color: #ff8;
+}
