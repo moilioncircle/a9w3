@@ -1,0 +1,68 @@
+/* styles for the ContextMenu /HTMLArea */
+/* The ContextMenu plugin is (c) dynarch.com 2003. */
+/* Distributed under the same terms as HTMLArea itself */
+
+div.htmlarea-context-menu {
+  position: absolute;
+  border: 1px solid #aca899;
+  padding: 2px;
+  background-color: #fff;
+  color: #000;
+  cursor: default;
+  z-index: 1000;
+}
+
+div.htmlarea-context-menu table {
+  font: 8pt tahoma,verdana,sans-serif;
+  border-collapse: collapse;
+}
+
+div.htmlarea-context-menu tr.item td.icon img {
+  width: 18px;
+  height: 18px;
+}
+
+div.htmlarea-context-menu tr.item td { height: 20px; }
+
+div.htmlarea-context-menu tr.item td.icon {
+  padding: 0px 3px;
+  background-color: #cdf;
+}
+
+div.htmlarea-context-menu tr.item td.label {
+  padding-right: 10px;
+  padding-left: 3px;
+}
+
+div.htmlarea-context-menu tr.separator td {
+  padding: 2px 0px;
+}
+
+div.htmlarea-context-menu tr.separator td div {
+  background-color: #aca899;
+  overflow: hidden;
+  height: 1px;
+  font-size: 1px;
+}
+
+div.htmlarea-context-menu tr.separator td.icon {
+  background-color: #cdf;
+}
+
+div.htmlarea-context-menu tr.separator td.icon div {
+  /* margin-left: 3px; */
+  background-color: #fff;
+}
+
+div.htmlarea-context-menu tr.separator td.label div {
+  margin-right: 3px;
+}
+
+div.htmlarea-context-menu tr.item.hover {
+  background-color: #316ac5;
+  color: #fff;
+}
+
+div.htmlarea-context-menu tr.item.hover td.icon {
+  background-color: #619af5;
+}

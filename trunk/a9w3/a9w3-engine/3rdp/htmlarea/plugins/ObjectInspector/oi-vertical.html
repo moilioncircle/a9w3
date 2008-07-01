@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Pragma" content="no-cache"></meta>
+    <title>Object inspector vertical</title>
+    <script type="text/javascript">
+      function initDocument() {
+        window.parent.ObjectInspector.editor.plugins["ObjectInspector"].instance.onDataLoaded();
+      }
+    </script>
+  </head>
+  <body onload="initDocument()">
+    <div class="control-title"><code>
+        args.onUpdate = function() {
+          var spans = this.target.getElementsByTagName("span");
+          var source = this.oi.element;
+          var txt = source.tagName.toLowerCase();
+          if (source.id)
+            txt += "#" + source.id;
+          if (source.className)
+            txt += "." + source.className;
+          spans[1].innerHTML = txt;
+        };
+      </code><h1 title="Object Inspector"><span>O.I.</span> [<span></span>]</h1></div>
+    <div class="content">
+      <table border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse;">
+        <tr>
+          <td valign="top" style="padding-right: 5px">
+            <div class="section">
+              <div class="title"><span>Colors</span></div>
+              <table border="0" cellpadding="0" cellspacing="0" class="body properties">
+                <tr>
+                  <td class="label"><span>Background color:</span></td>
+                  <td><div class="control-color-selector"><code>
+                        args.type = "style[backgroundColor]";
+                      </code><span>Choose bg color</span></div></td>
+                </tr>
+                <tr>
+                  <td class="label"><span>Foreground color:</span></td>
+                  <td><div class="control-color-selector"><code>
+                        args.type = "style[color]";
+                      </code><span>Choose text color</span></div></td>
+                </tr>
+              </table>
+            </div>
+            <div style="text-align: center; padding: 5px 0">
+              <button class="control-button-makeDiv">Make div</button>
+              <button class="control-button-makeSpan">Make span</button>
+            </div>
+          </td>
+        </tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr>
+          <td valign="top" style="padding-right: 5px">
+            <div class="section">
+              <div class="title"><span>Layout</span></div>
+              <table border="0" cellpadding="0" cellspacing="0" class="body properties">
+                <tr>
+                  <td class="label"><span>Padding:</span></td>
+                  <td><div class="control-input"><code>
+                        args.type = "numeric length style[paddingTop]";
+                      </code><span>Top padding</span></div></td>
+                  <td><div class="control-input"><code>
+                        args.type = "numeric length style[paddingRight]";
+                      </code><span>Right padding</span></div></td>
+                  <td><div class="control-input"><code>
+                        args.type = "numeric length style[paddingBottom]";
+                      </code><span>Bottom padding</span></div></td>
+                  <td><div class="control-input"><code>
+                        args.type = "numeric length style[paddingLeft]";
+                      </code><span>Left padding</span></div></td>
+                </tr>
+                <tr>
+                  <td class="label"><span>Margin:</span></td>
+                  <td><div class="control-input"><code>
+                        args.type = "numeric length style[marginTop]";
+                      </code><span>Top margin</span></div></td>
+                  <td><div class="control-input"><code>
+                        args.type = "numeric length style[marginRight]";
+                      </code><span>Right margin</span></div></td>
+                  <td><div class="control-input"><code>
+                        args.type = "numeric length style[marginBottom]";
+                      </code><span>Bottom margin</span></div></td>
+                  <td><div class="control-input"><code>
+                        args.type = "numeric length style[marginLeft]";
+                      </code><span>Left margin</span></div></td>
+                </tr>
+                <tr>
+                  <td class="label"><span>Width:</span></td>
+                  <td><div class="control-input"><code>
+                        args.type = "numeric length style[width]";
+                      </code><span>Element width</span></div></td>
+                  <td class="label" colspan="2"><span>Height:</span></td>
+                  <td><div class="control-input"><code>
+                        args.type = "numeric length style[height]";
+                      </code><span>Element height</span></div></td>
+                </tr>
+                <tr>
+                  <td class="label"><span>Float:</span></td>
+                  <td colspan="4"><div class="control-select"><code>
+                        args.options = { "none"  : "None",
+                                         "left"  : "Left",
+                                         "right" : "Right" };
+                        args.onUpdate = function() {
+                          if (HTMLArea.is_ie)
+                            this.setValue(this.oi.element.style.getAttribute("float"));
+                          else
+                            this.setValue(this.oi.element.style.getPropertyValue("float"));
+                        };
+                        args.onSelect = function() {
+                          if (HTMLArea.is_ie) {
+                            this.oi.element.style.setAttribute("float", this.getValue(), "");
+                            this.oi.redraw();
+                          } else
+                            this.oi.element.style.setProperty("float", this.getValue(), "");
+                        };
+                      </code><span>Floating element?</span></div></td>
+                </tr>
+              </table>
+            </div>
+          </td>
+        </tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr>
+          <td valign="top">
+            <div class="section">
+              <div class="title"><span>Borders</span></div>
+              <table border="0" cellpadding="0" cellspacing="0" class="body properties" style="text-align: center">
+                <tr>
+                  <td rowspan="2" class="label"><span>Style:</span></td>
+                  <td colspan="2"><div class="control-select-border-style"><code>
+                        args.type = "borderTopStyle";
+                      </code><span>Top border style</span></div></td>
+                  <td colspan="2"><div class="control-select-border-style"><code>
+                        args.type = "borderRightStyle";
+                      </code><span>Right border style</span></div></td>
+                </tr>
+                <tr>
+                  <td colspan="2"><div class="control-select-border-style"><code>
+                        args.type = "borderBottomStyle";
+                      </code><span>Bottom border style</span></div></td>
+                  <td colspan="2"><div class="control-select-border-style"><code>
+                        args.type = "borderLeftStyle";
+                      </code><span>Left border style</span></div></td>
+                </tr>
+                <tr>
+                  <td class="label"><span>Thickness:</span></td>
+                  <td><div class="control-input"><code>
+                        args.type = "numeric length style[borderTopWidth]";
+                      </code><span>Top border thickness</span></div></td>
+                  <td><div class="control-input"><code>
+                        args.type = "numeric length style[borderRightWidth]";
+                      </code><span>Right border thickness</span></div></td>
+                  <td><div class="control-input"><code>
+                        args.type = "numeric length style[borderBottomWidth]";
+                      </code><span>Bottom border thickness</span></div></td>
+                  <td><div class="control-input"><code>
+                        args.type = "numeric length style[borderLeftWidth]";
+                      </code><span>Left border thickness</span></div></td>
+                </tr>
+                <tr>
+                  <td class="label"><span>Color:</span></td>
+                  <td><div class="control-color-selector"><code>
+                        args.type = "style[borderTopColor]";
+                      </code><span>Select top border color</span></div></td>
+                  <td><div class="control-color-selector"><code>
+                        args.type = "style[borderRightColor]";
+                      </code><span>Select right border color</span></div></td>
+                  <td><div class="control-color-selector"><code>
+                        args.type = "style[borderBottomColor]";
+                      </code><span>Select bottom border color</span></div></td>
+                  <td><div class="control-color-selector"><code>
+                        args.type = "style[borderLeftColor]";
+                      </code><span>Select left border color</span></div></td>
+                </tr>
+              </table>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

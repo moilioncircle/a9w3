@@ -1,0 +1,106 @@
+﻿<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+<pre>
+A9text - Text Doc
+^^^^^^^^^^^^^^^^^^
+- License: GNU General Public License (GPL)
+- Version: 20080320
+
+[[a9text&lt;=./data/a9text.png]] is a set of text-doc specification,
+implementations and tools.it is easy and friendly to read, write and
+translate(to docbook/html/pdf).
+
+0. Sections
+^^^^^^^^^^^
+[[&lt;=$INDEX]]
+
+1. main links
+^^^^^^^^^^^^^
+*) [[my home (www.trydofor.com)=&gt;http://www.trydofor.com]]
+*) [[project home=&gt;http://sourceforge.net/projects/a9text]]
+*) [[project cvs=&gt;http://a9text.cvs.sourceforge.net/a9text/]]
+*) [[download zip file (local,lastest)=&gt;a9text.zip]]
+*) [[download released files (sf.net)=&gt;http://sourceforge.net/project/showfiles.php?group_id=197873]]
+*) [[mail list=&gt;mailto:a9text@googlegroups.com]]
+*) [[a9text group at google=&gt;http://groups.google.com/group/a9text]]
+
+2. cvs access
+^^^^^^^^^^^^^
+cvs co -P a9text
+
+*) developer:
+   CVSROOT=:ext:trydofor@a9text.cvs.sourceforge.net:/cvsroot/a9text
+*) anonymous:
+   CVSROOT=:pserver:anonymous@a9text.cvs.sourceforge.net:/cvsroot/a9text
+
+3. impl_javascript
+^^^^^^^^^^^^^^^^^^
+a pure javascript implementation,
+works well on IE6.0/Opera8.5/Firefox1.5.
+there are some useful tools, like right-click-menu.
+
+3.1. impl_javascript structure
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...............................................
+impl_javascript
+  |  a9engine.js          core script (Deprecated)
+  |  a9loader.js          js loader and async manager
+  |  a9text.htm           html/js entrance
+  |  change-log.txt       (Deprecated)
+  |  todos.txt            new chagelog
+  |
+  +- __testdemo__         test and demo
+  +- doc                  document
+  +- com/trydofor/a9text  ***(interesting things)
+  +- com/trydofor/a9js
+  |   +- http
+  |   |      __info__.js  package description
+  |   |      xhr.js       XmlHttpRequest class
+  |   +- code
+  |   |      __info__.js  package description
+  |   |      aes.js       Aes class
+  |   |      md5.js       Md5 class
+  |   +- format
+  |   |      __info__.js  package description
+  |   |      date.js      like java's DateFormat
+...............................................
+
+3.2. impl_javascript a9loader example
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+In fact, the a9loader is a class loader of a9text,it make js works like java.
+it is an important part of a9text runtime,it can works standalong.
+
+code example:
+=============== js : A9Loader.asyncLoadClass ===============
+A9Loader.asyncLoadClass('com.trydofor.a9text.parser.a9text');
+A9Loader.asyncLoadClass('com.trydofor.a9text.render.html.a9text');
+A9Loader.runAfterClassLoaded(function(){
+domRender = new com.trydofor.a9text.render.dom.a9text.A9TextRender();
+htmRender = new com.trydofor.a9text.render.html.a9text.A9TextRender();
+});
+==============================================================
+
+3.3. impl_javascript examples
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+*) [[A9text Manual (htm-render)=&gt;http://a9text.sf.net/impl_javascript/a9text.htm]]
+*) [[A9text UserGuide (htm-render)=&gt;http://a9text.sf.net/impl_javascript/doc/cn/a9text/a9text-guide.htm]]
+*) [[A9text TestAll (dom-render/htm-render)=&gt;http://a9text.sf.net/impl_javascript/__testdemo__/com_trydofor_a9tex/test-a9textAll.htm]]
+*) [[A9text CodeUtil=&gt;http://a9text.sf.net/impl_javascript/tools/minitools/code-util.htm]]
+*) [[A9text SetUtil=&gt;http://a9text.sf.net/impl_javascript/tools/minitools/set-util.htm]]
+
+4. impl_java
+^^^^^^^^^^^^
+java and eclipse plugin implementation,
+more powerful to write and translate(docbook,pdf,word)
+
+5. other links
+^^^^^^^^^^^^^^
+*) [[JSI=&gt;http://jsintegration.sourceforge.net/]]
+*) [[Ecma-262=&gt;http://www.ecma-international.org/publications/standards/Ecma-262.htm]]
+*) [[AsciiDoc=&gt;http://www.methods.co.nz/asciidoc/]]
+
+==============================================================================
+
+more in cvs, good luck :)
+</pre>
+<script type='text/javascript' src='../../../../../a9w3-engine/core/a9loader.js'></script>
+<script type='text/javascript' src='../../../../../a9w3-engine/data/script/reader/a9w3-a9text.js'></script>

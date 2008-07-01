@@ -1,0 +1,28 @@
+BODY {
+	overflow:hidden;
+	margin: 0px;
+    width:600px;
+	font-size:12px;
+}
+TEXTAREA
+{
+	width:100%;
+	height:575px;
+	margin: 0px;
+	padding: 0px;
+    font-family: Courier, "Courier New","Sans Mono",Fixedsys;
+}
+SELECT
+{
+	color:#000000;
+	background-color:#FFFFFF;
+	font-size:12px;
+	height:20px;
+	margin:1px;
+}
+.a9w3_edit_text_on {
+	border: 1px solid #44aadd;
+}
+.a9w3_edit_text_off {
+	border: 1px solid #000000;
+}
