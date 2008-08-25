@@ -1,0 +1,72 @@
+﻿#common
+common.lang = en
+
+#parser
+parser.common =
+parser.join.text.name = *.txt|*.a9t
+
+# see http://www.faqs.org/rfcs/rfc1738.html
+parser.link.simple-1.addr   = $1
+parser.link.simple-1.regexp = (file://[\w\$\-_\.\+!\*'\(\),\{\}\|\\\^~\[\]`<>#%;/\?:@&=]+)
+parser.link.simple-2.addr   = $1
+parser.link.simple-2.regexp = (http://[\w\$\-_\.\+!\*'\(\),\{\}\|\\\^~\[\]`<>#%;/\?:@&=]+)
+parser.link.simple-3.addr   = $1
+parser.link.simple-3.regexp = (https://[\w\$\-_\.\+!\*'\(\),\{\}\|\\\^~\[\]`<>#%;/\?:@&=]+)
+parser.link.simple-4.addr   = $1
+parser.link.simple-4.regexp = (ftp://[\w\$\-_\.\+!\*'\(\),\{\}\|\\\^~\[\]`<>#%;/\?:@&=]+)
+parser.link.simple-5.addr   = $1
+parser.link.simple-5.regexp = (mailto:[\w\-\.]+@[\w\-\.]+\.[\w]+)
+parser.link.simple-6.addr   = mailto:$1
+parser.link.simple-6.regexp = ([\w\-\.]+@[\w\-\.]+\.[\w]+)
+
+parser.area.aes.ball   = com.trydofor.a9text.parser.area.b64
+parser.area.aes.clzz   = AreaB64Parser
+parser.area.bash.ball  = com.trydofor.a9text.parser.area.bash
+parser.area.bash.clzz  = AreaBashParser
+parser.area.b64.ball   = com.trydofor.a9text.parser.area.b64
+parser.area.b64.clzz   = AreaB64Parser
+parser.area.c.ball     = com.trydofor.a9text.parser.area.c
+parser.area.c.clzz     = AreaCParser
+parser.area.cpp.ball   = com.trydofor.a9text.parser.area.cpp
+parser.area.cpp.clzz   = AreaCppParser
+parser.area.java.ball  = com.trydofor.a9text.parser.area.java
+parser.area.java.clzz  = AreaJavaParser
+parser.area.js.ball    = com.trydofor.a9text.parser.area.js
+parser.area.js.clzz    = AreaJsParser
+parser.area.sql.ball   = com.trydofor.a9text.parser.area.sql
+parser.area.sql.clzz   = AreaSQLParser
+parser.area.table.ball = com.trydofor.a9text.parser.area.table
+parser.area.table.clzz = AreaTableParser
+parser.area.tty.ball   = com.trydofor.a9text.parser.area.tty
+parser.area.tty.clzz   = AreaTTYParser
+
+#render
+render.html.common.css.a9text = $CORE_PATH/com/trydofor/a9text/render/html/css/a9text.css
+render.html.common.js.syntax  = $CORE_PATH/com/trydofor/a9text/render/html/js/syntax.js
+render.html.common.js.aes-1   = $CORE_PATH/com/trydofor/a9js/code/b64.js
+render.html.common.js.aes-2   = $CORE_PATH/com/trydofor/a9js/code/aes.js
+render.html.common.js.aes-3   = $CORE_PATH/com/trydofor/a9text/render/html/js/aes.js
+
+render.html.join.img.name  = *.jpg|*.png|*.gif|*.bmp
+render.html.join.swf.name  = *.swf
+
+render.html.area.aes.ball  = com.trydofor.a9text.render.html.area.aes
+render.html.area.aes.clzz  = AreaAesRender
+render.html.area.bash.ball  = com.trydofor.a9text.render.html.area.bash
+render.html.area.bash.clzz  = AreaBashRender
+render.html.area.b64.ball  = com.trydofor.a9text.render.html.area.b64
+render.html.area.b64.clzz  = AreaB64Render
+render.html.area.c.ball  = com.trydofor.a9text.render.html.area.c
+render.html.area.c.clzz  = AreaCRender
+render.html.area.cpp.ball  = com.trydofor.a9text.render.html.area.cpp
+render.html.area.cpp.clzz  = AreaCppRender
+render.html.area.java.ball  = com.trydofor.a9text.render.html.area.java
+render.html.area.java.clzz  = AreaJavaRender
+render.html.area.js.ball  = com.trydofor.a9text.render.html.area.js
+render.html.area.js.clzz  = AreaJsRender
+render.html.area.sql.ball  = com.trydofor.a9text.render.html.area.sql
+render.html.area.sql.clzz  = AreaSQLRender
+render.html.area.table.ball  = com.trydofor.a9text.render.html.area.table
+render.html.area.table.clzz  = AreaTableRender
+render.html.area.tty.ball  = com.trydofor.a9text.render.html.area.tty
+render.html.area.tty.clzz  = AreaTTYRender
