@@ -1,7 +1,30 @@
 var W3GUI = {};
 
-W3GUI.LISTWINNAME="A9W3_LIST_WIN";
-W3GUI.ITEMWINNAME="A9W3_ITEM_WIN";
+W3GUI.LISTWINNAME = "A9W3_LIST_WIN";
+W3GUI.ITEMWINNAME = "A9W3_ITEM_WIN";
+W3GUI.LISTWINOBJW = null;
+W3GUI.ITEMWINOBJW = null;
+
+W3GUI.POOL = {};
+W3GUI.KEY = {
+    ART_TTL_LNK : "Article.Total.Link",
+    ART_LBL_LST : "Article.Label.List",
+    ART_LBL_LNK : "Article.Label.Link.",
+    ART_MNT_LST : "Article.Month.List",
+    ART_MNT_LNK : "Article.Month.Link.",
+    ART_ITM     : "Article.Item.",
+    GLY_TTL_LNK : "Gallery.Total.Link",
+    GLY_LBL_LST : "Gallery.Label.List",
+    GLY_LBL_LNK : "Gallery.Label.Link.",
+    GLY_MNT_LST : "Gallery.Month.List",
+    GLY_MNT_LNK : "Gallery.Month.Link.",
+    GLY_ITM     : "Gallery.Item.",
+    BRD_LNK     : "Board.Link",
+    BRD_ITM     : "Board.Item.",
+    LNK_ITM     : "Links.Item",
+    NTC_LNK     : "Notice.Link",
+    NTC_ITM     : "Notice.Item."
+};
 
 /** home */
 W3GUI.drawMenu = function()
@@ -64,6 +87,9 @@ W3GUI.drawPage = function()
         
     document.getElementById("A9W3_ITEM").innerHTML="<iframe frameborder='0' id='"+W3GUI.ITEMWINNAME+"' name='"+W3GUI.ITEMWINNAME+"' src='"+
         W3CNF.CONF.getValue("page.item.url")+"'></iframe>";
+    
+    W3GUI.LISTWINOBJW = eval(W3GUI.LISTWINNAME);
+    W3GUI.ITEMWINOBJW = eval(W3GUI.ITEMWINNAME);
 }
 
 W3GUI.changeCss = function(obj,cname)
@@ -103,56 +129,55 @@ W3GUI.menuEvent = function()
     return {'onOver':onOver,'onOut':onOut,'onClick':onClick};
 }();
 
-/** list data */
-W3GUI.POOL = {};
+/** 
+list: a list of label/month. (indexer/article/label/item.txt)
+link: a link to item in the list. (indexer/article/label/001/item.txt)
+item: a target of link. (a9admin/article/2008/0502140800/head.txt)
+*/
 
 // article
 W3GUI.getArticleTotalLink = function(func)
 {
-	var key = "Article.Total.Link";
 	var url = W3CNF.USERHOME+"indexer/article/total/item.txt";
-	W3GUI._callbackArray_(key,url,func);
+	W3GUI._callbackArray_(W3GUI.KEY.ART_TTL_LNK,url,func);
 }
 W3GUI.getArticleLabelList = function(func)
 {
-	var key = "Article.Label.List";
-    if(W3GUI.POOL[key] == null)
+    if(W3GUI.POOL[W3GUI.KEY.ART_LBL_LST] == null)
     {
         var kv  = W3CNF.ARTICLE_LABEL.getKeyValClone();
         var arr = [];
         for(var k in kv){
             arr.push(k);
         }
-        W3GUI.POOL[key] = arr;
+        W3GUI.POOL[W3GUI.KEY.ART_LBL_LST] = arr;
     }
-    func(W3GUI.POOL[key]);
+    func(W3GUI.POOL[W3GUI.KEY.ART_LBL_LST]);
 }
 W3GUI.getArticleLabelLink = function(id,func)
 {
-	var key = "Article.Label.Link."+id;
+	var key = W3GUI.KEY.ART_LBL_LNK+id;
 	var url = W3CNF.USERHOME+"indexer/article/label/"+id+"/item.txt";
 	W3GUI._callbackArray_(key,url,func);
 }
 W3GUI.getArticleMonthList = function(func)
 {
-	var key = "Article.Month.List";
 	var url = W3CNF.USERHOME+"indexer/article/month/item.txt";
-	W3GUI._callbackArray_(key,url,func);
+	W3GUI._callbackArray_(W3GUI.KEY.ART_MNT_LST,url,func);
 }
 W3GUI.getArticleMonthLink = function(id,func)
 {
-	var key = "Article.Month.Link."+id;
+	var key = W3GUI.KEY.ART_MNT_LNK+id;
 	var url = W3CNF.USERHOME+"indexer/article/month/"+id+"/item.txt";
 	W3GUI._callbackArray_(key,url,func);
 }
 W3GUI.getArticleItem = function(id,func)
 {
-	var key = "Article.Item."+id;
+	var key = W3GUI.KEY.ART_ITM+id;
 	var urls = [W3CNF.USERHOME+"article/"+id+"/head.txt",
 				W3CNF.USERHOME+"helpers/status/read/article/"+id+".txt"];
 	W3GUI._callbackObject_(id,W3TXT.articleItem,key,urls,func);
 }
-
 W3GUI.getArticleData = function(id,func)
 {
     var url = W3CNF.USERHOME+"article/"+id+"/data/index.txt";
@@ -162,46 +187,42 @@ W3GUI.getArticleData = function(id,func)
 // gallery
 W3GUI.getGalleryTotalLink = function(func)
 {
-	var key = "Gallery.Total.Link";
 	var url = W3CNF.USERHOME+"indexer/gallery/total/item.txt";
-	W3GUI._callbackArray_(key,url,func);
+	W3GUI._callbackArray_(W3GUI.KEY.GLY_TTL_LNK,url,func);
 }
 W3GUI.getGalleryLabelList = function(func)
 {
-	var key = "Gallery.Label.List";
-    if(W3GUI.POOL[key] == null)
+    if(W3GUI.POOL[W3GUI.KEY.GLY_LBL_LST] == null)
     {
         var kv  = W3CNF.GALLERY_LABEL.getKeyValClone();
         var arr = [];
         for(var k in kv){
             arr.push(k);
         }
-        W3GUI.POOL[key] = arr;
+        W3GUI.POOL[W3GUI.KEY.GLY_LBL_LST] = arr;
     }
-    func(W3GUI.POOL[key]);
+    func(W3GUI.POOL[W3GUI.KEY.GLY_LBL_LST]);
 }
 W3GUI.getGalleryLabelLink = function(id,func)
 {
-	var key = "Gallery.Label.Link."+id;
+	var key = W3GUI.KEY.GLY_LBL_LNK+id;
 	var url = W3CNF.USERHOME+"indexer/gallery/label/"+id+"/item.txt";
 	W3GUI._callbackArray_(key,url,func);
 }
 W3GUI.getGalleryMonthList = function(func)
 {
-	var key = "Gallery.Month.List";
 	var url = W3CNF.USERHOME+"indexer/gallery/month/item.txt";
-	W3GUI._callbackArray_(key,url,func);
+	W3GUI._callbackArray_(W3GUI.KEY.GLY_MNT_LST,url,func);
 }
 W3GUI.getGalleryMonthLink = function(id,func)
 {
-	var key = "Gallery.Month.Link."+id;
+	var key = W3GUI.KEY.GLY_MNT_LNK+id;
 	var url = W3CNF.USERHOME+"indexer/gallery/month/"+id+"/item.txt";
 	W3GUI._callbackArray_(key,url,func);
 }
-
 W3GUI.getGalleryItem = function(id,func)
 {
-	var key = "Gallery.Item."+id;
+	var key = W3GUI.KEY.GLY_ITM+id;
 	var urls = [W3CNF.USERHOME+"gallery/info/"+id+".txt",
 				W3CNF.USERHOME+"helpers/status/read/gallery/"+id+".txt"];
 	W3GUI._callbackObject_(id,W3TXT.galleryItem,key,urls,func);
@@ -210,13 +231,12 @@ W3GUI.getGalleryItem = function(id,func)
 // board
 W3GUI.getBoardLink = function(func)
 {
-	var key = "Board.Link";
 	var url = W3CNF.USERHOME+"helpers/board/00000000000000000.txt";
-	W3GUI._callbackArray_(key,url,func);
+	W3GUI._callbackArray_(W3GUI.KEY.BRD_LNK,url,func);
 }
 W3GUI.getBoardItem = function(id,func)
 {
-	var key = "Board.Item."+id;
+	var key = W3GUI.KEY.BRD_ITM+id;
 	var urls = [W3CNF.USERHOME+"helpers/board/"+id+".txt"];
 	W3GUI._callbackObject_(id,W3TXT.messageItem,key,urls,func);
 }
@@ -224,21 +244,19 @@ W3GUI.getBoardItem = function(id,func)
 // links
 W3GUI.getLinksItem = function(func)
 {
-	var key = "Links.Item";
 	var urls = [W3CNF.USERHOME+"helpers/links/name-url-map.txt"];
-	W3GUI._callbackObject_(null,null,key,urls,func);
+	W3GUI._callbackObject_(null,null,W3GUI.KEY.LNK_ITM,urls,func);
 }
 
 // notice
 W3GUI.getNoticeLink = function(func)
 {
-	var key = "Notice.Link";
 	var url = W3CNF.USERHOME+"helpers/notice/00000000000000000.txt";
-	W3GUI._callbackArray_(key,url,func);
+	W3GUI._callbackArray_(W3GUI.KEY.NTC_LNK,url,func);
 }
 W3GUI.getNoticeItem = function(id,func)
 {
-	var key = "Notice.Item."+id;
+	var key = W3GUI.KEY.NTC_ITM+id;
 	var urls = [W3CNF.USERHOME+"helpers/notice/"+id+"/head.txt"];
 	W3GUI._callbackObject_(id,W3TXT.noticeItem,key,urls,func);
 }
@@ -246,7 +264,7 @@ W3GUI.getNoticeItem = function(id,func)
 /** switch view */
 W3GUI.showArticle = function(id)
 {
-	eval(W3GUI.ITEMWINNAME+".location='"+W3CNF.USERHOME+"article/"+id+"/body.htm';");
+	W3GUI.ITEMWINOBJW.location=W3CNF.USERHOME+"article/"+id+"/body.htm";
 }
 W3GUI.showPicture = function(id)
 {
@@ -279,19 +297,32 @@ W3GUI.showPicture = function(id)
 		buff.push("</td></tr>");
 		buff.push("</table>");
 		
-		var doc = eval(W3GUI.ITEMWINNAME+".document");
+		var doc = W3GUI.ITEMWINOBJW.document;
 		doc.write(buff.join(""));
 		doc.close();
 	});
 }
+
 /** admin */
 W3GUI.deleteArticle = function(id)
 {
-	alert("delete article:"+id);
+    if(W3GUI.POOL[W3GUI.KEY.ART_TTL_LNK] != null)
+    {   
+        var arr = [];
+        for(var i=0;i<W3GUI.POOL[W3GUI.KEY.ART_TTL_LNK].length;i++)
+        {
+            if(W3GUI.POOL[W3GUI.KEY.ART_TTL_LNK][i] != id)
+            {
+                arr.push(W3GUI.POOL[W3GUI.KEY.ART_TTL_LNK][i]);
+            }
+        }
+        W3GUI.POOL[W3GUI.KEY.ART_TTL_LNK] = arr;
+    }
+    W3GUI.LISTWINOBJW.update();
 }
 W3GUI.editArticle = function(id)
 {
-    eval(W3GUI.ITEMWINNAME+".location=\""+W3CNF.A9W3HOME+"a9w3-engine/view/writer/item-paper.htm?"+id+"\";");
+    W3GUI.ITEMWINOBJW.location=W3CNF.A9W3HOME+"a9w3-engine/view/writer/item-paper.htm?"+id;
 }
 W3GUI.deletePicture = function(id)
 {
@@ -325,6 +356,7 @@ W3GUI.editNotice = function(id)
 {
 	alert("edit Notice:"+id);
 }
+
 /** private */
 W3GUI._callbackObject_ = function(id,clzz,key,urls,func)
 {
