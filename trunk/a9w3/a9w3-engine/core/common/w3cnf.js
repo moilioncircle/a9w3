@@ -88,6 +88,11 @@ A9Loader.asyncLoadText(function(u,t){
 	W3CNF.GALLERY_LABEL.loadFromText(t)
 },W3CNF.USERHOME+"indexer/gallery/label/item.txt");
 
+W3CNF.SERVER = new CnfReaderClass();
+A9Loader.asyncLoadText(function(u,t){
+    W3CNF.SERVER.loadFromText(t)
+},W3CNF.A9W3HOME+"a9w3-server/server.txt");
+
 W3CNF.getI18nString = function()
 {
     var en = new CnfReaderClass();
@@ -109,9 +114,3 @@ W3CNF.getI18nString = function()
         return str;
     }
 }();
-
-W3CNF.SERVER = new CnfReaderClass();
-A9Loader.asyncLoadText(function(u,t){
-    W3CNF.SERVER.loadFromText(t)
-},W3CNF.A9W3HOME+"a9w3-server/server.txt");
-
