@@ -22,9 +22,29 @@ SELECT,INPUT
 	height:18px;
 }
 
+/* by name */
 .a9w3_edit_text_on {
 	border: 1px solid #44aadd;
 }
 .a9w3_edit_text_off {
 	border: 1px solid #000000;
 }
+
+.a9w3_edit_data_upload_dialog {
+	visibility:hidden;
+	overflow:hidden;
+	position:absolute;
+	left:20px;
+	top:150px;
+	z-index:1;
+	background-color: #000000;
+	border: 0px;
+}
+.a9w3_edit_data_upload_title {
+	background-color: #cccccc;
+	font-weight:bold;
+}
+.a9w3_edit_data_upload_frame {
+	background-color: #efefef;
+}
+

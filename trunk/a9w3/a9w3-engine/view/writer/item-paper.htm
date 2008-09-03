@@ -1,5 +1,32 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="../../data/style/black/editor.css" rel="stylesheet" type="text/css">
+<div id="__DATA_UPLOAD__" class="a9w3_edit_data_upload_dialog">
+  <table width="350"  border="0" cellpadding="0" cellspacing="1">
+    <tr>
+      <td height="20" class="a9w3_edit_data_upload_title">&nbsp;&nbsp;Data Upload</td>
+    </tr>
+    <tr>
+      <td valign="top"  class="a9w3_edit_data_upload_frame">
+      <table width="100%" style="table-layout:fixed;overflow:hidden" border="0" cellspacing="5" cellpadding="0">
+        <tr>
+    	  <form target="__DATA_POSTER__" id="__DATA_FORM__" method="post" enctype="multipart/form-data">
+          <td height="20">
+              <input type="file" name="DATA_FILE" onchange="onDataChose(this)" style="width:200px" class="a9w3_edit_text_off"  onmouseover="this.className='a9w3_edit_text_on'"  onmouseout="this.className='a9w3_edit_text_off'"/>&nbsp;
+              <input type="button" name="UPLOAD" value="Upload" onclick="onDataUpload()" class="a9w3_edit_text_off"  onmouseover="this.className='a9w3_edit_text_on'"  onmouseout="this.className='a9w3_edit_text_off'" />
+              <input type="button" name="CLOSE" value="Close" onclick="hideDataDialog()" class="a9w3_edit_text_off"  onmouseover="this.className='a9w3_edit_text_on'"  onmouseout="this.className='a9w3_edit_text_off'"/>
+             <iframe onload="try{onDataPostDone()}catch(e){}" onreadystatechange="try{onDataPostDone()}catch(e){}" id="__DATA_POSTER__" name="__DATA_POSTER__" width='0px' height='0' frameborder='0' src="about:blank"></iframe>
+          </td>
+          </form>
+        </tr>
+        <tr>
+          <td class="a9w3_edit_text_off" height="200" id="__DATA_PREVIEW__">&nbsp;</td>
+        </tr>
+      </table>
+    </td>
+    </tr>
+  </table>
+</div>
+
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td><table width="100%" border="0" cellspacing="2" cellpadding="0">
@@ -24,7 +51,7 @@
         <td><select name="__DATAS__" id="__DATAS__" class="a9w3_edit_text_off" style="width:60%">
             <option value="">== data ==</option>
             </select>
-            <input type="button" value="Add" onclick="addData()" class="a9w3_edit_text_off"  onmouseover="this.className='a9w3_edit_text_on'"  onmouseout="this.className='a9w3_edit_text_off'"/>
+            <input type="button" value="Add" onclick="showDataDialog()" class="a9w3_edit_text_off"  onmouseover="this.className='a9w3_edit_text_on'"  onmouseout="this.className='a9w3_edit_text_off'"/>
             <input type="button" value="Delete" onclick="delData()" class="a9w3_edit_text_off"  onmouseover="this.className='a9w3_edit_text_on'"  onmouseout="this.className='a9w3_edit_text_off'"/>
             <input type="button" value="View" onclick="viewData()" class="a9w3_edit_text_off"  onmouseover="this.className='a9w3_edit_text_on'"  onmouseout="this.className='a9w3_edit_text_off'"/>
         </td>
