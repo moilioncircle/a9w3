@@ -6,6 +6,7 @@ BODY {
 }
 TEXTAREA
 {
+    overflow:auto;
 	width:100%;
 	height:575px;
 	margin: 0px;
