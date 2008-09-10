@@ -88,10 +88,25 @@ A9Loader.asyncLoadText(function(u,t){
 	W3CNF.GALLERY_LABEL.loadFromText(t)
 },W3CNF.USERHOME+"indexer/gallery/label/item.txt");
 
-W3CNF.SERVER = new CnfReaderClass();
-A9Loader.asyncLoadText(function(u,t){
-    W3CNF.SERVER.loadFromText(t)
-},W3CNF.A9W3HOME+"a9w3-server/server.txt");
+//
+W3CNF.getServerURL = function(){
+    var sf = new CnfReaderClass();
+    A9Loader.asyncLoadText(function(u,t){
+        sf.loadFromText(t)
+    },W3CNF.A9W3HOME+"a9w3-server/server.txt");
+    
+    return function(key)
+    {
+        var url = sf.getValue(key);
+        if(url == null || url.length ==0) return "#";
+        
+        if(!/https?:\/+/.test(url))
+        {
+            url = W3CNF.A9W3HOME+url;
+        }
+        return url;
+    }
+}();
 
 W3CNF.getI18nString = function()
 {

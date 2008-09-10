@@ -13,7 +13,7 @@ function onDataChose(obj)
 function onDataUpload()
 {
     var fm = document.getElementById("__DATA_FORM__");
-    fm.action = parent.W3CNF.A9W3HOME+parent.W3CNF.SERVER.getValue("paper.data.upload");
+    fm.action = parent.W3CNF.getServerURL("paper.data.upload");
     fm.submit();
 }
 function hideDataDialog()
@@ -69,9 +69,13 @@ function addData()
 function delData()
 {
     var id = document.getElementById("__DATAS__").value;
-    if(id == null || id == "") return;
+    if(id == null || id == "")
+    {
+        alert(parent.W3CNF.getI18nString("info.delete.data.null"));
+        return;
+    }
     
-    var rtv = parent.A9Loader.syncLoadText(parent.W3CNF.A9W3HOME+parent.W3CNF.SERVER.getValue("paper.data.delete"));
+    var rtv = parent.A9Loader.syncLoadText(parent.W3CNF.getServerURL("paper.data.delete"));
     if(rtv == "info.success")
     {
         alert("ok");
