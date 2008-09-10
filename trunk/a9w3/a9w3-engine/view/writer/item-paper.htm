@@ -1,5 +1,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="../../data/style/black/editor.css" rel="stylesheet" type="text/css">
+
 <div id="__DATA_UPLOAD__" class="a9w3_edit_data_upload_dialog">
   <table width="350"  border="0" cellpadding="0" cellspacing="1">
     <tr>
@@ -9,12 +10,12 @@
       <td valign="top"  class="a9w3_edit_data_upload_frame">
       <table width="100%" style="table-layout:fixed;overflow:hidden" border="0" cellspacing="5" cellpadding="0">
         <tr>
-    	  <form target="__DATA_POSTER__" id="__DATA_FORM__" method="post" enctype="multipart/form-data">
+    	  <form target="__DATA_POSTER__" id="__DATA_FORM__" enctype="multipart/form-data">
           <td height="20">
               <input type="file" name="DATA_FILE" onchange="onDataChose(this)" style="width:200px" class="a9w3_edit_text_off"  onmouseover="this.className='a9w3_edit_text_on'"  onmouseout="this.className='a9w3_edit_text_off'"/>&nbsp;
               <input type="button" name="UPLOAD" value="Upload" onclick="onDataUpload()" class="a9w3_edit_text_off"  onmouseover="this.className='a9w3_edit_text_on'"  onmouseout="this.className='a9w3_edit_text_off'" />
               <input type="button" name="CLOSE" value="Close" onclick="hideDataDialog()" class="a9w3_edit_text_off"  onmouseover="this.className='a9w3_edit_text_on'"  onmouseout="this.className='a9w3_edit_text_off'"/>
-             <iframe onload="try{onDataPostDone()}catch(e){}" onreadystatechange="try{onDataPostDone()}catch(e){}" id="__DATA_POSTER__" name="__DATA_POSTER__" width='0px' height='0' frameborder='0' src="about:blank"></iframe>
+             <iframe onload="try{onDataResponse()}catch(e){}" onreadystatechange="try{onDataResponse()}catch(e){}" id="__DATA_POSTER__" name="__DATA_POSTER__" width='0px' height='0' frameborder='0' src="about:blank"></iframe>
           </td>
           </form>
         </tr>
@@ -37,7 +38,7 @@
       <tr>
         <td><strong>Label:</strong></td>
         <td><input name="__LABEL__" type="text" id="__LABEL__" style="width:60%;" class="a9w3_edit_text_off" onfocus="this.className='a9w3_edit_text_on'" onblur="this.className='a9w3_edit_text_off'"/>
-            <select name="__LBLNME__" id="__LBLNME__" class="a9w3_edit_text_off" onchange="addLabel()">
+            <select name="__LBLNME__" id="__LBLNME__" class="a9w3_edit_text_off" onchange="onAddLabel()">
               <option value="">== label ==</option>
             </select>
         </td>
@@ -52,26 +53,34 @@
             <option value="">== data ==</option>
             </select>
             <input type="button" value="Add" onclick="showDataDialog()" class="a9w3_edit_text_off"  onmouseover="this.className='a9w3_edit_text_on'"  onmouseout="this.className='a9w3_edit_text_off'"/>
-            <input type="button" value="Delete" onclick="delData()" class="a9w3_edit_text_off"  onmouseover="this.className='a9w3_edit_text_on'"  onmouseout="this.className='a9w3_edit_text_off'"/>
-            <input type="button" value="View" onclick="viewData()" class="a9w3_edit_text_off"  onmouseover="this.className='a9w3_edit_text_on'"  onmouseout="this.className='a9w3_edit_text_off'"/>
+            <input type="button" value="Delete" onclick="onDelData()" class="a9w3_edit_text_off"  onmouseover="this.className='a9w3_edit_text_on'"  onmouseout="this.className='a9w3_edit_text_off'"/>
+            <input type="button" value="View" onclick="onViewData()" class="a9w3_edit_text_off"  onmouseover="this.className='a9w3_edit_text_on'"  onmouseout="this.className='a9w3_edit_text_off'"/>
         </td>
       </tr>
     </table></td>
   </tr>
   <tr>
-    <td height="8"></td>
+    <td height="8">
+<form target="__PAPER_POSTER__" id="__PAPER_FORM__" enctype="multipart/form-data" style="display:none">
+ <iframe onload="try{onPaperResponse()}catch(e){}" onreadystatechange="try{onPaperResponse()}catch(e){}" id="__PAPER_POSTER__" name="__PAPER_POSTER__" width='0px' height='0' frameborder='0' src="about:blank"></iframe>
+</form>
+    </td>
   </tr>
   <tr>
-    <td height="600"><iframe onload="try{ideReady()}catch(e){}" id="__EDIOR__" name="__EDIOR__" frameborder='0' src="about:blank"></iframe></td>
+    <td height="600">
+        <iframe onload="try{ideReady()}catch(e){}" id="__EDIOR__" name="__EDIOR__" frameborder='0' src="about:blank"></iframe>
+    </td>
   </tr>
   <tr>
     <td height="20">
-        <input type="button" id="__BTN_TINYMCE__" name="__BTN_TINYMCE__" onclick="switchEditor(false)" value="TinyMce" style="background-color:#99CCFF" class="a9w3_edit_text_off"  onmouseover="this.className='a9w3_edit_text_on'"  onmouseout="this.className='a9w3_edit_text_off'"/>
-        <input type="button" id="__BTN_A9TEXT__" name="__BTN_A9TEXT__" onclick="switchEditor(true)" value="A9Text" style="background-color:#99CCFF" class="a9w3_edit_text_off"  onmouseover="this.className='a9w3_edit_text_on'" onmouseout="this.className='a9w3_edit_text_off'"/>
-        <input type="button" onclick="preview()" value="Preview" style="background-color:#99CCFF" class="a9w3_edit_text_off"  onmouseover="this.className='a9w3_edit_text_on'" onmouseout="this.className='a9w3_edit_text_off'"/>
-        <input type="button" value="Save" style="background-color:#CC9900" class="a9w3_edit_text_off"  onmouseover="this.className='a9w3_edit_text_on'" onmouseout="this.className='a9w3_edit_text_off'"/>
-        <input type="button" value="Hide" style="background-color:#CC9900" class="a9w3_edit_text_off"  onmouseover="this.className='a9w3_edit_text_on'" onmouseout="this.className='a9w3_edit_text_off'"/>
-        <input type="button" value="Delete" style="background-color:#CC9900" class="a9w3_edit_text_off"  onmouseover="this.className='a9w3_edit_text_on'" onmouseout="this.className='a9w3_edit_text_off'"/></td>
+        <input type="button" id="__BTN_TINYMCE__" name="__BTN_TINYMCE__" onclick="onSwitchEditor(false)" value="TinyMce" style="background-color:#99CCFF" class="a9w3_edit_text_off"  onmouseover="this.className='a9w3_edit_text_on'"  onmouseout="this.className='a9w3_edit_text_off'"/>
+        <input type="button" id="__BTN_A9TEXT__" name="__BTN_A9TEXT__" onclick="onSwitchEditor(true)" value="A9Text" style="background-color:#99CCFF" class="a9w3_edit_text_off"  onmouseover="this.className='a9w3_edit_text_on'" onmouseout="this.className='a9w3_edit_text_off'"/>
+        <input type="button" onclick="onViewPaper()" value="Preview" style="background-color:#99CCFF" class="a9w3_edit_text_off"  onmouseover="this.className='a9w3_edit_text_on'" onmouseout="this.className='a9w3_edit_text_off'"/>
+        <input type="button" onclick="onSavePaper()"  value="Save" style="background-color:#CC9900" class="a9w3_edit_text_off"  onmouseover="this.className='a9w3_edit_text_on'" onmouseout="this.className='a9w3_edit_text_off'"/>
+        <input type="button" onclick="onHidePaper()"  value="Hide" style="background-color:#CC9900" class="a9w3_edit_text_off"  onmouseover="this.className='a9w3_edit_text_on'" onmouseout="this.className='a9w3_edit_text_off'"/>
+        <input type="button" id="__BTN_DELETE__" disabled onclick="onDeletePaper()" value="Delete" style="background-color:#CC9900" class="a9w3_edit_text_off"  onmouseover="this.className='a9w3_edit_text_on'" onmouseout="this.className='a9w3_edit_text_off'"/>
+    </td>
   </tr>
 </table>
+
 <script type="text/javascript" src="../../core/writer/item-paper.js"></script>
