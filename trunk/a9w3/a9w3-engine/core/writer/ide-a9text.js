@@ -144,7 +144,7 @@ function wrapA9text(text)
     buff.push(text);
     buff.push("</pre>");
     buff.push("<script type='text/javascript' src='../../../../../a9w3-engine/3rdp/a9text/a9loader.js'></script>");
-    buff.push("<script type='text/javascript' src='../../../../../a9w3-engine/core/reader/a9w3-a9text.js'></script>");
+    buff.push("<script type='text/javascript' src='../../../../../a9w3-engine/core/reader/item-a9text.js'></script>");
     return buff.join("\n");
 }
 
