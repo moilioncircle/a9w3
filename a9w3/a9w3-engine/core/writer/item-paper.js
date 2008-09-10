@@ -14,6 +14,7 @@ function onDataUpload()
 {
     var fm = document.getElementById("__DATA_FORM__");
     fm.action = parent.W3CNF.getServerURL("paper.data.upload");
+    fm.method="POST";
     fm.submit();
 }
 function hideDataDialog()
@@ -25,7 +26,7 @@ function showDataDialog()
     document.getElementById("__DATA_UPLOAD__").style.visibility="visible";
 }
 
-function onDataPostDone()
+function onDataResponse()
 {
     var rtv = "";
     if(__DATA_POSTER__.document.readyState)// onreadystatechange
@@ -45,10 +46,35 @@ function onDataPostDone()
     if(rtv != "")
     {
         alert(rtv);
+        __DATA_POSTER__.location="about:blank";// avoid recommit when refresh
+    }
+}
+function onPaperResponse()
+{
+    var rtv = "";
+    if(__PAPER_POSTER__.document.readyState)// onreadystatechange
+    {
+        if(__PAPER_POSTER__.document.readyState == "complete")
+        {
+            rtv = __PAPER_POSTER__.document.body.innerHTML;
+            __PAPER_POSTER__.document.body.innerHTML = "";
+        }
+    }
+    else // onload
+    {
+        rtv = __PAPER_POSTER__.document.body.innerHTML;
+        __PAPER_POSTER__.document.body.innerHTML = "";
+    }
+    
+    if(rtv != "")
+    {
+        alert(rtv);
+        __PAPER_POSTER__.location="about:blank";// avoid recommit when refresh
     }
 }
 
-function addLabel()
+
+function onAddLabel()
 {
     var lb = document.getElementById("__LBLNME__").value;
     if(lb == "" || lb == "default") return;
@@ -60,13 +86,8 @@ function addLabel()
         obj.value = txt +", "+lb;
     }
 }
-function addData()
-{
-    var id = document.getElementById("__DATAS__").value;
-    if(id == null || id == "") return;
-    alert("add:"+id);
-}
-function delData()
+
+function onDelData()
 {
     var id = document.getElementById("__DATAS__").value;
     if(id == null || id == "")
@@ -82,14 +103,14 @@ function delData()
     }
     alert(parent.W3CNF.getI18nString(rtv));
 }
-function viewData()
+function onViewData()
 {
     var id = document.getElementById("__DATAS__").value;
     if(id == null || id == "") return;
     window.open(docPath+"data/"+id,'newwindow', 'height=200, width=400, top=0, left=0, toolbar=no,scrollbars=yes, resizable=yes, menubar=no,location=no,status=no');
 }
 
-function preview()
+function onViewPaper()
 {
     var win = window.open("about:blank",'newwindow', 'height=600, width=600, top=0, left=0, toolbar=no,scrollbars=yes, resizable=yes, menubar=no,location=no, status=no');
     win.document.write("<base href='"+docPath+"'>");
@@ -97,7 +118,23 @@ function preview()
     win.document.close();
 }
 
-function switchEditor(isA9)
+function onSavePaper()
+{
+    
+}
+
+function onHidePaper()
+{
+    
+}
+
+function onDeletePaper()
+{
+    if(paperId == null) return;
+}
+
+
+function onSwitchEditor(isA9)
 {
     bodyTxt = __EDIOR__.getText();
     initEditor(isA9);
@@ -188,6 +225,8 @@ function init()
             bodyTxt = t;
             initEditor(isA9text(t));
         },docPath+"body.htm");
+        
+        document.getElementById("__BTN_DELETE__").disabled=false;
     }
 }
 //
