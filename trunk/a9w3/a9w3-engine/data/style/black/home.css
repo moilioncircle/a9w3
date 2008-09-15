@@ -5,7 +5,7 @@ BODY {
 BODY,TD,PRE{
 	font-size: 12px;
 	font-family:Arial, sans-serifarial, Verdana, Helvetica;
-    align:left;
+	text-align:left;
 	vertical-align: top;
 }
 IFRAME {
