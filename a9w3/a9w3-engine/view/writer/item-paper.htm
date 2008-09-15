@@ -1,6 +1,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="../../data/style/black/editor.css" rel="stylesheet" type="text/css">
-
+<!-- dialog -->
 <div id="__DATA_UPLOAD__" class="a9w3_edit_data_upload_dialog">
   <table width="350"  border="0" cellpadding="0" cellspacing="1">
     <tr>
@@ -10,12 +10,11 @@
       <td valign="top"  class="a9w3_edit_data_upload_frame">
       <table width="100%" style="table-layout:fixed;overflow:hidden" border="0" cellspacing="5" cellpadding="0">
         <tr>
-    	  <form target="__DATA_POSTER__" id="__DATA_FORM__" enctype="multipart/form-data">
+          <form target="__DATA_POSTER__" id="__DATA_FORM__" enctype="multipart/form-data">
           <td height="20">
               <input type="file" name="DATA_FILE" onchange="onDataChose(this)" style="width:200px" class="a9w3_edit_text_off"  onmouseover="this.className='a9w3_edit_text_on'"  onmouseout="this.className='a9w3_edit_text_off'"/>&nbsp;
               <input type="button" name="UPLOAD" value="Upload" onclick="onDataUpload()" class="a9w3_edit_text_off"  onmouseover="this.className='a9w3_edit_text_on'"  onmouseout="this.className='a9w3_edit_text_off'" />
               <input type="button" name="CLOSE" value="Close" onclick="hideDataDialog()" class="a9w3_edit_text_off"  onmouseover="this.className='a9w3_edit_text_on'"  onmouseout="this.className='a9w3_edit_text_off'"/>
-             <iframe onload="try{onDataResponse()}catch(e){}" onreadystatechange="try{onDataResponse()}catch(e){}" id="__DATA_POSTER__" name="__DATA_POSTER__" width='0px' height='0' frameborder='0' src="about:blank"></iframe>
           </td>
           </form>
         </tr>
@@ -27,6 +26,9 @@
     </tr>
   </table>
 </div>
+<!-- poster -->
+<iframe onload="try{onDataResponse()}catch(e){}" onreadystatechange="try{onDataResponse()}catch(e){}" id="__DATA_POSTER__" name="__DATA_POSTER__" width='0px' height='0' frameborder='0' src="about:blank"  style="display:none"></iframe>
+<iframe onload="try{onPaperResponse()}catch(e){}" onreadystatechange="try{onPaperResponse()}catch(e){}" id="__PAPER_POSTER__" name="__PAPER_POSTER__" width='0px' height='0' frameborder='0' src="about:blank" style="display:none"></iframe>
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
@@ -61,9 +63,12 @@
   </tr>
   <tr>
     <td height="8">
-<form target="__PAPER_POSTER__" id="__PAPER_FORM__" enctype="multipart/form-data" style="display:none">
- <iframe onload="try{onPaperResponse()}catch(e){}" onreadystatechange="try{onPaperResponse()}catch(e){}" id="__PAPER_POSTER__" name="__PAPER_POSTER__" width='0px' height='0' frameborder='0' src="about:blank"></iframe>
-</form>
+    <form target="__PAPER_POSTER__" id="__PAPER_FORM__" enctype="multipart/form-data" style="display:none">
+		<input type="hidden" name="PAPER_TITLE" id="PAPER_TITLE" value="" />
+		<input type="hidden" name="PAPER_LABEL" id="PAPER_TITLE" value="" />
+		<input type="hidden" name="PAPER_BRIEF" id="PAPER_TITLE" value="" />
+		<input type="hidden" name="PAPER_XTEXT" id="PAPER_TITLE" value="" />
+    </form>
     </td>
   </tr>
   <tr>
