@@ -3,6 +3,19 @@ var paperId = null;
 var bodyTxt = null;
 
 // event
+function onAddLabel()
+{
+    var lb = document.getElementById("__LBLNME__").value;
+    if(lb == "" || lb == "default") return;
+    var obj = document.getElementById("__LABEL__");
+    var txt = obj.value;
+    if(txt == ""){
+        obj.value = lb;
+    }else if (txt.indexOf(lb)<0){
+        obj.value = txt +", "+lb;
+    }
+}
+
 function onDataChose(obj)
 {
     var box = document.getElementById("__DATA_PREVIEW__");
@@ -10,19 +23,33 @@ function onDataChose(obj)
     htm = "<img src='file://localhost/"+obj.value+"' alt='"+obj.value+"'/>";
     box.innerHTML=htm;
 }
+
 function onDataUpload()
 {
+    if(isNewPaper()) return;
+
+    var url = parent.W3CNF.getServerURL("paper.data.upload");
+    if(url.indexOf("?")>0)
+        url = url+"&UID="+parent.W3CNF.USER+"&PID="+paperId;
+    else
+        url = url+"?UID="+parent.W3CNF.USER+"&PID="+paperId;
+
     var fm = document.getElementById("__DATA_FORM__");
-    fm.action = parent.W3CNF.getServerURL("paper.data.upload");
-    fm.method="POST";
+    fm.action = url;
     fm.submit();
 }
 function hideDataDialog()
 {
     document.getElementById("__DATA_UPLOAD__").style.visibility="hidden";
 }
+
 function showDataDialog()
 {
+    if(isNewPaper()) 
+    {
+        alert(parent.W3CNF.getI18nString("info.paper.newpaper"));
+        return;
+    }
     document.getElementById("__DATA_UPLOAD__").style.visibility="visible";
 }
 
@@ -49,6 +76,135 @@ function onDataResponse()
         __DATA_POSTER__.location="about:blank";// avoid recommit when refresh
     }
 }
+
+function onDelData()
+{
+    var id = document.getElementById("__DATAS__").value;
+    if(id == null || id == "")
+    {
+        alert(parent.W3CNF.getI18nString("info.paper.data.empty"));
+        return;
+    }
+    if(isNewPaper()) 
+    {
+        alert(parent.W3CNF.getI18nString("info.paper.newpaper"));
+        return;
+    }
+    
+    var url = parent.W3CNF.getServerURL("paper.data.delete");
+    if(url.indexOf("?")>0)
+        url = url+"&UID="+parent.W3CNF.USER+"&PID="+paperId+"&DATA_FILE="+id;
+    else
+        url = url+"?UID="+parent.W3CNF.USER+"&PID="+paperId+"&DATA_FILE="+id;
+    
+    var rtv = parent.A9Loader.syncLoadText(url);
+    if(rtv == "info.success")
+    {
+        alert("ok");
+    }
+    alert(parent.W3CNF.getI18nString(rtv));
+}
+
+function onViewData()
+{
+    var id = document.getElementById("__DATAS__").value;
+    if(id == null || id == "")
+    {
+        alert(parent.W3CNF.getI18nString("info.paper.data.empty"));
+        return;
+    }
+
+    window.open(docPath+"data/"+id,'newwindow', 'height=200, width=400, top=0, left=0, toolbar=no,scrollbars=yes, resizable=yes, menubar=no,location=no,status=no');
+}
+
+function onViewPaper()
+{
+    var win = window.open("about:blank",'newwindow', 'height=600, width=600, top=0, left=0, toolbar=no,scrollbars=yes, resizable=yes, menubar=no,location=no, status=no');
+    win.document.write("<base href='"+docPath+"'>");
+    win.document.write(__EDIOR__.getText());
+    win.document.close();
+}
+
+function onSavePaper()
+{
+    var title = document.getElementById("__TITLE__").value;
+    if(title =="")
+    {
+        alert(parent.W3CNF.getI18nString("info.check.empty"));
+        document.getElementById("__TITLE__").focus();
+        return;
+    }
+    var brief = document.getElementById("__BRIEF__").value;
+    if(brief =="")
+    {
+        alert(parent.W3CNF.getI18nString("info.check.empty"));
+        document.getElementById("__BRIEF__").focus();
+        return;
+    }
+    
+    document.getElementById("PAPER_TITLE").value = title;
+    document.getElementById("PAPER_BRIEF").value = brief
+    document.getElementById("PAPER_LABEL").value = document.getElementById("__LABEL__").value;
+    document.getElementById("PAPER_XTEXT").value = __EDIOR__.getText();
+    
+    var url = parent.W3CNF.getServerURL("paper.edit.commit");
+    if(url.indexOf("?")>0)
+        url = url+"&UID="+parent.W3CNF.USER+"&PID="+paperId;
+    else
+        url = url+"?UID="+parent.W3CNF.USER+"&PID="+paperId;
+
+    var fm = document.getElementById("__PAPER_FORM__");
+    fm.action=url;
+    fm.submit();
+}
+
+function onHidePaper()
+{
+    if(isNewPaper()) 
+    {
+        alert(parent.W3CNF.getI18nString("info.paper.newpaper"));
+        return;
+    }
+    
+    if(window.confirm(parent.W3CNF.getI18nString("info.paper.hidden.confirm")))
+    {
+        var url = parent.W3CNF.getServerURL("paper.edit.hidden");
+        if(url.indexOf("?")>0)
+            url = url+"&UID="+parent.W3CNF.USER+"&PID="+paperId;
+        else
+            url = url+"?UID="+parent.W3CNF.USER+"&PID="+paperId;
+        
+        var rtv = parent.A9Loader.syncLoadText(url);
+        if(rtv == "info.success")
+        {
+            alert("ok");
+        }
+        alert(parent.W3CNF.getI18nString(rtv));
+    }
+}
+
+function onDeletePaper()
+{
+    if(isNewPaper()) 
+    {
+        alert(parent.W3CNF.getI18nString("info.paper.newpaper"));
+        return;
+    }
+    
+    var url = parent.W3CNF.getServerURL("paper.edit.delete");
+    if(url.indexOf("?")>0)
+        url = url+"&UID="+parent.W3CNF.USER+"&PID="+paperId;
+    else
+        url = url+"?UID="+parent.W3CNF.USER+"&PID="+paperId;
+    
+    var rtv = parent.A9Loader.syncLoadText(url);
+    if(rtv == "info.success")
+    {
+        alert("ok");
+    }
+    alert(parent.W3CNF.getI18nString(rtv));
+}
+
 function onPaperResponse()
 {
     var rtv = "";
@@ -69,70 +225,19 @@ function onPaperResponse()
     if(rtv != "")
     {
         alert(rtv);
+        
+        if(/^\d{4}\/\d{10}$/.test(rtv)) // new paper,return id
+        {
+            window.location=self.location.href+"?"+rtv;
+        }
+        else // message
+        {
+            
+        }
+        
         __PAPER_POSTER__.location="about:blank";// avoid recommit when refresh
     }
 }
-
-
-function onAddLabel()
-{
-    var lb = document.getElementById("__LBLNME__").value;
-    if(lb == "" || lb == "default") return;
-    var obj = document.getElementById("__LABEL__");
-    var txt = obj.value;
-    if(txt == ""){
-        obj.value = lb;
-    }else if (txt.indexOf(lb)<0){
-        obj.value = txt +", "+lb;
-    }
-}
-
-function onDelData()
-{
-    var id = document.getElementById("__DATAS__").value;
-    if(id == null || id == "")
-    {
-        alert(parent.W3CNF.getI18nString("info.delete.data.null"));
-        return;
-    }
-    
-    var rtv = parent.A9Loader.syncLoadText(parent.W3CNF.getServerURL("paper.data.delete"));
-    if(rtv == "info.success")
-    {
-        alert("ok");
-    }
-    alert(parent.W3CNF.getI18nString(rtv));
-}
-function onViewData()
-{
-    var id = document.getElementById("__DATAS__").value;
-    if(id == null || id == "") return;
-    window.open(docPath+"data/"+id,'newwindow', 'height=200, width=400, top=0, left=0, toolbar=no,scrollbars=yes, resizable=yes, menubar=no,location=no,status=no');
-}
-
-function onViewPaper()
-{
-    var win = window.open("about:blank",'newwindow', 'height=600, width=600, top=0, left=0, toolbar=no,scrollbars=yes, resizable=yes, menubar=no,location=no, status=no');
-    win.document.write("<base href='"+docPath+"'>");
-    win.document.write(__EDIOR__.getText());
-    win.document.close();
-}
-
-function onSavePaper()
-{
-    
-}
-
-function onHidePaper()
-{
-    
-}
-
-function onDeletePaper()
-{
-    if(paperId == null) return;
-}
-
 
 function onSwitchEditor(isA9)
 {
@@ -194,6 +299,13 @@ function initData()
         }
     });
 }
+
+function isNewPaper()
+{
+    if(paperId == null || paperId == "") return true;
+    return false;
+}
+
 function init()
 {
     var url = self.location.href;
