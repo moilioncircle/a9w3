@@ -17,3 +17,9 @@ BODY,TD,SPAN{
 .a9w3_album_innerbox {
     border:1px solid #FFFFFF;
 }
+.a9w3_edit_text_on {
+	border: 1px solid #44aadd;
+}
+.a9w3_edit_text_off {
+	border: 1px solid #000000;
+}
