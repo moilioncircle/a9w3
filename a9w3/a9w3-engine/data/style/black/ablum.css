@@ -1,0 +1,19 @@
+BODY {
+    margin: 5px;
+}
+BODY,TD,SPAN{
+    font-size: 12px;
+    font-family:Arial, sans-serifarial, Verdana, Helvetica;
+    line-height: 150%;
+    text-align:left;
+    vertical-align: top;
+    white-space:normal;
+    word-break:break-all; 
+    word-wrap:break-word;
+}
+.a9w3_album_outerbox {
+    border:1px solid #333333;
+}
+.a9w3_album_innerbox {
+    border:1px solid #FFFFFF;
+}

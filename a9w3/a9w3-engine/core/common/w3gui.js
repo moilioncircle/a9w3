@@ -268,39 +268,7 @@ W3GUI.showArticle = function(id)
 }
 W3GUI.showPicture = function(id)
 {
-	W3GUI.getGalleryItem(id,function(ai){
-		var buff = [];
-		buff.push("<br />");
-		buff.push("<table  border='0' align='center' cellpadding='1' cellspacing='0'>");
-		buff.push("<tr>");
-		buff.push("<td style='border:1px solid #333333'><img src='"+W3CNF.USERHOME+"gallery/data/"+ai.id+"."+ai.ftype+"' style='border:1px solid #FFFFFF'></td>");
-		buff.push("</tr>");
-		buff.push("<tr><td>");
-		buff.push("<br />");
-		buff.push("<table width='100%'  border='0' cellspacing='0' cellpadding='0'>");
-		buff.push("<tr><td><img src='"+W3CNF.A9W3HOME+"a9w3-engine/data/image/icon-list-ctime.png' title='created' /> "+ai.ctime);
-		buff.push("&nbsp;&nbsp;<img src='"+W3CNF.A9W3HOME+"a9w3-engine/data/image/icon-list-pixel.png' title='pixel' /> "+ai.pixel);
-		buff.push("&nbsp;&nbsp;<img src='"+W3CNF.A9W3HOME+"a9w3-engine/data/image/icon-list-sizeb.png' title='size' /> "+ai.sizeb);
-		buff.push("&nbsp;&nbsp;<img src='"+W3CNF.A9W3HOME+"a9w3-engine/data/image/icon-list-views.png' title='view' /> "+ai.views+"</td></tr>");
-		buff.push("<tr><td><img src='"+W3CNF.A9W3HOME+"a9w3-engine/data/image/icon-list-label.png' title='label'/> ");
-		if(ai.lable ==null || ai.lable.length ==0)
-		{
-		    ai.lable=[W3CNF.GALLERY_LABEL.getValue("000")];
-		}
-		for(var k=0;k<ai.lable.length;k++)
-		{
-			buff.push(ai.lable[k]+"&nbsp;");
-		}
-		buff.push("</td></tr>");
-		buff.push("<tr><td class='a9w3_text_plain'>"+W3TXT.text2html(ai.brief)+"</td></tr>");
-		buff.push("</table>");
-		buff.push("</td></tr>");
-		buff.push("</table>");
-		
-		var doc = W3GUI.ITEMWINOBJW.document;
-		doc.write(buff.join(""));
-		doc.close();
-	});
+    W3GUI.ITEMWINOBJW.location=W3CNF.A9W3HOME+"a9w3-engine/view/reader/item-album.htm?"+id;
 }
 
 /** admin */
