@@ -298,7 +298,7 @@ W3GUI.deletePicture = function(id)
 }
 W3GUI.editPicture = function(id)
 {
-	alert("edit picture:"+id);
+    W3GUI.ITEMWINOBJW.location=W3CNF.A9W3HOME+"a9w3-engine/view/writer/item-album.htm?"+id;
 }
 W3GUI.deleteLinks = function(id)
 {
