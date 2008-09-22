@@ -1,29 +1,55 @@
+var docPath = null;
+var albumId = null;
+
+function onDataChose(obj)
+{
+    var box = document.getElementById("__PICTURE__");
+    var htm = "&nbsp;";
+    htm = "<img src='file://localhost/"+obj.value+"' alt='"+obj.value+"'/>";
+    box.innerHTML=htm;
+}
+
 function onAddLabel()
 {
     var lb = document.getElementById("__LBLNME__").value;
     if(lb == "" || lb == "default") return;
-    var obj = document.getElementById("__LABEL__");
+    var obj = document.getElementById("LABEL");
     var txt = obj.value;
     if(txt == ""){
         obj.value = lb;
-    }else if (txt.indexOf(lb)<0){
-        obj.value = txt +", "+lb;
+    }else if (txt.indexOf(lb+" ") < 0 && txt.lastIndexOf(lb) != txt.length-lb.length){
+        obj.value += " " + lb;
     }
 }
 
-function onDataUpload()
+function onDeleteAlbum()
 {
-    if(isNewPaper()) return;
-
-    var url = parent.W3CNF.getServerURL("paper.data.upload");
+    var url = parent.W3CNF.getServerURL("album.edit.delete");
     if(url.indexOf("?")>0)
-        url = url+"&UID="+parent.W3CNF.USER+"&PID="+paperId;
+        url = url+"&UID="+parent.W3CNF.USER+"&AID="+albumId;
     else
-        url = url+"?UID="+parent.W3CNF.USER+"&PID="+paperId;
+        url = url+"?UID="+parent.W3CNF.USER+"&AID="+albumId;
+    
+    var rtv = parent.A9Loader.syncLoadText(url);
+    if(rtv == "info.success")
+    {
+        alert("ok");
+    }
+    alert(parent.W3CNF.getI18nString(rtv));
+}
+
+function onSaveAlbum()
+{
+    var url = parent.W3CNF.getServerURL("album.edit.commit");
+    if(url.indexOf("?")>0)
+        url = url+"&UID="+parent.W3CNF.USER+"&AID="+albumId;
+    else
+        url = url+"?UID="+parent.W3CNF.USER+"&AID="+albumId;
 
     var fm = document.getElementById("__DATA_FORM__");
-    fm.action = url;
+    fm.action=url;
     fm.submit();
+
 }
 
 function onDataResponse()
@@ -55,24 +81,30 @@ function init()
     var url = self.location.href;
     var pos = url.indexOf("?");
     if(pos>0){
-        var id = url.substr(pos+1);
-        parent.W3GUI.getGalleryItem(id,function(ai){
-            document.getElementById("PICTURE").src=parent.W3CNF.USERHOME+"gallery/data/"+ai.id+"."+ai.ftype;
-            document.getElementById("CTIME").innerHTML=ai.ctime;
-            document.getElementById("PIXEL").innerHTML=ai.pixel;
-            document.getElementById("SIZEB").innerHTML=ai.sizeb;
-            document.getElementById("VIEWS").innerHTML=ai.views;
-            if(ai.lable ==null || ai.lable.length ==0)
-            {
-                ai.lable=[parent.W3CNF.GALLERY_LABEL.getValue("000")];
+        albumId = url.substr(pos+1);
+        docPath = parent.W3CNF.USERHOME+"gallery/data/"+albumId.substring(0,albumId.indexOf("/")+1);
+        
+                //label
+        var lblMap = parent.W3CNF.GALLERY_LABEL.getKeyValClone();
+        var lblObj = document.getElementById("__LBLNME__");
+        for(var k in lblMap)
+        {
+            var opt=document.createElement("OPTION");
+            opt.text=lblMap[k];
+            opt.value=lblMap[k];
+            try{
+                lblObj.add(opt,null);
+            }catch(e){
+                lblObj.add(opt);
             }
-            var lb = "";
-            for(var k=0;k<ai.lable.length;k++)
-            {
-                lb +=ai.lable[k]+"&nbsp;";
-            }
-            document.getElementById("LABEL").innerHTML=lb;
-            document.getElementById("BRIEF").innerHTML=parent.W3TXT.text2html(ai.brief);
+        }
+        document.getElementById("__BTN_DELETE__").disabled=false;
+
+        parent.W3GUI.getGalleryItem(albumId,function(ai){
+            document.getElementById("__PICTURE__").src=parent.W3CNF.USERHOME+"gallery/data/"+ai.id+"."+ai.ftype;
+            document.getElementById("FILE").disabled=true;
+            document.getElementById("LABEL").value=ai.lable.join(" ");
+            document.getElementById("BRIEF").value=parent.W3TXT.text2html(ai.brief);
         });
     }
 }

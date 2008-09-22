@@ -11,8 +11,8 @@ function onAddLabel()
     var txt = obj.value;
     if(txt == ""){
         obj.value = lb;
-    }else if (txt.indexOf(lb)<0){
-        obj.value = txt +", "+lb;
+    }else if (txt.indexOf(lb+" ") < 0 && txt.lastIndexOf(lb) != txt.length-lb.length){
+        obj.value += " " + lb;
     }
 }
 
@@ -93,9 +93,9 @@ function onDelData()
     
     var url = parent.W3CNF.getServerURL("paper.data.delete");
     if(url.indexOf("?")>0)
-        url = url+"&UID="+parent.W3CNF.USER+"&PID="+paperId+"&DATA_FILE="+id;
+        url = url+"&UID="+parent.W3CNF.USER+"&PID="+paperId+"&FILE="+id;
     else
-        url = url+"?UID="+parent.W3CNF.USER+"&PID="+paperId+"&DATA_FILE="+id;
+        url = url+"?UID="+parent.W3CNF.USER+"&PID="+paperId+"&FILE="+id;
     
     var rtv = parent.A9Loader.syncLoadText(url);
     if(rtv == "info.success")
@@ -142,10 +142,10 @@ function onSavePaper()
         return;
     }
     
-    document.getElementById("PAPER_TITLE").value = title;
-    document.getElementById("PAPER_BRIEF").value = brief
-    document.getElementById("PAPER_LABEL").value = document.getElementById("__LABEL__").value;
-    document.getElementById("PAPER_XTEXT").value = __EDIOR__.getText();
+    document.getElementById("TITLE").value = title;
+    document.getElementById("BRIEF").value = brief
+    document.getElementById("LABEL").value = document.getElementById("__LABEL__").value;
+    document.getElementById("XTEXT").value = __EDIOR__.getText();
     
     var url = parent.W3CNF.getServerURL("paper.edit.commit");
     if(url.indexOf("?")>0)
@@ -275,7 +275,7 @@ function initHead()
 {
     parent.W3GUI.getArticleItem(paperId,function(ai){
         document.getElementById("__TITLE__").value = ai.title;
-        document.getElementById("__LABEL__").value = ai.lable.join(", ");
+        document.getElementById("__LABEL__").value = ai.lable.join(" ");
         document.getElementById("__BRIEF__").value = ai.brief;
     });
 }

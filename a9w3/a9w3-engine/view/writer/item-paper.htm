@@ -12,7 +12,7 @@
         <tr>
           <form target="__DATA_POSTER__" id="__DATA_FORM__" method="POST"  enctype="multipart/form-data">
           <td height="20">
-              <input type="file" name="DATA_FILE" onchange="onDataChose(this)" style="width:200px" class="a9w3_edit_text_off"  onmouseover="this.className='a9w3_edit_text_on'"  onmouseout="this.className='a9w3_edit_text_off'"/>&nbsp;
+              <input type="file" name="FILE" onchange="onDataChose(this)" style="width:200px" class="a9w3_edit_text_off"  onmouseover="this.className='a9w3_edit_text_on'"  onmouseout="this.className='a9w3_edit_text_off'"/>&nbsp;
               <input type="button" name="UPLOAD" value="Upload" onclick="onDataUpload()" class="a9w3_edit_text_off"  onmouseover="this.className='a9w3_edit_text_on'"  onmouseout="this.className='a9w3_edit_text_off'" />
               <input type="button" name="CLOSE" value="Close" onclick="hideDataDialog()" class="a9w3_edit_text_off"  onmouseover="this.className='a9w3_edit_text_on'"  onmouseout="this.className='a9w3_edit_text_off'"/>
           </td>
@@ -64,10 +64,10 @@
   <tr>
     <td height="8">
     <form target="__PAPER_POSTER__" id="__PAPER_FORM__" method="POST" enctype="multipart/form-data" style="display:none">
-		<input type="hidden" name="PAPER_TITLE" id="PAPER_TITLE" value="" />
-		<input type="hidden" name="PAPER_LABEL" id="PAPER_TITLE" value="" />
-		<input type="hidden" name="PAPER_BRIEF" id="PAPER_TITLE" value="" />
-		<input type="hidden" name="PAPER_XTEXT" id="PAPER_TITLE" value="" />
+		<input type="hidden" name="TITLE" id="TITLE" value="" />
+		<input type="hidden" name="LABEL" id="LABEL" value="" />
+		<input type="hidden" name="BRIEF" id="BRIEF" value="" />
+		<input type="hidden" name="XTEXT" id="XTEXT" value="" />
     </form>
     </td>
   </tr>

@@ -5,22 +5,29 @@
 <table  border='0' align='center' cellpadding='1' cellspacing='0' width="90%" style="table-layout:fixed ">
 	<tr>
 	  <td width="40" ><strong>File:</strong></td>
-	  <td ><input type="file" name="file"  style="width:100%;"  class="a9w3_edit_text_off" onfocus="this.className='a9w3_edit_text_on'" onblur="this.className='a9w3_edit_text_off'"></td>
+	  <td ><input type="file" name="FILE" id="FILE"  style="width:100%;"  class="a9w3_edit_text_off"  onchange="onDataChose(this)" onfocus="this.className='a9w3_edit_text_on'" onblur="this.className='a9w3_edit_text_off'"></td>
 	</tr>
 	<tr><td><strong>Label:</strong></td>
 	  <td>
-	  <input name="__LABEL__" type="text" id="__LABEL__" style="width:65%;" class="a9w3_edit_text_off" onfocus="this.className='a9w3_edit_text_on'" onblur="this.className='a9w3_edit_text_off'"/>
+	  <input type="text" name="LABEL" id="LABEL" style="width:65%;" class="a9w3_edit_text_off" onfocus="this.className='a9w3_edit_text_on'" onblur="this.className='a9w3_edit_text_off'"/>
             <select name="__LBLNME__" id="__LBLNME__" class="a9w3_edit_text_off" onchange="onAddLabel()"  style="width:30%;">
               <option value="">== label ==</option>
             </select>
 		</td>
 	</tr>
 	<tr><td><strong>Brief:</strong></td>
-	  <td><textarea name="textarea" rows="4"  class="a9w3_edit_text_off"  style="width:100%;" onfocus="this.className='a9w3_edit_text_on'" onblur="this.className='a9w3_edit_text_off'"></textarea></td>
+	  <td><textarea name="BRIEF" id="BRIEF" rows="4"  class="a9w3_edit_text_off"  style="width:100%;" onfocus="this.className='a9w3_edit_text_on'" onblur="this.className='a9w3_edit_text_off'"></textarea></td>
 	</tr>
 	<tr>
 		<td>&nbsp;</td>
-		<td class="a9w3_album_outerbox"><img src='#' id="PICTUREX" class="a9w3_album_innerbox"></td>
+		<td>
+        <input type="button" onclick="onSaveAlbum()"  value="Save" style="background-color:#CC9900" class="a9w3_edit_text_off"  onmouseover="this.className='a9w3_edit_text_on'" onmouseout="this.className='a9w3_edit_text_off'"/>
+        <input type="button" id="__BTN_DELETE__" onclick="onDeleteAlbum()" value="Delete" style="background-color:#CC9900" class="a9w3_edit_text_off"  onmouseover="this.className='a9w3_edit_text_on'" onmouseout="this.className='a9w3_edit_text_off'" disabled/>
+        </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td class="a9w3_album_outerbox"><img src='#' id="__PICTURE__" class="a9w3_album_innerbox"></td>
 	</tr>
 </table>
 </form>
