@@ -1,6 +1,7 @@
 var docPath = null;
 var paperId = null;
 var bodyTxt = null;
+var regexpId=/^\d{4}\/\d{10}$/;
 
 // event
 function onAddLabel()
@@ -226,7 +227,7 @@ function onPaperResponse()
     {
         alert(rtv);
         
-        if(/^\d{4}\/\d{10}$/.test(rtv)) // new paper,return id
+        if(regexpId.test(rtv)) // new paper,return id
         {
             window.location=self.location.href+"?"+rtv;
         }
@@ -310,8 +311,9 @@ function init()
 {
     var url = self.location.href;
     var pos = url.indexOf("?");
-    if(pos>0){
-        paperId = url.substr(pos+1);
+    if(pos>0 && regexpId.test(url.substr(pos+1)))
+	{
+		paperId = url.substr(pos+1);
         docPath = parent.W3CNF.USERHOME+"article/"+paperId+"/";
         
         //label

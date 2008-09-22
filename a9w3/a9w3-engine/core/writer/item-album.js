@@ -1,12 +1,11 @@
 var docPath = null;
 var albumId = null;
+var regexpId=/^\d{4}\/\d{13}$/;
 
 function onDataChose(obj)
 {
-    var box = document.getElementById("__PICTURE__");
-    var htm = "&nbsp;";
-    htm = "<img src='file://localhost/"+obj.value+"' alt='"+obj.value+"'/>";
-    box.innerHTML=htm;
+    var img = document.getElementById("__PICTURE__");
+    img.src="file://localhost/"+obj.value;
 }
 
 function onAddLabel()
@@ -80,11 +79,12 @@ function init()
 {
     var url = self.location.href;
     var pos = url.indexOf("?");
-    if(pos>0){
+    if(pos>0 && regexpId.test(url.substr(pos+1)))
+	{
         albumId = url.substr(pos+1);
         docPath = parent.W3CNF.USERHOME+"gallery/data/"+albumId.substring(0,albumId.indexOf("/")+1);
         
-                //label
+        //label
         var lblMap = parent.W3CNF.GALLERY_LABEL.getKeyValClone();
         var lblObj = document.getElementById("__LBLNME__");
         for(var k in lblMap)
@@ -99,10 +99,9 @@ function init()
             }
         }
         document.getElementById("__BTN_DELETE__").disabled=false;
-
+        document.getElementById("FILE").disabled=true;
         parent.W3GUI.getGalleryItem(albumId,function(ai){
             document.getElementById("__PICTURE__").src=parent.W3CNF.USERHOME+"gallery/data/"+ai.id+"."+ai.ftype;
-            document.getElementById("FILE").disabled=true;
             document.getElementById("LABEL").value=ai.lable.join(" ");
             document.getElementById("BRIEF").value=parent.W3TXT.text2html(ai.brief);
         });
