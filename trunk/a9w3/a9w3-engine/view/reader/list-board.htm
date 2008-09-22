@@ -1,18 +1,39 @@
 ﻿<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="../../data/style/black/list.css" rel="stylesheet" type="text/css">
 <link href="../../data/style/black/board.css" rel="stylesheet" type="text/css">
 <table border='0' cellspacing='2' cellpadding='0' width='100%'>
+<form target="__DATA_POSTER__" id="__DATA_FORM__" method="POST"  enctype="multipart/form-data">
 <tr>
-  <td><a href="item-board.htm" target="A9W3_ITEM_WIN">items</a></td>
+	<td width="30"><strong>User</strong></td>
+	<td><input type="text" name="USER" id="USER" class="a9w3_board_user"></td>
 </tr>
 <tr>
-  <td><input type="text" name="textfield" class="a9w3_board_user"></td>
+	<td><strong>Code</strong></td>
+	<td><table width="100%"  border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="50%"><input type="text"  name="CODE" id="CODE"  class="a9w3_board_code"></td>
+		<td width="12">&nbsp;</td>
+        <td><img src="../../data/image/loading-circle-grace-m.gif" id="__CODE__" alt="random code"></td>
+      </tr>
+    </table>
+	</td>
 </tr>
 <tr>
-  <td><textarea name="textarea"  class="a9w3_board_text"></textarea></td>
+	<td><strong>Text</strong></td>
+	<td><textarea type="textarea"  name="TEXT" id="TEXT"   class="a9w3_board_text"></textarea></td>
 </tr>
-<tr>
+<td>&nbsp;</td>
   <td><input type="button" name="Submit" value="Submit" class="a9w3_board_button">
     <input type="button" name="Submit2" value="Reset"  class="a9w3_board_button"></td>
 </tr>
+</form>
 </table>
+<hr size="1">
+<table width="100%"  border="0" cellspacing="0" cellpadding="0" >
+	<tr><td id="BOARDITEM"></td></tr>
+  <tr>
+    <td><a href="item-board.htm" target="A9W3_ITEM_WIN">more ...</a></td>
+  </tr>
+</table>
+
+<iframe onload="try{onDataResponse()}catch(e){}" onreadystatechange="try{onDataResponse()}catch(e){}" id="__DATA_POSTER__" name="__DATA_POSTER__" width='0px' height='0' frameborder='0' src="about:blank"  style="display:none"></iframe>
+<script type="text/javascript" src="../../core/reader/list-board.js"></script>
