@@ -1,10 +1,11 @@
 ﻿<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="../../data/style/black/list.css" rel="stylesheet" type="text/css">
 <link href="../../data/style/black/board.css" rel="stylesheet" type="text/css">
 <table border='0' cellspacing='2' cellpadding='0' width='100%'>
 <form target="__DATA_POSTER__" id="__DATA_FORM__" method="POST"  enctype="multipart/form-data">
 <tr>
-	<td width="30"><strong>User</strong></td>
-	<td><input type="text" name="USER" id="USER" class="a9w3_board_user"></td>
+	<td width="30"><strong>From</strong></td>
+	<td><input type="text" name="FROM" id="FROM" class="a9w3_board_from"></td>
 </tr>
 <tr>
 	<td><strong>Code</strong></td>
@@ -21,17 +22,20 @@
 	<td><strong>Text</strong></td>
 	<td><textarea type="textarea"  name="TEXT" id="TEXT"   class="a9w3_board_text"></textarea></td>
 </tr>
+<tr>
 <td>&nbsp;</td>
   <td><input type="button" name="Submit" value="Submit" class="a9w3_board_button">
-    <input type="button" name="Submit2" value="Reset"  class="a9w3_board_button"></td>
+    <input type="reset" name="Submit2" value="Reset"  class="a9w3_board_button"></td>
 </tr>
 </form>
 </table>
 <hr size="1">
-<table width="100%"  border="0" cellspacing="0" cellpadding="0" >
-	<tr><td id="BOARDITEM"></td></tr>
+<table width="100%"  border="0" cellspacing="4" cellpadding="0" >
   <tr>
-    <td><a href="item-board.htm" target="A9W3_ITEM_WIN">more ...</a></td>
+    <td id="__BOARDITEM__"> last 3 messages </td>
+  </tr>
+  <tr>
+    <td style="text-align:right">Last&nbsp;<span id="__BOARDSIZE__">0</span>&nbsp;&nbsp;<a href="item-board.htm" target="A9W3_ITEM_WIN">more ...</a></td>
   </tr>
 </table>
 

@@ -19,7 +19,7 @@ BODY,TD{
 	border: 1px dashed #999999;
 	background-color:#EFEFEF;
 }
-.a9w3_board_user {
+.a9w3_board_from {
     width:100%;
     height:20px;
 	font-size: 12px;
@@ -33,7 +33,7 @@ BODY,TD{
 }
 .a9w3_board_text {
     width:100%;
-    height:150px;
+    height:200px;
     font-size: 12px;
 	border: 1px solid #999999;
 }
