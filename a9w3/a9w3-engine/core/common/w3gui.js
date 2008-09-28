@@ -300,11 +300,11 @@ W3GUI.editNotice = function(id)
 
 W3GUI.deleteArticle = function(id)
 {
-    if(!W3GUI.deleteCommon("paper.edit.delete",id)) return;
+    if(!W3GUI.deleteCommon("paper.edit.delete",id,"Article.")) return;
 }
 W3GUI.deletePicture = function(id)
 {
-    if(!W3GUI.deleteCommon("album.edit.delete",id)) return;
+    if(!W3GUI.deleteCommon("album.edit.delete",id,"Gallery.")) return;
 }
 W3GUI.deleteBoard = function(id)
 {
@@ -317,10 +317,10 @@ W3GUI.deleteLinks = function(id)
 
 W3GUI.deleteNotice = function(id)
 {
-    if(!W3GUI.deleteCommon("notice.edit.delete",id)) return;
+    if(!W3GUI.deleteCommon("notice.edit.delete",id,"Notice.")) return;
 }
 
-W3GUI.deleteCommon = function(code,pid,pool)
+W3GUI.deleteCommon = function(code,pid,key)
 {
     if(code==null || pid == null)
     {
@@ -338,6 +338,9 @@ W3GUI.deleteCommon = function(code,pid,pool)
     if(rtv == "info.success"){
         for(var pk in W3GUI.POOL){
             if(W3GUI.POOL[pk] instanceof Array){
+                
+                if(key != null && pk.indexOf(key) != 0) continue;
+                
                 var arr = [];
                 for(var i=0;i<W3GUI.POOL[pk].length;i++){
                     if(W3GUI.POOL[pk][i] != pid){
