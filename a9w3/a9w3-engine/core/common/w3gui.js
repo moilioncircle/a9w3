@@ -260,6 +260,11 @@ W3GUI.getNoticeItem = function(id,func)
 	var urls = [W3CNF.USERHOME+"helpers/notice/"+id+"/head.txt"];
 	W3GUI._callbackObject_(id,W3TXT.noticeItem,key,urls,func);
 }
+W3GUI.getNoticeData = function(id,func)
+{
+    var url = W3CNF.USERHOME+"helpers/notice/"+id+"/data/index.txt";
+    W3GUI._callbackArray_(null,url,func);
+}
 
 /** switch view */
 W3GUI.showArticle = function(id)
@@ -272,57 +277,85 @@ W3GUI.showPicture = function(id)
 }
 
 /** admin */
-W3GUI.deleteArticle = function(id)
-{
-    if(W3GUI.POOL[W3GUI.KEY.ART_TTL_LNK] != null)
-    {   
-        var arr = [];
-        for(var i=0;i<W3GUI.POOL[W3GUI.KEY.ART_TTL_LNK].length;i++)
-        {
-            if(W3GUI.POOL[W3GUI.KEY.ART_TTL_LNK][i] != id)
-            {
-                arr.push(W3GUI.POOL[W3GUI.KEY.ART_TTL_LNK][i]);
-            }
-        }
-        W3GUI.POOL[W3GUI.KEY.ART_TTL_LNK] = arr;
-    }
-    W3GUI.LISTWINOBJW.update();
-}
 W3GUI.editArticle = function(id)
 {
     W3GUI.ITEMWINOBJW.location=W3CNF.A9W3HOME+"a9w3-engine/view/writer/item-paper.htm?"+id;
-}
-W3GUI.deletePicture = function(id)
-{
-	alert("delete picture:"+id);
 }
 W3GUI.editPicture = function(id)
 {
     W3GUI.ITEMWINOBJW.location=W3CNF.A9W3HOME+"a9w3-engine/view/writer/item-album.htm?"+id;
 }
-W3GUI.deleteLinks = function(id)
-{
-	alert("delete Links:"+id);
-}
 W3GUI.editLinks = function(id)
 {
 	alert("edit Links:"+id);
-}
-W3GUI.deleteBoard = function(id)
-{
-	alert("delete Board:"+id);
 }
 W3GUI.editBoard = function(id)
 {
 	alert("edit Board:"+id);
 }
-W3GUI.deleteNotice = function(id)
-{
-	alert("delete Notice:"+id);
-}
 W3GUI.editNotice = function(id)
 {
-	alert("edit Notice:"+id);
+    W3GUI.ITEMWINOBJW.location=W3CNF.A9W3HOME+"a9w3-engine/view/writer/item-notice.htm?"+id;
+}
+
+W3GUI.deleteArticle = function(id)
+{
+    if(!W3GUI.deleteCommon("paper.edit.delete",id)) return;
+}
+W3GUI.deletePicture = function(id)
+{
+    if(!W3GUI.deleteCommon("album.edit.delete",id)) return;
+}
+W3GUI.deleteBoard = function(id)
+{
+	alert("delete Board:"+id);
+}
+W3GUI.deleteLinks = function(id)
+{
+	alert("delete Links:"+id);
+}
+
+W3GUI.deleteNotice = function(id)
+{
+    if(!W3GUI.deleteCommon("notice.edit.delete",id)) return;
+}
+
+W3GUI.deleteCommon = function(code,pid,pool)
+{
+    if(code==null || pid == null)
+    {
+        alert(W3CNF.getI18nString("warn.nullval"));
+        return false;
+    }
+    
+    var url = W3CNF.getServerURL(code);
+    if(url.indexOf("?")>0)
+        url = url+"&UID="+W3CNF.USER+"&PID="+pid;
+    else
+        url = url+"?UID="+W3CNF.USER+"&PID="+pid;
+    
+    var rtv = A9Loader.syncLoadText(url);
+    if(rtv == "info.success"){
+        for(var pk in W3GUI.POOL){
+            if(W3GUI.POOL[pk] instanceof Array){
+                var arr = [];
+                for(var i=0;i<W3GUI.POOL[pk].length;i++){
+                    if(W3GUI.POOL[pk][i] != pid){
+                        arr.push(W3GUI.POOL[pk][i]);
+                    }
+                }
+                W3GUI.POOL[pk] = arr;
+            }
+        }
+        try{
+            W3GUI.LISTWINOBJW.update();
+        }catch(e){};
+        
+        return true;
+    }else{
+        alert(W3CNF.getI18nString(rtv));
+        return false;
+    }
 }
 
 /** private */

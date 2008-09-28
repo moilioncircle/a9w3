@@ -23,27 +23,16 @@ function onAddLabel()
 
 function onDeleteAlbum()
 {
-    var url = parent.W3CNF.getServerURL("album.edit.delete");
-    if(url.indexOf("?")>0)
-        url = url+"&UID="+parent.W3CNF.USER+"&AID="+albumId;
-    else
-        url = url+"?UID="+parent.W3CNF.USER+"&AID="+albumId;
-    
-    var rtv = parent.A9Loader.syncLoadText(url);
-    if(rtv == "info.success")
-    {
-        alert("ok");
-    }
-    alert(parent.W3CNF.getI18nString(rtv));
+    parent.W3GUI.deletePicture(albumId);
 }
 
 function onSaveAlbum()
 {
     var url = parent.W3CNF.getServerURL("album.edit.commit");
     if(url.indexOf("?")>0)
-        url = url+"&UID="+parent.W3CNF.USER+"&AID="+albumId;
+        url = url+"&UID="+parent.W3CNF.USER+"&PID="+albumId;
     else
-        url = url+"?UID="+parent.W3CNF.USER+"&AID="+albumId;
+        url = url+"?UID="+parent.W3CNF.USER+"&PID="+albumId;
 
     var fm = document.getElementById("__DATA_FORM__");
     fm.action=url;
