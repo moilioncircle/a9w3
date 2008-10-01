@@ -278,7 +278,12 @@ function drawArticleLinkView(page,obj,lst)
 // label
 function showLabel(par,page){
     parent.W3GUI.getArticleLabelList(function(ls){
-        if(par == null) par = ls[0];
+        if(ls == null || ls.length == 0) return;
+        if(par == null){
+            var rn = Math.random()
+            rn = Math.round(rn*ls.length)
+            par = ls[rn];
+        }
         drawArticleListLabelView(par,document.getElementById("ARTLISTS"),ls);
         parent.W3GUI.getArticleLabelLink(par,function(ls2){
             drawArticleLinkView(page,document.getElementById("ARTLINKS"),ls2);
@@ -288,7 +293,10 @@ function showLabel(par,page){
 // month
 function showMonth(par,page){
     parent.W3GUI.getArticleMonthList(function(ls){
-        if(par == null) par = ls[0];
+        if(ls == null || ls.length == 0) return;
+        if(par == null){
+            par = ls[ls.length-1];
+        }
         drawArticleListMonthView(par,document.getElementById("ARTLISTS"),ls);
         parent.W3GUI.getArticleMonthLink(par,function(ls2){
             drawArticleLinkView(page,document.getElementById("ARTLINKS"),ls2);
@@ -298,6 +306,7 @@ function showMonth(par,page){
 // total
 function showTotal(page){
     parent.W3GUI.getArticleTotalLink(function(ls){
+        if(ls == null || ls.length == 0) return;
         document.getElementById("ARTLISTS").innerHTML="";
         drawArticleLinkView(page,document.getElementById("ARTLINKS"),ls);
     });

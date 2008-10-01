@@ -99,6 +99,7 @@ drawNoticeLinkView = function(page,obj,lst)
 // total
 function showPage(page){
     parent.W3GUI.getNoticeLink(function(ls){
+        if(ls == null || ls.length == 0) return;
         drawNoticeLinkView(page,document.getElementById("ARTLINKS"),ls);
     });
 }
