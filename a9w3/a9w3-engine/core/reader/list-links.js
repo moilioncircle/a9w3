@@ -235,7 +235,7 @@ function drawAddressLinkView(page,obj,lst)
             buff.push("<tr height='2'><td></td></tr>");
             buff.push("<tr>");
             buff.push("<td onmouseover='document.getElementById(\"ITEM_"+ai.id+"\").style.display=\"\"' onmouseout='document.getElementById(\"ITEM_"+ai.id+"\").style.display=\"none\"'>");
-            buff.push("<a href='javascript:parent.W3GUI.showAddress(\""+ai.id+"\")' class='a9w3_link_title'>"+parent.W3TXT.text2html(ai.title)+"</a></td>");
+            buff.push("<a href=\""+ai.addrs+"\" class='a9w3_link_title' target='_blank'>"+parent.W3TXT.text2html(ai.title)+"</a></td>");
             buff.push("</tr>");
             buff.push("<tr>");
             var cdt = ai.ctime
@@ -276,8 +276,7 @@ function drawAddressLinkView(page,obj,lst)
 // label
 function showLabel(par,page){
     parent.W3GUI.getAddressLabelList(function(ls){
-        if(ls == null || ls.length == 0) return;
-        if(par == null){
+        if(par == null && ls != null && ls.length>0){
             var rn = Math.random()
             rn = Math.round(rn*ls.length)
             par = ls[rn];
@@ -291,8 +290,7 @@ function showLabel(par,page){
 // month
 function showMonth(par,page){
     parent.W3GUI.getAddressMonthList(function(ls){
-        if(ls == null || ls.length == 0) return;
-        if(par == null){
+        if(par == null && ls != null && ls.length>0){
             par = ls[ls.length-1];
         }
         drawAddressListMonthView(par,document.getElementById("ARTLISTS"),ls);
@@ -304,7 +302,6 @@ function showMonth(par,page){
 // total
 function showTotal(page){
     parent.W3GUI.getAddressTotalLink(function(ls){
-        if(ls == null || ls.length == 0) return;
         document.getElementById("ARTLISTS").innerHTML="";
         drawAddressLinkView(page,document.getElementById("ARTLINKS"),ls);
     });

@@ -42,6 +42,7 @@ W3TXT.addressItem = function(map)
     this.lable = [];
     this.ctime = "";
     this.mtime = "";
+    this.addrs = "";
     this.brief = "";
     
     // init
@@ -51,6 +52,7 @@ W3TXT.addressItem = function(map)
         if(map["title"] != null) this.title = map["title"];
     	if(map["ctime"] != null) this.ctime = map["ctime"];
     	if(map["mtime"] != null) this.mtime = map["mtime"];
+    	if(map["addrs"] != null) this.addrs = map["addrs"];
     	if(map["brief"] != null) this.brief = map["brief"];
     	
     	var str = map["label"];
