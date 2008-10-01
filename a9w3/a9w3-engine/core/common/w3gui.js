@@ -329,7 +329,7 @@ W3GUI.editPicture = function(id)
 }
 W3GUI.editAddress = function(id)
 {
-	alert("edit Links:"+id);
+    W3GUI.ITEMWINOBJW.location=W3CNF.A9W3HOME+"a9w3-engine/view/writer/item-links.htm?"+id;
 }
 W3GUI.editBoard = function(id)
 {

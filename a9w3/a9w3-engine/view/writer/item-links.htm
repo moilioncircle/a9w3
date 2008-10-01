@@ -1,1 +1,40 @@
 ﻿<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="../../data/style/black/ablum.css" rel="stylesheet" type="text/css">
+<br />
+<form target="__DATA_POSTER__" id="__DATA_FORM__" method="POST"  enctype="multipart/form-data">
+<table  border='0' align='center' cellpadding='1' cellspacing='0' width="90%" style="table-layout:fixed ">
+	<tr>
+      <td width="40" ><strong>Title:</strong></td>
+	  <td>
+        <input type="text" name="TITLE" id="TITLE" style="width:100%;" class="a9w3_edit_text_off" onfocus="this.className='a9w3_edit_text_on'" onblur="this.className='a9w3_edit_text_off'"/>
+      </td>
+	</tr>
+	<tr>
+      <td width="40" ><strong>Addrs:</strong></td>
+	  <td>
+        <input type="text" name="ADDRS" id="ADDRS" style="width:100%;" class="a9w3_edit_text_off" onfocus="this.className='a9w3_edit_text_on'" onblur="this.className='a9w3_edit_text_off'"/>
+      </td>
+	</tr>
+	<tr>
+      <td><strong>Label:</strong></td>
+	  <td>
+        <input type="text" name="LABEL" id="LABEL" style="width:65%;" class="a9w3_edit_text_off" onfocus="this.className='a9w3_edit_text_on'" onblur="this.className='a9w3_edit_text_off'"/>
+        <select name="__LBLNME__" id="__LBLNME__" class="a9w3_edit_text_off" onchange="onAddLabel()"  style="width:30%;">
+          <option value="">== label ==</option>
+        </select>
+		</td>
+	</tr>
+	<tr><td><strong>Brief:</strong></td>
+	  <td><textarea name="BRIEF" id="BRIEF" rows="4"  class="a9w3_edit_text_off"  style="width:100%;" onfocus="this.className='a9w3_edit_text_on'" onblur="this.className='a9w3_edit_text_off'"></textarea></td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td>
+        <input type="button" onclick="onSaveAlbum()"  value="Save" style="background-color:#CC9900" class="a9w3_edit_text_off"  onmouseover="this.className='a9w3_edit_text_on'" onmouseout="this.className='a9w3_edit_text_off'"/>
+        <input type="button" id="__BTN_DELETE__" onclick="onDeleteAlbum()" value="Delete" style="background-color:#CC9900" class="a9w3_edit_text_off"  onmouseover="this.className='a9w3_edit_text_on'" onmouseout="this.className='a9w3_edit_text_off'" disabled/>
+        </td>
+	</tr>
+</table>
+</form>
+<iframe onload="try{onDataResponse()}catch(e){}" onreadystatechange="try{onDataResponse()}catch(e){}" id="__DATA_POSTER__" name="__DATA_POSTER__" width='0px' height='0' frameborder='0' src="about:blank"  style="display:none"></iframe>
+<script type="text/javascript" src="../../core/writer/item-links.js"></script>
