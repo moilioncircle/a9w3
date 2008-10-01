@@ -88,6 +88,10 @@ A9Loader.asyncLoadText(function(u,t){
 	W3CNF.GALLERY_LABEL.loadFromText(t)
 },W3CNF.USERHOME+"indexer/gallery/label/item.txt");
 
+W3CNF.ADDRESS_LABEL = new CnfReaderClass();
+A9Loader.asyncLoadText(function(u,t){
+	W3CNF.ADDRESS_LABEL.loadFromText(t)
+},W3CNF.USERHOME+"indexer/address/label/item.txt");
 //
 W3CNF.getServerURL = function(){
     var sf = new CnfReaderClass();

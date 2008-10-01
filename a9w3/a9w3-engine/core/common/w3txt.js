@@ -35,6 +35,37 @@ W3TXT.articleItem = function(map)
     }
 };
 
+W3TXT.addressItem = function(map)
+{
+    this.id = null;
+    this.title = "";
+    this.lable = [];
+    this.ctime = "";
+    this.mtime = "";
+    this.brief = "";
+    
+    // init
+    if(map != null)
+    {
+        if(map["id"] != null) this.id = map["id"];
+        if(map["title"] != null) this.title = map["title"];
+    	if(map["ctime"] != null) this.ctime = map["ctime"];
+    	if(map["mtime"] != null) this.mtime = map["mtime"];
+    	if(map["brief"] != null) this.brief = map["brief"];
+    	
+    	var str = map["label"];
+    	if(str != null)
+    	{
+    		var tmp = str.split(/[ \t]+/);
+			for(var i=0; i<tmp.length; i++) {
+				if(tmp[i] != "")
+				this.lable.push(tmp[i]);
+			}
+    	}
+    }
+};
+
+
 W3TXT.galleryItem = function(map)
 {
     this.id = null;

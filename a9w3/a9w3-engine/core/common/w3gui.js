@@ -13,6 +13,12 @@ W3GUI.KEY = {
     ART_MNT_LST : "Article.Month.List",
     ART_MNT_LNK : "Article.Month.Link.",
     ART_ITM     : "Article.Item.",
+    ADD_TTL_LNK : "Address.Total.Link",
+    ADD_LBL_LST : "Address.Label.List",
+    ADD_LBL_LNK : "Address.Label.Link.",
+    ADD_MNT_LST : "Address.Month.List",
+    ADD_MNT_LNK : "Address.Month.Link.",
+    ADD_ITM     : "Address.Item.",
     GLY_TTL_LNK : "Gallery.Total.Link",
     GLY_LBL_LST : "Gallery.Label.List",
     GLY_LBL_LNK : "Gallery.Label.Link.",
@@ -184,6 +190,49 @@ W3GUI.getArticleData = function(id,func)
     W3GUI._callbackArray_(null,url,func);
 }
 
+// address
+W3GUI.getAddressTotalLink = function(func)
+{
+	var url = W3CNF.USERHOME+"indexer/address/total/item.txt";
+	W3GUI._callbackArray_(W3GUI.KEY.ADD_TTL_LNK,url,func);
+}
+W3GUI.getAddressLabelList = function(func)
+{
+    if(W3GUI.POOL[W3GUI.KEY.ADD_LBL_LST] == null)
+    {
+        var kv  = W3CNF.ADDRESS_LABEL.getKeyValClone();
+        var arr = [];
+        for(var k in kv){
+            arr.push(k);
+        }
+        W3GUI.POOL[W3GUI.KEY.ADD_LBL_LST] = arr;
+    }
+    func(W3GUI.POOL[W3GUI.KEY.ADD_LBL_LST]);
+}
+W3GUI.getAddressLabelLink = function(id,func)
+{
+	var key = W3GUI.KEY.ADD_LBL_LNK+id;
+	var url = W3CNF.USERHOME+"indexer/address/label/"+id+"/item.txt";
+	W3GUI._callbackArray_(key,url,func);
+}
+W3GUI.getAddressMonthList = function(func)
+{
+	var url = W3CNF.USERHOME+"indexer/address/month/item.txt";
+	W3GUI._callbackArray_(W3GUI.KEY.ADD_MNT_LST,url,func);
+}
+W3GUI.getAddressMonthLink = function(id,func)
+{
+	var key = W3GUI.KEY.ADD_MNT_LNK+id;
+	var url = W3CNF.USERHOME+"indexer/address/month/"+id+"/item.txt";
+	W3GUI._callbackArray_(key,url,func);
+}
+W3GUI.getAddressItem = function(id,func)
+{
+	var key = W3GUI.KEY.ADD_ITM+id;
+	var urls = [W3CNF.USERHOME+"address/"+id+".txt"];
+	W3GUI._callbackObject_(id,W3TXT.addressItem,key,urls,func);
+}
+
 // gallery
 W3GUI.getGalleryTotalLink = function(func)
 {
@@ -239,13 +288,6 @@ W3GUI.getBoardItem = function(id,func)
 	var key = W3GUI.KEY.BRD_ITM+id;
 	var urls = [W3CNF.USERHOME+"helpers/board/"+id+".txt"];
 	W3GUI._callbackObject_(id,W3TXT.messageItem,key,urls,func);
-}
-
-// links
-W3GUI.getLinksItem = function(func)
-{
-	var urls = [W3CNF.USERHOME+"helpers/links/name-url-map.txt"];
-	W3GUI._callbackObject_(null,null,W3GUI.KEY.LNK_ITM,urls,func);
 }
 
 // notice
