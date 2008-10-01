@@ -6,7 +6,10 @@ function loadCode()
 
 function init()
 {
-    parent.W3GUI.getBoardLink(function(lst){
+	loadCode();
+    parent.W3GUI.getBoardLink(function(lst)
+    {
+        if(lst == null || lst.length ==0) return;
 		var size = lst.length<3?lst.length:3;
 		var poff = size<3?0:lst.length-3;
 		var buff = [];
@@ -40,13 +43,7 @@ function init()
 				document.getElementById(bxid+ai.id).innerHTML=buff.join("");
 			});
 		}
-		
-
     });
-	
-	loadCode();
-	
-	
 }
 
 //

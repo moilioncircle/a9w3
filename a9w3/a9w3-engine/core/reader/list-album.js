@@ -284,7 +284,12 @@ function drawGalleryLinkView(page,obj,lst)
 // label
 function showLabel(par,page){
     parent.W3GUI.getGalleryLabelList(function(ls){
-        if(par == null) par = ls[0];
+        if(ls == null || ls.length == 0) return;
+        if(par == null){
+            var rn = Math.random()
+            rn = Math.round(rn*ls.length)
+            par = ls[rn];
+        }
         drawGalleryListLabelView(par,document.getElementById("ARTLISTS"),ls);
         parent.W3GUI.getGalleryLabelLink(par,function(ls2){
             drawGalleryLinkView(page,document.getElementById("ARTLINKS"),ls2);
@@ -294,7 +299,10 @@ function showLabel(par,page){
 // month
 function showMonth(par,page){
     parent.W3GUI.getGalleryMonthList(function(ls){
-        if(par == null) par = ls[0];
+        if(ls == null || ls.length == 0) return;
+        if(par == null){
+            par = ls[ls.length-1];
+        }
         drawGalleryListMonthView(par,document.getElementById("ARTLISTS"),ls);
         parent.W3GUI.getGalleryMonthLink(par,function(ls2){
             drawGalleryLinkView(page,document.getElementById("ARTLINKS"),ls2);
@@ -304,6 +312,7 @@ function showMonth(par,page){
 // total
 function showTotal(page){
     parent.W3GUI.getGalleryTotalLink(function(ls){
+        if(ls == null || ls.length == 0) return;
         document.getElementById("ARTLISTS").innerHTML="";
         drawGalleryLinkView(page,document.getElementById("ARTLINKS"),ls);
     });
