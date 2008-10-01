@@ -284,8 +284,7 @@ function drawGalleryLinkView(page,obj,lst)
 // label
 function showLabel(par,page){
     parent.W3GUI.getGalleryLabelList(function(ls){
-        if(ls == null || ls.length == 0) return;
-        if(par == null){
+        if(par == null && ls != null && ls.length>0){
             var rn = Math.random()
             rn = Math.round(rn*ls.length)
             par = ls[rn];
@@ -299,8 +298,7 @@ function showLabel(par,page){
 // month
 function showMonth(par,page){
     parent.W3GUI.getGalleryMonthList(function(ls){
-        if(ls == null || ls.length == 0) return;
-        if(par == null){
+        if(par == null && ls != null && ls.length>0){
             par = ls[ls.length-1];
         }
         drawGalleryListMonthView(par,document.getElementById("ARTLISTS"),ls);
@@ -312,7 +310,6 @@ function showMonth(par,page){
 // total
 function showTotal(page){
     parent.W3GUI.getGalleryTotalLink(function(ls){
-        if(ls == null || ls.length == 0) return;
         document.getElementById("ARTLISTS").innerHTML="";
         drawGalleryLinkView(page,document.getElementById("ARTLINKS"),ls);
     });

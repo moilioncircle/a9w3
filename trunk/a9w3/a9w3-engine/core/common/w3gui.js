@@ -327,7 +327,7 @@ W3GUI.editPicture = function(id)
 {
     W3GUI.ITEMWINOBJW.location=W3CNF.A9W3HOME+"a9w3-engine/view/writer/item-album.htm?"+id;
 }
-W3GUI.editLinks = function(id)
+W3GUI.editAddress = function(id)
 {
 	alert("edit Links:"+id);
 }
@@ -344,6 +344,10 @@ W3GUI.deleteArticle = function(id)
 {
     if(!W3GUI.deleteCommon("paper.edit.delete",id,"Article.")) return;
 }
+W3GUI.deleteAddress = function(id)
+{
+    if(!W3GUI.deleteCommon("links.delete",id,"Address.")) return;
+}
 W3GUI.deletePicture = function(id)
 {
     if(!W3GUI.deleteCommon("album.edit.delete",id,"Gallery.")) return;
@@ -351,10 +355,6 @@ W3GUI.deletePicture = function(id)
 W3GUI.deleteBoard = function(id)
 {
 	alert("delete Board:"+id);
-}
-W3GUI.deleteLinks = function(id)
-{
-	alert("delete Links:"+id);
 }
 
 W3GUI.deleteNotice = function(id)
