@@ -25,7 +25,7 @@ W3GUI.KEY = {
     GLY_MNT_LST : "Gallery.Month.List",
     GLY_MNT_LNK : "Gallery.Month.Link.",
     GLY_ITM     : "Gallery.Item.",
-    BRD_LNK     : "Board.Link",
+    //BRD_LNK     : "Board.Link", // do not cache it
     BRD_ITM     : "Board.Item.",
     LNK_ITM     : "Links.Item",
     NTC_LNK     : "Notice.Link",
@@ -281,7 +281,7 @@ W3GUI.getGalleryItem = function(id,func)
 W3GUI.getBoardLink = function(func)
 {
 	var url = W3CNF.USERHOME+"helpers/board/00000000000000000.txt";
-	W3GUI._callbackArray_(W3GUI.KEY.BRD_LNK,url,func);
+	W3GUI._callbackArray_(null,url,func);
 }
 W3GUI.getBoardItem = function(id,func)
 {
