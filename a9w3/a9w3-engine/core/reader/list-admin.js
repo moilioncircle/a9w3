@@ -25,9 +25,9 @@ function onDataResponse()
 
 function onSaveBoard()
 {
-    if(document.getElementById("PASS").value =="")
+    if(isSimplePass(document.getElementById("PASS").value))
     {
-        alert(parent.W3CNF.getI18nString("info.check.empty"));
+        alert(parent.W3CNF.getI18nString("info.pass.simple"));
         document.getElementById("PASS").focus();
         return;
     }
@@ -47,6 +47,15 @@ function onSaveBoard()
     var fm = document.getElementById("__DATA_FORM__");
     fm.action=url;
     fm.submit();
+}
+
+function isSimplePass(pass)
+{
+    if(pass == null || pass.length<10) return true;
+    if(/^\d+$/.test(pass)) return true;
+    if(/^[a-zA-Z]+$/.test(pass)) return true;
+    if(pass.replace(/[0-9a-zA-Z]/g,"").length==0) return true;
+    return false;
 }
 
 function loadCode()
