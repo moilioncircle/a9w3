@@ -58,7 +58,7 @@ function drawGalleryListLabelView(cur,obj,lst)
             buff.push("<a href='javascript:{showPage(\"label\",\""+show[i]+"\")}' class='a9w3_link_infos'>"+parent.W3CNF.GALLERY_LABEL.getValue(show[i])+"</a>");
         else
             buff.push(parent.W3CNF.GALLERY_LABEL.getValue(show[i]));
-        buff.push(". ");
+        buff.push(" ");
     }
     
     buff.push("</td>");
@@ -72,7 +72,7 @@ function drawGalleryListLabelView(cur,obj,lst)
             buff.push("<a href='javascript:{showPage(\"label\",\""+lst[i]+"\")}' class='a9w3_link_infos'>"+parent.W3CNF.GALLERY_LABEL.getValue(lst[i])+"</a>");
         else
             buff.push(parent.W3CNF.GALLERY_LABEL.getValue(lst[i]));
-        buff.push(". ");
+        buff.push(" ");
     }
     buff.push("</td>");
     buff.push("</tr>");
@@ -135,7 +135,7 @@ function drawGalleryListMonthView(cur,obj,lst)
             buff.push("<a href='javascript:{showPage(\"month\",\""+show[i]+"\")}' class='a9w3_link_infos'>"+show[i]+"</a>");
         else
             buff.push(show[i]);
-        buff.push(". ");
+        buff.push(" ");
     }
     
     buff.push("</td>");
@@ -149,7 +149,7 @@ function drawGalleryListMonthView(cur,obj,lst)
             buff.push("<a href='javascript:{showPage(\"month\",\""+lst[i]+"\")}' class='a9w3_link_infos'>"+lst[i]+"</a>");
         else
             buff.push(lst[i]);
-        buff.push(". ");
+        buff.push(" ");
     }
     buff.push("</td>");
     buff.push("</tr>");
@@ -226,7 +226,7 @@ function drawGalleryLinkView(page,obj,lst)
         else
             buff.push("<span class='a9w3_text_infos'>"+page+"</span>");
         
-        buff.push(".");
+        buff.push(" ");
     }
     buff.push("</div>");
     obj.innerHTML=buff.join("");

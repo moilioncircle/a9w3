@@ -61,7 +61,7 @@ function drawBoardItemView(page,obj,lst)
         else
             buff.push("<span class='a9w3_text_infos'>"+page+"</span>");
         
-        buff.push(".");
+        buff.push(" ");
     }
     buff.push("</div>");
     obj.innerHTML=buff.join("");

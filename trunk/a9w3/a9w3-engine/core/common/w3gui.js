@@ -26,6 +26,7 @@ W3GUI.KEY = {
     GLY_MNT_LNK : "Gallery.Month.Link.",
     GLY_ITM     : "Gallery.Item.",
     //BRD_LNK     : "Board.Link", // do not cache it
+    BRD_INF     : "Board.Info",
     BRD_ITM     : "Board.Item.",
     LNK_ITM     : "Links.Item",
     NTC_LNK     : "Notice.Link",
@@ -278,6 +279,22 @@ W3GUI.getGalleryItem = function(id,func)
 }
 
 // board
+W3GUI.getBoardInfo = function(func)
+{
+	var url = W3CNF.USERHOME+"profile/board.txt";
+    var key = W3GUI.KEY.BRD_INF;
+    if(W3GUI.POOL[key] == null)
+    {
+        A9Loader.asyncLoadText(function(u,t){
+            W3GUI.POOL[key] = t;
+            func(t);
+        },url);
+    }
+    else
+    {
+        func(W3GUI.POOL[key]);
+    }
+}
 W3GUI.getBoardLink = function(func)
 {
 	var url = W3CNF.USERHOME+"helpers/board/00000000000000000.txt";
