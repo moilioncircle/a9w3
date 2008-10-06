@@ -23,7 +23,7 @@ function onDataResponse()
 }
 
 
-function onSaveBoard()
+function onLogin()
 {
     if(isSimplePass(document.getElementById("PASS").value))
     {
@@ -48,7 +48,17 @@ function onSaveBoard()
     fm.action=url;
     fm.submit();
 }
+function onLogout()
+{
+    var url = parent.W3CNF.getServerURL("admin.logout");
+    if(url.indexOf("?")>0)
+        url = url+"&UID="+parent.W3CNF.USER;
+    else
+        url = url+"?UID="+parent.W3CNF.USER;
 
+	var rtv = parent.A9Loader.syncLoadText(url);
+    alert(parent.W3CNF.getI18nString(rtv));
+}
 function isSimplePass(pass)
 {
     if(pass == null || pass.length<10) return true;
