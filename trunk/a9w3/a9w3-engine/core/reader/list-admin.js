@@ -38,7 +38,7 @@ function onSaveBoard()
         return;
     }
     
-    var url = parent.W3CNF.getServerURL("admin.commit");
+    var url = parent.W3CNF.getServerURL("admin.login");
     if(url.indexOf("?")>0)
         url = url+"&UID="+parent.W3CNF.USER;
     else
@@ -60,7 +60,13 @@ function isSimplePass(pass)
 
 function loadCode()
 {
-	document.getElementById("__CODE__").src=parent.W3CNF.getServerURL("admin.random");
+    var url = parent.W3CNF.getServerURL("admin.random");
+    if(url.indexOf("?")>0)
+        url = url+"&UID="+parent.W3CNF.USER;
+    else
+        url = url+"?UID="+parent.W3CNF.USER;
+
+	document.getElementById("__CODE__").src=url;
 }
 
 function init()
