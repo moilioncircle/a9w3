@@ -59,7 +59,13 @@ function onSaveBoard()
 
 function loadCode()
 {
-	document.getElementById("__CODE__").src=parent.W3CNF.getServerURL("board.random");
+        var url = parent.W3CNF.getServerURL("board.random");
+    if(url.indexOf("?")>0)
+        url = url+"&UID="+parent.W3CNF.USER;
+    else
+        url = url+"?UID="+parent.W3CNF.USER;
+
+	document.getElementById("__CODE__").src=url;
 }
 
 function init()
