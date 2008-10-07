@@ -17,15 +17,8 @@ function onDataResponse()
     
     if(rtv != "")
     {
-        if(rtv == "warn.pass.change" || rtv == "info.success")
-        {
-            window.location="../writer/list-admin.htm";
-        }
-        else
-        {
-            __DATA_POSTER__.location="about:blank";// avoid recommit when refresh
-        }
         alert(parent.W3CNF.getI18nString(rtv));
+        __DATA_POSTER__.location="about:blank";// avoid recommit when refresh
     }
 }
 
