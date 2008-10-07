@@ -19,16 +19,20 @@ function onDataResponse()
     {
         if(rtv == "warn.pass.change" || rtv == "info.success")
         {
-            window.location="../writer/list-admin.htm";
+            if(parent.W3CNF.A9W3_RTMODE == parent.W3CNF.A9W3_WRITER)
+            {
+                parent.W3CNF.A9W3_RTMODE = parent.W3CNF.A9W3_READER;
+            }
+            else
+            {
+                parent.W3CNF.A9W3_RTMODE = parent.W3CNF.A9W3_WRITER;
+            }
+            switchMode();
         }
-        else
-        {
-            __DATA_POSTER__.location="about:blank";// avoid recommit when refresh
-        }
+        __DATA_POSTER__.location="about:blank";// avoid recommit when refresh
         alert(parent.W3CNF.getI18nString(rtv));
     }
 }
-
 
 function onLogin()
 {
@@ -64,7 +68,61 @@ function onLogout()
         url = url+"?UID="+parent.W3CNF.USER;
 
 	var rtv = parent.A9Loader.syncLoadText(url);
+    if(rtv == "info.success")
+    {
+        parent.W3CNF.A9W3_RTMODE = parent.W3CNF.A9W3_READER;
+        switchMode();
+    }
+
     alert(parent.W3CNF.getI18nString(rtv));
+}
+
+function onChpass()
+{
+    if(isSimplePass(document.getElementById("PASS").value))
+    {
+        alert(parent.W3CNF.getI18nString("info.pass.simple"));
+        document.getElementById("PASS").focus();
+        return;
+    }
+    if(isSimplePass(document.getElementById("NEWP").value))
+    {
+        alert(parent.W3CNF.getI18nString("info.pass.simple"));
+        document.getElementById("NEWP").focus();
+        return;
+    }
+    
+    if(document.getElementById("NEWP").value != document.getElementById("RENP").value)
+    {
+        alert(parent.W3CNF.getI18nString("warn.pass.differ"));
+        document.getElementById("RENP").focus();
+        return;
+    }
+    
+    if(document.getElementById("CODE").value =="")
+    {
+        alert(parent.W3CNF.getI18nString("info.check.empty"));
+        document.getElementById("CODE").focus();
+        return;
+    }
+    var url = parent.W3CNF.getServerURL("admin.cpass");
+    if(url.indexOf("?")>0)
+        url = url+"&UID="+parent.W3CNF.USER;
+    else
+        url = url+"?UID="+parent.W3CNF.USER;
+
+    var fm = document.getElementById("__DATA_FORM__");
+    fm.action=url;
+    fm.submit();
+}
+
+function switchMode()
+{
+    var isAdmin = (parent.W3CNF.A9W3_RTMODE == parent.W3CNF.A9W3_WRITER);
+    document.getElementById("__READER__").style.display=isAdmin?"none":"";
+    document.getElementById("__CPASS1__").style.display=isAdmin?"":"none";
+    document.getElementById("__CPASS2__").style.display=isAdmin?"":"none";
+    document.getElementById("__WRITER__").style.display=isAdmin?"":"none";
 }
 function isSimplePass(pass)
 {
@@ -89,6 +147,7 @@ function loadCode()
 function init()
 {
 	loadCode();
+    switchMode();
 }
 
 //
