@@ -1,21 +1,9 @@
 <?php
 require_once("common.php");
-if(!checkRequestUID()) exit;
-
-switch($_REQUEST["t"])
-{
-    case "admin":
-        $type = "SN_ADMIN.".$_REQUEST["UID"];
-        break;
-    case "board":
-        $type = "SN_BOARD.".$_REQUEST["UID"];
-        break;
-    default:
-        exit;
-}
+checkRequestUID();
 
 session_start();
-$_SESSION[$type]=genImageSn();
+$_SESSION[SKEY_IMGSN.$_REQUEST["UID"]]=genImageSn();
 
 // function
 function genImageSn()
