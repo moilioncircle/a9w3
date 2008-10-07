@@ -7,6 +7,8 @@ define("RKEY_SUCCESS","info.success");
 define("RKEY_WRIMGSN","warn.imgsn.wrong");
 define("RKEY_ACCDENY","warn.deny");
 define("RKEY_SETPASS","warn.pass.change");
+define("RKEY_SMPPASS","info.pass.simple");
+
 
 function checkRequestUID(){
     if(empty($_REQUEST["UID"])) return false;
