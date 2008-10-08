@@ -124,8 +124,6 @@ function switchMode()
 function isSimplePass(pass)
 {
     if(pass == null || pass.length<10) return true;
-    if(/^\d+$/.test(pass)) return true;
-    if(/^[a-zA-Z]+$/.test(pass)) return true;
     if(pass.replace(/[0-9a-zA-Z]/g,"").length<=0) return true;
     return false;
 }
