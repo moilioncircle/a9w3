@@ -4,13 +4,13 @@ checkRequestUID();
 
 // check by js at client
 if(empty($_REQUEST["PASS"]) || empty($_REQUEST["CODE"])){
-        echo RKEY_ACCDENY;
-        exit;
+    echo RKEY_ACCDENY;
+    exit;
 }
 // check imgsn
 session_start();
 if(empty($_SESSION[SKEY_IMGSN.$_REQUEST["UID"]])
-   ||strcmp($_REQUEST["CODE"],$_SESSION[SKEY_IMGSN.$_REQUEST["UID"]]) != 0){
+|| $_REQUEST["CODE"] !== $_SESSION[SKEY_IMGSN.$_REQUEST["UID"]]){
     echo RKEY_WRIMGSN;
     exit;
 }
