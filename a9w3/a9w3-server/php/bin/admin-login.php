@@ -17,20 +17,34 @@ if(empty($_SESSION[SKEY_IMGSN.$_REQUEST["UID"]])
 unset($_SESSION[SKEY_IMGSN.$_REQUEST["UID"]]); // clear imgsn
 
 // check passwd
-$rtv = RKEY_UNKOWN;
 $pass = file_get_contents(PATH_ROOT."a9w3-auhome/".$_REQUEST["UID"]."/profile/passwd.txt");
 if($pass === '' && DEFAULT_PASS === $_REQUEST["PASS"]){
     $_SESSION[SKEY_UTIME.$_REQUEST["UID"]]=time();
-    $rtv = RKEY_SETPASS;
+    echo RKEY_SETPASS;
 }else if($pass === sha1($_REQUEST["PASS"])){
     $_SESSION[SKEY_UTIME.$_REQUEST["UID"]]=time();
-    $rtv = RKEY_SUCCESS;
+    echo RKEY_SUCCESS;
 }else{
     echo RKEY_ACCDENY;
     exit;
 }
 
-// check group
-echo $rtv;
-
+// set group
+foreach(file(PATH_ROOT."a9w3-engine/conf/group.txt") as $line){
+    if (preg_match("/\b".$_REQUEST["UID"]."\b/", $line)){
+        $umd = UMODE_READER;
+        if(preg_match("/^admin/i", $line)){
+            $umd=UMODE_ADMIN;
+        }else if(preg_match("/^writer/i", $line)){
+            $umd=UMODE_WRITER;
+        }else{
+            $umd=UMODE_READER;
+        }
+        if(empty($_SESSION[SKEY_UMODE.$_REQUEST["UID"]])){
+            $_SESSION[SKEY_UMODE.$_REQUEST["UID"]]=$umd;
+        }else{
+            $_SESSION[SKEY_UMODE.$_REQUEST["UID"]].=",".$umd;
+        }
+    }
+}
 ?>

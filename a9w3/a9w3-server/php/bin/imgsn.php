@@ -30,7 +30,7 @@ function genImageSn()
         imageline($im, rand(0,$width), rand(0,$height),rand(0,$width), rand(0,$height), IMG_COLOR_STYLED);
     }
 
-	$valiText="abdefghijmnqrty23456789ABCDEFGHJKLMNPQRTUVWSXYZ";
+	$valiText="abdefghijqrty23456789ABCDEFGHJKLMNPQRTUVWSXYZ";
 	$valiNum=5;
 	$valiColor=array
 	(
