@@ -19,15 +19,12 @@ function onDataResponse()
     {
         if(rtv == "warn.pass.change" || rtv == "info.success")
         {
-            if(parent.W3CNF.A9W3_RTMODE == parent.W3CNF.A9W3_WRITER)
-            {
-                parent.W3CNF.A9W3_RTMODE = parent.W3CNF.A9W3_READER;
-            }
-            else
+            if(parent.W3CNF.A9W3_RTMODE == parent.W3CNF.A9W3_READER)
             {
                 parent.W3CNF.A9W3_RTMODE = parent.W3CNF.A9W3_WRITER;
             }
             switchMode();
+            loadCode();
         }
         __DATA_POSTER__.location="about:blank";// avoid recommit when refresh
         alert(parent.W3CNF.getI18nString(rtv));
@@ -129,7 +126,7 @@ function isSimplePass(pass)
     if(pass == null || pass.length<10) return true;
     if(/^\d+$/.test(pass)) return true;
     if(/^[a-zA-Z]+$/.test(pass)) return true;
-    if(pass.replace(/[0-9a-zA-Z]/g,"").length==0) return true;
+    if(pass.replace(/[0-9a-zA-Z]/g,"").length<=0) return true;
     return false;
 }
 

@@ -18,40 +18,42 @@ if(empty($_SESSION[SKEY_IMGSN.$_REQUEST["UID"]])
 }
 
 // check passwd
-if(!checkPass()){
-    echo RKEY_ACCDENY;
+$rtv = checkPass();
+if($rtv !== RKEY_SUCCESS){
+    echo $rtv;
     exit;
 }
 
-// check simple
-if(!checkStrong())
-{
-    echo RKEY_SMPPASS;
-    exit;
+// write new passwd
+if(writeFile(PATH_ROOT."a9w3-auhome/".$_REQUEST["UID"]."/profile/passwd.txt",sha1($_REQUEST["NEWP"]),"w")){
+    echo RKEY_SUCCESS;
+}else{
+    echo RKEY_UNKOWN;
 }
 
 ////
 function checkPass()
 {
-    $DEFAULT_PASS = "a9w3_1s_g00d";
-    if($DEFAULT_PASS === $_REQUEST["PASS"]){
-        return true;
-    }
     $pass = file_get_contents(PATH_ROOT."a9w3-auhome/".$_REQUEST["UID"]."/profile/passwd.txt");
-    if($pass === ''){
-        $_SESSION[SKEY_CPASS.$_REQUEST["UID"]]=time();
-        return true;
-    }else if($pass === sha1($_REQUEST["PASS"])){
-        $_SESSION[SKEY_ADMIN.$_REQUEST["UID"]]=time();
-        return true;
+    if(($pass === '' && DEFAULT_PASS === $_REQUEST["PASS"])
+    || $pass === sha1($_REQUEST["PASS"])){
+        // ok
+    }else{
+        return RKEY_ACCDENY;
     }
     
-    return false;
+    // old or default
+    if(DEFAULT_PASS === $_REQUEST["NEWP"]
+    || $pass === sha1($_REQUEST["NEWP"])){
+        return RKEY_SMPPASS;
+    }
+    
+    // js-check
+    if(strlen($_REQUEST["NEWP"])<10) return RKEY_SMPPASS;
+    if(preg_match("/^\d+$/", $_REQUEST["NEWP"])) return RKEY_SMPPASS;
+    if(preg_match("/^[a-zA-Z]+$/", $_REQUEST["NEWP"])) return RKEY_SMPPASS;
+    if(strlen(preg_replace("/[0-9a-zA-Z]/", '', $_REQUEST["NEWP"]))<=0) return RKEY_SMPPASS;
+    
+    return RKEY_SUCCESS;
 }
-
-function checkStrong()
-{
-    return false;
-}
-
 ?>
