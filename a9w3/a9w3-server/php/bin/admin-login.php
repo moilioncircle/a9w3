@@ -15,15 +15,22 @@ if(empty($_SESSION[SKEY_IMGSN.$_REQUEST["UID"]])
     exit;
 }
 unset($_SESSION[SKEY_IMGSN.$_REQUEST["UID"]]); // clear imgsn
+
 // check passwd
+$rtv = RKEY_UNKOWN;
 $pass = file_get_contents(PATH_ROOT."a9w3-auhome/".$_REQUEST["UID"]."/profile/passwd.txt");
 if($pass === '' && DEFAULT_PASS === $_REQUEST["PASS"]){
-    $_SESSION[SKEY_CPASS.$_REQUEST["UID"]]=time();
-    echo RKEY_SETPASS;
+    $_SESSION[SKEY_UTIME.$_REQUEST["UID"]]=time();
+    $rtv = RKEY_SETPASS;
 }else if($pass === sha1($_REQUEST["PASS"])){
-    $_SESSION[SKEY_ADMIN.$_REQUEST["UID"]]=time();
-    echo RKEY_SUCCESS;
+    $_SESSION[SKEY_UTIME.$_REQUEST["UID"]]=time();
+    $rtv = RKEY_SUCCESS;
 }else{
     echo RKEY_ACCDENY;
+    exit;
 }
+
+// check group
+echo $rtv;
+
 ?>
