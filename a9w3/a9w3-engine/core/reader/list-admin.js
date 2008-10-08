@@ -24,8 +24,8 @@ function onDataResponse()
                 parent.W3CNF.A9W3_RTMODE = parent.W3CNF.A9W3_WRITER;
             }
             switchMode();
-            loadCode();
         }
+        loadCode();
         __DATA_POSTER__.location="about:blank";// avoid recommit when refresh
         alert(parent.W3CNF.getI18nString(rtv));
     }
@@ -56,24 +56,6 @@ function onLogin()
     fm.action=url;
     fm.submit();
 }
-function onLogout()
-{
-    var url = parent.W3CNF.getServerURL("admin.logout");
-    if(url.indexOf("?")>0)
-        url = url+"&UID="+parent.W3CNF.USER;
-    else
-        url = url+"?UID="+parent.W3CNF.USER;
-
-	var rtv = parent.A9Loader.syncLoadText(url);
-    if(rtv == "info.success")
-    {
-        parent.W3CNF.A9W3_RTMODE = parent.W3CNF.A9W3_READER;
-        switchMode();
-    }
-
-    alert(parent.W3CNF.getI18nString(rtv));
-}
-
 function onChpass()
 {
     if(isSimplePass(document.getElementById("PASS").value))
@@ -113,6 +95,23 @@ function onChpass()
     fm.submit();
 }
 
+function onLogout()
+{
+    var url = parent.W3CNF.getServerURL("admin.logout");
+    if(url.indexOf("?")>0)
+        url = url+"&UID="+parent.W3CNF.USER;
+    else
+        url = url+"?UID="+parent.W3CNF.USER;
+
+	var rtv = parent.A9Loader.syncLoadText(url);
+    if(rtv == "info.success")
+    {
+        parent.W3CNF.A9W3_RTMODE = parent.W3CNF.A9W3_READER;
+        switchMode();
+    }
+    alert(parent.W3CNF.getI18nString(rtv));
+}
+
 function switchMode()
 {
     var isAdmin = (parent.W3CNF.A9W3_RTMODE == parent.W3CNF.A9W3_WRITER);
@@ -120,6 +119,7 @@ function switchMode()
     document.getElementById("__CPASS1__").style.display=isAdmin?"":"none";
     document.getElementById("__CPASS2__").style.display=isAdmin?"":"none";
     document.getElementById("__WRITER__").style.display=isAdmin?"":"none";
+    document.getElementById("__DATA_FORM__").reset();
 }
 function isSimplePass(pass)
 {

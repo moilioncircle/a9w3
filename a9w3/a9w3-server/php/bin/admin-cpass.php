@@ -16,6 +16,7 @@ if(empty($_SESSION[SKEY_IMGSN.$_REQUEST["UID"]])
     echo RKEY_WRIMGSN;
     exit;
 }
+unset($_SESSION[SKEY_IMGSN.$_REQUEST["UID"]]);  // clear imgsn
 
 // check passwd
 $pass = file_get_contents(PATH_ROOT."a9w3-auhome/".$_REQUEST["UID"]."/profile/passwd.txt");
