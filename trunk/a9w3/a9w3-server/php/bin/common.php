@@ -1,13 +1,16 @@
 <?php
 define("PATH_ROOT","../../../");
+define("DEFAULT_PASS","a9w3_1s_g00d");
 define("SKEY_IMGSN","IMGSN_");
 define("SKEY_ADMIN","ADMIN_");
 define("SKEY_CPASS","CPASS_");
+define("RKEY_UNKOWN","warn.unknown");
 define("RKEY_SUCCESS","info.success");
 define("RKEY_WRIMGSN","warn.imgsn.wrong");
 define("RKEY_ACCDENY","warn.deny");
 define("RKEY_SETPASS","warn.pass.change");
 define("RKEY_SMPPASS","info.pass.simple");
+
 
 
 function checkRequestUID(){
@@ -28,5 +31,28 @@ function checkAdminPermit(){
         echo RKEY_ACCDENY;
         exit;
     }
+}
+
+function writeFile($filename,$content,$mode){
+    
+    if (!is_writable($filename)) return false;
+    
+    // failed to open
+    if (!$handle = fopen($filename, $mode)){
+         return false;
+    }
+    // failed to lock
+    if (!flock($handle, LOCK_EX)){
+        fclose($handle);
+        return false;
+    }
+    
+    // write
+    $rtv = (fwrite($handle,$content) === FALSE)?false:true;
+    
+    // close lock and file
+    flock($handle, LOCK_UN);
+    fclose($handle);
+    return $rtv;
 }
 ?>
