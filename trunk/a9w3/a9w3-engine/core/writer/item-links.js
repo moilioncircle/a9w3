@@ -82,10 +82,10 @@ function init()
         
         document.getElementById("__BTN_DELETE__").disabled=false;
         parent.W3GUI.getAddressItem(linksId,function(ai){
-            document.getElementById("TITLE").value=parent.W3TXT.text2html(ai.title);
-            document.getElementById("ADDRS").value=parent.W3TXT.text2html(ai.addrs);
+            document.getElementById("TITLE").value=parent.W3TXT.html2text(ai.title);
+            document.getElementById("ADDRS").value=parent.W3TXT.html2text(ai.addrs);
             document.getElementById("LABEL").value=ai.lable.join(" ");
-            document.getElementById("BRIEF").value=parent.W3TXT.text2html(ai.brief);
+            document.getElementById("BRIEF").value=parent.W3TXT.html2text(ai.brief);
         });
     }
 }

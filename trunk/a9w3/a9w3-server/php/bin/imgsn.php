@@ -1,9 +1,9 @@
 <?php
-require_once("common.php");
+require_once('common.php');
 checkRequestUID();
 
 session_start();
-$_SESSION[SKEY_IMGSN.$_REQUEST["UID"]]=genImageSn();
+$_SESSION[SKEY_IMGSN.$_REQUEST['UID']]=genImageSn();
 
 // function
 function genImageSn()
@@ -30,15 +30,15 @@ function genImageSn()
         imageline($im, rand(0,$width), rand(0,$height),rand(0,$width), rand(0,$height), IMG_COLOR_STYLED);
     }
 
-	$valiText="abdefghijqrty23456789ABCDEFGHJKLMNPQRTUVWSXYZ";
+	$valiText='abdefghijqrty23456789ABCDEFGHJKLMNPQRTUVWSXYZ';
 	$valiNum=5;
 	$valiColor=array
 	(
-		0=>array("0","0","139"),
-		1=>array("0","139","0"),
-		2=>array("0","139","139"),
-		3=>array("139","0","0"),
-        4=>array("139","0","139")
+		0=>array('0','0','139'),
+		1=>array('0','139','0'),
+		2=>array('0','139','139'),
+		3=>array('139','0','0'),
+        4=>array('139','0','139')
 	);
 	$c=count($valiColor);
     
@@ -46,7 +46,7 @@ function genImageSn()
 	$fontY=4;
 	$fontM=8;
     
-    $sn = "";
+    $sn = '';
 	for($i=0;$i<$valiNum;$i++)
 	{
 		$font=substr($valiText,rand(0,strlen($valiText)-1),1);
@@ -60,7 +60,7 @@ function genImageSn()
 		$sn.=$font;
 	}
 	
-    header("Content-type: image/png");
+    header('Content-type: image/png');
 	imagepng($im);
 	imagedestroy($im);
     

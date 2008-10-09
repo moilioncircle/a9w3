@@ -39,29 +39,29 @@ W3GUI.drawMenu = function()
     var html = "<table width='100%'  border='0' cellspacing='6' cellpadding='0'>";
     for (var i=1;;i++)
     {
-    	var infoText = W3CNF.CONF.getValue("menu.item-"+i+".info.text");
-    	var infoType = W3CNF.CONF.getValue("menu.item-"+i+".info.type");
-    	
-    	if(infoText == null) break;
-    	
-    	if(infoType == "function")
-    		infoText = eval(infoText);
+        var infoText = W3CNF.CONF.getValue("menu.item-"+i+".info.text");
+        var infoType = W3CNF.CONF.getValue("menu.item-"+i+".info.type");
+        
+        if(infoText == null) break;
+        
+        if(infoType == "function")
+            infoText = eval(infoText);
         else if ((infoType == "config"))
             infoText = W3CNF.MENU.getValue(infoText);
-    	
-    	var linkText = W3CNF.CONF.getValue("menu.item-"+i+".link.text");
-    	var linkType = W3CNF.CONF.getValue("menu.item-"+i+".link.type");
-    	
-    	if(linkType == "string")
-    	   linkText = W3GUI.LISTWINNAME+".location=unescape('"+escape(linkText)+"');";
-    	   
-    	
-    	var icon  = W3CNF.CONF.getValue("menu.item-"+i+".icon");
-    	
+        
+        var linkText = W3CNF.CONF.getValue("menu.item-"+i+".link.text");
+        var linkType = W3CNF.CONF.getValue("menu.item-"+i+".link.type");
+        
+        if(linkType == "string")
+           linkText = W3GUI.LISTWINNAME+".location=unescape('"+escape(linkText)+"');";
+           
+        
+        var icon  = W3CNF.CONF.getValue("menu.item-"+i+".icon");
+        
         html+= "<tr>";
         html+= "<td class='a9w3_menu_info'>"+infoText+"</td>";
         html+= "<td><div class='a9w3_menu_out' onMouseOver='W3GUI.menuEvent.onOver(this)' onMouseOut='W3GUI.menuEvent.onOut(this)' onclick='W3GUI.menuEvent.onClick(this,\""+
-        		escape(linkText)+"\")'><img src='"+
+                escape(linkText)+"\")'><img src='"+
                 icon+"'></div></td>";
         html+= "</tr>";
     }
@@ -145,8 +145,8 @@ item: a target of link. (a9admin/article/2008/0502140800/head.txt)
 // article
 W3GUI.getArticleTotalLink = function(func)
 {
-	var url = W3CNF.USERHOME+"indexer/article/total/item.txt";
-	W3GUI._callbackArray_(W3GUI.KEY.ART_TTL_LNK,url,func);
+    var url = W3CNF.USERHOME+"indexer/article/total/item.txt";
+    W3GUI._callbackArray_(W3GUI.KEY.ART_TTL_LNK,url,func);
 }
 W3GUI.getArticleLabelList = function(func)
 {
@@ -163,27 +163,27 @@ W3GUI.getArticleLabelList = function(func)
 }
 W3GUI.getArticleLabelLink = function(id,func)
 {
-	var key = W3GUI.KEY.ART_LBL_LNK+id;
-	var url = W3CNF.USERHOME+"indexer/article/label/"+id+"/item.txt";
-	W3GUI._callbackArray_(key,url,func);
+    var key = W3GUI.KEY.ART_LBL_LNK+id;
+    var url = W3CNF.USERHOME+"indexer/article/label/"+id+"/item.txt";
+    W3GUI._callbackArray_(key,url,func);
 }
 W3GUI.getArticleMonthList = function(func)
 {
-	var url = W3CNF.USERHOME+"indexer/article/month/item.txt";
-	W3GUI._callbackArray_(W3GUI.KEY.ART_MNT_LST,url,func);
+    var url = W3CNF.USERHOME+"indexer/article/month/item.txt";
+    W3GUI._callbackArray_(W3GUI.KEY.ART_MNT_LST,url,func);
 }
 W3GUI.getArticleMonthLink = function(id,func)
 {
-	var key = W3GUI.KEY.ART_MNT_LNK+id;
-	var url = W3CNF.USERHOME+"indexer/article/month/"+id+"/item.txt";
-	W3GUI._callbackArray_(key,url,func);
+    var key = W3GUI.KEY.ART_MNT_LNK+id;
+    var url = W3CNF.USERHOME+"indexer/article/month/"+id+"/item.txt";
+    W3GUI._callbackArray_(key,url,func);
 }
 W3GUI.getArticleItem = function(id,func)
 {
-	var key = W3GUI.KEY.ART_ITM+id;
-	var urls = [W3CNF.USERHOME+"article/"+id+"/head.txt",
-				W3CNF.USERHOME+"helpers/status/read/article/"+id+".txt"];
-	W3GUI._callbackObject_(id,W3TXT.articleItem,key,urls,func);
+    var key = W3GUI.KEY.ART_ITM+id;
+    var urls = [W3CNF.USERHOME+"article/"+id+"/head.txt",
+                W3CNF.USERHOME+"helpers/status/read/article/"+id+".txt"];
+    W3GUI._callbackObject_(id,W3TXT.articleItem,key,urls,func);
 }
 W3GUI.getArticleData = function(id,func)
 {
@@ -194,8 +194,8 @@ W3GUI.getArticleData = function(id,func)
 // address
 W3GUI.getAddressTotalLink = function(func)
 {
-	var url = W3CNF.USERHOME+"indexer/address/total/item.txt";
-	W3GUI._callbackArray_(W3GUI.KEY.ADD_TTL_LNK,url,func);
+    var url = W3CNF.USERHOME+"indexer/address/total/item.txt";
+    W3GUI._callbackArray_(W3GUI.KEY.ADD_TTL_LNK,url,func);
 }
 W3GUI.getAddressLabelList = function(func)
 {
@@ -212,33 +212,33 @@ W3GUI.getAddressLabelList = function(func)
 }
 W3GUI.getAddressLabelLink = function(id,func)
 {
-	var key = W3GUI.KEY.ADD_LBL_LNK+id;
-	var url = W3CNF.USERHOME+"indexer/address/label/"+id+"/item.txt";
-	W3GUI._callbackArray_(key,url,func);
+    var key = W3GUI.KEY.ADD_LBL_LNK+id;
+    var url = W3CNF.USERHOME+"indexer/address/label/"+id+"/item.txt";
+    W3GUI._callbackArray_(key,url,func);
 }
 W3GUI.getAddressMonthList = function(func)
 {
-	var url = W3CNF.USERHOME+"indexer/address/month/item.txt";
-	W3GUI._callbackArray_(W3GUI.KEY.ADD_MNT_LST,url,func);
+    var url = W3CNF.USERHOME+"indexer/address/month/item.txt";
+    W3GUI._callbackArray_(W3GUI.KEY.ADD_MNT_LST,url,func);
 }
 W3GUI.getAddressMonthLink = function(id,func)
 {
-	var key = W3GUI.KEY.ADD_MNT_LNK+id;
-	var url = W3CNF.USERHOME+"indexer/address/month/"+id+"/item.txt";
-	W3GUI._callbackArray_(key,url,func);
+    var key = W3GUI.KEY.ADD_MNT_LNK+id;
+    var url = W3CNF.USERHOME+"indexer/address/month/"+id+"/item.txt";
+    W3GUI._callbackArray_(key,url,func);
 }
 W3GUI.getAddressItem = function(id,func)
 {
-	var key = W3GUI.KEY.ADD_ITM+id;
-	var urls = [W3CNF.USERHOME+"address/"+id+".txt"];
-	W3GUI._callbackObject_(id,W3TXT.addressItem,key,urls,func);
+    var key = W3GUI.KEY.ADD_ITM+id;
+    var urls = [W3CNF.USERHOME+"address/"+id+".txt"];
+    W3GUI._callbackObject_(id,W3TXT.addressItem,key,urls,func);
 }
 
 // gallery
 W3GUI.getGalleryTotalLink = function(func)
 {
-	var url = W3CNF.USERHOME+"indexer/gallery/total/item.txt";
-	W3GUI._callbackArray_(W3GUI.KEY.GLY_TTL_LNK,url,func);
+    var url = W3CNF.USERHOME+"indexer/gallery/total/item.txt";
+    W3GUI._callbackArray_(W3GUI.KEY.GLY_TTL_LNK,url,func);
 }
 W3GUI.getGalleryLabelList = function(func)
 {
@@ -255,33 +255,33 @@ W3GUI.getGalleryLabelList = function(func)
 }
 W3GUI.getGalleryLabelLink = function(id,func)
 {
-	var key = W3GUI.KEY.GLY_LBL_LNK+id;
-	var url = W3CNF.USERHOME+"indexer/gallery/label/"+id+"/item.txt";
-	W3GUI._callbackArray_(key,url,func);
+    var key = W3GUI.KEY.GLY_LBL_LNK+id;
+    var url = W3CNF.USERHOME+"indexer/gallery/label/"+id+"/item.txt";
+    W3GUI._callbackArray_(key,url,func);
 }
 W3GUI.getGalleryMonthList = function(func)
 {
-	var url = W3CNF.USERHOME+"indexer/gallery/month/item.txt";
-	W3GUI._callbackArray_(W3GUI.KEY.GLY_MNT_LST,url,func);
+    var url = W3CNF.USERHOME+"indexer/gallery/month/item.txt";
+    W3GUI._callbackArray_(W3GUI.KEY.GLY_MNT_LST,url,func);
 }
 W3GUI.getGalleryMonthLink = function(id,func)
 {
-	var key = W3GUI.KEY.GLY_MNT_LNK+id;
-	var url = W3CNF.USERHOME+"indexer/gallery/month/"+id+"/item.txt";
-	W3GUI._callbackArray_(key,url,func);
+    var key = W3GUI.KEY.GLY_MNT_LNK+id;
+    var url = W3CNF.USERHOME+"indexer/gallery/month/"+id+"/item.txt";
+    W3GUI._callbackArray_(key,url,func);
 }
 W3GUI.getGalleryItem = function(id,func)
 {
-	var key = W3GUI.KEY.GLY_ITM+id;
-	var urls = [W3CNF.USERHOME+"gallery/info/"+id+".txt",
-				W3CNF.USERHOME+"helpers/status/read/gallery/"+id+".txt"];
-	W3GUI._callbackObject_(id,W3TXT.galleryItem,key,urls,func);
+    var key = W3GUI.KEY.GLY_ITM+id;
+    var urls = [W3CNF.USERHOME+"gallery/info/"+id+".txt",
+                W3CNF.USERHOME+"helpers/status/read/gallery/"+id+".txt"];
+    W3GUI._callbackObject_(id,W3TXT.galleryItem,key,urls,func);
 }
 
 // board
 W3GUI.getBoardInfo = function(func)
 {
-	var url = W3CNF.USERHOME+"profile/board.txt";
+    var url = W3CNF.USERHOME+"profile/board.txt";
     var key = W3GUI.KEY.BRD_INF;
     if(W3GUI.POOL[key] == null)
     {
@@ -297,27 +297,27 @@ W3GUI.getBoardInfo = function(func)
 }
 W3GUI.getBoardLink = function(func)
 {
-	var url = W3CNF.USERHOME+"helpers/board/00000000000000000.txt";
-	W3GUI._callbackArray_(null,url,func);
+    var url = W3CNF.USERHOME+"helpers/board/00000000000000000.txt";
+    W3GUI._callbackArray_(null,url,func);
 }
 W3GUI.getBoardItem = function(id,func)
 {
-	var key = W3GUI.KEY.BRD_ITM+id;
-	var urls = [W3CNF.USERHOME+"helpers/board/"+id+".txt"];
-	W3GUI._callbackObject_(id,W3TXT.messageItem,key,urls,func);
+    var key = W3GUI.KEY.BRD_ITM+id;
+    var urls = [W3CNF.USERHOME+"helpers/board/"+id+".txt"];
+    W3GUI._callbackObject_(id,W3TXT.messageItem,key,urls,func);
 }
 
 // notice
 W3GUI.getNoticeLink = function(func)
 {
-	var url = W3CNF.USERHOME+"helpers/notice/00000000000000000.txt";
-	W3GUI._callbackArray_(W3GUI.KEY.NTC_LNK,url,func);
+    var url = W3CNF.USERHOME+"helpers/notice/00000000000000000.txt";
+    W3GUI._callbackArray_(W3GUI.KEY.NTC_LNK,url,func);
 }
 W3GUI.getNoticeItem = function(id,func)
 {
-	var key = W3GUI.KEY.NTC_ITM+id;
-	var urls = [W3CNF.USERHOME+"helpers/notice/"+id+"/head.txt"];
-	W3GUI._callbackObject_(id,W3TXT.noticeItem,key,urls,func);
+    var key = W3GUI.KEY.NTC_ITM+id;
+    var urls = [W3CNF.USERHOME+"helpers/notice/"+id+"/head.txt"];
+    W3GUI._callbackObject_(id,W3TXT.noticeItem,key,urls,func);
 }
 W3GUI.getNoticeData = function(id,func)
 {
@@ -328,7 +328,7 @@ W3GUI.getNoticeData = function(id,func)
 /** switch view */
 W3GUI.showArticle = function(id)
 {
-	W3GUI.ITEMWINOBJW.location=W3CNF.USERHOME+"article/"+id+"/body.htm";
+    W3GUI.ITEMWINOBJW.location=W3CNF.USERHOME+"article/"+id+"/body.htm";
 }
 W3GUI.showPicture = function(id)
 {
@@ -347,10 +347,6 @@ W3GUI.editPicture = function(id)
 W3GUI.editAddress = function(id)
 {
     W3GUI.ITEMWINOBJW.location=W3CNF.A9W3HOME+"a9w3-engine/view/writer/item-links.htm?"+id;
-}
-W3GUI.editBoard = function(id)
-{
-	alert("edit Board:"+id);
 }
 W3GUI.editNotice = function(id)
 {
@@ -371,7 +367,7 @@ W3GUI.deletePicture = function(id)
 }
 W3GUI.deleteBoard = function(id)
 {
-	alert("delete Board:"+id);
+    if(!W3GUI.deleteCommon("board.delete",id,"Board.")) return;
 }
 
 W3GUI.deleteNotice = function(id)
@@ -384,6 +380,10 @@ W3GUI.deleteCommon = function(code,pid,key)
     if(code==null || pid == null)
     {
         alert(W3CNF.getI18nString("warn.nullval"));
+        return false;
+    }
+    if(!window.confirm(W3CNF.getI18nString("info.delete.confirm")))
+    {
         return false;
     }
     
@@ -436,18 +436,18 @@ W3GUI._callbackObject_ = function(id,clzz,key,urls,func)
                 
                 if(us[x].indexOf(vwtkn)<0)
                 {
-	                var tmp = ts[x].split(/[\r\n]/);
-	                for(var i=0; i<tmp.length; i++) {
-	                    var pos = tmp[i].indexOf("=");
-	                    if(pos <0) continue;
-	                    var key = tmp[i].substr(0,pos).replace(/^[ \t]+/g,"").replace(/[ \t]+$/g,"");
-	                    var val = tmp[i].substr(pos+1);
-	                    map[key] = val;
-	                }
+                    var tmp = ts[x].split(/[\r\n]/);
+                    for(var i=0; i<tmp.length; i++) {
+                        var pos = tmp[i].indexOf("=");
+                        if(pos <0) continue;
+                        var key = tmp[i].substr(0,pos).replace(/^[ \t]+/g,"").replace(/[ \t]+$/g,"");
+                        var val = tmp[i].substr(pos+1);
+                        map[key] = val;
+                    }
                 }
                 else
                 {
-                	map["views"] = (ts[x]==null||ts[x]=="")?0:ts[x];
+                    map["views"] = (ts[x]==null||ts[x]=="")?0:ts[x];
                 }
             }
             W3GUI.POOL[key] = clzz == null?map:new clzz(map);
@@ -487,14 +487,14 @@ W3GUI._callbackArray_ = function(key,url,func)
 
 W3GUI._getDocumentByObject_ = function(obj)
 {
-	if(obj == null) return null;
-	
-	var doc = obj.parentNode
-	while(doc != null && doc.getElementById == null)
-	{
-		doc = doc.parentNode;
-	}
-	return doc;
+    if(obj == null) return null;
+    
+    var doc = obj.parentNode
+    while(doc != null && doc.getElementById == null)
+    {
+        doc = doc.parentNode;
+    }
+    return doc;
 }
 
 //
@@ -504,4 +504,3 @@ W3GUI.asyncLoadText = function(func,url)
         func(t);
     },url);
 }
-

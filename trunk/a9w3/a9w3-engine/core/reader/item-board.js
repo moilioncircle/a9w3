@@ -78,8 +78,8 @@ function drawBoardItemView(page,obj,lst)
             {
             	buff.push("<a href='javascript:parent.W3GUI.deleteBoard(\""+ai.id+"\")'><img onmouseover='this.className=\"a9w3_admin_on\"' onmouseout='this.className=\"a9w3_admin_off\"' src='../../data/image/icon-list-delete.png' title='delete' border=0 /></a>&nbsp;");
             }
-            buff.push("<img src='../../data/image/icon-list-posts.png' />&nbsp;"+parent.W3TXT.text2html(ai.user)+"&nbsp;<span class='a9w3_text_plain'>("+ai.time+")<span></td></tr>");
-            buff.push("<tr><td><pre>"+parent.W3TXT.text2html(parent.W3TXT.line2text(ai.text))+"</pre></td></tr>");
+            buff.push("<img src='../../data/image/icon-list-posts.png' />&nbsp;"+parent.W3TXT.html2text(ai.user)+"&nbsp;<span class='a9w3_text_plain'>("+ai.time+")<span></td></tr>");
+            buff.push("<tr><td><pre>"+parent.W3TXT.html2text(parent.W3TXT.line2text(ai.text))+"</pre></td></tr>");
             buff.push("</table>");
             
             document.getElementById(bxid+ai.id).innerHTML=buff.join("");
@@ -91,6 +91,7 @@ function drawBoardItemView(page,obj,lst)
 function showPage(page){
     parent.W3GUI.getBoardLink(function(ls){
         if(ls == null || ls.length == 0) return;
+        ls = ls.reverse();
         drawBoardItemView(page,document.getElementById("BOARDITEM"),ls);
     });
 }

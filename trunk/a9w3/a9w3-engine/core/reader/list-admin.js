@@ -136,7 +136,7 @@ function loadCode()
     else
         url = url+"?UID="+parent.W3CNF.USER;
 
-	document.getElementById("__CODE__").src=url;
+	document.getElementById("__CODE__").src=url+"&"+(new Date().getTime());
 }
 
 function init()

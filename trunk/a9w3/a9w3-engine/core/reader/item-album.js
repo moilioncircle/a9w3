@@ -20,7 +20,7 @@ function init()
                 lb +=ai.lable[k]+"&nbsp;";
             }
             document.getElementById("LABEL").innerHTML=lb;
-            document.getElementById("BRIEF").innerHTML=parent.W3TXT.text2html(ai.brief);
+            document.getElementById("BRIEF").innerHTML=parent.W3TXT.html2text(ai.brief);
         });
     }
 }
