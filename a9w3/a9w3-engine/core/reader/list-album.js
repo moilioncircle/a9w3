@@ -275,7 +275,7 @@ function drawGalleryLinkView(page,obj,lst)
             buff.push("</td>");
             buff.push("</tr>");
             buff.push("<tr>");
-            buff.push("<td style='display:none' id='ITEM_"+ai.id+"' class='a9w3_text_plain'>"+parent.W3TXT.text2html(ai.brief)+"</td>");
+            buff.push("<td style='display:none' id='ITEM_"+ai.id+"' class='a9w3_text_plain'>"+parent.W3TXT.html2text(ai.brief)+"</td>");
             buff.push("</tr>");
             buff.push("<tr height='2'><td></td></tr>");
             buff.push("</table>");
