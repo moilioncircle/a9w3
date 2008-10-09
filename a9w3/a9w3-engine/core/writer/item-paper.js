@@ -48,7 +48,7 @@ function showDataDialog()
 {
     if(isNewPaper()) 
     {
-        alert(parent.W3CNF.getI18nString("info.paper.newpaper"));
+        alert(parent.W3CNF.getI18nString("info.commit.newone"));
         return;
     }
     document.getElementById("__DATA_UPLOAD__").style.visibility="visible";
@@ -83,12 +83,12 @@ function onDelData()
     var id = document.getElementById("__DATAS__").value;
     if(id == null || id == "")
     {
-        alert(parent.W3CNF.getI18nString("info.paper.data.empty"));
+        alert(parent.W3CNF.getI18nString("info.select.empty"));
         return;
     }
     if(isNewPaper()) 
     {
-        alert(parent.W3CNF.getI18nString("info.paper.newpaper"));
+        alert(parent.W3CNF.getI18nString("info.commit.newone"));
         return;
     }
     
@@ -111,7 +111,7 @@ function onViewData()
     var id = document.getElementById("__DATAS__").value;
     if(id == null || id == "")
     {
-        alert(parent.W3CNF.getI18nString("info.paper.data.empty"));
+        alert(parent.W3CNF.getI18nString("info.select.empty"));
         return;
     }
 
@@ -131,14 +131,14 @@ function onSavePaper()
     var title = document.getElementById("__TITLE__").value;
     if(title =="")
     {
-        alert(parent.W3CNF.getI18nString("info.check.empty"));
+        alert(parent.W3CNF.getI18nString("info.item.empty"));
         document.getElementById("__TITLE__").focus();
         return;
     }
     var brief = document.getElementById("__BRIEF__").value;
     if(brief =="")
     {
-        alert(parent.W3CNF.getI18nString("info.check.empty"));
+        alert(parent.W3CNF.getI18nString("info.item.empty"));
         document.getElementById("__BRIEF__").focus();
         return;
     }
@@ -159,36 +159,11 @@ function onSavePaper()
     fm.submit();
 }
 
-function onHidePaper()
-{
-    if(isNewPaper()) 
-    {
-        alert(parent.W3CNF.getI18nString("info.paper.newpaper"));
-        return;
-    }
-    
-    if(window.confirm(parent.W3CNF.getI18nString("info.paper.hidden.confirm")))
-    {
-        var url = parent.W3CNF.getServerURL("paper.edit.hidden");
-        if(url.indexOf("?")>0)
-            url = url+"&UID="+parent.W3CNF.USER+"&PID="+paperId;
-        else
-            url = url+"?UID="+parent.W3CNF.USER+"&PID="+paperId;
-        
-        var rtv = parent.A9Loader.syncLoadText(url);
-        if(rtv == "info.success")
-        {
-            alert("ok");
-        }
-        alert(parent.W3CNF.getI18nString(rtv));
-    }
-}
-
 function onDeletePaper()
 {
     if(isNewPaper()) 
     {
-        alert(parent.W3CNF.getI18nString("info.paper.newpaper"));
+        alert(parent.W3CNF.getI18nString("info.commit.newone"));
         return;
     }
     parent.W3GUI.deleteNotice(paperId);

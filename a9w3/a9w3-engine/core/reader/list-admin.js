@@ -41,7 +41,7 @@ function onLogin()
     }
     if(document.getElementById("CODE").value =="")
     {
-        alert(parent.W3CNF.getI18nString("info.check.empty"));
+        alert(parent.W3CNF.getI18nString("info.item.empty"));
         document.getElementById("CODE").focus();
         return;
     }
@@ -80,7 +80,7 @@ function onChpass()
     
     if(document.getElementById("CODE").value =="")
     {
-        alert(parent.W3CNF.getI18nString("info.check.empty"));
+        alert(parent.W3CNF.getI18nString("info.item.empty"));
         document.getElementById("CODE").focus();
         return;
     }
