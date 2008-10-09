@@ -28,20 +28,20 @@ function onSaveBoard()
 {
     if(document.getElementById("FROM").value =="")
     {
-        alert(parent.W3CNF.getI18nString("info.check.empty"));
+        alert(parent.W3CNF.getI18nString("info.item.empty"));
         document.getElementById("FROM").focus();
         return;
     }
     if(document.getElementById("CODE").value =="")
     {
-        alert(parent.W3CNF.getI18nString("info.check.empty"));
+        alert(parent.W3CNF.getI18nString("info.item.empty"));
         document.getElementById("CODE").focus();
         return;
     }
     
     if(document.getElementById("TEXT").value =="")
     {
-        alert(parent.W3CNF.getI18nString("info.check.empty"));
+        alert(parent.W3CNF.getI18nString("info.item.empty"));
         document.getElementById("TEXT").focus();
         return;
     }
