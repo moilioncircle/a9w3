@@ -19,7 +19,7 @@ if(empty($_SESSION[SKEY_IMGSN.$_REQUEST['UID']])
 unset($_SESSION[SKEY_IMGSN.$_REQUEST['UID']]);  // clear imgsn
 
 // check passwd
-$pass = file_get_contents(PATH_ROOT.'a9w3-auhome/'.$_REQUEST['UID'].'/profile/passwd.txt');
+$pass = file_get_contents(PATH_ROOT.'a9w3-auhome/'.$_REQUEST['UID'].'/profile/passwd.htm');
 if(!(($pass === '' && DEFAULT_PASS === $_REQUEST['PASS'])
 || $pass === sha1($_REQUEST['PASS']))){ // access
     echo RKEY_ACCDENY;
@@ -39,7 +39,7 @@ if(strlen($_REQUEST['NEWP'])<10
 }
 
 // write new passwd
-if(writeFile(PATH_ROOT.'a9w3-auhome/'.$_REQUEST['UID'].'/profile/passwd.txt',sha1($_REQUEST['NEWP']),'w')){
+if(writeFile(PATH_ROOT.'a9w3-auhome/'.$_REQUEST['UID'].'/profile/passwd.htm',sha1($_REQUEST['NEWP']),'w')){
     echo RKEY_SUCCESS;
 }else{
     echo RKEY_UNKOWN;

@@ -70,28 +70,28 @@ W3CNF.USER = function()
 W3CNF.USERHOME = W3CNF.A9W3HOME+"a9w3-auhome/"+W3CNF.USER+"/";
 
 W3CNF.CONF = new CnfReaderClass();
-W3CNF.CONF.loadFormFile(W3CNF.USERHOME+"profile/config.txt");
+W3CNF.CONF.loadFormFile(W3CNF.USERHOME+"profile/config.htm");
 
 W3CNF.LANG = W3CNF.CONF.getValue("lang");
 
 W3CNF.MENU = new CnfReaderClass();
-W3CNF.MENU.loadFormFile(W3CNF.USERHOME+"helpers/status/info/menu.txt");
+W3CNF.MENU.loadFormFile(W3CNF.USERHOME+"helpers/status/info/menu.htm");
 
 /** async */
 W3CNF.ARTICLE_LABEL = new CnfReaderClass();
 A9Loader.asyncLoadText(function(u,t){
 	W3CNF.ARTICLE_LABEL.loadFromText(t)
-},W3CNF.USERHOME+"indexer/article/label/item.txt");
+},W3CNF.USERHOME+"indexer/article/label/item.htm");
 
 W3CNF.GALLERY_LABEL = new CnfReaderClass();
 A9Loader.asyncLoadText(function(u,t){
 	W3CNF.GALLERY_LABEL.loadFromText(t)
-},W3CNF.USERHOME+"indexer/gallery/label/item.txt");
+},W3CNF.USERHOME+"indexer/gallery/label/item.htm");
 
 W3CNF.ADDRESS_LABEL = new CnfReaderClass();
 A9Loader.asyncLoadText(function(u,t){
 	W3CNF.ADDRESS_LABEL.loadFromText(t)
-},W3CNF.USERHOME+"indexer/address/label/item.txt");
+},W3CNF.USERHOME+"indexer/address/label/item.htm");
 //
 W3CNF.getServerURL = function(){
     var sf = new CnfReaderClass();
