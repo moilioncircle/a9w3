@@ -24,7 +24,7 @@ W3CNF.A9W3HOME = function()
 W3CNF.USER = function()
 {
     var userCnf = new CnfReaderClass();
-    userCnf.loadFormFile(W3CNF.A9W3HOME+"a9w3-engine/conf/users.txt");
+    userCnf.loadFormFile(W3CNF.A9W3HOME+"a9w3-engine/conf/users.htm");
     var kvmap = userCnf.getKeyValClone();
     
     var user = null;
@@ -97,7 +97,7 @@ W3CNF.getServerURL = function(){
     var sf = new CnfReaderClass();
     A9Loader.asyncLoadText(function(u,t){
         sf.loadFromText(t)
-    },W3CNF.A9W3HOME+"a9w3-server/server.txt");
+    },W3CNF.A9W3HOME+"a9w3-server/server.htm");
     
     return function(key)
     {
@@ -115,7 +115,7 @@ W3CNF.getServerURL = function(){
 W3CNF.getI18nString = function()
 {
     var en = new CnfReaderClass();
-    en.loadFormFile(W3CNF.A9W3HOME+"a9w3-engine/i18n/en.txt");
+    en.loadFormFile(W3CNF.A9W3HOME+"a9w3-engine/i18n/en.htm");
     
     var lc = en;
     if(W3CNF.LANG != 'en')
@@ -123,7 +123,7 @@ W3CNF.getI18nString = function()
         lc = new CnfReaderClass();
         A9Loader.asyncLoadText(function(u,t){
             lc.loadFromText(t)
-        },W3CNF.A9W3HOME+"a9w3-engine/i18n/"+W3CNF.LANG+".txt");
+        },W3CNF.A9W3HOME+"a9w3-engine/i18n/"+W3CNF.LANG+".htm");
     }
     
     return function(key)

@@ -64,4 +64,9 @@ function writeFile($filename,$content,$mode){
     fclose($handle);
     return $rtv;
 }
+
+function deleteFile($filename){
+    if (!is_file($filename)) return false;
+    return unlink($filename);
+}
 ?>

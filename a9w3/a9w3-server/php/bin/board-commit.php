@@ -19,7 +19,7 @@ if(empty($_SESSION[SKEY_IMGSN.$_REQUEST['UID']])
 unset($_SESSION[SKEY_IMGSN.$_REQUEST['UID']]); // clear imgsn
 
 // write board
-$boardid = date('YmdHis').printf("%02s",rand(1,999));
+$boardid = date('YmdHis').sprintf("%03s",rand(1,999));
 $boardtx  = 
 'time='.date('Y-m-d H:i:s').'
 user='.preg_replace('/[\r\n]+/','',$_REQUEST['FROM']).'

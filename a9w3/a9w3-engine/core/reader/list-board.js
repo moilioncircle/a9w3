@@ -64,7 +64,7 @@ function loadCode()
         url = url+"&UID="+parent.W3CNF.USER;
     else
         url = url+"?UID="+parent.W3CNF.USER;
-
+    
 	document.getElementById("__CODE__").src=url+"&"+(new Date().getTime());
 }
 

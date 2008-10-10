@@ -350,23 +350,28 @@ W3GUI.editNotice = function(id)
 W3GUI.deleteArticle = function(id)
 {
     if(!W3GUI.deleteCommon("paper.edit.delete",id,"Article.")) return;
+    W3GUI.LISTWINOBJW.update();
 }
 W3GUI.deleteAddress = function(id)
 {
     if(!W3GUI.deleteCommon("links.delete",id,"Address.")) return;
+    W3GUI.LISTWINOBJW.update();
 }
 W3GUI.deletePicture = function(id)
 {
     if(!W3GUI.deleteCommon("album.edit.delete",id,"Gallery.")) return;
+    W3GUI.LISTWINOBJW.update();
 }
 W3GUI.deleteBoard = function(id)
 {
     if(!W3GUI.deleteCommon("board.delete",id,"Board.")) return;
+    W3GUI.ITEMWINOBJW.update();
 }
 
 W3GUI.deleteNotice = function(id)
 {
     if(!W3GUI.deleteCommon("notice.edit.delete",id,"Notice.")) return;
+    W3GUI.LISTWINOBJW.update();
 }
 
 W3GUI.deleteCommon = function(code,pid,key)
@@ -403,10 +408,6 @@ W3GUI.deleteCommon = function(code,pid,key)
                 W3GUI.POOL[pk] = arr;
             }
         }
-        try{
-            W3GUI.LISTWINOBJW.update();
-        }catch(e){};
-        
         return true;
     }else{
         alert(W3CNF.getI18nString(rtv));
