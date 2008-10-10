@@ -17,7 +17,7 @@ if(empty($_SESSION[SKEY_IMGSN.$_REQUEST['UID']])
 unset($_SESSION[SKEY_IMGSN.$_REQUEST['UID']]); // clear imgsn
 
 // check passwd
-$pass = file_get_contents(PATH_ROOT.'a9w3-auhome/'.$_REQUEST['UID'].'/profile/passwd.txt');
+$pass = file_get_contents(PATH_ROOT.'a9w3-auhome/'.$_REQUEST['UID'].'/profile/passwd.htm');
 if($pass === '' && DEFAULT_PASS === $_REQUEST['PASS']){
     $_SESSION[SKEY_UTIME.$_REQUEST['UID']]=time();
     echo RKEY_SETPASS;

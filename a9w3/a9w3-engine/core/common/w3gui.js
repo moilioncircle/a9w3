@@ -136,16 +136,10 @@ W3GUI.menuEvent = function()
     return {'onOver':onOver,'onOut':onOut,'onClick':onClick};
 }();
 
-/** 
-list: a list of label/month. (indexer/article/label/item.txt)
-link: a link to item in the list. (indexer/article/label/001/item.txt)
-item: a target of link. (a9admin/article/2008/0502140800/head.txt)
-*/
-
 // article
 W3GUI.getArticleTotalLink = function(func)
 {
-    var url = W3CNF.USERHOME+"indexer/article/total/item.txt";
+    var url = W3CNF.USERHOME+"indexer/article/total/item.htm";
     W3GUI._callbackArray_(W3GUI.KEY.ART_TTL_LNK,url,func);
 }
 W3GUI.getArticleLabelList = function(func)
@@ -164,37 +158,37 @@ W3GUI.getArticleLabelList = function(func)
 W3GUI.getArticleLabelLink = function(id,func)
 {
     var key = W3GUI.KEY.ART_LBL_LNK+id;
-    var url = W3CNF.USERHOME+"indexer/article/label/"+id+"/item.txt";
+    var url = W3CNF.USERHOME+"indexer/article/label/"+id+"/item.htm";
     W3GUI._callbackArray_(key,url,func);
 }
 W3GUI.getArticleMonthList = function(func)
 {
-    var url = W3CNF.USERHOME+"indexer/article/month/item.txt";
+    var url = W3CNF.USERHOME+"indexer/article/month/item.htm";
     W3GUI._callbackArray_(W3GUI.KEY.ART_MNT_LST,url,func);
 }
 W3GUI.getArticleMonthLink = function(id,func)
 {
     var key = W3GUI.KEY.ART_MNT_LNK+id;
-    var url = W3CNF.USERHOME+"indexer/article/month/"+id+"/item.txt";
+    var url = W3CNF.USERHOME+"indexer/article/month/"+id+"/item.htm";
     W3GUI._callbackArray_(key,url,func);
 }
 W3GUI.getArticleItem = function(id,func)
 {
     var key = W3GUI.KEY.ART_ITM+id;
-    var urls = [W3CNF.USERHOME+"article/"+id+"/head.txt",
-                W3CNF.USERHOME+"helpers/status/read/article/"+id+".txt"];
+    var urls = [W3CNF.USERHOME+"article/"+id+"/head.htm",
+                W3CNF.USERHOME+"helpers/status/read/article/"+id+".htm"];
     W3GUI._callbackObject_(id,W3TXT.articleItem,key,urls,func);
 }
 W3GUI.getArticleData = function(id,func)
 {
-    var url = W3CNF.USERHOME+"article/"+id+"/data/index.txt";
+    var url = W3CNF.USERHOME+"article/"+id+"/data/index.htm";
     W3GUI._callbackArray_(null,url,func);
 }
 
 // address
 W3GUI.getAddressTotalLink = function(func)
 {
-    var url = W3CNF.USERHOME+"indexer/address/total/item.txt";
+    var url = W3CNF.USERHOME+"indexer/address/total/item.htm";
     W3GUI._callbackArray_(W3GUI.KEY.ADD_TTL_LNK,url,func);
 }
 W3GUI.getAddressLabelList = function(func)
@@ -213,31 +207,31 @@ W3GUI.getAddressLabelList = function(func)
 W3GUI.getAddressLabelLink = function(id,func)
 {
     var key = W3GUI.KEY.ADD_LBL_LNK+id;
-    var url = W3CNF.USERHOME+"indexer/address/label/"+id+"/item.txt";
+    var url = W3CNF.USERHOME+"indexer/address/label/"+id+"/item.htm";
     W3GUI._callbackArray_(key,url,func);
 }
 W3GUI.getAddressMonthList = function(func)
 {
-    var url = W3CNF.USERHOME+"indexer/address/month/item.txt";
+    var url = W3CNF.USERHOME+"indexer/address/month/item.htm";
     W3GUI._callbackArray_(W3GUI.KEY.ADD_MNT_LST,url,func);
 }
 W3GUI.getAddressMonthLink = function(id,func)
 {
     var key = W3GUI.KEY.ADD_MNT_LNK+id;
-    var url = W3CNF.USERHOME+"indexer/address/month/"+id+"/item.txt";
+    var url = W3CNF.USERHOME+"indexer/address/month/"+id+"/item.htm";
     W3GUI._callbackArray_(key,url,func);
 }
 W3GUI.getAddressItem = function(id,func)
 {
     var key = W3GUI.KEY.ADD_ITM+id;
-    var urls = [W3CNF.USERHOME+"address/"+id+".txt"];
+    var urls = [W3CNF.USERHOME+"address/"+id+".htm"];
     W3GUI._callbackObject_(id,W3TXT.addressItem,key,urls,func);
 }
 
 // gallery
 W3GUI.getGalleryTotalLink = function(func)
 {
-    var url = W3CNF.USERHOME+"indexer/gallery/total/item.txt";
+    var url = W3CNF.USERHOME+"indexer/gallery/total/item.htm";
     W3GUI._callbackArray_(W3GUI.KEY.GLY_TTL_LNK,url,func);
 }
 W3GUI.getGalleryLabelList = function(func)
@@ -256,32 +250,32 @@ W3GUI.getGalleryLabelList = function(func)
 W3GUI.getGalleryLabelLink = function(id,func)
 {
     var key = W3GUI.KEY.GLY_LBL_LNK+id;
-    var url = W3CNF.USERHOME+"indexer/gallery/label/"+id+"/item.txt";
+    var url = W3CNF.USERHOME+"indexer/gallery/label/"+id+"/item.htm";
     W3GUI._callbackArray_(key,url,func);
 }
 W3GUI.getGalleryMonthList = function(func)
 {
-    var url = W3CNF.USERHOME+"indexer/gallery/month/item.txt";
+    var url = W3CNF.USERHOME+"indexer/gallery/month/item.htm";
     W3GUI._callbackArray_(W3GUI.KEY.GLY_MNT_LST,url,func);
 }
 W3GUI.getGalleryMonthLink = function(id,func)
 {
     var key = W3GUI.KEY.GLY_MNT_LNK+id;
-    var url = W3CNF.USERHOME+"indexer/gallery/month/"+id+"/item.txt";
+    var url = W3CNF.USERHOME+"indexer/gallery/month/"+id+"/item.htm";
     W3GUI._callbackArray_(key,url,func);
 }
 W3GUI.getGalleryItem = function(id,func)
 {
     var key = W3GUI.KEY.GLY_ITM+id;
-    var urls = [W3CNF.USERHOME+"gallery/info/"+id+".txt",
-                W3CNF.USERHOME+"helpers/status/read/gallery/"+id+".txt"];
+    var urls = [W3CNF.USERHOME+"gallery/info/"+id+".htm",
+                W3CNF.USERHOME+"helpers/status/read/gallery/"+id+".htm"];
     W3GUI._callbackObject_(id,W3TXT.galleryItem,key,urls,func);
 }
 
 // board
 W3GUI.getBoardInfo = function(func)
 {
-    var url = W3CNF.USERHOME+"profile/board.txt";
+    var url = W3CNF.USERHOME+"profile/board.htm";
     var key = W3GUI.KEY.BRD_INF;
     if(W3GUI.POOL[key] == null)
     {
@@ -297,31 +291,31 @@ W3GUI.getBoardInfo = function(func)
 }
 W3GUI.getBoardLink = function(func)
 {
-    var url = W3CNF.USERHOME+"helpers/board/00000000000000000.txt";
+    var url = W3CNF.USERHOME+"helpers/board/00000000000000000.htm"+"?"+(new Date().getTime());
     W3GUI._callbackArray_(null,url,func);
 }
 W3GUI.getBoardItem = function(id,func)
 {
     var key = W3GUI.KEY.BRD_ITM+id;
-    var urls = [W3CNF.USERHOME+"helpers/board/"+id+".txt"];
+    var urls = [W3CNF.USERHOME+"helpers/board/"+id+".htm"];
     W3GUI._callbackObject_(id,W3TXT.messageItem,key,urls,func);
 }
 
 // notice
 W3GUI.getNoticeLink = function(func)
 {
-    var url = W3CNF.USERHOME+"helpers/notice/00000000000000000.txt";
+    var url = W3CNF.USERHOME+"helpers/notice/00000000000000000.htm";
     W3GUI._callbackArray_(W3GUI.KEY.NTC_LNK,url,func);
 }
 W3GUI.getNoticeItem = function(id,func)
 {
     var key = W3GUI.KEY.NTC_ITM+id;
-    var urls = [W3CNF.USERHOME+"helpers/notice/"+id+"/head.txt"];
+    var urls = [W3CNF.USERHOME+"helpers/notice/"+id+"/head.htm"];
     W3GUI._callbackObject_(id,W3TXT.noticeItem,key,urls,func);
 }
 W3GUI.getNoticeData = function(id,func)
 {
-    var url = W3CNF.USERHOME+"helpers/notice/"+id+"/data/index.txt";
+    var url = W3CNF.USERHOME+"helpers/notice/"+id+"/data/index.htm";
     W3GUI._callbackArray_(null,url,func);
 }
 

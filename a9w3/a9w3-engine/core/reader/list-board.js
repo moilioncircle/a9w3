@@ -73,7 +73,7 @@ function init()
 	loadCode();
     parent.W3GUI.getBoardInfo(function(txt)
     {
-        document.getElementById("__BOARDINFO__").innerHTML="<pre style='line-height:100%;margin-top:0px;'>"+txt+"</pre>";
+        document.getElementById("__BOARDINFO__").innerHTML=txt;
     });
     parent.W3GUI.getBoardLink(function(lst)
     {

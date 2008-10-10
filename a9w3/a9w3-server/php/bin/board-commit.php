@@ -19,19 +19,19 @@ if(empty($_SESSION[SKEY_IMGSN.$_REQUEST['UID']])
 unset($_SESSION[SKEY_IMGSN.$_REQUEST['UID']]); // clear imgsn
 
 // write board
-$boardid = date('YmdHis').rand(1,999);
+$boardid = date('YmdHis').printf("%02s",rand(1,999));
 $boardtx  = 
 'time='.date('Y-m-d H:i:s').'
 user='.preg_replace('/[\r\n]+/','',$_REQUEST['FROM']).'
 from='.$_SERVER['REMOTE_ADDR'].'
 text='.preg_replace('/[\r\n]+/','\n',$_REQUEST['TEXT']);
 
-if(!writeFile(PATH_ROOT.'a9w3-auhome/'.$_REQUEST['UID'].'/helpers/board/'.$boardid.'.txt',$boardtx,'w')){
+if(!writeFile(PATH_ROOT.'a9w3-auhome/'.$_REQUEST['UID'].'/helpers/board/'.$boardid.'.htm',$boardtx,'w')){
     echo RKEY_UNKOWN;
     exit;
 }
 // write index
-if(!writeFile(PATH_ROOT.'a9w3-auhome/'.$_REQUEST['UID'].'/helpers/board/00000000000000000.txt',"\n".$boardid,'a+')){
+if(!writeFile(PATH_ROOT.'a9w3-auhome/'.$_REQUEST['UID'].'/helpers/board/00000000000000000.htm',"\n".$boardid,'a+')){
     echo RKEY_UNKOWN;
     exit;
 }
