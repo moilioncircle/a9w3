@@ -30,7 +30,7 @@ if($pass === '' && DEFAULT_PASS === $_REQUEST['PASS']){
 }
 
 // set group
-foreach(file(PATH_ROOT.'a9w3-engine/conf/group.txt') as $line){
+foreach(file(PATH_ROOT.'a9w3-engine/conf/group.htm') as $line){
     if (preg_match('/\b'.$_REQUEST['UID'].'\b/', $line)){
         $umd = UMODE_READER;
         if(preg_match('/^admin/i', $line)){

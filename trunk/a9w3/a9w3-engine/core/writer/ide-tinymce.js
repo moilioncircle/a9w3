@@ -1,17 +1,14 @@
 var isReady = false;
-function getText()
-{
+function getText(){
     var text = null;
-    if(tinyMCE.activeEditor != null)
-    {
+    if(tinyMCE.activeEditor != null){
         text = tinyMCE.activeEditor.getContent();
     }
     
     return addUTF8Meta(text);
 }
 
-function setText(text)
-{
+function setText(text){
     if(!isReady){
         window.setTimeout(function(){setText(text)},500);
     }else{
@@ -19,8 +16,7 @@ function setText(text)
     }
 }
 
-function initEdit(docPath)
-{
+function initEdit(docPath){
     var docPath = null;
     
     var url = self.location.href;
@@ -46,37 +42,29 @@ function initEdit(docPath)
        //
        setup:function(ed){
           ed.onInit.add(function(ed){ isReady = true;});
-        }
+       }
        });
 }
 // helper
-function addUTF8Meta(text)
-{
+function addUTF8Meta(text){
     if(text == null || text =="") return text;
     
     // add charset
     var regm = /<\s*meta\s+.*content\s*=\s*['"]\s*text\/html\s*;\s*charset\s*=\s*[\w\d-]+\s*['"]\s*\/?>/i;
     var pos = text.search(regm);
-    if(pos>=0)
-    {
+    if(pos>=0){
         text = text.replace(regm,"<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>");
-    }
-    else
-    {
+    }else{
         var regh = /<\s*head\s*>/i;
         pos = text.search(regh);
-        if(pos>=0)
-        {
+        if(pos>=0){
             text = text.replace(regh,"<head><meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>");
-        }
-        else
-        {
+        }else{
             text = "<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>"+text;
         }
     }
     
     return text;
 }
-
 //
 initEdit();

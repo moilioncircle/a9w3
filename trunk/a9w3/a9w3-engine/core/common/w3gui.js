@@ -25,7 +25,7 @@ W3GUI.KEY = {
     GLY_MNT_LST : "Gallery.Month.List",
     GLY_MNT_LNK : "Gallery.Month.Link.",
     GLY_ITM     : "Gallery.Item.",
-    //BRD_LNK     : "Board.Link", // do not cache it
+    BRD_LNK     : "Board.Link",
     BRD_INF     : "Board.Info",
     BRD_ITM     : "Board.Item.",
     LNK_ITM     : "Links.Item",
@@ -34,28 +34,27 @@ W3GUI.KEY = {
 };
 
 /** home */
-W3GUI.drawMenu = function()
-{
+W3GUI.drawMenu = function(){
     var html = "<table width='100%'  border='0' cellspacing='6' cellpadding='0'>";
-    for (var i=1;;i++)
-    {
+    for (var i=1;;i++){
         var infoText = W3CNF.CONF.getValue("menu.item-"+i+".info.text");
         var infoType = W3CNF.CONF.getValue("menu.item-"+i+".info.type");
         
         if(infoText == null) break;
         
-        if(infoType == "function")
+        if(infoType == "function"){
             infoText = eval(infoText);
-        else if ((infoType == "config"))
+        }else if ((infoType == "config")){
             infoText = W3CNF.MENU.getValue(infoText);
+        }
         
         var linkText = W3CNF.CONF.getValue("menu.item-"+i+".link.text");
         var linkType = W3CNF.CONF.getValue("menu.item-"+i+".link.type");
         
-        if(linkType == "string")
+        if(linkType == "string"){
            linkText = W3GUI.LISTWINNAME+".location=unescape('"+escape(linkText)+"');";
-           
-        
+        }
+
         var icon  = W3CNF.CONF.getValue("menu.item-"+i+".icon");
         
         html+= "<tr>";
@@ -71,8 +70,7 @@ W3GUI.drawMenu = function()
     document.getElementById("A9W3_MENU").innerHTML=html;
 }
 
-W3GUI.drawLogo = function()
-{
+W3GUI.drawLogo = function(){
     var icon = W3CNF.CONF.getValue("logo.icon");
     var text = W3CNF.CONF.getValue("logo.text");
     
@@ -86,8 +84,7 @@ W3GUI.drawLogo = function()
     document.getElementById("A9W3_LOGO").innerHTML=html;
 }
 
-W3GUI.drawPage = function()
-{
+W3GUI.drawPage = function(){
     document.title=W3CNF.CONF.getValue("page.name");
     document.getElementById("A9W3_LIST").innerHTML="<iframe frameborder='0' id='"+W3GUI.LISTWINNAME+"' name='"+W3GUI.LISTWINNAME+"' src='"+
         W3CNF.CONF.getValue("page.list.url")+"'></iframe>";
@@ -99,33 +96,28 @@ W3GUI.drawPage = function()
     W3GUI.ITEMWINOBJW = eval(W3GUI.ITEMWINNAME);
 }
 
-W3GUI.changeCss = function(obj,cname)
-{
+W3GUI.changeCss = function(obj,cname){
     obj.className = cname;
 }
 
 /** event */
-W3GUI.menuEvent = function()
-{
+W3GUI.menuEvent = function(){
     var active=null;
     var overcss="a9w3_menu_over";
     var outcss="a9w3_menu_out";
     var clickcss="a9w3_menu_focus";
     
-    function onOver(obj)
-    {
+    function onOver(obj){
         if(active == obj) return;
         obj.className = overcss;
     }
     
-    function onOut(obj)
-    {
+    function onOut(obj){
         if(active == obj) return;
         obj.className = outcss;
     }
     
-    function onClick(obj,action)
-    {
+    function onClick(obj,action){
         if(active == obj) return;
         if(active != null) active.className = outcss;
         obj.className = clickcss;
@@ -137,15 +129,12 @@ W3GUI.menuEvent = function()
 }();
 
 // article
-W3GUI.getArticleTotalLink = function(func)
-{
+W3GUI.getArticleTotalLink = function(func){
     var url = W3CNF.USERHOME+"indexer/article/total/item.htm";
     W3GUI._callbackArray_(W3GUI.KEY.ART_TTL_LNK,url,func);
 }
-W3GUI.getArticleLabelList = function(func)
-{
-    if(W3GUI.POOL[W3GUI.KEY.ART_LBL_LST] == null)
-    {
+W3GUI.getArticleLabelList = function(func){
+    if(W3GUI.POOL[W3GUI.KEY.ART_LBL_LST] == null){
         var kv  = W3CNF.ARTICLE_LABEL.getKeyValClone();
         var arr = [];
         for(var k in kv){
@@ -155,46 +144,38 @@ W3GUI.getArticleLabelList = function(func)
     }
     func(W3GUI.POOL[W3GUI.KEY.ART_LBL_LST]);
 }
-W3GUI.getArticleLabelLink = function(id,func)
-{
+W3GUI.getArticleLabelLink = function(id,func){
     var key = W3GUI.KEY.ART_LBL_LNK+id;
     var url = W3CNF.USERHOME+"indexer/article/label/"+id+"/item.htm";
     W3GUI._callbackArray_(key,url,func);
 }
-W3GUI.getArticleMonthList = function(func)
-{
+W3GUI.getArticleMonthList = function(func){
     var url = W3CNF.USERHOME+"indexer/article/month/item.htm";
     W3GUI._callbackArray_(W3GUI.KEY.ART_MNT_LST,url,func);
 }
-W3GUI.getArticleMonthLink = function(id,func)
-{
+W3GUI.getArticleMonthLink = function(id,func){
     var key = W3GUI.KEY.ART_MNT_LNK+id;
     var url = W3CNF.USERHOME+"indexer/article/month/"+id+"/item.htm";
     W3GUI._callbackArray_(key,url,func);
 }
-W3GUI.getArticleItem = function(id,func)
-{
+W3GUI.getArticleItem = function(id,func){
     var key = W3GUI.KEY.ART_ITM+id;
     var urls = [W3CNF.USERHOME+"article/"+id+"/head.htm",
                 W3CNF.USERHOME+"helpers/status/read/article/"+id+".htm"];
     W3GUI._callbackObject_(id,W3TXT.articleItem,key,urls,func);
 }
-W3GUI.getArticleData = function(id,func)
-{
+W3GUI.getArticleData = function(id,func){
     var url = W3CNF.USERHOME+"article/"+id+"/data/index.htm";
     W3GUI._callbackArray_(null,url,func);
 }
 
 // address
-W3GUI.getAddressTotalLink = function(func)
-{
+W3GUI.getAddressTotalLink = function(func){
     var url = W3CNF.USERHOME+"indexer/address/total/item.htm";
     W3GUI._callbackArray_(W3GUI.KEY.ADD_TTL_LNK,url,func);
 }
-W3GUI.getAddressLabelList = function(func)
-{
-    if(W3GUI.POOL[W3GUI.KEY.ADD_LBL_LST] == null)
-    {
+W3GUI.getAddressLabelList = function(func){
+    if(W3GUI.POOL[W3GUI.KEY.ADD_LBL_LST] == null){
         var kv  = W3CNF.ADDRESS_LABEL.getKeyValClone();
         var arr = [];
         for(var k in kv){
@@ -204,40 +185,33 @@ W3GUI.getAddressLabelList = function(func)
     }
     func(W3GUI.POOL[W3GUI.KEY.ADD_LBL_LST]);
 }
-W3GUI.getAddressLabelLink = function(id,func)
-{
+W3GUI.getAddressLabelLink = function(id,func){
     var key = W3GUI.KEY.ADD_LBL_LNK+id;
     var url = W3CNF.USERHOME+"indexer/address/label/"+id+"/item.htm";
     W3GUI._callbackArray_(key,url,func);
 }
-W3GUI.getAddressMonthList = function(func)
-{
+W3GUI.getAddressMonthList = function(func){
     var url = W3CNF.USERHOME+"indexer/address/month/item.htm";
     W3GUI._callbackArray_(W3GUI.KEY.ADD_MNT_LST,url,func);
 }
-W3GUI.getAddressMonthLink = function(id,func)
-{
+W3GUI.getAddressMonthLink = function(id,func){
     var key = W3GUI.KEY.ADD_MNT_LNK+id;
     var url = W3CNF.USERHOME+"indexer/address/month/"+id+"/item.htm";
     W3GUI._callbackArray_(key,url,func);
 }
-W3GUI.getAddressItem = function(id,func)
-{
+W3GUI.getAddressItem = function(id,func){
     var key = W3GUI.KEY.ADD_ITM+id;
     var urls = [W3CNF.USERHOME+"address/"+id+".htm"];
     W3GUI._callbackObject_(id,W3TXT.addressItem,key,urls,func);
 }
 
 // gallery
-W3GUI.getGalleryTotalLink = function(func)
-{
+W3GUI.getGalleryTotalLink = function(func){
     var url = W3CNF.USERHOME+"indexer/gallery/total/item.htm";
     W3GUI._callbackArray_(W3GUI.KEY.GLY_TTL_LNK,url,func);
 }
-W3GUI.getGalleryLabelList = function(func)
-{
-    if(W3GUI.POOL[W3GUI.KEY.GLY_LBL_LST] == null)
-    {
+W3GUI.getGalleryLabelList = function(func){
+    if(W3GUI.POOL[W3GUI.KEY.GLY_LBL_LST] == null){
         var kv  = W3CNF.GALLERY_LABEL.getKeyValClone();
         var arr = [];
         for(var k in kv){
@@ -247,25 +221,21 @@ W3GUI.getGalleryLabelList = function(func)
     }
     func(W3GUI.POOL[W3GUI.KEY.GLY_LBL_LST]);
 }
-W3GUI.getGalleryLabelLink = function(id,func)
-{
+W3GUI.getGalleryLabelLink = function(id,func){
     var key = W3GUI.KEY.GLY_LBL_LNK+id;
     var url = W3CNF.USERHOME+"indexer/gallery/label/"+id+"/item.htm";
     W3GUI._callbackArray_(key,url,func);
 }
-W3GUI.getGalleryMonthList = function(func)
-{
+W3GUI.getGalleryMonthList = function(func){
     var url = W3CNF.USERHOME+"indexer/gallery/month/item.htm";
     W3GUI._callbackArray_(W3GUI.KEY.GLY_MNT_LST,url,func);
 }
-W3GUI.getGalleryMonthLink = function(id,func)
-{
+W3GUI.getGalleryMonthLink = function(id,func){
     var key = W3GUI.KEY.GLY_MNT_LNK+id;
     var url = W3CNF.USERHOME+"indexer/gallery/month/"+id+"/item.htm";
     W3GUI._callbackArray_(key,url,func);
 }
-W3GUI.getGalleryItem = function(id,func)
-{
+W3GUI.getGalleryItem = function(id,func){
     var key = W3GUI.KEY.GLY_ITM+id;
     var urls = [W3CNF.USERHOME+"gallery/info/"+id+".htm",
                 W3CNF.USERHOME+"helpers/status/read/gallery/"+id+".htm"];
@@ -273,124 +243,101 @@ W3GUI.getGalleryItem = function(id,func)
 }
 
 // board
-W3GUI.getBoardInfo = function(func)
-{
+W3GUI.getBoardInfo = function(func){
     var url = W3CNF.USERHOME+"profile/board.htm";
     var key = W3GUI.KEY.BRD_INF;
-    if(W3GUI.POOL[key] == null)
-    {
+    if(W3GUI.POOL[key] == null){
         A9Loader.asyncLoadText(function(u,t){
             W3GUI.POOL[key] = t;
             func(t);
         },url);
-    }
-    else
-    {
+    }else{
         func(W3GUI.POOL[key]);
     }
 }
-W3GUI.getBoardLink = function(func)
-{
+W3GUI.getBoardLink = function(func){
     var url = W3CNF.USERHOME+"helpers/board/00000000000000000.htm"+"?"+(new Date().getTime());
     W3GUI._callbackArray_(null,url,func);
 }
-W3GUI.getBoardItem = function(id,func)
-{
+W3GUI.getBoardItem = function(id,func){
     var key = W3GUI.KEY.BRD_ITM+id;
     var urls = [W3CNF.USERHOME+"helpers/board/"+id+".htm"];
     W3GUI._callbackObject_(id,W3TXT.messageItem,key,urls,func);
 }
 
 // notice
-W3GUI.getNoticeLink = function(func)
-{
+W3GUI.getNoticeLink = function(func){
     var url = W3CNF.USERHOME+"helpers/notice/00000000000000000.htm";
     W3GUI._callbackArray_(W3GUI.KEY.NTC_LNK,url,func);
 }
-W3GUI.getNoticeItem = function(id,func)
-{
+W3GUI.getNoticeItem = function(id,func){
     var key = W3GUI.KEY.NTC_ITM+id;
     var urls = [W3CNF.USERHOME+"helpers/notice/"+id+"/head.htm"];
     W3GUI._callbackObject_(id,W3TXT.noticeItem,key,urls,func);
 }
-W3GUI.getNoticeData = function(id,func)
-{
+W3GUI.getNoticeData = function(id,func){
     var url = W3CNF.USERHOME+"helpers/notice/"+id+"/data/index.htm";
     W3GUI._callbackArray_(null,url,func);
 }
 
 /** switch view */
-W3GUI.showArticle = function(id)
-{
+W3GUI.showArticle = function(id){
     W3GUI.ITEMWINOBJW.location=W3CNF.USERHOME+"article/"+id+"/body.htm";
 }
-W3GUI.showPicture = function(id)
-{
+W3GUI.showPicture = function(id){
     W3GUI.ITEMWINOBJW.location=W3CNF.A9W3HOME+"a9w3-engine/view/reader/item-album.htm?"+id;
 }
 
 /** admin */
-W3GUI.editArticle = function(id)
-{
+W3GUI.editArticle = function(id){
     W3GUI.ITEMWINOBJW.location=W3CNF.A9W3HOME+"a9w3-engine/view/writer/item-paper.htm?"+id;
 }
-W3GUI.editPicture = function(id)
-{
+W3GUI.editPicture = function(id){
     W3GUI.ITEMWINOBJW.location=W3CNF.A9W3HOME+"a9w3-engine/view/writer/item-album.htm?"+id;
 }
-W3GUI.editAddress = function(id)
-{
+W3GUI.editAddress = function(id){
     W3GUI.ITEMWINOBJW.location=W3CNF.A9W3HOME+"a9w3-engine/view/writer/item-links.htm?"+id;
 }
-W3GUI.editNotice = function(id)
-{
+W3GUI.editNotice = function(id){
     W3GUI.ITEMWINOBJW.location=W3CNF.A9W3HOME+"a9w3-engine/view/writer/item-notice.htm?"+id;
 }
 
-W3GUI.deleteArticle = function(id)
-{
+W3GUI.deleteArticle = function(id){
     if(!W3GUI.deleteCommon("paper.edit.delete",id,"Article.")) return;
     W3GUI.LISTWINOBJW.update();
 }
-W3GUI.deleteAddress = function(id)
-{
+W3GUI.deleteAddress = function(id){
     if(!W3GUI.deleteCommon("links.delete",id,"Address.")) return;
     W3GUI.LISTWINOBJW.update();
 }
-W3GUI.deletePicture = function(id)
-{
+W3GUI.deletePicture = function(id){
     if(!W3GUI.deleteCommon("album.edit.delete",id,"Gallery.")) return;
     W3GUI.LISTWINOBJW.update();
 }
-W3GUI.deleteBoard = function(id)
-{
+W3GUI.deleteBoard = function(id){
     if(!W3GUI.deleteCommon("board.delete",id,"Board.")) return;
     W3GUI.ITEMWINOBJW.update();
+    if((W3GUI.LISTWINOBJW.location+"").indexOf("list-board.htm")>0){
+        W3GUI.LISTWINOBJW.update();
+    }
 }
 
-W3GUI.deleteNotice = function(id)
-{
+W3GUI.deleteNotice = function(id){
     if(!W3GUI.deleteCommon("notice.edit.delete",id,"Notice.")) return;
     W3GUI.LISTWINOBJW.update();
 }
 
-W3GUI.deleteCommon = function(code,pid,key)
-{
-    if(code==null || pid == null)
-    {
+W3GUI.deleteCommon = function(code,pid,key){
+    if(code==null || pid == null){
         alert(W3CNF.getI18nString("warn.nullval"));
         return false;
     }
-    if(!window.confirm(W3CNF.getI18nString("info.delete.confirm")))
-    {
+    if(!window.confirm(W3CNF.getI18nString("info.delete.confirm"))){
         return false;
     }
     
     var url = W3CNF.getServerURL(code);
-    if(url.indexOf("?")>0)
-        url = url+"&UID="+W3CNF.USER+"&PID="+pid;
-    else
-        url = url+"?UID="+W3CNF.USER+"&PID="+pid;
+    url = W3GUI.wrapUID(url)+"&PID="+pid;
     
     var rtv = A9Loader.syncLoadText(url);
     if(rtv == "info.success"){
@@ -416,53 +363,42 @@ W3GUI.deleteCommon = function(code,pid,key)
 }
 
 /** private */
-W3GUI._callbackObject_ = function(id,clzz,key,urls,func)
-{
-    if(W3GUI.POOL[key] == null)
-    {
+W3GUI._callbackObject_ = function(id,clzz,key,urls,func){
+    if(W3GUI.POOL[key] == null){
         A9Loader.asyncLoadText(function(us,ts){
             var map = {};
             
             if(id != null) map['id']=id;
             var vwtkn = "helpers/status/read/";
-            for(var x=0;x<ts.length;x++)
-            {
+            for(var x=0;x<ts.length;x++){
                 if(ts[x] == null) continue;
                 
-                if(us[x].indexOf(vwtkn)<0)
-                {
+                if(us[x].indexOf(vwtkn)<0){
                     var tmp = ts[x].split(/[\r\n]/);
-                    for(var i=0; i<tmp.length; i++) {
+                    for(var i=0; i<tmp.length; i++){
                         var pos = tmp[i].indexOf("=");
                         if(pos <0) continue;
                         var key = tmp[i].substr(0,pos).replace(/^[ \t]+/g,"").replace(/[ \t]+$/g,"");
                         var val = tmp[i].substr(pos+1);
                         map[key] = val;
                     }
-                }
-                else
-                {
+                }else{
                     map["views"] = (ts[x]==null||ts[x]=="")?0:ts[x];
                 }
             }
             W3GUI.POOL[key] = clzz == null?map:new clzz(map);
             func(W3GUI.POOL[key]);
         },urls);
-    }
-    else
-    {
+    }else{
         func(W3GUI.POOL[key]);
     }
 }
 
-W3GUI._callbackArray_ = function(key,url,func)
-{
-    if(key == null || W3GUI.POOL[key] == null)
-    {
+W3GUI._callbackArray_ = function(key,url,func){
+    if(key == null || W3GUI.POOL[key] == null){
         A9Loader.asyncLoadText(function(u,t){
             var arr = [];
-            if(t != null && t != "")
-            {
+            if(t != null && t != ""){
                 var tmp = t.split(/[\r\n]+/);
                 var arr = [];
                 for(var i=0; i<tmp.length; i++) {
@@ -473,28 +409,49 @@ W3GUI._callbackArray_ = function(key,url,func)
             if(key != null) W3GUI.POOL[key] = arr;
             func(arr);
         },url);
-    }
-    else
-    {
+    }else{
         func(W3GUI.POOL[key]);
     }
 }
 
-W3GUI._getDocumentByObject_ = function(obj)
-{
+W3GUI.avoidClientCache = function(urls){
+    if(urls == null) return null;
+    var tm = new Date().getTime();
+    if(typeof(urls) == "string"){
+        urls = urls+(urls.indexOf("?")>0?"&":"?")+tm;
+    }else{
+        for(var i=0;i<urls.length;i++){
+            urls[i] = urls[i]+(urls[i].indexOf("?")>0?"&":"?")+tm;
+        }
+    }
+    return urls;
+}
+
+W3GUI.wrapUID = function(urls){
+    if(urls == null) return null;
+    var tm = new Date().getTime();
+    if(typeof(urls) == "string"){
+        urls += (urls.indexOf("?")>0?"&":"?")+"UID="+W3CNF.USER;
+    }else{
+        for(var i=0;i<urls.length;i++){
+            urls[i] += (urls[i].indexOf("?")>0?"&":"?")+"UID="+W3CNF.USER;
+        }
+    }
+    return urls;
+}
+
+W3GUI._getDocumentByObject_ = function(obj){
     if(obj == null) return null;
     
     var doc = obj.parentNode
-    while(doc != null && doc.getElementById == null)
-    {
+    while(doc != null && doc.getElementById == null){
         doc = doc.parentNode;
     }
     return doc;
 }
 
 //
-W3GUI.asyncLoadText = function(func,url)
-{
+W3GUI.asyncLoadText = function(func,url){
     A9Loader.asyncLoadText(function(u,t){
         func(t);
     },url);
