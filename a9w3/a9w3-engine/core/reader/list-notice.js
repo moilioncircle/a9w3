@@ -2,8 +2,7 @@ var cacheObj = null;
 var cacheLst = null;
 var cachePge = null;
 
-drawNoticeLinkView = function(page,obj,lst)
-{
+drawNoticeLinkView = function(page,obj,lst){
     if(obj != null) cacheObj=obj;
     else obj = cacheObj;
 
@@ -11,8 +10,7 @@ drawNoticeLinkView = function(page,obj,lst)
     else lst = cacheLst;
         
     if(obj == null) return;
-    if(lst == null || lst.length ==0)
-    {
+    if(lst == null || lst.length ==0){
         obj.innerHTML="";
         return;
     }
@@ -26,10 +24,8 @@ drawNoticeLinkView = function(page,obj,lst)
     var tmp = [1,2,page-1,page,page+1,pall-1,pall];
     var cur = 0;
     var show=[];
-    for(var i=0;i<tmp.length;i++)
-    {
-        if(tmp[i]>0 && tmp[i]<=pall && tmp[i]>cur)
-        {
+    for(var i=0;i<tmp.length;i++){
+        if(tmp[i]>0 && tmp[i]<=pall && tmp[i]>cur){
             show.push(tmp[i]);
             cur = tmp[i];
         }
@@ -41,38 +37,34 @@ drawNoticeLinkView = function(page,obj,lst)
     // draw box
     var buff = [];
     var bxid = "W3GUI_LINK_BOX_";
-    for(var i=0;i<size;i++)
-    {
-    	buff.push("<div id='"+bxid+lst[poff+i]+"'>");
-    	buff.push("<img alt='loading "+lst[poff+i]+"' title='"+lst[poff+i]+"' src='../../data/image/loading-circle-red-s.gif' />");
-    	buff.push("</div>");
+    for(var i=0;i<size;i++){
+        buff.push("<div id='"+bxid+lst[poff+i]+"'>");
+        buff.push("<img alt='loading "+lst[poff+i]+"' title='"+lst[poff+i]+"' src='../../data/image/loading-circle-red-s.gif' />");
+        buff.push("</div>");
     }
     
     // page
     buff.push("<div class='a9w3_text_page_box'>");
-    if(parent.W3CNF.A9W3_RTMODE == parent.W3CNF.A9W3_WRITER)
-    {
-    	buff.push("<a href='javascript:parent.W3GUI.editNotice()'><img onmouseover='this.className=\"a9w3_admin_on\"' onmouseout='this.className=\"a9w3_admin_off\"' src='../../data/image/icon-list-new.png' title='edit'  border=0 /></a>");
-    	buff.push("&nbsp;&nbsp;");
+    if(parent.W3CNF.A9W3_RTMODE == parent.W3CNF.A9W3_WRITER){
+        buff.push("<a href='javascript:parent.W3GUI.editNotice()'><img onmouseover='this.className=\"a9w3_admin_on\"' onmouseout='this.className=\"a9w3_admin_off\"' src='../../data/image/icon-list-new.png' title='edit'  border=0 /></a>");
+        buff.push("&nbsp;&nbsp;");
     }
 
-    for(var j=0;j<show.length;j++)
-    {
+    for(var j=0;j<show.length;j++){
         if(j>0 && show[j]-show[j-1]>1)buff.push("--");
 
-        if(show[j]!=page)
+        if(show[j]!=page){
             buff.push("<a href='javascript:drawNoticeLinkView("+show[j]+")' class='a9w3_link_infos'>"+show[j]+"</a>");
-        else
+        }else{
             buff.push("<span class='a9w3_text_infos'>"+page+"</span>");
-        
+        }
         buff.push(" ");
     }
     buff.push("</div>");
     obj.innerHTML=buff.join("");
     
     // load link
-    for(var i=0;i<size;i++)
-    {	
+    for(var i=0;i<size;i++){    
         parent.W3GUI.getNoticeItem(lst[poff+i],function(ai){
             var buff = [];
             buff.push("<table border='0' cellspacing='0' cellpadding='0' width='100%' class='a9w3_article_item'>");
@@ -83,10 +75,9 @@ drawNoticeLinkView = function(page,obj,lst)
             buff.push("</tr>");
             buff.push("<tr>");
             buff.push("<td class='a9w3_text_plain'>");
-            if(parent.W3CNF.A9W3_RTMODE == parent.W3CNF.A9W3_WRITER)
-            {
-            	buff.push("<a href='javascript:parent.W3GUI.editNotice(\""+ai.id+"\")'><img onmouseover='this.className=\"a9w3_admin_on\"' onmouseout='this.className=\"a9w3_admin_off\"' src='../../data/image/icon-list-edit.png' title='edit'  border=0 /></a>");
-            	buff.push("&nbsp;<a href='javascript:parent.W3GUI.deleteNotice(\""+ai.id+"\")'><img onmouseover='this.className=\"a9w3_admin_on\"' onmouseout='this.className=\"a9w3_admin_off\"' src='../../data/image/icon-list-delete.png' title='delete'  border=0 /></a>&nbsp;&nbsp;");
+            if(parent.W3CNF.A9W3_RTMODE == parent.W3CNF.A9W3_WRITER){
+                buff.push("<a href='javascript:parent.W3GUI.editNotice(\""+ai.id+"\")'><img onmouseover='this.className=\"a9w3_admin_on\"' onmouseout='this.className=\"a9w3_admin_off\"' src='../../data/image/icon-list-edit.png' title='edit'  border=0 /></a>");
+                buff.push("&nbsp;<a href='javascript:parent.W3GUI.deleteNotice(\""+ai.id+"\")'><img onmouseover='this.className=\"a9w3_admin_on\"' onmouseout='this.className=\"a9w3_admin_off\"' src='../../data/image/icon-list-delete.png' title='delete'  border=0 /></a>&nbsp;&nbsp;");
             }
             buff.push("<img src='../../data/image/icon-list-ctime.png' title='created time'/> "+ai.ctime);
             buff.push("&nbsp;<img src='../../data/image/icon-list-sizeb.png' title='size'/> "+ai.sizeb);
@@ -110,8 +101,7 @@ function showPage(page){
 }
 
 // update
-function update()
-{
+function update(){
     showPage(cachePge);
 }
 

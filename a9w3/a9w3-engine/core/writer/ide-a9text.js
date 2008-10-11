@@ -1,11 +1,9 @@
-function getText()
-{
+function getText(){
     var text = document.getElementById("__ART_TEXT__").value;
     return wrapA9text(text);
 }
 
-function setText(text)
-{
+function setText(text){
     if(text == null) return;
     
     text = unwrapA9text(text);
@@ -14,8 +12,7 @@ function setText(text)
     obj.value=text;
 }
 
-function initEdit()
-{
+function initEdit(){
     var btns = {
         mode:{
             "Blod":"[![|]]",
@@ -91,13 +88,11 @@ function initEdit()
             }
     };
     buff = [];
-    for(var kb in btns)
-    {
+    for(var kb in btns){
         buff.push("<select onchange='insertText(unescape(this.value))'>");
         buff.push("<option value=''>::"+kb+"::</option>");
         var btn = btns[kb];
-        for(var ks in btn)
-        {
+        for(var ks in btn){
             buff.push("<option value=\""+escape(btn[ks])+"\">"+ks+"</option>");
         }
         buff.push("</select>");
@@ -106,37 +101,28 @@ function initEdit()
     document.getElementById("__ART_BTNS__").innerHTML=buff.join("");
 }
 
-function insertText(t)
-{
+function insertText(t){
     if(t == "") return;
     
     var obj = document.getElementById("__ART_TEXT__");
     obj.focus();
-    if(t.charAt(0)=="^")
-    {
+    if(t.charAt(0)=="^"){
         obj.value = t.substr(1)+obj.value;
-    }
-    else if(obj.selectionStart && obj.selectionEnd)
-    {
+    }else if(obj.selectionStart && obj.selectionEnd){
         var at = obj.value;
         var st = at.substring(obj.selectionStart,obj.selectionEnd);
         obj.value = at.substring(0,obj.selectionStart)+t.replace("|",st)+at.substr(obj.selectionEnd);
-    }
-    else if(document.selection)
-    {
+    }else if(document.selection){
         var st=document.selection.createRange().text;
         if(st == null) st = "";
         document.selection.createRange().text = t.replace("|",st);
-    }
-    else
-    {
+    }else{
         obj.value += t.replace("|","");
     }
 }
 
 // helper
-function wrapA9text(text)
-{
+function wrapA9text(text){
     if(text == null) text = "";
     var buff = [];
     buff.push("<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />");
@@ -148,8 +134,7 @@ function wrapA9text(text)
     return buff.join("\n");
 }
 
-function unwrapA9text(text)
-{
+function unwrapA9text(text){
     if(text == null) text = "";
     var pret = "<pre>";
     var pos1 = text.indexOf(pret);

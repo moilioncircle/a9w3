@@ -1,8 +1,7 @@
 var linksId = null;
 var regexpId=/^\d{14}$/;
 
-function onAddLabel()
-{
+function onAddLabel(){
     var lb = document.getElementById("__LBLNME__").value;
     if(lb == "" || lb == "default") return;
     var obj = document.getElementById("LABEL");
@@ -14,18 +13,13 @@ function onAddLabel()
     }
 }
 
-function onDeleteLinks()
-{
+function onDeleteLinks(){
     parent.W3GUI.deleteAddress(linksId);
 }
 
-function onSaveLinks()
-{
+function onSaveLinks(){
     var url = parent.W3CNF.getServerURL("links.commit");
-    if(url.indexOf("?")>0)
-        url = url+"&UID="+parent.W3CNF.USER+"&PID="+linksId;
-    else
-        url = url+"?UID="+parent.W3CNF.USER+"&PID="+linksId;
+    url = parent.W3GUI.wrapUID(url)+"&PID="+linksId;
 
     var fm = document.getElementById("__DATA_FORM__");
     fm.action=url;
@@ -33,43 +27,34 @@ function onSaveLinks()
 
 }
 
-function onDataResponse()
-{
+function onDataResponse(){
     var rtv = "";
-    if(__DATA_POSTER__.document.readyState)// onreadystatechange
-    {
-        if(__DATA_POSTER__.document.readyState == "complete")
-        {
+    if(__DATA_POSTER__.document.readyState){// onreadystatechange
+        if(__DATA_POSTER__.document.readyState == "complete"){
             rtv = __DATA_POSTER__.document.body.innerHTML;
             __DATA_POSTER__.document.body.innerHTML = "";
         }
-    }
-    else // onload
-    {
+    }else{ // onload
         rtv = __DATA_POSTER__.document.body.innerHTML;
         __DATA_POSTER__.document.body.innerHTML = "";
     }
     
-    if(rtv != "")
-    {
+    if(rtv != ""){
         alert(rtv);
         __DATA_POSTER__.location="about:blank";// avoid recommit when refresh
     }
 }
 
-function init()
-{
+function init(){
     var url = self.location.href;
     var pos = url.indexOf("?");
-    if(pos>0 && regexpId.test(url.substr(pos+1)))
-	{
+    if(pos>0 && regexpId.test(url.substr(pos+1))){
         linksId = url.substr(pos+1);
         
         //label
         var lblMap = parent.W3CNF.ADDRESS_LABEL.getKeyValClone();
         var lblObj = document.getElementById("__LBLNME__");
-        for(var k in lblMap)
-        {
+        for(var k in lblMap){
             var opt=document.createElement("OPTION");
             opt.text=lblMap[k];
             opt.value=lblMap[k];
@@ -89,7 +74,6 @@ function init()
         });
     }
 }
-
 //
 init();
 
