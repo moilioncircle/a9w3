@@ -10,7 +10,7 @@ if(empty($_REQUEST['PASS']) || empty($_REQUEST['CODE'])){
 // check imgsn
 session_start();
 if(empty($_SESSION[SKEY_IMGSN.$_REQUEST['UID']])
-|| $_REQUEST['CODE'] !== $_SESSION[SKEY_IMGSN.$_REQUEST['UID']]){
+|| strcasecmp($_REQUEST['CODE'],$_SESSION[SKEY_IMGSN.$_REQUEST['UID']]) != 0){
     echo RKEY_WRIMGSN;
     exit;
 }
@@ -19,15 +19,15 @@ unset($_SESSION[SKEY_IMGSN.$_REQUEST['UID']]); // clear imgsn
 // check passwd
 $pass = file_get_contents(PATH_ROOT.'a9w3-auhome/'.$_REQUEST['UID'].'/profile/passwd.htm');
 if($pass === '' && DEFAULT_PASS === $_REQUEST['PASS']){
-    $_SESSION[SKEY_UTIME.$_REQUEST['UID']]=time();
     echo RKEY_SETPASS;
 }else if($pass === sha1($_REQUEST['PASS'])){
-    $_SESSION[SKEY_UTIME.$_REQUEST['UID']]=time();
     echo RKEY_SUCCESS;
 }else{
     echo RKEY_ACCDENY;
     exit;
 }
+$_SESSION[SKEY_UID]=$_REQUEST['UID'];
+$_SESSION[SKEY_UTIME]=time();
 
 // set group
 foreach(file(PATH_ROOT.'a9w3-engine/conf/group.htm') as $line){
@@ -40,10 +40,10 @@ foreach(file(PATH_ROOT.'a9w3-engine/conf/group.htm') as $line){
         }else{
             $umd=UMODE_READER;
         }
-        if(empty($_SESSION[SKEY_UMODE.$_REQUEST['UID']])){
-            $_SESSION[SKEY_UMODE.$_REQUEST['UID']]=$umd;
+        if(empty($_SESSION[SKEY_UMODE])){
+            $_SESSION[SKEY_UMODE]=$umd;
         }else{
-            $_SESSION[SKEY_UMODE.$_REQUEST['UID']].=','.$umd;
+            $_SESSION[SKEY_UMODE].=','.$umd;
         }
     }
 }

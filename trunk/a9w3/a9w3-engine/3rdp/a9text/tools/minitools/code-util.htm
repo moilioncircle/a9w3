@@ -1,0 +1,111 @@
+﻿<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script language="javascript" src="../../com/trydofor/a9js/code/b64.js"></script>
+<script language="javascript" src="../../com/trydofor/a9js/code/aes.js"></script>
+<script language="javascript" src="../../com/trydofor/a9js/code/md5.js"></script>
+<script language="javascript" src="../../com/trydofor/a9js/code/sha1.js"></script>
+<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr  height="30">
+    <td>
+    <input type="button" onclick="md5sum()" value="md5sum" style="background-color:#99CC00"/>
+    <input type="button" onclick="sha1sum()" value="sha1sum" style="background-color:#99CC00"/> 
+    <input type="button" onclick="enB64()"  value="base64 encode" style="background-color:#CC9900"/> 
+    <input type="button" onclick="deB64()"  value="base64 decode" style="background-color:#CC9900"/> 
+    <input type="button" onclick="enAes()"  value="aes encrypt" style="background-color:#0066FF"/> 
+    <input type="button" onclick="deAes()"  value="aes decrypt" style="background-color:#0066FF"/> 
+    </td>
+  </tr>
+  <tr>
+    <td>
+        <textarea name="textarea" id="INPUT" style="width:100%; height:100%" ondblclick="this.select()"></textarea>
+    </td>
+  </tr>
+  <tr>
+    <td>
+        <textarea name="textarea" id="OUTPUT" style="width:100%; height:100%" ondblclick="this.select()"></textarea>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+var md5Impl  = new MD5Class();
+var sha1Impl = new SHA1Class();
+var b64Impl  = new B64Class();
+var aesImpl  = new AESClass();
+var iptObj = document.getElementById("INPUT");
+var optObj = document.getElementById("OUTPUT");
+
+function md5sum()
+{
+    try{
+        optObj.value = md5Impl.hash(iptObj.value);
+    }catch(e){
+        alert("failed to get md5sum:"+e);
+    }
+}
+
+function sha1sum()
+{
+    try{
+        optObj.value = sha1Impl.hash(iptObj.value);
+    }catch(e){
+        alert("failed to get sha1sum:"+e);
+    }
+}
+
+function enB64()
+{
+    try{
+        var ot = b64Impl.encode(iptObj.value);
+        optObj.value = format(ot);
+    }catch(e){
+        alert("failed to get base64 encode:"+e);
+    }
+}
+function deB64()
+{
+    try{
+        optObj.value = b64Impl.decode(iptObj.value.replace(/\s/gm,''));
+    }catch(e){
+        alert("failed to get base64 decode:"+e);
+    }
+}
+function enAes()
+{
+    try{
+        var passwd = window.prompt('please input your passwd','');
+        if(passwd ==null || passwd =='') return;
+        
+        var ot = b64Impl.encode(aesImpl.encrypt(iptObj.value,passwd,256));
+        optObj.value = format(ot);
+    }catch(e){
+        alert("failed to get base64 encode:"+e);
+    }
+}
+function deAes()
+{
+    try{
+        var passwd = window.prompt('please input your passwd','');
+        if(passwd ==null || passwd =='') return;
+        
+        optObj.value = aesImpl.decrypt(b64Impl.decode(iptObj.value.replace(/\s/gm,'')),passwd,256);
+    }catch(e){
+        alert("failed to get base64 decode:"+e);
+    }
+}
+
+function format(text)
+{
+    if(text == null || text =='') return text;
+    
+    var linesize = 64;
+    
+    text = text.replace(/\s+/g,'');
+    var rtxt = [];
+    for(var i=0;i<text.length;i+=linesize){
+        var line = (i+linesize<text.length)?text.substr(i,linesize):text.substr(i);
+        rtxt.push(line);
+    }
+    
+    return rtxt.join('\n');
+}
+</script>
