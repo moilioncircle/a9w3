@@ -100,6 +100,12 @@ function onViewPaper(){
     win.document.write(__EDIOR__.getText());
     win.document.close();
 }
+function onOpenCodeTool(){
+    window.open("../../3rdp/a9text/tools/minitools/code-util.htm",'newwindow', 'height=600, width=600, top=0, left=0, toolbar=no,scrollbars=yes, resizable=yes, menubar=no,location=no, status=no');
+}
+function onOpenSetTool(){
+    window.open("../../3rdp/a9text/tools/minitools/set-util.htm",'newwindow', 'height=600, width=600, top=0, left=0, toolbar=no,scrollbars=yes, resizable=yes, menubar=no,location=no, status=no');
+}
 
 function onSavePaper(){
     var title = document.getElementById("__TITLE__").value;

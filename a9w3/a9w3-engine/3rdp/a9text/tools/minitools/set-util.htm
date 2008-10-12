@@ -1,0 +1,135 @@
+﻿<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="50%" height="30">
+    <input type="button" onclick="duplicateA()" value="R=Duplicate(A)" /> 
+    <input type="button" onclick="distinctA()"  value="R=Distinct(A)" /> 
+    <input type="button" onclick="remain()" value="R=A∩!B" /> 
+    <input type="button" onclick="bothin()" value="R=A∩B" /> 
+    <input type="button" onclick="anyone()" value="R=A∪B" /> 
+    <span id="MESSAGE"></span></td>
+    <td>Left = {A},Right = {B},Bottom = {R}</td>
+  </tr>
+  <tr>
+    <td width="50%">
+    <textarea name="textarea" id="A_SET" style="width:100%; height:100%" ondblclick="this.select()"></textarea>    </td>
+    <td>
+    <textarea name="textarea" id="B_SET" style="width:100%; height:100%" ondblclick="this.select()"></textarea>    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+    <textarea name="textarea" id="R_SET" style="width:100%; height:100%" ondblclick="this.select()"></textarea>    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+
+var aArr = {};
+var bArr = {};
+var aSet = {};
+var bSet = {};
+var rArr = [];
+
+var aObj = document.getElementById("A_SET");
+var bObj = document.getElementById("B_SET");
+var rObj = document.getElementById("R_SET");
+var mObj = document.getElementById("MESSAGE");
+
+function init()
+{
+    aArr = aObj.value.split(/[\r\n]+/g);
+    bArr = bObj.value.split(/[\r\n]+/g);
+    
+    aSet = {};
+    for(var i=0; i<aArr.length; i++)
+        if(aArr[i] != "")
+            aSet[aArr[i]] = true;
+
+    bSet = {};
+    for(var i=0; i<bArr.length; i++)
+        if(bArr[i] != "") 
+            bSet[bArr[i]] = true;
+
+    rArr = [];
+}
+
+function anyone()
+{
+    init();
+    
+    var mess = "{A}:"+aArr.length+" {B}:"+bArr.length;
+    
+    for(var key in aSet)
+        if(!bSet[key])
+            rArr.push(key);
+            
+    for(var key in bSet)
+            rArr.push(key);
+
+    rObj.value=rArr.join('\n');
+    mObj.innerHTML = mess+" {R}:"+rArr.length;
+
+}
+
+function bothin()
+{
+    init();
+
+    var mess = "{A}:"+aArr.length+" {B}:"+bArr.length;
+    for(var key in aSet)
+        if(bSet[key])
+            rArr.push(key);
+    
+    rObj.value=rArr.join('\n');
+    mObj.innerHTML = mess+" {R}:"+rArr.length;
+}
+
+function remain()
+{
+    init();
+
+    var mess = "{A}:"+aArr.length+" {B}:"+bArr.length;
+    for(var key in aSet)
+        if(!bSet[key])
+            rArr.push(key);
+    
+    rObj.value=rArr.join('\n');
+    mObj.innerHTML = mess+" {R}:"+rArr.length;
+}
+
+function duplicateA()
+{
+    init();
+
+    var mess = "{A}:"+aArr.length;
+    var tmpset = [];
+    var rset = {};
+    for(var i=0;i<aArr.length;i++)
+    {
+        if(tmpset[aArr[i]])
+            rset[aArr[i]] = true;
+        else
+            tmpset[aArr[i]]=aArr[i];
+    }
+    
+    for(var key in rset)
+        rArr.push(key);
+    
+    rObj.value=rArr.join('\n');
+    mObj.innerHTML = mess+" {R}:"+rArr.length;
+}
+
+function distinctA()
+{
+    init();
+
+    var mess = "{A}:"+aArr.length;
+    for(var key in aSet)
+        rArr.push(key);
+    
+    rObj.value=rArr.join('\n');
+    mObj.innerHTML = mess+" {R}:"+rArr.length;
+
+}
+
+</script>

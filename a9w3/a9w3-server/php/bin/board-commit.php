@@ -12,7 +12,7 @@ if(empty($_REQUEST['FROM'])
 // check imgsn
 session_start();
 if(empty($_SESSION[SKEY_IMGSN.$_REQUEST['UID']])
-|| $_REQUEST['CODE'] !== $_SESSION[SKEY_IMGSN.$_REQUEST['UID']]){
+|| strcasecmp($_REQUEST['CODE'],$_SESSION[SKEY_IMGSN.$_REQUEST['UID']]) != 0){
     echo RKEY_WRIMGSN;
     exit;
 }

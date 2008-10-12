@@ -3,9 +3,12 @@ define('PATH_ROOT','../../../');
 define('DEFAULT_PASS','a9w3_1s_g00d');
 define('TIMEOUT_MINUTES',5);
 
-define('SKEY_IMGSN','IMGSN_');
-define('SKEY_UTIME','UTIME_');
-define('SKEY_UMODE','UMODE_');
+define('SKEY_IMGSN','IMGSN_'); // by uid
+
+define('SKEY_UID','UID');
+define('SKEY_UTIME','UTIME');
+define('SKEY_UMODE','UMODE');
+
 define('UMODE_ADMIN','ADMIN');
 define('UMODE_WRITER','WRITER');
 define('UMODE_READER','READER');
@@ -27,18 +30,25 @@ function checkRequestUID(){
 
 function checkUmodePermit($group){
     @session_start();
-    if(empty($_SESSION[SKEY_UTIME.$_REQUEST['UID']])
-    || empty($_SESSION[SKEY_UMODE.$_REQUEST['UID']])){
+    if(empty($_SESSION[SKEY_UID])
+    || empty($_SESSION[SKEY_UTIME])
+    || empty($_SESSION[SKEY_UMODE])){
         echo RKEY_ACCDENY;
         exit;
     }
-    if (strpos($_SESSION[SKEY_UMODE.$_REQUEST['UID']], $group) === false){
+    if(time() - $_SESSION[SKEY_UTIME] > TIMEOUT_MINUTES*60){
         echo RKEY_ACCDENY;
         exit;
     }
-    if(time() - $_SESSION[SKEY_UTIME.$_REQUEST['UID']] > TIMEOUT_MINUTES*60){
-        echo RKEY_ACCDENY;
-        exit;
+    
+    if(strpos($_SESSION[SKEY_UMODE], UMODE_ADMIN) === false){
+        if(strpos($_SESSION[SKEY_UMODE], $group) === false
+        || $_SESSION[SKEY_UID] !== $_REQUEST['UID']){
+            echo RKEY_ACCDENY;
+            exit;
+        }
+    }else{
+        // ADMIN(=ADMIN) > WRITER(!=WRITER)
     }
 }
 
