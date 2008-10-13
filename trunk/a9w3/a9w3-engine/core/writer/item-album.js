@@ -1,5 +1,5 @@
-var docPath = null;
-var albumId = null;
+var docPath = "";
+var albumId = "";
 var regexpId=/^\d{4}\/\d{13}$/;
 
 function onDataChose(obj){

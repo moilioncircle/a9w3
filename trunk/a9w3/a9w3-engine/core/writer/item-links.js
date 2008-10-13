@@ -1,4 +1,4 @@
-var linksId = null;
+var linksId = "";
 var regexpId=/^\d{14}$/;
 
 function onAddLabel(){
@@ -18,13 +18,28 @@ function onDeleteLinks(){
 }
 
 function onSaveLinks(){
+    if(document.getElementById("TITLE").value ==""){
+        alert(parent.W3CNF.getI18nString("info.item.empty"));
+        document.getElementById("TITLE").focus();
+        return;
+    }
+    if(document.getElementById("ADDRS").value ==""){
+        alert(parent.W3CNF.getI18nString("info.item.empty"));
+        document.getElementById("ADDRS").focus();
+        return;
+    }
+    if(document.getElementById("BRIEF").value ==""){
+        alert(parent.W3CNF.getI18nString("info.item.empty"));
+        document.getElementById("BRIEF").focus();
+        return;
+    }
+    
     var url = parent.W3CNF.getServerURL("links.commit");
     url = parent.W3GUI.wrapUID(url)+"&PID="+linksId;
 
     var fm = document.getElementById("__DATA_FORM__");
     fm.action=url;
     fm.submit();
-
 }
 
 function onDataResponse(){
