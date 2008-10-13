@@ -250,13 +250,13 @@ W3GUI.getBoardInfo = function(func){
         A9Loader.asyncLoadText(function(u,t){
             W3GUI.POOL[key] = t;
             func(t);
-        },url);
+        },W3GUI.avoidClientCache(url));
     }else{
         func(W3GUI.POOL[key]);
     }
 }
 W3GUI.getBoardLink = function(func){
-    var url = W3CNF.USERHOME+"helpers/board/00000000000000000.htm"+"?"+(new Date().getTime());
+    var url = W3CNF.USERHOME+"helpers/board/00000000000000000.htm";
     W3GUI._callbackArray_(null,url,func);
 }
 W3GUI.getBoardItem = function(id,func){
@@ -388,7 +388,7 @@ W3GUI._callbackObject_ = function(id,clzz,key,urls,func){
             }
             W3GUI.POOL[key] = clzz == null?map:new clzz(map);
             func(W3GUI.POOL[key]);
-        },urls);
+        },W3GUI.avoidClientCache(urls));
     }else{
         func(W3GUI.POOL[key]);
     }
@@ -408,7 +408,7 @@ W3GUI._callbackArray_ = function(key,url,func){
             }
             if(key != null) W3GUI.POOL[key] = arr;
             func(arr);
-        },url);
+        },W3GUI.avoidClientCache(url));
     }else{
         func(W3GUI.POOL[key]);
     }
