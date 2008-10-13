@@ -34,9 +34,17 @@ try{
                 
                 // ie problem
                 window.setTimeout(function (){
+                    var baseHtm = "<base href='";
+                    var basetags = document.getElementsByTagName("base");
+                    if(basetags != null && basetags.length>0){
+                        baseHtm+=basetags[0].href;
+                    }else{
+                        baseHtm+=window.location;
+                    }
+                    baseHtm+="'>\n";
                     document.body.innerHTML="";
                     document.open();
-                    document.write(a9htm);
+                    document.write(baseHtm+a9htm);
                     document.close();
                 },1000);
         });
