@@ -46,7 +46,7 @@ function onSaveBoard(){
 
 function loadCode(){
     var url = parent.W3CNF.getServerURL("board.random");
-    url = parent.W3GUI.wrapUID(url)+"&"+(new Date().getTime());
+    url = parent.W3GUI.avoidClientCache(parent.W3GUI.wrapUID(url));
     
     document.getElementById("__CODE__").src=url;
 }
