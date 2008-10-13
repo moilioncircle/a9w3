@@ -21,8 +21,8 @@ define('RKEY_SETPASS','warn.pass.change');
 define('RKEY_SMPPASS','info.pass.simple');
 
 function checkRequestUID(){
-    if(empty($_REQUEST['UID'])) return false;
-    if(!is_dir(PATH_ROOT.'a9w3-auhome/'.$_REQUEST['UID'])){
+    if(empty($_REQUEST['UID'])
+    || !is_dir(PATH_ROOT.'a9w3-auhome/'.$_REQUEST['UID'])){
         echo RKEY_ACCDENY;
         exit;
     }
@@ -40,7 +40,6 @@ function checkUmodePermit($group){
         echo RKEY_ACCDENY;
         exit;
     }
-    
     if(strpos($_SESSION[SKEY_UMODE], UMODE_ADMIN) === false){
         if(strpos($_SESSION[SKEY_UMODE], $group) === false
         || $_SESSION[SKEY_UID] !== $_REQUEST['UID']){

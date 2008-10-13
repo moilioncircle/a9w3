@@ -1,6 +1,6 @@
-var docPath = null;
-var paperId = null;
-var bodyTxt = null;
+var docPath = "";
+var paperId = "";
+var bodyTxt = "";
 var regexpId=/^\d{17}$/;
 
 // event
