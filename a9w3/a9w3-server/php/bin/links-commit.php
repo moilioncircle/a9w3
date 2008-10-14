@@ -47,7 +47,7 @@ if(!writeFile($fn,trim($txt),'w')){
 // build index
 require_once('common-indexer.php');
 appendIndex(IDX_ADDRESS,);
-if(!appendIndex(IDX_ADDRESS,$id,$_REQUEST['LABEL'])){
+if(!appendIndex(IDX_ADDRESS,$_REQUEST['UID'],$id,$_REQUEST['LABEL'])){
     echo RKEY_UNKOWN;
     exit;
 }
