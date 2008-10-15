@@ -406,8 +406,8 @@ W3GUI._callbackArray_ = function(key,url,func){
                     arr.push(W3TXT.line2text(tmp[i]));
                 }
             }
-            if(key != null) W3GUI.POOL[key] = arr;
-            func(arr);
+            if(key != null) W3GUI.POOL[key] = arr.reverse();
+            func(W3GUI.POOL[key]);
         },W3GUI.avoidClientCache(url));
     }else{
         func(W3GUI.POOL[key]);

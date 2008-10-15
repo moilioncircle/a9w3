@@ -267,7 +267,7 @@ function showLabel(par,page){
 function showMonth(par,page){
     parent.W3GUI.getArticleMonthList(function(ls){
         if(par == null && ls != null && ls.length>0){
-            par = ls[ls.length-1];
+            par = ls[0];
         }
         drawArticleListMonthView(par,document.getElementById("ARTLISTS"),ls);
         parent.W3GUI.getArticleMonthLink(par,function(ls2){

@@ -267,7 +267,7 @@ function showLabel(par,page){
 function showMonth(par,page){
     parent.W3GUI.getAddressMonthList(function(ls){
         if(par == null && ls != null && ls.length>0){
-            par = ls[ls.length-1];
+            par = ls[0];
         }
         drawAddressListMonthView(par,document.getElementById("ARTLISTS"),ls);
         parent.W3GUI.getAddressMonthLink(par,function(ls2){
