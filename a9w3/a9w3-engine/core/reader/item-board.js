@@ -83,7 +83,6 @@ function drawBoardItemView(page,obj,lst){
 function showPage(page){
     parent.W3GUI.getBoardLink(function(ls){
         if(ls == null || ls.length == 0) return;
-        ls = ls.reverse();
         drawBoardItemView(page,document.getElementById("BOARDITEM"),ls);
     });
 }

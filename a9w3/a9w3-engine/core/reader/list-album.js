@@ -280,7 +280,7 @@ function showLabel(par,page){
 function showMonth(par,page){
     parent.W3GUI.getGalleryMonthList(function(ls){
         if(par == null && ls != null && ls.length>0){
-            par = ls[ls.length-1];
+            par = ls[0];
         }
         drawGalleryListMonthView(par,document.getElementById("ARTLISTS"),ls);
         parent.W3GUI.getGalleryMonthLink(par,function(ls2){

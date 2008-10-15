@@ -22,7 +22,6 @@ function appendIndex($tp,$uid,$pid,$lbl){
             }
         }
         foreach(preg_split('/[\s,=]+/', $lbl) as $part){
-            
             if (array_key_exists($part, $valkey)){
                 $lbto = $valkey[$part];
             }else{
@@ -57,10 +56,45 @@ function appendIndex($tp,$uid,$pid,$lbl){
     
     return true;
 }
-function deleteIndex($tp,$uid,$pid,$lbl){
+function deleteIndex($tp,$uid,$pid){
     if(!isValidType($tp)){
         return false;
     }
+    $idir = PATH_ROOT.'a9w3-auhome/'.$uid.'/indexer/'.$tp; //address
+    
+    //label
+    foreach(file($idir.'/label/item.htm') as $line){
+        $line = substr($line, 0, strpos($line,'='));
+        if(!removeIfHasPid($idir.'/label/'.trim($line).'/item.htm',$pid)){
+            return false;
+        }
+    }
+    //month
+    foreach(file($idir.'/month/item.htm') as $line){
+        if(!removeIfHasPid($idir.'/month/'.trim($line).'/item.htm',$pid)){
+            return false;
+        }
+    }
+    //total
+    if(!removeIfHasPid($idir.'/total/item.htm',$pid)){
+        return false;
+    }
+    return true;
+}
+function removeIfHasPid($fn,$pid){
+    $lines = file($fn);
+    $has = false;
+    foreach($lines as $i => $line){
+        if(strpos($line,$pid) !== false){
+            unset($lines[$i]);
+            $has = true;
+            break;
+        }
+    }
+    if($has && !writeFile($fn,implode('', $lines),'w')){
+        return false;
+    }
+    return true;
 }
 
 function isValidType($tp){
@@ -68,8 +102,11 @@ function isValidType($tp){
     || $tp === IDX_ARTICLE
     || $tp === IDX_GALLERY);
 }
-
-/*if(appendIndex(IDX_ADDRESS,'a9admin','20081015212121','我的, 测试 abc')){
+/*
+if(appendIndex(IDX_ADDRESS,'a9admin','20081015212121','我的, 测试 abc')){
     echo 'ok';
 }*/
+if(deleteIndex(IDX_ADDRESS,'a9admin','20081015212121')){
+    echo 'ok';
+}
 ?>

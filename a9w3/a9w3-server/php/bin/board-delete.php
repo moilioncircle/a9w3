@@ -17,8 +17,9 @@ if(!deleteFile(PATH_ROOT.'a9w3-auhome/'.$_REQUEST['UID'].'/helpers/board/'.$_REQ
 $idxfile = PATH_ROOT.'a9w3-auhome/'.$_REQUEST['UID'].'/helpers/board/00000000000000000.htm';
 $idxlines = file($idxfile);
 foreach ($idxlines as $i => $line){
-    if(strpos($line, $_REQUEST['PID']) === 0 ){
+    if(strpos($line, $_REQUEST['PID']) !== false){
         unset($idxlines[$i]);
+        break;
     }
 }
 if(!writeFile($idxfile,implode('', $idxlines),'w')){
