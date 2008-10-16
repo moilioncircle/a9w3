@@ -78,4 +78,9 @@ function deleteFile($filename){
     if (!is_file($filename)) return false;
     return unlink($filename);
 }
+
+function text2line($text){
+    if(empty($text)) return '';
+    return str_replace(array("\\","\n","\r"),array("\\\\","\\n","\\r"),$text);
+}
 ?>

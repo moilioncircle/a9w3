@@ -76,7 +76,7 @@ function init(){
         parent.W3GUI.getGalleryItem(albumId,function(ai){
             document.getElementById("__PICTURE__").src=parent.W3CNF.USERHOME+"gallery/data/"+ai.id+"."+ai.ftype;
             document.getElementById("LABEL").value=ai.lable.join(" ");
-            document.getElementById("BRIEF").value=parent.W3TXT.html2text(ai.brief);
+            document.getElementById("BRIEF").value=parent.W3TXT.line2text(ai.brief);
         });
     }
 }
