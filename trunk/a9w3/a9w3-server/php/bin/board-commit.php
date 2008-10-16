@@ -22,9 +22,9 @@ unset($_SESSION[SKEY_IMGSN.$_REQUEST['UID']]); // clear imgsn
 $boardid = date('YmdHis').sprintf("%03s",rand(1,999));
 $boardtx  = '
 time='.date('Y-m-d H:i:s').'
-user='.preg_replace('/[\r\n]+/','',$_REQUEST['FROM']).'
+user='.text2line($_REQUEST['FROM']).'
 from='.$_SERVER['REMOTE_ADDR'].'
-text='.preg_replace('/[\r\n]+/','\n',$_REQUEST['TEXT']);
+text='.text2line($_REQUEST['TEXT']);
 
 if(!writeFile(PATH_ROOT.'a9w3-auhome/'.$_REQUEST['UID'].'/helpers/board/'.$boardid.'.htm',trim($boardtx),'w')){
     echo RKEY_UNKOWN;
