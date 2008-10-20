@@ -1,7 +1,7 @@
 <?php
 require_once('common.php');
 checkRequestUID();
-//checkUmodePermit(UMODE_WRITER);
+checkUmodePermit(UMODE_WRITER);
 
 // check by js at client #PID|CODE (UID,[PID],TITLE,ADDRS,BRIEF,[LABEL])
 if(empty($_REQUEST['TITLE'])

@@ -20,6 +20,8 @@ define('RKEY_ACCDENY','warn.deny');
 define('RKEY_SETPASS','warn.pass.change');
 define('RKEY_SMPPASS','info.pass.simple');
 
+define('PERMIT_MODE',false);
+
 function checkRequestUID(){
     if(empty($_REQUEST['UID'])
     || !is_dir(PATH_ROOT.'a9w3-auhome/'.$_REQUEST['UID'])){
@@ -29,6 +31,8 @@ function checkRequestUID(){
 }
 
 function checkUmodePermit($group){
+    if(!PERMIT_MODE) return;
+    
     @session_start();
     if(empty($_SESSION[SKEY_UID])
     || empty($_SESSION[SKEY_UTIME])
