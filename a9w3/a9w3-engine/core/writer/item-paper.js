@@ -114,15 +114,9 @@ function onSavePaper(){
         document.getElementById("__TITLE__").focus();
         return;
     }
-    var brief = document.getElementById("__BRIEF__").value;
-    if(brief ==""){
-        alert(parent.W3CNF.getI18nString("info.item.empty"));
-        document.getElementById("__BRIEF__").focus();
-        return;
-    }
     
     document.getElementById("TITLE").value = title;
-    document.getElementById("BRIEF").value = brief
+    document.getElementById("BRIEF").value = document.getElementById("__BRIEF__").value;
     document.getElementById("LABEL").value = document.getElementById("__LABEL__").value;
     document.getElementById("XTEXT").value = __EDIOR__.getText();
     
