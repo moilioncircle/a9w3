@@ -7,6 +7,9 @@ W3GUI.ITEMWINOBJW = null;
 
 W3GUI.POOL = {};
 W3GUI.KEY = {
+    IDX_LBL_ART : "Indexer.Label.Article",
+    IDX_LBL_ADD : "Indexer.Label.Address",
+    IDX_LBL_GLY : "Indexer.Label.Gallery",
     ART_TTL_LNK : "Article.Total.Link",
     ART_LBL_LST : "Article.Label.List",
     ART_LBL_LNK : "Article.Label.Link.",
@@ -134,6 +137,9 @@ W3GUI.getArticleTotalLink = function(func){
     W3GUI._callbackArray_(W3GUI.KEY.ART_TTL_LNK,url,func);
 }
 W3GUI.getArticleLabelList = function(func){
+    var url = W3CNF.USERHOME+"indexer/article/label/item.htm";
+    W3GUI._callbackLabel_(W3GUI.KEY.IDX_LBL_ART,url,func);
+    
     if(W3GUI.POOL[W3GUI.KEY.ART_LBL_LST] == null){
         var kv  = W3CNF.ARTICLE_LABEL.getKeyValClone();
         var arr = [];
@@ -414,6 +420,19 @@ W3GUI._callbackArray_ = function(key,url,func){
     }
 }
 
+W3GUI._callbackLabel_ = function(key,url,func){
+    if(key == null || W3GUI.POOL[key] == null){
+        A9Loader.asyncLoadText(function(u,t){
+            var lblcnf = new CnfReaderClass();
+                lblcnf.loadFromText(t);
+            if(key != null) W3GUI.POOL[key] = lblcnf;
+            func(W3GUI.POOL[key]);
+        },W3GUI.avoidClientCache(url));
+    }else{
+        func(W3GUI.POOL[key]);
+    }
+}
+
 W3GUI.avoidClientCache = function(urls){
     if(urls == null) return null;
     var tm = new Date().getTime();
@@ -456,3 +475,18 @@ W3GUI.asyncLoadText = function(func,url){
         func(t);
     },url);
 }
+
+W3GUI.ARTICLE_LABEL = new CnfReaderClass();
+A9Loader.asyncLoadText(function(u,t){
+	W3GUI.ARTICLE_LABEL.loadFromText(t)
+},W3CNF.USERHOME+"indexer/article/label/item.htm");
+
+W3GUI.GALLERY_LABEL = new CnfReaderClass();
+A9Loader.asyncLoadText(function(u,t){
+	W3GUI.GALLERY_LABEL.loadFromText(t)
+},W3CNF.USERHOME+"indexer/gallery/label/item.htm");
+
+W3GUI.ADDRESS_LABEL = new CnfReaderClass();
+A9Loader.asyncLoadText(function(u,t){
+	W3GUI.ADDRESS_LABEL.loadFromText(t)
+},W3CNF.USERHOME+"indexer/address/label/item.htm");
