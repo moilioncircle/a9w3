@@ -229,7 +229,7 @@ function init(){
         docPath = parent.W3CNF.USERHOME+"article/"+paperId+"/";
         
         //label
-        var lblMap = parent.W3CNF.ARTICLE_LABEL.getKeyValClone();
+        var lblMap = parent.W3GUI.ARTICLE_LABEL.getKeyValClone();
         var lblObj = document.getElementById("__LBLNME__");
         for(var k in lblMap){
             var opt=document.createElement("OPTION");

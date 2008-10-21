@@ -67,7 +67,7 @@ function init(){
         linksId = url.substr(pos+1);
         
         //label
-        var lblMap = parent.W3CNF.ADDRESS_LABEL.getKeyValClone();
+        var lblMap = parent.W3GUI.ADDRESS_LABEL.getKeyValClone();
         var lblObj = document.getElementById("__LBLNME__");
         for(var k in lblMap){
             var opt=document.createElement("OPTION");

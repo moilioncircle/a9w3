@@ -5,11 +5,13 @@ W3GUI.ITEMWINNAME = "A9W3_ITEM_WIN";
 W3GUI.LISTWINOBJW = null;
 W3GUI.ITEMWINOBJW = null;
 
+W3GUI.ARTICLE_LABEL = new CnfReaderClass();
+W3GUI.GALLERY_LABEL = new CnfReaderClass();
+W3GUI.ADDRESS_LABEL = new CnfReaderClass();
+W3GUI.MENU = new CnfReaderClass();
+
 W3GUI.POOL = {};
 W3GUI.KEY = {
-    IDX_LBL_ART : "Indexer.Label.Article",
-    IDX_LBL_ADD : "Indexer.Label.Address",
-    IDX_LBL_GLY : "Indexer.Label.Gallery",
     ART_TTL_LNK : "Article.Total.Link",
     ART_LBL_LST : "Article.Label.List",
     ART_LBL_LNK : "Article.Label.Link.",
@@ -48,7 +50,7 @@ W3GUI.drawMenu = function(){
         if(infoType == "function"){
             infoText = eval(infoText);
         }else if ((infoType == "config")){
-            infoText = W3CNF.MENU.getValue(infoText);
+            infoText = W3GUI.MENU.getValue(infoText);
         }
         
         var linkText = W3CNF.CONF.getValue("menu.item-"+i+".link.text");
@@ -137,11 +139,8 @@ W3GUI.getArticleTotalLink = function(func){
     W3GUI._callbackArray_(W3GUI.KEY.ART_TTL_LNK,url,func);
 }
 W3GUI.getArticleLabelList = function(func){
-    var url = W3CNF.USERHOME+"indexer/article/label/item.htm";
-    W3GUI._callbackLabel_(W3GUI.KEY.IDX_LBL_ART,url,func);
-    
     if(W3GUI.POOL[W3GUI.KEY.ART_LBL_LST] == null){
-        var kv  = W3CNF.ARTICLE_LABEL.getKeyValClone();
+        var kv  = W3GUI.ARTICLE_LABEL.getKeyValClone();
         var arr = [];
         for(var k in kv){
             arr.push(k);
@@ -182,7 +181,7 @@ W3GUI.getAddressTotalLink = function(func){
 }
 W3GUI.getAddressLabelList = function(func){
     if(W3GUI.POOL[W3GUI.KEY.ADD_LBL_LST] == null){
-        var kv  = W3CNF.ADDRESS_LABEL.getKeyValClone();
+        var kv  = W3GUI.ADDRESS_LABEL.getKeyValClone();
         var arr = [];
         for(var k in kv){
             arr.push(k);
@@ -218,7 +217,7 @@ W3GUI.getGalleryTotalLink = function(func){
 }
 W3GUI.getGalleryLabelList = function(func){
     if(W3GUI.POOL[W3GUI.KEY.GLY_LBL_LST] == null){
-        var kv  = W3CNF.GALLERY_LABEL.getKeyValClone();
+        var kv  = W3GUI.GALLERY_LABEL.getKeyValClone();
         var arr = [];
         for(var k in kv){
             arr.push(k);
@@ -419,20 +418,6 @@ W3GUI._callbackArray_ = function(key,url,func){
         func(W3GUI.POOL[key]);
     }
 }
-
-W3GUI._callbackLabel_ = function(key,url,func){
-    if(key == null || W3GUI.POOL[key] == null){
-        A9Loader.asyncLoadText(function(u,t){
-            var lblcnf = new CnfReaderClass();
-                lblcnf.loadFromText(t);
-            if(key != null) W3GUI.POOL[key] = lblcnf;
-            func(W3GUI.POOL[key]);
-        },W3GUI.avoidClientCache(url));
-    }else{
-        func(W3GUI.POOL[key]);
-    }
-}
-
 W3GUI.avoidClientCache = function(urls){
     if(urls == null) return null;
     var tm = new Date().getTime();
@@ -476,17 +461,23 @@ W3GUI.asyncLoadText = function(func,url){
     },url);
 }
 
-W3GUI.ARTICLE_LABEL = new CnfReaderClass();
-A9Loader.asyncLoadText(function(u,t){
-	W3GUI.ARTICLE_LABEL.loadFromText(t)
-},W3CNF.USERHOME+"indexer/article/label/item.htm");
+function initLabelIndexer(){
+    A9Loader.asyncLoadText(function(u,t){
+        W3GUI.ARTICLE_LABEL.clear();
+        W3GUI.ARTICLE_LABEL.loadFromText(t)
+    },W3GUI.avoidClientCache(W3CNF.USERHOME+"indexer/article/label/item.htm"));
 
-W3GUI.GALLERY_LABEL = new CnfReaderClass();
-A9Loader.asyncLoadText(function(u,t){
-	W3GUI.GALLERY_LABEL.loadFromText(t)
-},W3CNF.USERHOME+"indexer/gallery/label/item.htm");
+    A9Loader.asyncLoadText(function(u,t){
+        W3GUI.GALLERY_LABEL.clear();
+        W3GUI.GALLERY_LABEL.loadFromText(t)
+    },W3GUI.avoidClientCache(W3CNF.USERHOME+"indexer/gallery/label/item.htm"));
 
-W3GUI.ADDRESS_LABEL = new CnfReaderClass();
-A9Loader.asyncLoadText(function(u,t){
-	W3GUI.ADDRESS_LABEL.loadFromText(t)
-},W3CNF.USERHOME+"indexer/address/label/item.htm");
+    A9Loader.asyncLoadText(function(u,t){
+        W3GUI.ADDRESS_LABEL.clear();
+        W3GUI.ADDRESS_LABEL.loadFromText(t)
+    },W3GUI.avoidClientCache(W3CNF.USERHOME+"indexer/address/label/item.htm"));
+}
+
+// init
+W3GUI.MENU.loadFormFile(W3CNF.USERHOME+"helpers/status/info/menu.htm");
+initLabelIndexer();
