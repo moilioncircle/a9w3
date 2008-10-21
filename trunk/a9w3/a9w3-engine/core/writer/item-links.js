@@ -55,8 +55,12 @@ function onDataResponse(){
     }
     
     if(rtv != ""){
-        alert(rtv);
         __DATA_POSTER__.location="about:blank";// avoid recommit when refresh
+        if(regexpId.test(rtv)){
+            linksId = rtv;
+            rtv="info.success";
+        }
+        alert(rtv);
     }
 }
 

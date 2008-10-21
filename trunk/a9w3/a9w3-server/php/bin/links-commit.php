@@ -104,6 +104,9 @@ if(!writeFile($dst,trim($txt),'w')){
     echo RKEY_UNKOWN;
     exit;
 }
-
-echo RKEY_SUCCESS;
+if(empty($_REQUEST['PID'])){ //new
+    echo $pid;
+}else{
+    echo RKEY_SUCCESS;
+}
 ?>
