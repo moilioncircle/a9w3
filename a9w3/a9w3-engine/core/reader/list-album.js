@@ -46,9 +46,9 @@ function drawGalleryListLabelView(cur,obj,lst){
     buff.push("<td  class='a9w3_text_list_box'>");
     for(var i=0;i<show.length;i++){
         if(cur != show[i]){
-            buff.push("<a href='javascript:{showPage(\"label\",\""+show[i]+"\")}' class='a9w3_link_infos'>"+parent.W3CNF.GALLERY_LABEL.getValue(show[i])+"</a>");
+            buff.push("<a href='javascript:{showPage(\"label\",\""+show[i]+"\")}' class='a9w3_link_infos'>"+parent.W3GUI.GALLERY_LABEL.getValue(show[i])+"</a>");
         }else{
-            buff.push(parent.W3CNF.GALLERY_LABEL.getValue(show[i]));
+            buff.push(parent.W3GUI.GALLERY_LABEL.getValue(show[i]));
         }
         buff.push(" ");
     }
@@ -60,9 +60,9 @@ function drawGalleryListLabelView(cur,obj,lst){
     buff.push("<td class='a9w3_text_list_box'>");
     for(var i=0;i<lst.length;i++){
         if(cur != lst[i]){
-            buff.push("<a href='javascript:{showPage(\"label\",\""+lst[i]+"\")}' class='a9w3_link_infos'>"+parent.W3CNF.GALLERY_LABEL.getValue(lst[i])+"</a>");
+            buff.push("<a href='javascript:{showPage(\"label\",\""+lst[i]+"\")}' class='a9w3_link_infos'>"+parent.W3GUI.GALLERY_LABEL.getValue(lst[i])+"</a>");
         }else{
-            buff.push(parent.W3CNF.GALLERY_LABEL.getValue(lst[i]));
+            buff.push(parent.W3GUI.GALLERY_LABEL.getValue(lst[i]));
         }
         buff.push(" ");
     }
@@ -239,10 +239,10 @@ function drawGalleryLinkView(page,obj,lst){
             buff.push("&nbsp;&nbsp;<img src='../../data/image/icon-list-views.png' title='view' /> "+ai.views+"</td></tr>");
             buff.push("<tr><td><img src='../../data/image/icon-list-label.png' title='label'/> ");
             if(ai.lable ==null || ai.lable.length ==0){
-                ai.lable=[parent.W3CNF.GALLERY_LABEL.getValue("000")];
+                ai.lable=[parent.W3GUI.GALLERY_LABEL.getValue("000")];
             }
             for(var k=0;k<ai.lable.length;k++){
-                buff.push("<a href='javascript:showPage(\"label\",\""+parent.W3CNF.GALLERY_LABEL.getKey(ai.lable[k])+"\")' class='a9w3_link_infos'>"+ai.lable[k]+"</a>. ");
+                buff.push("<a href='javascript:showPage(\"label\",\""+parent.W3GUI.GALLERY_LABEL.getKey(ai.lable[k])+"\")' class='a9w3_link_infos'>"+ai.lable[k]+"</a>. ");
             }
             buff.push("</td></tr>");
             buff.push("</table></td>");

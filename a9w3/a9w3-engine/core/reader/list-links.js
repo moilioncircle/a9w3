@@ -46,9 +46,9 @@ function drawAddressListLabelView(cur,obj,lst){
     buff.push("<td  class='a9w3_text_list_box'>");
     for(var i=0;i<show.length;i++){
         if(cur != show[i]){
-            buff.push("<a href='javascript:{showPage(\"label\",\""+show[i]+"\")}' class='a9w3_link_infos'>"+parent.W3CNF.ADDRESS_LABEL.getValue(show[i])+"</a>");
+            buff.push("<a href='javascript:{showPage(\"label\",\""+show[i]+"\")}' class='a9w3_link_infos'>"+parent.W3GUI.ADDRESS_LABEL.getValue(show[i])+"</a>");
         }else{
-            buff.push(parent.W3CNF.ADDRESS_LABEL.getValue(show[i]));
+            buff.push(parent.W3GUI.ADDRESS_LABEL.getValue(show[i]));
         }
         buff.push(" ");
     }
@@ -60,9 +60,9 @@ function drawAddressListLabelView(cur,obj,lst){
     buff.push("<td class='a9w3_text_list_box'>");
     for(var i=0;i<lst.length;i++){
         if(cur != lst[i]){
-            buff.push("<a href='javascript:{showPage(\"label\",\""+lst[i]+"\")}' class='a9w3_link_infos'>"+parent.W3CNF.ADDRESS_LABEL.getValue(lst[i])+"</a>");
+            buff.push("<a href='javascript:{showPage(\"label\",\""+lst[i]+"\")}' class='a9w3_link_infos'>"+parent.W3GUI.ADDRESS_LABEL.getValue(lst[i])+"</a>");
         }else{
-            buff.push(parent.W3CNF.ADDRESS_LABEL.getValue(lst[i]));
+            buff.push(parent.W3GUI.ADDRESS_LABEL.getValue(lst[i]));
         }
         buff.push(" ");
     }
@@ -228,12 +228,12 @@ function drawAddressLinkView(page,obj,lst){
             buff.push("</td>");
             buff.push("</tr>");
             if(ai.lable ==null || ai.lable.length ==0){
-                ai.lable=[parent.W3CNF.ADDRESS_LABEL.getValue("000")];
+                ai.lable=[parent.W3GUI.ADDRESS_LABEL.getValue("000")];
             }
             buff.push("<tr>");
             buff.push("<td><img src='../../data/image/icon-list-label.png' title='label'/> ");
             for(var k=0;k<ai.lable.length;k++){
-                buff.push("<a href='javascript:showPage(\"label\",\""+parent.W3CNF.ADDRESS_LABEL.getKey(ai.lable[k])+"\")' class='a9w3_link_infos'>"+ai.lable[k]+"</a>. ");
+                buff.push("<a href='javascript:showPage(\"label\",\""+parent.W3GUI.ADDRESS_LABEL.getKey(ai.lable[k])+"\")' class='a9w3_link_infos'>"+ai.lable[k]+"</a>. ");
             }
             buff.push("</td>");
             buff.push("</tr>");

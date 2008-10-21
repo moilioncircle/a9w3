@@ -10,7 +10,7 @@ function init(){
             document.getElementById("SIZEB").innerHTML=ai.sizeb;
             document.getElementById("VIEWS").innerHTML=ai.views;
             if(ai.lable ==null || ai.lable.length ==0){
-                ai.lable=[parent.W3CNF.GALLERY_LABEL.getValue("000")];
+                ai.lable=[parent.W3GUI.GALLERY_LABEL.getValue("000")];
             }
             var lb = "";
             for(var k=0;k<ai.lable.length;k++){

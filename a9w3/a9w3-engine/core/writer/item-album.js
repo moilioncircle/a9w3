@@ -59,7 +59,7 @@ function init(){
         docPath = parent.W3CNF.USERHOME+"gallery/data/"+albumId.substring(0,albumId.indexOf("/")+1);
         
         //label
-        var lblMap = parent.W3CNF.GALLERY_LABEL.getKeyValClone();
+        var lblMap = parent.W3GUI.GALLERY_LABEL.getKeyValClone();
         var lblObj = document.getElementById("__LBLNME__");
         for(var k in lblMap){
             var opt=document.createElement("OPTION");
