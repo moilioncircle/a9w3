@@ -11,7 +11,7 @@ drawNoticeLinkView = function(page,obj,lst){
         
     if(obj == null) return;
     if(lst == null || lst.length ==0){
-        obj.innerHTML="";
+        obj.innerHTML="<br />"+parent.W3CNF.getI18nString("info.list.empty");
         return;
     }
 

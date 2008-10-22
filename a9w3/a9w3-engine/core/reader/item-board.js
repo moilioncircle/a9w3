@@ -11,7 +11,7 @@ function drawBoardItemView(page,obj,lst){
         
     if(obj == null) return;
     if(lst == null || lst.length ==0){
-        obj.innerHTML="";
+        obj.innerHTML="<br />"+parent.W3CNF.getI18nString("info.list.empty");
         return;
     }
 
@@ -82,7 +82,6 @@ function drawBoardItemView(page,obj,lst){
 // total
 function showPage(page){
     parent.W3GUI.getBoardLink(function(ls){
-        if(ls == null || ls.length == 0) return;
         drawBoardItemView(page,document.getElementById("BOARDITEM"),ls);
     });
 }
