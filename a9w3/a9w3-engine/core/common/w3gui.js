@@ -9,6 +9,7 @@ W3GUI.ARTICLE_LABEL = new CnfReaderClass();
 W3GUI.GALLERY_LABEL = new CnfReaderClass();
 W3GUI.ADDRESS_LABEL = new CnfReaderClass();
 W3GUI.MENU = new CnfReaderClass();
+W3GUI.STAT = new CnfReaderClass();
 
 W3GUI.POOL = {};
 W3GUI.KEY = {
@@ -479,5 +480,6 @@ function initLabelIndexer(){
 }
 
 // init
-W3GUI.MENU.loadFormFile(W3CNF.USERHOME+"helpers/status/info/menu.htm");
 initLabelIndexer();
+W3GUI.MENU.loadFormFile(W3CNF.USERHOME+"profile/menu.htm");
+W3GUI.STAT.loadFormFile(W3CNF.USERHOME+"helpers/status/info/stat.htm");
