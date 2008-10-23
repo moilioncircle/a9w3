@@ -1,8 +1,9 @@
 <?php
+require_once('common.php');
+
 define('IDX_ADDRESS','address');
 define('IDX_ARTICLE','article');
 define('IDX_GALLERY','gallery');
-require_once('common.php');
 
 function appendIndexToTotal($tp,$uid,$pid){
     if(!isValidType($tp)){
