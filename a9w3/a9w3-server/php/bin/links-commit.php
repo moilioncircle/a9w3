@@ -109,4 +109,10 @@ if(empty($_REQUEST['PID'])){ //new
 }else{
     echo RKEY_SUCCESS;
 }
+
+// set stat
+require_once('common-userstat.php');
+if(!traceUserStat(CHL_ADDRESS,$_REQUEST['UID'])){
+    echo RKEY_UNKOWN;
+}
 ?>
