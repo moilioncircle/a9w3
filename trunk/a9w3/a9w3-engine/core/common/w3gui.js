@@ -167,7 +167,7 @@ W3GUI.getArticleMonthLink = function(id,func){
 W3GUI.getArticleItem = function(id,func){
     var key = W3GUI.KEY.ART_ITM+id;
     var urls = [W3CNF.USERHOME+"article/"+id+"/head.htm",
-                W3CNF.USERHOME+"helpers/status/read/article/"+id+".htm"];
+                W3CNF.USERHOME+"helpers/status/read/article/"+id+"-hit.htm"];
     W3GUI._callbackObject_(id,W3TXT.articleItem,key,urls,func);
 }
 W3GUI.getArticleData = function(id,func){
@@ -244,7 +244,7 @@ W3GUI.getGalleryMonthLink = function(id,func){
 W3GUI.getGalleryItem = function(id,func){
     var key = W3GUI.KEY.GLY_ITM+id;
     var urls = [W3CNF.USERHOME+"gallery/info/"+id+".htm",
-                W3CNF.USERHOME+"helpers/status/read/gallery/"+id+".htm"];
+                W3CNF.USERHOME+"helpers/status/read/gallery/"+id+"-hit.htm"];
     W3GUI._callbackObject_(id,W3TXT.galleryItem,key,urls,func);
 }
 

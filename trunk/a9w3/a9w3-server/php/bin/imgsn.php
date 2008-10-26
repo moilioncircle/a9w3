@@ -56,7 +56,7 @@ function genImageSn()
 		$b=$valiColor[$index][2];
 		$fontColor=imagecolorallocate($im,$r,$g,$b);
 		$charIndex=imagechar($im,rand(3,5),$fontX,rand(1,$fontY),$font,$fontColor);
-		$fontX+=(imagefontwidth($charIndexr)+$fontM);
+		$fontX+=(imagefontwidth($charIndex)+$fontM);
 		$sn.=$font;
 	}
 	
