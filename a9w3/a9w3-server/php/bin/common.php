@@ -24,6 +24,7 @@ define('PERMIT_MODE',false);
 
 function checkRequestUID(){
     if(empty($_REQUEST['UID'])
+    || !preg_match("/^[a-z0-9]+$/i", $_REQUEST['UID'])
     || !is_dir(PATH_ROOT.'a9w3-auhome/'.$_REQUEST['UID'])){
         echo RKEY_ACCDENY;
         exit;
