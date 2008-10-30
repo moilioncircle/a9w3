@@ -289,9 +289,11 @@ W3GUI.getNoticeData = function(id,func){
 /** switch view */
 W3GUI.showArticle = function(id){
     W3GUI.ITEMWINOBJW.location=W3CNF.USERHOME+"article/"+id+"/body.htm";
+    readerTracer(id,"paper.view.tracer");
 }
 W3GUI.showPicture = function(id){
     W3GUI.ITEMWINOBJW.location=W3CNF.A9W3HOME+"a9w3-engine/view/reader/item-album.htm?"+id;
+    readerTracer(id,"album.view.tracer");
 }
 
 /** admin */
@@ -479,6 +481,12 @@ function initLabelIndexer(){
     },W3GUI.avoidClientCache(W3CNF.USERHOME+"indexer/address/label/item.htm"));
 }
 
+function readerTracer(pid,code){
+    var url = W3CNF.getServerURL(code);
+    url += (url.indexOf("?")>0?"&":"?")+"UID="+W3CNF.USER+"&PID="+pid;
+    A9Loader.asyncLoadText(function(u,t){
+    },W3GUI.avoidClientCache(url));
+}
 // init
 initLabelIndexer();
 W3GUI.MENU.loadFormFile(W3CNF.USERHOME+"profile/menu.htm");
