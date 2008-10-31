@@ -10,12 +10,13 @@ if(empty($_REQUEST['PID'])){
 }
 
 // delete file
-if(!deleteFile(PATH_ROOT.'a9w3-auhome/'.$_REQUEST['UID'].'/address/'.$_REQUEST['PID'].'.htm';)){
+if(!deleteFile(PATH_ROOT.'a9w3-auhome/'.$_REQUEST['UID'].'/address/'.$_REQUEST['PID'].'.htm')){
     echo RKEY_UNKOWN;
     exit;
 }
 
 // remove index
+require_once('common-indexer.php');
 if(!removeIndexFromTotal(IDX_ADDRESS,$_REQUEST['UID'],$_REQUEST['PID'])
 || !removeIndexFromMonth(IDX_ADDRESS,$_REQUEST['UID'],$_REQUEST['PID'])
 || !removeIndexFromLabel(IDX_ADDRESS,$_REQUEST['UID'],$_REQUEST['PID'])){
