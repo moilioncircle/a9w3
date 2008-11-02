@@ -5,18 +5,23 @@ checkRequestUID();
 // check type and pid
 if(empty($_REQUEST['PID'])) exit;
 
+// alias
+$r_uid  = $_REQUEST['UID'];
+$r_pid  = $_REQUEST['PID'];
+$r_type = $_REQUEST['type'];
+
 require_once('common-readlog.php');
-if($_REQUEST['type'] === 'paper'){
-    if(!preg_match('/^[0-9]{4}\/[0-9]{10}+$/', $_REQUEST['PID'])) exit;
-    if(!is_dir(PATH_ROOT.'a9w3-auhome/'.$_REQUEST['UID'].'/article/'.$_REQUEST['PID'])) exit;
+if($r_type === 'paper'){
+    if(!preg_match('/^[0-9]{4}\/[0-9]{10}+$/', $r_pid)) exit;
+    if(!is_dir(PATH_ROOT.'a9w3-auhome/'.$r_uid.'/article/'.$r_pid)) exit;
     $tp = RDL_ARTICLE;
-}else if ($_REQUEST['type'] === 'album'){
-    if(!preg_match('/^[0-9]{4}\/[0-9]{13}+$/', $_REQUEST['PID'])) exit;
-    if(!is_file(PATH_ROOT.'a9w3-auhome/'.$_REQUEST['UID'].'/gallery/info/'.$_REQUEST['PID'].'.htm')) exit;
+}else if ($r_type === 'album'){
+    if(!preg_match('/^[0-9]{4}\/[0-9]{13}+$/', $r_pid)) exit;
+    if(!is_file(PATH_ROOT.'a9w3-auhome/'.$r_uid.'/gallery/info/'.$r_pid.'.htm')) exit;
     $tp = RDL_GALLERY;
 }else{
     exit;
 }
 // write log
-traceReader($tp,$_REQUEST['UID'],$_REQUEST['PID']);
+traceReader($tp,$r_uid,$r_pid);
 ?>

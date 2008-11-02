@@ -11,30 +11,38 @@ if(empty($_REQUEST['TITLE'])
     exit;
 }
 
+// alias
+$r_uid  = $_REQUEST['UID'];
+$r_pid  = $_REQUEST['PID'];
+$r_title = $_REQUEST['TITLE'];
+$r_label = $_REQUEST['LABEL'];
+$r_addrs = $_REQUEST['ADDRS'];
+$r_brief = $_REQUEST['BRIEF'];
+
 $newFields = array(
-    'title'=>trim($_REQUEST['TITLE']),
-    'label'=>preg_split('/[\s,]+/',trim($_REQUEST['LABEL'])),
-    'addrs'=>trim($_REQUEST['ADDRS']),
-    'brief'=>text2line(trim($_REQUEST['BRIEF']))
+    'title'=>trim($r_title),
+    'label'=>preg_split('/[\s,]+/',trim($r_label)),
+    'addrs'=>trim($r_addrs),
+    'brief'=>text2line(trim($r_brief))
 );
 
-if(empty($_REQUEST['PID'])){ // new
+if(empty($r_pid)){ // new
     $pid = date('YmdHis');
-    $dst = PATH_ROOT.'a9w3-auhome/'.$_REQUEST['UID'].'/address/'.$pid.'.htm';
+    $dst = PATH_ROOT.'a9w3-auhome/'.$r_uid.'/address/'.$pid.'.htm';
     $newFields['mtime'] = date('Y-m-d H:i:s');
     $newFields['ctime'] = $newFields['mtime'];
     
     // add index
     require_once('common-indexer.php');
-    if(!appendIndexToTotal(IDX_ADDRESS,$_REQUEST['UID'],$pid,$_REQUEST['LABEL'])
-    || !appendIndexToMonth(IDX_ADDRESS,$_REQUEST['UID'],$pid,$_REQUEST['LABEL'])
-    || !appendIndexToLabel(IDX_ADDRESS,$_REQUEST['UID'],$pid,$_REQUEST['LABEL'],$newFields['label'])){
+    if(!appendIndexToTotal(IDX_ADDRESS,$r_uid,$pid,$r_label)
+    || !appendIndexToMonth(IDX_ADDRESS,$r_uid,$pid,$r_label)
+    || !appendIndexToLabel(IDX_ADDRESS,$r_uid,$pid,$r_label,$newFields['label'])){
         echo RKEY_UNKOWN;
         exit;
     }
 }else{ // exists
-    $pid = $_REQUEST['PID'];
-    $dst = PATH_ROOT.'a9w3-auhome/'.$_REQUEST['UID'].'/address/'.$pid.'.htm';
+    $pid = $r_pid;
+    $dst = PATH_ROOT.'a9w3-auhome/'.$r_uid.'/address/'.$pid.'.htm';
     if(!is_file($dst)){
         echo RKEY_ACCDENY;
         exit;
@@ -63,7 +71,7 @@ if(empty($_REQUEST['PID'])){ // new
         $fval = preg_split('/[\s,]+/',$oldFields[$k]);
         foreach($newFields[$k] as $v){ // append
             if(array_search($v,$fval) === false){
-                if(appendIndexToLabel(IDX_ADDRESS,$_REQUEST['UID'],$pid,$v)){
+                if(appendIndexToLabel(IDX_ADDRESS,$r_uid,$pid,$v)){
                     $changed = true;
                 }else{
                     echo RKEY_UNKOWN;
@@ -73,7 +81,7 @@ if(empty($_REQUEST['PID'])){ // new
         }
         foreach($fval as $v){ // remove
             if(array_search($v,$newFields[$k]) === false){
-                if(removeIndexFromLabel(IDX_ADDRESS,$_REQUEST['UID'],$pid,$v)){
+                if(removeIndexFromLabel(IDX_ADDRESS,$r_uid,$pid,$v)){
                     $changed = true;
                 }else{
                     echo RKEY_UNKOWN;
@@ -104,7 +112,7 @@ if(!writeFile($dst,trim($txt),'w')){
     echo RKEY_UNKOWN;
     exit;
 }
-if(empty($_REQUEST['PID'])){ //new
+if(empty($r_pid)){ //new
     echo $pid;
 }else{
     echo RKEY_SUCCESS;
@@ -112,7 +120,7 @@ if(empty($_REQUEST['PID'])){ //new
 
 // set stat
 require_once('common-userstat.php');
-if(!traceUserStat(CHL_ADDRESS,$_REQUEST['UID'])){
+if(!traceUserStat(CHL_ADDRESS,$r_uid)){
     echo RKEY_UNKOWN;
 }
 ?>

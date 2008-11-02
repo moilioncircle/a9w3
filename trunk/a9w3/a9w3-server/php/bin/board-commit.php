@@ -9,29 +9,36 @@ if(empty($_REQUEST['FROM'])
     echo RKEY_ACCDENY;
     exit;
 }
+// alias
+$r_uid  = $_REQUEST['UID'];
+$r_pid  = $_REQUEST['PID'];
+$r_from  = $_REQUEST['FROM'];
+$r_text  = $_REQUEST['TEXT'];
+$r_code  = $_REQUEST['CODE'];
+
 // check imgsn
 session_start();
-if(empty($_SESSION[SKEY_IMGSN.$_REQUEST['UID']])
-|| strcasecmp($_REQUEST['CODE'],$_SESSION[SKEY_IMGSN.$_REQUEST['UID']]) != 0){
+if(empty($_SESSION[SKEY_IMGSN.$r_uid])
+|| strcasecmp($r_code,$_SESSION[SKEY_IMGSN.$r_uid]) != 0){
     echo RKEY_WRIMGSN;
     exit;
 }
-unset($_SESSION[SKEY_IMGSN.$_REQUEST['UID']]); // clear imgsn
+unset($_SESSION[SKEY_IMGSN.$r_uid]); // clear imgsn
 
 // write board
 $boardid = date('YmdHis').sprintf("%03s",rand(1,999));
 $boardtx  = '
 time='.date('Y-m-d H:i:s').'
-user='.text2line($_REQUEST['FROM']).'
+user='.text2line($r_from).'
 from='.$_SERVER['REMOTE_ADDR'].'
-text='.text2line($_REQUEST['TEXT']);
+text='.text2line($r_text);
 
-if(!writeFile(PATH_ROOT.'a9w3-auhome/'.$_REQUEST['UID'].'/helpers/board/'.$boardid.'.htm',trim($boardtx),'w')){
+if(!writeFile(PATH_ROOT.'a9w3-auhome/'.$r_uid.'/helpers/board/'.$boardid.'.htm',trim($boardtx),'w')){
     echo RKEY_UNKOWN;
     exit;
 }
 // write index
-if(!writeFile(PATH_ROOT.'a9w3-auhome/'.$_REQUEST['UID'].'/helpers/board/00000000000000000.htm',"\n".$boardid,'a+')){
+if(!writeFile(PATH_ROOT.'a9w3-auhome/'.$r_uid.'/helpers/board/00000000000000000.htm',"\n".$boardid,'a+')){
     echo RKEY_UNKOWN;
     exit;
 }

@@ -7,31 +7,37 @@ if(empty($_REQUEST['PASS']) || empty($_REQUEST['CODE'])){
     echo RKEY_ACCDENY;
     exit;
 }
+
+// alias
+$r_uid  = $_REQUEST['UID'];
+$r_pass  = $_REQUEST['PASS'];
+$r_code  = $_REQUEST['CODE'];
+
 // check imgsn
 session_start();
-if(empty($_SESSION[SKEY_IMGSN.$_REQUEST['UID']])
-|| strcasecmp($_REQUEST['CODE'],$_SESSION[SKEY_IMGSN.$_REQUEST['UID']]) != 0){
+if(empty($_SESSION[SKEY_IMGSN.$r_uid])
+|| strcasecmp($r_code,$_SESSION[SKEY_IMGSN.$r_uid]) != 0){
     echo RKEY_WRIMGSN;
     exit;
 }
-unset($_SESSION[SKEY_IMGSN.$_REQUEST['UID']]); // clear imgsn
+unset($_SESSION[SKEY_IMGSN.$r_uid]); // clear imgsn
 
 // check passwd
-$pass = file_get_contents(PATH_ROOT.'a9w3-auhome/'.$_REQUEST['UID'].'/profile/passwd.htm');
-if($pass === '' && DEFAULT_PASS === $_REQUEST['PASS']){
+$pass = file_get_contents(PATH_ROOT.'a9w3-auhome/'.$r_uid.'/profile/passwd.htm');
+if($pass === '' && DEFAULT_PASS === $r_pass){
     echo RKEY_SETPASS;
-}else if($pass === sha1($_REQUEST['PASS'])){
+}else if($pass === sha1($r_pass)){
     echo RKEY_SUCCESS;
 }else{
     echo RKEY_ACCDENY;
     exit;
 }
-$_SESSION[SKEY_UID]=$_REQUEST['UID'];
+$_SESSION[SKEY_UID]=$r_uid;
 $_SESSION[SKEY_UTIME]=time();
 
 // set group
 foreach(file(PATH_ROOT.'a9w3-engine/conf/group.htm') as $line){
-    if (preg_match('/\b'.$_REQUEST['UID'].'\b/', $line)){
+    if (preg_match('/\b'.$r_uid.'\b/', $line)){
         $umd = UMODE_READER;
         if(preg_match('/^admin/i', $line)){
             $umd=UMODE_ADMIN;
@@ -49,7 +55,7 @@ foreach(file(PATH_ROOT.'a9w3-engine/conf/group.htm') as $line){
 }
 // set stat
 require_once('common-userstat.php');
-if(!traceUserStat(CHL_ADMIN,$_REQUEST['UID'])){
+if(!traceUserStat(CHL_ADMIN,$r_uid)){
     echo RKEY_UNKOWN;
 }
 ?>
