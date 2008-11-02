@@ -10,24 +10,28 @@ if(empty($_REQUEST['PID'])
     exit;
 }
 
-foreach(file(PATH_ROOT.'a9w3-auhome/'.$_REQUEST['UID'].'/gallery/info/'.$_REQUEST['PID'].'.htm') as $line){
+// alias
+$r_uid  = $_REQUEST['UID'];
+$r_pid  = $_REQUEST['PID'];
+
+foreach(file(PATH_ROOT.'a9w3-auhome/'.$r_uid.'/gallery/info/'.$r_pid.'.htm') as $line){
     if(strpos($line, 'ftype') !== false){
         $ftype = trim(substr($line,strpos($line,'=')+1));
         break;
     }
 }
 // delete files
-if(!deleteFile(PATH_ROOT.'a9w3-auhome/'.$_REQUEST['UID'].'/gallery/data/'.$_REQUEST['PID'].'.'.$ftype)
-|| !deleteFile(PATH_ROOT.'a9w3-auhome/'.$_REQUEST['UID'].'/gallery/mini/'.$_REQUEST['PID'].'.jpg')
-|| !deleteFile(PATH_ROOT.'a9w3-auhome/'.$_REQUEST['UID'].'/gallery/info/'.$_REQUEST['PID'].'.htm')){
+if(!deleteFile(PATH_ROOT.'a9w3-auhome/'.$r_uid.'/gallery/data/'.$r_pid.'.'.$ftype)
+|| !deleteFile(PATH_ROOT.'a9w3-auhome/'.$r_uid.'/gallery/mini/'.$r_pid.'.jpg')
+|| !deleteFile(PATH_ROOT.'a9w3-auhome/'.$r_uid.'/gallery/info/'.$r_pid.'.htm')){
     echo RKEY_UNKOWN;
     exit;
 }
 // remove index
 require_once('common-indexer.php');
-if(!removeIndexFromTotal(IDX_GALLERY,$_REQUEST['UID'],$_REQUEST['PID'])
-|| !removeIndexFromMonth(IDX_GALLERY,$_REQUEST['UID'],$_REQUEST['PID'])
-|| !removeIndexFromLabel(IDX_GALLERY,$_REQUEST['UID'],$_REQUEST['PID'])){
+if(!removeIndexFromTotal(IDX_GALLERY,$r_uid,$r_pid)
+|| !removeIndexFromMonth(IDX_GALLERY,$r_uid,$r_pid)
+|| !removeIndexFromLabel(IDX_GALLERY,$r_uid,$r_pid)){
     echo RKEY_UNKOWN;
     exit;
 }

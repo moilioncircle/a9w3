@@ -9,17 +9,21 @@ if(empty($_REQUEST['PID'])){
     exit;
 }
 
+// alias
+$r_uid  = $_REQUEST['UID'];
+$r_pid  = $_REQUEST['PID'];
+
 // delete file
-if(!deleteFile(PATH_ROOT.'a9w3-auhome/'.$_REQUEST['UID'].'/address/'.$_REQUEST['PID'].'.htm')){
+if(!deleteFile(PATH_ROOT.'a9w3-auhome/'.$r_uid.'/address/'.$r_pid.'.htm')){
     echo RKEY_UNKOWN;
     exit;
 }
 
 // remove index
 require_once('common-indexer.php');
-if(!removeIndexFromTotal(IDX_ADDRESS,$_REQUEST['UID'],$_REQUEST['PID'])
-|| !removeIndexFromMonth(IDX_ADDRESS,$_REQUEST['UID'],$_REQUEST['PID'])
-|| !removeIndexFromLabel(IDX_ADDRESS,$_REQUEST['UID'],$_REQUEST['PID'])){
+if(!removeIndexFromTotal(IDX_ADDRESS,$r_uid,$r_pid)
+|| !removeIndexFromMonth(IDX_ADDRESS,$r_uid,$r_pid)
+|| !removeIndexFromLabel(IDX_ADDRESS,$r_uid,$r_pid)){
     echo RKEY_UNKOWN;
     exit;
 }
