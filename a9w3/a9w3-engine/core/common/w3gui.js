@@ -372,6 +372,7 @@ W3GUI.deleteCommon = function(code,pid,key){
 
 /** private */
 W3GUI._callbackObject_ = function(id,clzz,key,urls,func){
+    if(key == null){alert("key@_callbackObject_ is null");return;}
     if(W3GUI.POOL[key] == null){
         A9Loader.asyncLoadText(function(us,ts){
             var map = {};
@@ -414,8 +415,12 @@ W3GUI._callbackArray_ = function(key,url,func){
                     arr.push(W3TXT.line2text(tmp[i]));
                 }
             }
-            if(key != null) W3GUI.POOL[key] = arr.reverse();
-            func(W3GUI.POOL[key]);
+            if(key != null) {
+                W3GUI.POOL[key] = arr.reverse();
+                func(W3GUI.POOL[key]);
+            }else{
+                func(arr.reverse());
+            }
         },W3GUI.avoidClientCache(url));
     }else{
         func(W3GUI.POOL[key]);

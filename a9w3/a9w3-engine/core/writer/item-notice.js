@@ -5,6 +5,7 @@ var regexpId=/^\d{17}$/;
 
 // event
 function onDataChose(obj){
+    if(!checkDatumDeny(obj.value)) return;
     var box = document.getElementById("__DATA_PREVIEW__");
     var htm = "&nbsp;";
     htm = "<img src='file://localhost/"+obj.value+"' alt='"+obj.value+"'/>";
@@ -46,8 +47,13 @@ function onDataResponse(){
     }
     
     if(rtv != ""){
-        alert(rtv);
         __DATA_POSTER__.location="about:blank";// avoid recommit when refresh
+        
+        if(checkReplyCode(rtv)){
+            return;
+        }else{
+            alert(rtv);
+        }
     }
 }
 

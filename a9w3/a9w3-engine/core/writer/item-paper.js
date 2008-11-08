@@ -17,6 +17,7 @@ function onAddLabel(){
 }
 
 function onDataChose(obj){
+    if(!checkDatumDeny(obj.value)) return;
     var box = document.getElementById("__DATA_PREVIEW__");
     var htm = "&nbsp;";
     htm = "<img src='file://localhost/"+obj.value+"' alt='"+obj.value+"'/>";
@@ -25,10 +26,9 @@ function onDataChose(obj){
 
 function onDataUpload(){
     if(isNewPaper()) return;
-
     var url = parent.W3CNF.getServerURL("paper.data.upload");
     url = parent.W3GUI.wrapUID(url)+"&PID="+paperId;
-
+    
     var fm = document.getElementById("__DATA_FORM__");
     fm.action = url;
     fm.submit();
@@ -58,8 +58,12 @@ function onDataResponse(){
     }
     
     if(rtv != ""){
-        alert(rtv);
         __DATA_POSTER__.location="about:blank";// avoid recommit when refresh
+        if(checkReplyCode(rtv)){
+            return;
+        }else{
+            alert(rtv);
+        }
     }
 }
 

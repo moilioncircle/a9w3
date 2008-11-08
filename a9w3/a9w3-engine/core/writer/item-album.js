@@ -3,6 +3,7 @@ var albumId = "";
 var regexpId=/^\d{4}\/\d{13}$/;
 
 function onDataChose(obj){
+    if(!checkImageOnly(obj.value)) return;
     var img = document.getElementById("__PICTURE__");
     img.src="file://localhost/"+obj.value;
 }
@@ -30,7 +31,6 @@ function onSaveAlbum(){
     var fm = document.getElementById("__DATA_FORM__");
     fm.action=url;
     fm.submit();
-
 }
 
 function onDataResponse(){
@@ -46,8 +46,12 @@ function onDataResponse(){
     }
     
     if(rtv != ""){
-        alert(rtv);
         __DATA_POSTER__.location="about:blank";// avoid recommit when refresh
+        if(checkReplyCode(rtv)){
+            return;
+        }else{
+            alert(rtv);
+        }
     }
 }
 
