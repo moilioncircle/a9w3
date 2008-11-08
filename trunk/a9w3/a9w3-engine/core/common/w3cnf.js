@@ -66,6 +66,13 @@ W3CNF.CONF.loadFormFile(W3CNF.USERHOME+"profile/config.htm");
 W3CNF.LANG = W3CNF.CONF.getValue("lang");
 
 /** async */
+W3CNF.UPLOAD = new CnfReaderClass();
+//W3CNF.UPLOAD.loadFormFile(W3CNF.USERHOME+"a9w3-server/upload.htm");
+A9Loader.asyncLoadText(function(u,t){
+    W3CNF.UPLOAD.clear();
+    W3CNF.UPLOAD.loadFromText(t);
+},W3CNF.A9W3HOME+"a9w3-server/upload.htm");
+//
 W3CNF.getServerURL = function(){
     var sf = new CnfReaderClass();
     A9Loader.asyncLoadText(function(u,t){
