@@ -7,25 +7,34 @@ define('RKEY_FILE_DENY','warn.upload.deny');
 define('PATH_RULE_FILE',PATH_ROOT.'a9w3-server/upload.htm');
 
 function checkUploadFileOnly($fn){
-    
+    $ext = getExtendFileName($fn);
+    $rul = getFileNameRules('image.only');
+    foreach($rul as $rl){
+        if($ext === $rl) return;
+    }
     echo RKEY_FILE_ONLY;
     exit;
 }
 function checkUploadFileDeny($fn){
-    
-    echo RKEY_FILE_DENY;
-    exit;
+    $ext = getExtendFileName($fn);
+    $rul = getFileNameRules('datum.deny');
+    foreach($rul as $rl){
+        if($ext === $rl){
+            echo RKEY_FILE_DENY;
+            exit;
+        }
+    }
 }
 
 function getExtendFileName($fn){
     $pos = strrpos ($fn, '.');
-    return ($pos === false) ? '':substr($fn,$pos+1);
+    return ($pos === false) ? '':strtolower(substr($fn,$pos+1));
 }
 
 function getFileNameRules($cd){
     foreach(file(PATH_RULE_FILE) as $line){
-        if(strpos($cd) !== false){
-            return preg_split("/[ \t]*,[ \t]*/", $line);
+        if(strpos($line,$cd) !== false){
+            return preg_split("/[ \t]*,[ \t]*/", strtolower(substr($line,strpos($line,'=')+1)));
         }
     }
     return array();
