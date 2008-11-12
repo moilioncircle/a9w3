@@ -88,4 +88,19 @@ function text2line($text){
     if(empty($text)) return '';
     return str_replace(array("\\","\n","\r"),array("\\\\","\\n","\\r"),$text);
 }
+
+function formatSize($size){
+    if($size == 0) return '0B';
+    $sizename = array('?','B', 'K', 'M');
+    $powx = 1;
+    $dotx = 0;
+    while($size>1024){
+        $dotx = round($size%1024);
+        $size = round($size/1024);
+        $powx ++;
+    }
+    if($powx > count($sizename)) $powx = 0;
+    $sstr = $size<100?$size.'.'.sprintf("%-02s",$dotx):$size;
+    return substr($sstr,0,4).$sizename[$powx]; 
+} 
 ?>
