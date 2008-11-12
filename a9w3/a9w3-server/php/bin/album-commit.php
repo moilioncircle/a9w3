@@ -63,41 +63,23 @@ if(!empty($_REQUEST['PID'])){ // existed one
 	    $height = imagesy($im);
 	    $pixel=$width.'*'.$height;
 	    
-	    if($width > $maxwidth){
-	        if($maxwidth && $width > $maxwidth){
-	            $widthratio = $maxwidth/$width;
-	            $RESIZEWIDTH=true;
-	        }
-	        if($maxheight && $height > $maxheight){
-	            $heightratio = $maxheight/$height;
-	            $RESIZEHEIGHT=true;
-	        }
-	        if($RESIZEWIDTH && $RESIZEHEIGHT){
-	            if($widthratio < $heightratio){
-	                $ratio = $widthratio;
-	            }else{
-	                $ratio = $heightratio;
-	            }
-	        }elseif($RESIZEWIDTH){
-	            $ratio = $widthratio;
-	        }elseif($RESIZEHEIGHT){
-	            $ratio = $heightratio;
-	        }
-	        $newwidth = $width * $ratio;
-	        $newheight = $height * $ratio;
-	        if(function_exists("imagecopyresampled")){
+	    if($width > $maxwidth){ // resize
+	        $ratio    = $maxwidth/$width;
+	        $newwidth = $maxwidth;
+	        $newheight = $height * $maxwidth/$width;
+	        
+	        if(function_exists('imagecopyresampled')){
 	              $newim = imagecreatetruecolor($newwidth, $newheight);
-	              imagecopyresampled($newim, $im, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+	              imagecopyresampled($newim,$im,0,0,0,0,$newwidth,$newheight,$width,$height);
 	        }else{
 	              $newim = imagecreate($newwidth, $newheight);
-	              imagecopyresized($newim, $im, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+	              imagecopyresized($newim,$im,0,0,0,0,$newwidth,$newheight,$width,$height);
 	        }
-	        ImageJpeg ($newim,$name . ".jpg");
-	        ImageDestroy ($newim);
+	        imagejpeg($newim,$g_dir.'mini/'.$r_pid.'jpg');
+	        imagedestroy ($newim);
 	    }else{
-	        ImageJpeg ($im,$name . ".jpg");
+	        imagejpeg ($im,$g_dir.'mini/'.$r_pid.'jpg');
 	    }
-
 	}
 	
 	// save image
