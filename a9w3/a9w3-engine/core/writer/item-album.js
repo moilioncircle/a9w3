@@ -25,6 +25,12 @@ function onDeleteAlbum(){
 }
 
 function onSaveAlbum(){
+    if(document.getElementById("BRIEF").value ==""){
+        alert(parent.W3CNF.getI18nString("info.item.empty"));
+        document.getElementById("BRIEF").focus();
+        return;
+    }
+
     var url = parent.W3CNF.getServerURL("album.edit.commit");
     url = parent.W3GUI.wrapUID(url)+"&PID="+albumId;
 
