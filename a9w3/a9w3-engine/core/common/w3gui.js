@@ -273,7 +273,7 @@ W3GUI.getBoardItem = function(id,func){
 
 // notice
 W3GUI.getNoticeLink = function(func){
-    var url = W3CNF.USERHOME+"helpers/notice/00000000000000000.htm";
+    var url = W3CNF.USERHOME+"helpers/notice/00000000000000.htm";
     W3GUI._callbackArray_(W3GUI.KEY.NTC_LNK,url,func);
 }
 W3GUI.getNoticeItem = function(id,func){

@@ -25,28 +25,31 @@ $newFields = array(
     'addrs'=>trim($r_addrs),
     'brief'=>text2line(trim($r_brief))
 );
-
+$isNew = false;
 if(empty($r_pid)){ // new
-    $pid = date('YmdHis');
-    $dst = PATH_ROOT.'a9w3-auhome/'.$r_uid.'/address/'.$pid.'.htm';
+    $isNew = true;
+    $r_pid = date('YmdHis');
+    $dst = PATH_ROOT.'a9w3-auhome/'.$r_uid.'/address/'.$r_pid.'.htm';
     $newFields['mtime'] = date('Y-m-d H:i:s');
     $newFields['ctime'] = $newFields['mtime'];
     
     // add index
     require_once('common-indexer.php');
-    if(!appendIndexToTotal(IDX_ADDRESS,$r_uid,$pid,$r_label)
-    || !appendIndexToMonth(IDX_ADDRESS,$r_uid,$pid,$r_label)
-    || !appendIndexToLabel(IDX_ADDRESS,$r_uid,$pid,$r_label,$newFields['label'])){
+    if(!appendIndexToTotal(IDX_ADDRESS,$r_uid,$r_pid,$r_label)
+    || !appendIndexToMonth(IDX_ADDRESS,$r_uid,$r_pid,$r_label)
+    || !appendIndexToLabel(IDX_ADDRESS,$r_uid,$r_pid,$r_label,$newFields['label'])){
         echo RKEY_UNKOWN;
         exit;
     }
 }else{ // exists
-    $pid = $r_pid;
-    $dst = PATH_ROOT.'a9w3-auhome/'.$r_uid.'/address/'.$pid.'.htm';
-    if(!is_file($dst)){
+    $isNew = false;
+    $dst = PATH_ROOT.'a9w3-auhome/'.$r_uid.'/address/'.$r_pid.'.htm';
+    if(!preg_match('/^[0-9]{14}+$/', $r_pid)
+    || !is_file($dst)){
         echo RKEY_ACCDENY;
         exit;
     }
+    
     // check field changement
     $oldFields = array();
     foreach(file($dst) as $line){
@@ -71,7 +74,7 @@ if(empty($r_pid)){ // new
         $fval = preg_split('/[\s,]+/',$oldFields[$k]);
         foreach($newFields[$k] as $v){ // append
             if(array_search($v,$fval) === false){
-                if(appendIndexToLabel(IDX_ADDRESS,$r_uid,$pid,$v)){
+                if(appendIndexToLabel(IDX_ADDRESS,$r_uid,$r_pid,$v)){
                     $changed = true;
                 }else{
                     echo RKEY_UNKOWN;
@@ -81,7 +84,7 @@ if(empty($r_pid)){ // new
         }
         foreach($fval as $v){ // remove
             if(array_search($v,$newFields[$k]) === false){
-                if(removeIndexFromLabel(IDX_ADDRESS,$r_uid,$pid,$v)){
+                if(removeIndexFromLabel(IDX_ADDRESS,$r_uid,$r_pid,$v)){
                     $changed = true;
                 }else{
                     echo RKEY_UNKOWN;
@@ -92,7 +95,7 @@ if(empty($r_pid)){ // new
     }
     if($changed){
         $newFields['mtime'] = date('Y-m-d H:i:s');
-        $newFields['ctime'] = array_key_exists('ctime',$oldFields)?$oldFields['ctime']:$newFields['mtime'];
+        $newFields['ctime'] = $oldFields['ctime'];
     }else{
         echo RKEY_SUCCESS;
         exit;
@@ -112,8 +115,8 @@ if(!writeFile($dst,trim($txt),'w')){
     echo RKEY_UNKOWN;
     exit;
 }
-if(empty($r_pid)){ //new
-    echo $pid;
+if($isNew){ //new
+    echo $r_pid;
 }else{
     echo RKEY_SUCCESS;
 }

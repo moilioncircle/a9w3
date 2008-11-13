@@ -1,15 +1,18 @@
 var docPath = "";
 var paperId = "";
 var bodyTxt = "";
-var regexpId=/^\d{17}$/;
+var regexpId=/^\d{14}$/;
 
 // event
 function onDataChose(obj){
     if(!checkDatumDeny(obj.value)) return;
-    var box = document.getElementById("__DATA_PREVIEW__");
-    var htm = "&nbsp;";
-    htm = "<img src='file://localhost/"+obj.value+"' alt='"+obj.value+"'/>";
-    box.innerHTML=htm;
+    path = obj.value;
+    if(path==null) return;
+    path = path.replace(/\\/g,'/');
+    if(path.indexOf('/')<0) return;
+    
+    var img = document.getElementById("__DATA_PREVIEW__");
+    img.src="file://localhost/"+path;
 }
 
 function onDataUpload(){
