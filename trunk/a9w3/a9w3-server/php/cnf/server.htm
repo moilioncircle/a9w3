@@ -1,0 +1,54 @@
+#CODE = /a9w3/a9w3-engine/i18n/*.txt
+########### paper ###########
+#PID|CODE (UID,[PID],FILE)
+paper.data.upload=a9w3-server/php/bin/paper.php
+#CODE (UID,PID,FILE)
+paper.data.delete=a9w3-server/php/bin/paper.php
+#PID|CODE (UID,[PID],TITLE,[BRIEF],[LABEL],[XTEXT])
+paper.edit.commit=a9w3-server/php/bin/paper.php
+#CODE (UID,PID)
+paper.edit.delete=a9w3-server/php/bin/paper.php
+#VOID (UID,PID)
+paper.view.tracer=a9w3-server/php/bin/reader-tracer.php?type=paper
+
+########### album ###########
+#PID|CODE (UID,PID|FILE,[LABEL],BRIEF)
+album.edit.commit=a9w3-server/php/bin/album-commit.php
+#CODE (UID,PID)
+album.edit.delete=a9w3-server/php/bin/album-delete.php
+#VOID (UID,PID)
+album.view.tracer=a9w3-server/php/bin/reader-tracer.php?type=album
+
+########### links ###########
+#PID|CODE (UID,[PID],TITLE,ADDRS,BRIEF,[LABEL])
+links.commit=a9w3-server/php/bin/links-commit.php
+#CODE (UID,PID)
+links.delete=a9w3-server/php/bin/links-delete.php
+
+########### board ###########
+#PNG  (UID)
+board.random=a9w3-server/php/bin/imgsn.php
+#CODE (UID,FROM,CODE,TEXT)
+board.commit=a9w3-server/php/bin/board-commit.php
+#CODE (UID,PID)
+board.delete=a9w3-server/php/bin/board-delete.php
+
+########### notice ###########
+#PID|CODE (UID,[PID],FILE)
+notice.data.upload=a9w3-server/php/bin/paper.php
+#CODE (UID,PID,FILE)
+notice.data.delete=a9w3-server/php/bin/paper.php
+#PID|CODE (UID,[PID],TITLE,[BRIEF],[LABEL],[XTEXT])
+notice.edit.commit=a9w3-server/php/bin/paper.php
+#CODE (UID,PID)
+notice.edit.delete=a9w3-server/php/bin/paper.php
+
+########### admin ###########
+#PNG  (UID)
+admin.random=a9w3-server/php/bin/imgsn.php
+#CODE (UID,PASS,CODE)
+admin.login=a9w3-server/php/bin/admin-login.php
+#CODE (UID,PASS,NEWP,CODE)
+admin.cpass=a9w3-server/php/bin/admin-cpass.php
+#CODE (UID)
+admin.logout=a9w3-server/php/bin/admin-logout.php
