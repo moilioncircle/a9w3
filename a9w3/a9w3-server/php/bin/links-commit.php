@@ -121,9 +121,6 @@ if($isNew){ //new
     echo RKEY_SUCCESS;
 }
 
-// set stat
-require_once('common-userstat.php');
-if(!traceUserStat(CHL_ADDRESS,$r_uid)){
-    echo RKEY_UNKOWN;
-}
+// trace stat
+require_once('common-tracer.php');
 ?>
