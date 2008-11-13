@@ -1,7 +1,7 @@
 <?php
 require_once('common.php');
 checkRequestUID();
-checkUmodePermit(UMODE_WRITER);
+//checkUmodePermit(UMODE_WRITER);
 
 // PID|CODE (UID,PID|FILE,[LABEL],BRIEF)
 if(empty($_REQUEST['BRIEF'])
@@ -11,20 +11,28 @@ if(empty($_REQUEST['BRIEF'])
     exit;
 }
 
+// alias
 $r_uid  = $_REQUEST['UID'];
-if(!empty($_REQUEST['PID'])){ // existed one
-	if(!preg_match('/^[0-9]{4}\/[0-9]{13}+$/', $_REQUEST['PID'])
-	|| !is_file(PATH_ROOT.'a9w3-auhome/'.$_REQUEST['UID'].'/gallery/info/'.$_REQUEST['PID'].'.htm')){
-	    echo RKEY_ACCDENY;
-	    exit;
-	}
-	$r_pid  = $_REQUEST['PID'];
-	
-	// save info
+$r_pid  = $_REQUEST['PID'];
+$r_label = $_REQUEST['LABEL'];
+$r_brief = $_REQUEST['BRIEF'];
+$r_file  = $_FILES['FILE'];
 
-}else{
+// 
+$newFields = array(
+    'label'=>preg_split('/[\s,]+/',trim($r_label)),
+    'ctime'=>'',
+    'mtime'=>'',
+    'ftype'=>'',
+    'pixel'=>'',
+    'sizeb'=>'',
+    'brief'=>text2line(trim($r_brief))
+);
+$isNew = false;
+if(empty($r_pid)){ // new one
+    $isNew = true;
 	require_once('common-upload.php');
-    checkUploadFileOnly($_FILES['FILE']['name']);
+    checkUploadFileOnly($r_file['name']);
     $r_pid  = date('Y/mdHis');
     $g_dir  = PATH_ROOT.'a9w3-auhome/'.$r_uid.'/gallery/';
     
@@ -43,26 +51,26 @@ if(!empty($_REQUEST['PID'])){ // existed one
 	}
 
 	// save thumb
-	if($_FILES['FILE']['type'] == 'image/pjpeg'){
-    	$im = imagecreatefromjpeg($_FILES['FILE']['tmp_name']);
-	}elseif($_FILES['FILE']['type'] == 'image/x-png'){
-	    $im = imagecreatefrompng($_FILES['FILE']['tmp_name']);
-	}elseif($_FILES['FILE']['type'] == 'image/gif'){
-	    $im = imagecreatefromgif($_FILES['FILE']['tmp_name']);
+	if($r_file['type'] == 'image/pjpeg'){
+    	$im = imagecreatefromjpeg($r_file['tmp_name']);
+	}elseif($r_file['type'] == 'image/x-png'){
+	    $im = imagecreatefrompng($r_file['tmp_name']);
+	}elseif($r_file['type'] == 'image/gif'){
+	    $im = imagecreatefromgif($r_file['tmp_name']);
 	}
 	
 	if(empty($im)){
-		if (!copy(PATH_ROOT.'a9w3-engine/data/image/default-album-mini.jpg', $g_dir.'mini/'.$r_pid.'jpg')) {
+		if (!copy(PATH_ROOT.'a9w3-engine/data/image/default-album-mini.jpg', $g_dir.'mini/'.$r_pid.'.jpg')) {
 		    echo RKEY_ACCDENY;
 	    	exit;
 		}
-		$pixel='unknown';
+		$newFields['pixel']='unknown';
 	}else{
-		$maxwidth = 120;
 	    $width  = imagesx($im);
 	    $height = imagesy($im);
-	    $pixel=$width.'*'.$height;
-	    
+        $newFields['pixel']=$width.'*'.$height;
+        
+	    $maxwidth = 120;
 	    if($width > $maxwidth){ // resize
 	        $ratio    = $maxwidth/$width;
 	        $newwidth = $maxwidth;
@@ -75,23 +83,113 @@ if(!empty($_REQUEST['PID'])){ // existed one
 	              $newim = imagecreate($newwidth, $newheight);
 	              imagecopyresized($newim,$im,0,0,0,0,$newwidth,$newheight,$width,$height);
 	        }
-	        imagejpeg($newim,$g_dir.'mini/'.$r_pid.'jpg');
+	        imagejpeg($newim,$g_dir.'mini/'.$r_pid.'.jpg');
 	        imagedestroy ($newim);
 	    }else{
-	        imagejpeg ($im,$g_dir.'mini/'.$r_pid.'jpg');
+	        imagejpeg ($im,$g_dir.'mini/'.$r_pid.'.jpg');
 	    }
 	}
 	
 	// save image
-	$ftype = getExtendFileName($_FILES['FILE']['name']);
-	$sizeb = formatSize($_FILES['FILE']['size']);
-	if ($_FILES['FILE']['error'] !== UPLOAD_ERR_OK
-	||	move_uploaded_file($_FILES['FILE']['tmp_name'], $g_dir.'data/'.$r_pid.'.'.$ftype) === false){
+	$newFields['ftype'] = getExtendFileName($r_file['name']);
+	$newFields['sizeb'] = formatSize($r_file['size']);
+    $newFields['mtime'] = date('Y-m-d H:i:s');
+    $newFields['ctime'] = $newFields['mtime'];
+    
+	if ($r_file['error'] !== UPLOAD_ERR_OK
+	||	move_uploaded_file($r_file['tmp_name'], $g_dir.'data/'.$r_pid.'.'.$newFields['ftype']) === false){
    	    echo RKEY_ACCDENY;
 	    exit;
 	}
-
-	// save info
+    
+    // add index
+    require_once('common-indexer.php');
+    if(!appendIndexToTotal(IDX_GALLERY,$r_uid,$r_pid,$r_label)
+    || !appendIndexToMonth(IDX_GALLERY,$r_uid,$r_pid,$r_label)
+    || !appendIndexToLabel(IDX_GALLERY,$r_uid,$r_pid,$r_label,$newFields['label'])){
+        echo RKEY_UNKOWN;
+        exit;
+    }
+}else{
+    $isNew = false;
+    $dst = PATH_ROOT.'a9w3-auhome/'.$r_uid.'/gallery/info/'.$r_pid.'.htm';
+    if(!preg_match('/^[0-9]{4}\/[0-9]{10}+$/', $r_pid)
+    || !is_file($dst)){
+        echo RKEY_ACCDENY;
+        exit;
+    }
+    // check field changement
+    $oldFields = array();
+    foreach(file($dst) as $line){
+        $pos = strpos($line,'=');
+        if($pos !==false){
+            $oldFields[substr($line,0,$pos)] = trim(substr($line,$pos+1));
+        }
+    }
+    $changed = false;
+    $chkval = array('brief');
+    foreach($chkval as $k){
+        if(!array_key_exists($k,$oldFields)
+        || $oldFields[$k] !== $newFields[$k]){
+            $changed = true;
+        }
+    }
+    $k = 'label';
+    if(!array_key_exists($k,$oldFields)){
+        $changed = true;
+    }else{
+        require_once('common-indexer.php');
+        $fval = preg_split('/[\s,]+/',$oldFields[$k]);
+        foreach($newFields[$k] as $v){ // append
+            if(array_search($v,$fval) === false){
+                if(appendIndexToLabel(IDX_ADDRESS,$r_uid,$r_pid,$v)){
+                    $changed = true;
+                }else{
+                    echo RKEY_UNKOWN;
+                    exit;
+                }
+            }
+        }
+        foreach($fval as $v){ // remove
+            if(array_search($v,$newFields[$k]) === false){
+                if(removeIndexFromLabel(IDX_ADDRESS,$r_uid,$r_pid,$v)){
+                    $changed = true;
+                }else{
+                    echo RKEY_UNKOWN;
+                    exit;
+                }
+            }
+        }
+    }
+    if($changed){
+        $newFields['pixel'] = $oldFields['pixel'];
+        $newFields['ftype'] = $oldFields['ftype'];
+        $newFields['sizeb'] = $oldFields['sizeb'];
+        $newFields['ctime'] = $oldFields['ctime'];
+        $newFields['mtime'] = date('Y-m-d H:i:s');
+    }else{
+        echo RKEY_SUCCESS;
+        exit;
+    }
 }
 
+$txt  = '
+label='.implode(' ',$newFields['label']).'
+ctime='.$newFields['ctime'].'
+mtime='.$newFields['mtime'].'
+ftype='.$newFields['ftype'].'
+pixel='.$newFields['pixel'].'
+sizeb='.$newFields['sizeb'].'
+brief='.$newFields['brief'];
+
+$dst = PATH_ROOT.'a9w3-auhome/'.$r_uid.'/gallery/info/'.$r_pid.'.htm';
+if(!writeFile($dst,trim($txt),'w')){
+    echo RKEY_UNKOWN;
+    exit;
+}
+if($isNew){ //new
+    echo $r_pid;
+}else{
+    echo RKEY_SUCCESS;
+}
 ?>

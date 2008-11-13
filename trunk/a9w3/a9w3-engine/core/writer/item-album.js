@@ -1,11 +1,19 @@
 var docPath = "";
 var albumId = "";
-var regexpId=/^\d{4}\/\d{13}$/;
+var regexpId=/^\d{4}\/\d{10}$/;
 
 function onDataChose(obj){
     if(!checkImageOnly(obj.value)) return;
-    var img = document.getElementById("__PICTURE__");
-    img.src="file://localhost/"+obj.value;
+    tryPreview(obj.value,true);
+}
+
+function tryPreview(path,islocal){
+    if(path==null) return;
+    path = path.replace(/\\/g,'/');
+    if(path.indexOf('/')<0) return;
+	
+	var img = document.getElementById("__PICTURE__");
+    img.src=islocal?"file://localhost/"+path:path;
 }
 
 function onAddLabel(){
@@ -84,7 +92,7 @@ function init(){
         document.getElementById("__BTN_DELETE__").disabled=false;
         document.getElementById("FILE").disabled=true;
         parent.W3GUI.getGalleryItem(albumId,function(ai){
-            document.getElementById("__PICTURE__").src=parent.W3CNF.USERHOME+"gallery/data/"+ai.id+"."+ai.ftype;
+            tryPreview(parent.W3CNF.USERHOME+"gallery/data/"+ai.id+"."+ai.ftype,false);
             document.getElementById("LABEL").value=ai.lable.join(" ");
             document.getElementById("BRIEF").value=parent.W3TXT.line2text(ai.brief);
         });
