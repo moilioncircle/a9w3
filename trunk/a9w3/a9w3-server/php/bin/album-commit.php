@@ -1,7 +1,7 @@
 <?php
 require_once('common.php');
 checkRequestUID();
-//checkUmodePermit(UMODE_WRITER);
+checkUmodePermit(UMODE_WRITER);
 
 // PID|CODE (UID,PID|FILE,[LABEL],BRIEF)
 if(empty($_REQUEST['BRIEF'])

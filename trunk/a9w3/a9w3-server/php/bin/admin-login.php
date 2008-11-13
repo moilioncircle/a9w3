@@ -53,9 +53,6 @@ foreach(file(PATH_ROOT.'a9w3-engine/conf/group.htm') as $line){
         }
     }
 }
-// set stat
-require_once('common-userstat.php');
-if(!traceUserStat(CHL_ADMIN,$r_uid)){
-    echo RKEY_UNKOWN;
-}
+// trace stat
+require_once('common-tracer.php');
 ?>
