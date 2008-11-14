@@ -54,5 +54,5 @@ foreach(file(PATH_ROOT.'a9w3-engine/conf/group.htm') as $line){
     }
 }
 // trace stat
-require_once('common-tracer.php');
+require_once('writer-tracer.php');
 ?>

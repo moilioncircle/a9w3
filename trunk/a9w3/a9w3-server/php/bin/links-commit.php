@@ -122,5 +122,5 @@ if($isNew){ //new
 }
 
 // trace stat
-require_once('common-tracer.php');
+require_once('writer-tracer.php');
 ?>
