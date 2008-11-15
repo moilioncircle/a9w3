@@ -65,7 +65,10 @@ function onDataResponse(){
         if(checkReplyCode(rtv)){
             return;
         }else{
-            alert(rtv);
+        	if(rtv == "info.success"){
+		        initData();
+		    }
+            alert(parent.W3CNF.getI18nString(rtv));
         }
     }
 }
@@ -86,7 +89,7 @@ function onDelData(){
     
     var rtv = parent.A9Loader.syncLoadText(url);
     if(rtv == "info.success"){
-        alert("ok");
+        initData();
     }
     alert(parent.W3CNF.getI18nString(rtv));
 }
@@ -156,15 +159,14 @@ function onPaperResponse(){
     }
     
     if(rtv != ""){
-        alert(rtv);
+    	__PAPER_POSTER__.location="about:blank";// avoid recommit when refresh
         
         if(regexpId.test(rtv)){ // new paper,return id
+            alert(parent.W3CNF.getI18nString("info.success"));
             window.location=self.location.href+"?"+rtv;
         }else{ // message
-            
+            alert(parent.W3CNF.getI18nString(rtv));
         }
-        
-        __PAPER_POSTER__.location="about:blank";// avoid recommit when refresh
     }
 }
 
@@ -197,6 +199,24 @@ function ideReady(){
 
 // init
 function initHead(){
+    //label
+    var lblMap = parent.W3GUI.ARTICLE_LABEL.getKeyValClone();
+    var lblObj = document.getElementById("__LBLNME__");
+    var len = lblObj.length;
+    for(var i=1;i<len;i++){
+        lblObj.remove(1);
+    }
+    for(var k in lblMap){
+        var opt=document.createElement("OPTION");
+        opt.text=lblMap[k];
+        opt.value=lblMap[k];
+        try{
+            lblObj.add(opt,null);
+        }catch(e){
+            lblObj.add(opt);
+        }
+    }
+        
     parent.W3GUI.getArticleItem(paperId,function(ai){
         document.getElementById("__TITLE__").value = ai.title;
         document.getElementById("__LABEL__").value = ai.lable.join(" ");
@@ -234,20 +254,7 @@ function init(){
     if(pos>0 && regexpId.test(url.substr(pos+1))){
         paperId = url.substr(pos+1);
         docPath = parent.W3CNF.USERHOME+"article/"+paperId+"/";
-        
-        //label
-        var lblMap = parent.W3GUI.ARTICLE_LABEL.getKeyValClone();
-        var lblObj = document.getElementById("__LBLNME__");
-        for(var k in lblMap){
-            var opt=document.createElement("OPTION");
-            opt.text=lblMap[k];
-            opt.value=lblMap[k];
-            try{
-                lblObj.add(opt,null);
-            }catch(e){
-                lblObj.add(opt);
-            }
-        }
+
         // head
         initHead();
         // data

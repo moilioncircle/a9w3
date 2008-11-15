@@ -69,7 +69,7 @@ function onDataResponse(){
 	            rtv="info.success";
 	            updateUI();
 	        }
-	        alert(rtv);
+	        alert(parent.W3CNF.getI18nString(rtv));
         }
     }
 }
@@ -78,6 +78,10 @@ function updateUI(){
     //label
     var lblMap = parent.W3GUI.GALLERY_LABEL.getKeyValClone();
     var lblObj = document.getElementById("__LBLNME__");
+    var len = lblObj.length;
+    for(var i=1;i<len;i++){
+        lblObj.remove(1);
+    }
     for(var k in lblMap){
         var opt=document.createElement("OPTION");
         opt.text=lblMap[k];
