@@ -16,7 +16,6 @@ $r_uid  = $_REQUEST['UID'];
 $r_pid  = $_REQUEST['PID'];
 $r_label = $_REQUEST['LABEL'];
 $r_brief = $_REQUEST['BRIEF'];
-$r_file  = $_FILES['FILE'];
 
 // 
 $newFields = array(
@@ -31,6 +30,7 @@ $newFields = array(
 $isNew = false;
 if(empty($r_pid)){ // new one
     $isNew = true;
+    $r_file  = $_FILES['FILE'];
 	require_once('common-upload.php');
     checkUploadFileOnly($r_file['name']);
     $r_pid  = date('Y/mdHis');
@@ -104,16 +104,16 @@ if(empty($r_pid)){ // new one
     
     // add index
     require_once('common-indexer.php');
-    if(!appendIndexToTotal(IDX_GALLERY,$r_uid,$r_pid,$r_label)
-    || !appendIndexToMonth(IDX_GALLERY,$r_uid,$r_pid,$r_label)
-    || !appendIndexToLabel(IDX_GALLERY,$r_uid,$r_pid,$r_label,$newFields['label'])){
+    if(!appendIndexToTotal(IDX_GALLERY,$r_uid,$r_pid)
+    || !appendIndexToMonth(IDX_GALLERY,$r_uid,$r_pid)
+    || !appendIndexToLabel(IDX_GALLERY,$r_uid,$r_pid,$newFields['label'])){
         echo RKEY_UNKOWN;
         exit;
     }
 }else{
     $isNew = false;
     $dst = PATH_ROOT.'a9w3-auhome/'.$r_uid.'/gallery/info/'.$r_pid.'.htm';
-    if(!preg_match('/^[0-9]{4}\/[0-9]{10}+$/', $r_pid)
+    if(!preg_match('/^[0-9]{4}\/[0-9]{10}$/', $r_pid)
     || !is_file($dst)){
         echo RKEY_ACCDENY;
         exit;

@@ -5,7 +5,8 @@ checkUmodePermit(UMODE_WRITER);
 
 // check by js at client #CODE (UID,PID)
 if(empty($_REQUEST['PID'])
-||!preg_match('/^[0-9]{4}\/[0-9]{13}+$/', $_REQUEST['PID'])){
+||!preg_match('/^[0-9]{4}\/[0-9]{10}$/', $_REQUEST['PID'])){
+    echo 1;
     echo RKEY_ACCDENY;
     exit;
 }
