@@ -26,7 +26,7 @@ function appendIndexToMonth($tp,$uid,$pid,$mth=''){
     
     // month
     if(empty($mth)){
-        $mth = date('Y').'$'.intval((date('m')-1)/4+1); //2008$3
+        $mth = date('Y').'$'.ceil(date('m')/3); //2008$3
     }
     $itemdir = $idir.'/month/'.$mth; //month/2008$3/
     if(!is_dir($itemdir)
@@ -126,7 +126,7 @@ function removeIndexFromLabel($tp,$uid,$pid,$lbl=''){
     $idir = PATH_ROOT.'a9w3-auhome/'.$uid.'/indexer/'.$tp; //address
     //label
     if(empty($lbl)){
-        $lbls = file($idir.'/month/item.htm');
+        $lbls = file($idir.'/label/item.htm');
     }else{
         $lbls = array($lbl);
     }

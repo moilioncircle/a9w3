@@ -59,9 +59,35 @@ function onDataResponse(){
         if(regexpId.test(rtv)){
             linksId = rtv;
             rtv="info.success";
+            updateUI();
         }
         alert(rtv);
     }
+}
+
+function updateUI(){
+    //label
+    var lblMap = parent.W3GUI.ADDRESS_LABEL.getKeyValClone();
+    var lblObj = document.getElementById("__LBLNME__");
+    for(var k in lblMap){
+        var opt=document.createElement("OPTION");
+        opt.text=lblMap[k];
+        opt.value=lblMap[k];
+        try{
+            lblObj.add(opt,null);
+        }catch(e){
+            lblObj.add(opt);
+        }
+    }
+    document.getElementById("__BTN_DELETE__").disabled=false;
+    
+    if(linksId == null || !regexpId.test(linksId)) return;
+    parent.W3GUI.getAddressItem(linksId,function(ai){
+        document.getElementById("TITLE").value=ai.title;
+        document.getElementById("ADDRS").value=ai.addrs;
+        document.getElementById("LABEL").value=ai.lable.join(" ");
+        document.getElementById("BRIEF").value=parent.W3TXT.line2text(ai.brief);
+    });
 }
 
 function init(){
@@ -69,28 +95,7 @@ function init(){
     var pos = url.indexOf("?");
     if(pos>0 && regexpId.test(url.substr(pos+1))){
         linksId = url.substr(pos+1);
-        
-        //label
-        var lblMap = parent.W3GUI.ADDRESS_LABEL.getKeyValClone();
-        var lblObj = document.getElementById("__LBLNME__");
-        for(var k in lblMap){
-            var opt=document.createElement("OPTION");
-            opt.text=lblMap[k];
-            opt.value=lblMap[k];
-            try{
-                lblObj.add(opt,null);
-            }catch(e){
-                lblObj.add(opt);
-            }
-        }
-        
-        document.getElementById("__BTN_DELETE__").disabled=false;
-        parent.W3GUI.getAddressItem(linksId,function(ai){
-            document.getElementById("TITLE").value=ai.title;
-            document.getElementById("ADDRS").value=ai.addrs;
-            document.getElementById("LABEL").value=ai.lable.join(" ");
-            document.getElementById("BRIEF").value=parent.W3TXT.line2text(ai.brief);
-        });
+        updateUI();
     }
 }
 //

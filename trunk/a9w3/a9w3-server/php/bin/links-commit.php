@@ -35,16 +35,16 @@ if(empty($r_pid)){ // new
     
     // add index
     require_once('common-indexer.php');
-    if(!appendIndexToTotal(IDX_ADDRESS,$r_uid,$r_pid,$r_label)
-    || !appendIndexToMonth(IDX_ADDRESS,$r_uid,$r_pid,$r_label)
-    || !appendIndexToLabel(IDX_ADDRESS,$r_uid,$r_pid,$r_label,$newFields['label'])){
+    if(!appendIndexToTotal(IDX_ADDRESS,$r_uid,$r_pid)
+    || !appendIndexToMonth(IDX_ADDRESS,$r_uid,$r_pid)
+    || !appendIndexToLabel(IDX_ADDRESS,$r_uid,$r_pid,$newFields['label'])){
         echo RKEY_UNKOWN;
         exit;
     }
 }else{ // exists
     $isNew = false;
     $dst = PATH_ROOT.'a9w3-auhome/'.$r_uid.'/address/'.$r_pid.'.htm';
-    if(!preg_match('/^[0-9]{14}+$/', $r_pid)
+    if(!preg_match('/^[0-9]{14}$/', $r_pid)
     || !is_file($dst)){
         echo RKEY_ACCDENY;
         exit;
