@@ -119,13 +119,8 @@ if(empty($r_pid)){ // new one
         exit;
     }
     // check field changement
-    $oldFields = array();
-    foreach(file($dst) as $line){
-        $pos = strpos($line,'=');
-        if($pos !==false){
-            $oldFields[substr($line,0,$pos)] = trim(substr($line,$pos+1));
-        }
-    }
+    $oldFields = readKeyValues($dst);
+
     $changed = false;
     $chkval = array('brief');
     foreach($chkval as $k){

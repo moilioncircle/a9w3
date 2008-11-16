@@ -6,15 +6,7 @@ checkUmodePermit(UMODE_WRITER);
 
 function autoTrace(){
 	
-	$keyurlmap = array();
-	foreach(file(PATH_ROOT.'a9w3-server/server.htm') as $line){
-		if(strpos($line, '#') === 0) continue;
-		$line = trim($line);
-		$pos  = strpos($line,'=');
-        if($pos !==false){
-            $keyurlmap[substr($line,0,$pos)] = basename(trim(substr($line,$pos+1)));
-        }
-	}
+	$keyurlmap = readKeyValues(PATH_ROOT.'a9w3-server/server.htm');
 
 	$phpself = $_SERVER['PHP_SELF'];
 	foreach($keyurlmap as $key => $val){

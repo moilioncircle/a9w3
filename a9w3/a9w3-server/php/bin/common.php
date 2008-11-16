@@ -103,5 +103,20 @@ function formatSize($size){
     if($powx > count($sizename)) $powx = 0;
     $sstr = $size<100?$size.'.'.sprintf("%-02s",$dotx):$size;
     return substr($sstr,0,4).$sizename[$powx]; 
-} 
+}
+
+function readKeyValues($fn){
+    $rs = array();
+    if(is_file($fn)){
+        foreach(file($fn) as $line){
+            $line = trim($line);
+            if(strpos($line,'#') === 0) continue;
+            $pos = strpos($line,'=');
+            if($pos > 0){
+                $rs[trim(substr($line,0,$pos))] = trim(substr($line,$pos+1));
+            }
+        }
+    }
+    return $rs;
+}
 ?>
