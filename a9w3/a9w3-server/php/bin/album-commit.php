@@ -137,7 +137,7 @@ if(empty($r_pid)){ // new one
         $fval = preg_split('/[\s,]+/',$oldFields[$k]);
         foreach($newFields[$k] as $v){ // append
             if(array_search($v,$fval) === false){
-                if(appendIndexToLabel(IDX_ADDRESS,$r_uid,$r_pid,$v)){
+                if(appendIndexToLabel(IDX_GALLERY,$r_uid,$r_pid,$v)){
                     $changed = true;
                 }else{
                     echo RKEY_UNKOWN;
@@ -147,7 +147,7 @@ if(empty($r_pid)){ // new one
         }
         foreach($fval as $v){ // remove
             if(array_search($v,$newFields[$k]) === false){
-                if(removeIndexFromLabel(IDX_ADDRESS,$r_uid,$r_pid,$v)){
+                if(removeIndexFromLabel(IDX_GALLERY,$r_uid,$r_pid,$v)){
                     $changed = true;
                 }else{
                     echo RKEY_UNKOWN;

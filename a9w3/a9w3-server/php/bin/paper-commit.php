@@ -31,10 +31,19 @@ $isNew = false;
 if(empty($r_pid)){ // new
     $isNew = true;
     $r_pid = date('Y/mdHis');
-    $head = PATH_ROOT.'a9w3-auhome/'.$r_uid.'/address/'.$r_pid.'/head.htm';
+    $head = PATH_ROOT.'a9w3-auhome/'.$r_uid.'/article/'.$r_pid.'/head.htm';
     $doby = PATH_ROOT.'a9w3-auhome/'.$r_uid.'/article/'.$r_pid.'/body.htm';
     
-    if(!is_file($doby)){
+    if(is_file($doby)){
+        echo RKEY_ACCDENY;
+        exit;
+    }
+    
+    $yyyy = PATH_ROOT.'a9w3-auhome/'.$r_uid.'/article/'.date('/Y');
+    $mdhx = $yyyy.date('/mdHis');
+    
+    if((!is_dir($yyyy) && !mkdir($yyyy))
+    ||(!is_dir($mdhx) && !mkdir($mdhx))){
         echo RKEY_ACCDENY;
         exit;
     }
@@ -44,16 +53,16 @@ if(empty($r_pid)){ // new
     
     // add index
     require_once('common-indexer.php');
-    if(!appendIndexToTotal(IDX_ADDRESS,$r_uid,$r_pid)
-    || !appendIndexToMonth(IDX_ADDRESS,$r_uid,$r_pid)
-    || !appendIndexToLabel(IDX_ADDRESS,$r_uid,$r_pid,$newFields['label'])){
+    if(!appendIndexToTotal(IDX_ARTICLE,$r_uid,$r_pid)
+    || !appendIndexToMonth(IDX_ARTICLE,$r_uid,$r_pid)
+    || !appendIndexToLabel(IDX_ARTICLE,$r_uid,$r_pid,$newFields['label'])){
         echo RKEY_UNKOWN;
         exit;
     }
 }else{ // exists
     $isNew = false;
-    $head = PATH_ROOT.'a9w3-auhome/'.$r_uid.'/address/'.$r_pid.'/head.htm';
-    $doby = PATH_ROOT.'a9w3-auhome/'.$r_uid.'/address/'.$r_pid.'/body.htm';
+    $head = PATH_ROOT.'a9w3-auhome/'.$r_uid.'/article/'.$r_pid.'/head.htm';
+    $doby = PATH_ROOT.'a9w3-auhome/'.$r_uid.'/article/'.$r_pid.'/body.htm';
     if(!preg_match('/^[0-9]{4}\/[0-9]{10}$/', $r_pid)
     || !is_file($head)){
         echo RKEY_ACCDENY;
@@ -69,7 +78,7 @@ if(empty($r_pid)){ // new
         $fval = preg_split('/[\s,]+/',$oldFields[$k]);
         foreach($newFields[$k] as $v){ // append
             if(array_search($v,$fval) === false){
-                if(!appendIndexToLabel(IDX_ADDRESS,$r_uid,$r_pid,$v)){
+                if(!appendIndexToLabel(IDX_ARTICLE,$r_uid,$r_pid,$v)){
                     echo RKEY_UNKOWN;
                     exit;
                 }
@@ -77,7 +86,7 @@ if(empty($r_pid)){ // new
         }
         foreach($fval as $v){ // remove
             if(array_search($v,$newFields[$k]) === false){
-                if(!removeIndexFromLabel(IDX_ADDRESS,$r_uid,$r_pid,$v)){
+                if(!removeIndexFromLabel(IDX_ARTICLE,$r_uid,$r_pid,$v)){
                     echo RKEY_UNKOWN;
                     exit;
                 }

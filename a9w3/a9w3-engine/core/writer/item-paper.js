@@ -216,14 +216,14 @@ function initHead(){
             lblObj.add(opt);
         }
     }
-        
+}
+function initData(){
+	if(paperId == null || paperId == "") return;
     parent.W3GUI.getArticleItem(paperId,function(ai){
         document.getElementById("__TITLE__").value = ai.title;
         document.getElementById("__LABEL__").value = ai.lable.join(" ");
         document.getElementById("__BRIEF__").value = ai.brief;
     });
-}
-function initData(){
     parent.W3GUI.getArticleData(paperId,function(ls){
         var datObj = document.getElementById("__DATAS__");
         var len = datObj.length;
@@ -255,9 +255,7 @@ function init(){
         paperId = url.substr(pos+1);
         docPath = parent.W3CNF.USERHOME+"article/"+paperId+"/";
 
-        // head
         initHead();
-        // data
         initData();
         // body
         parent.W3GUI.asyncLoadText(function(t){
@@ -266,6 +264,9 @@ function init(){
         },docPath+"body.htm");
         
         document.getElementById("__BTN_DELETE__").disabled=false;
+    }else{
+    	initHead();
+    	initEditor("");
     }
 }
 //
