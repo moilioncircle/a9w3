@@ -3,7 +3,7 @@ require_once('common.php');
 checkRequestUID();
 checkUmodePermit(UMODE_WRITER);
 
-// PID|CODE (UID,PID|FILE,[LABEL],BRIEF)
+// PID|CODE (UID,PID|FILE*,[LABEL],BRIEF)
 if(empty($_REQUEST['BRIEF'])
 ||(empty($_REQUEST['PID']) && empty($_FILES['FILE']))
 ||(!empty($_REQUEST['PID']) && !empty($_FILES['FILE']))){

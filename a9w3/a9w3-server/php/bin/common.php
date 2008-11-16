@@ -19,6 +19,7 @@ define('RKEY_WRIMGSN','warn.imgsn.wrong');
 define('RKEY_ACCDENY','warn.deny');
 define('RKEY_SETPASS','warn.pass.change');
 define('RKEY_SMPPASS','info.pass.simple');
+define('RKEY_SYSDENY','warn.sysfile.deny');
 
 define('PERMIT_MODE',false);
 
