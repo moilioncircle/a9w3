@@ -84,6 +84,23 @@ function deleteFile($filename){
     if (!is_file($filename)) return false;
     return unlink($filename);
 }
+function deleteTree($filepath){
+    if (is_dir($filepath) && !is_link($filepath)){
+        if ($dh = opendir($filepath)){
+            while (($sf = readdir($dh)) !== false){
+                if ($sf == '.' || $sf == '..'){
+                    continue;
+                }
+                if (!deleteTree($filepath.'/'.$sf)){
+                    return false;
+                }
+            }
+            closedir($dh);
+        }
+        return rmdir($filepath);
+    }
+    return unlink($filepath);
+}
 
 function text2line($text){
     if(empty($text)) return '';
