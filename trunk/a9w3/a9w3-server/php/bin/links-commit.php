@@ -30,6 +30,12 @@ if(empty($r_pid)){ // new
     $isNew = true;
     $r_pid = date('YmdHis');
     $dst = PATH_ROOT.'a9w3-auhome/'.$r_uid.'/address/'.$r_pid.'.htm';
+    
+    if(!is_file($dst)){
+    	echo RKEY_ACCDENY;
+        exit;
+    }
+    
     $newFields['mtime'] = date('Y-m-d H:i:s');
     $newFields['ctime'] = $newFields['mtime'];
     
@@ -51,13 +57,7 @@ if(empty($r_pid)){ // new
     }
     
     // check field changement
-    $oldFields = array();
-    foreach(file($dst) as $line){
-        $pos = strpos($line,'=');
-        if($pos !==false){
-            $oldFields[substr($line,0,$pos)] = trim(substr($line,$pos+1));
-        }
-    }
+    $oldFields = readKeyValues($dst);
     $changed = false;
     $chkval = array('title','addrs','brief');
     foreach($chkval as $k){
