@@ -310,6 +310,41 @@ W3GUI.editNotice = function(id){
     W3GUI.ITEMWINOBJW.location=W3CNF.A9W3HOME+"a9w3-engine/view/writer/item-notice.htm?"+id;
 }
 
+// commit
+W3GUI.commitArticle = function(){
+	commitCommon("list-paper.htm","Article.");
+}
+W3GUI.commitAddress = function(){
+	commitCommon("list-links.htm","Address.");
+}
+W3GUI.commitPicture = function(){
+	commitCommon("list-album.htm","Gallery.");
+}
+W3GUI.commitNotice = function(){
+	commitCommon("list-notice.htm","Notice.");
+}
+W3GUI.commitCommon = function(url,key){
+	if(url != null){
+		if((W3GUI.LISTWINOBJW.location+"").indexOf(url)>0){
+            W3GUI.LISTWINOBJW.update();
+	    }
+	}
+    if(key != null){
+	    for(var pk in W3GUI.POOL){
+	        if(W3GUI.POOL[pk] instanceof Array){
+	            if(key != null && pk.indexOf(key) != 0) continue;
+	            var arr = [];
+	            for(var i=0;i<W3GUI.POOL[pk].length;i++){
+	                if(W3GUI.POOL[pk][i] != pid){
+	                    arr.push(W3GUI.POOL[pk][i]);
+	                }
+	            }
+	            W3GUI.POOL[pk] = arr;
+	        }
+	    }
+    }
+}
+// delete
 W3GUI.deleteArticle = function(id){
     if(!W3GUI.deleteCommon("paper.edit.delete",id,"Article.")) return;
     W3GUI.LISTWINOBJW.update();
@@ -329,7 +364,6 @@ W3GUI.deleteBoard = function(id){
         W3GUI.LISTWINOBJW.update();
     }
 }
-
 W3GUI.deleteNotice = function(id){
     if(!W3GUI.deleteCommon("notice.edit.delete",id,"Notice.")) return;
     W3GUI.LISTWINOBJW.update();
@@ -349,19 +383,21 @@ W3GUI.deleteCommon = function(code,pid,key){
     
     var rtv = A9Loader.syncLoadText(url);
     if(rtv == "info.success"){
-        for(var pk in W3GUI.POOL){
-            if(W3GUI.POOL[pk] instanceof Array){
-                
-                if(key != null && pk.indexOf(key) != 0) continue;
-                
-                var arr = [];
-                for(var i=0;i<W3GUI.POOL[pk].length;i++){
-                    if(W3GUI.POOL[pk][i] != pid){
-                        arr.push(W3GUI.POOL[pk][i]);
-                    }
-                }
-                W3GUI.POOL[pk] = arr;
-            }
+    	if(key != null){
+	        for(var pk in W3GUI.POOL){
+	            if(W3GUI.POOL[pk] instanceof Array){
+	                
+	                if(key != null && pk.indexOf(key) != 0) continue;
+	                
+	                var arr = [];
+	                for(var i=0;i<W3GUI.POOL[pk].length;i++){
+	                    if(W3GUI.POOL[pk][i] != pid){
+	                        arr.push(W3GUI.POOL[pk][i]);
+	                    }
+	                }
+	                W3GUI.POOL[pk] = arr;
+	            }
+	        }
         }
         return true;
     }else{

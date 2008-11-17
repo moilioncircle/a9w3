@@ -30,7 +30,9 @@ $newFields = array(
 $isNew = false;
 if(empty($r_pid)){ // new
     $isNew = true;
-    $r_pid = date('Y/mdHis');
+    $y4 = date('Y');
+    $m8 = date('/mdHis');
+    $r_pid = $y4.$m8;
     $head = PATH_ROOT.'a9w3-auhome/'.$r_uid.'/article/'.$r_pid.'/head.htm';
     $doby = PATH_ROOT.'a9w3-auhome/'.$r_uid.'/article/'.$r_pid.'/body.htm';
     
@@ -39,8 +41,8 @@ if(empty($r_pid)){ // new
         exit;
     }
     
-    $yyyy = PATH_ROOT.'a9w3-auhome/'.$r_uid.'/article/'.date('/Y');
-    $mdhx = $yyyy.date('/mdHis');
+    $yyyy = PATH_ROOT.'a9w3-auhome/'.$r_uid.'/article/'.$y4;
+    $mdhx = $yyyy.$m8;
     
     if((!is_dir($yyyy) && !mkdir($yyyy))
     ||(!is_dir($mdhx) && !mkdir($mdhx))){

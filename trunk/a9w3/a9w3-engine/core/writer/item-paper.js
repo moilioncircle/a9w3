@@ -143,7 +143,7 @@ function onDeletePaper(){
         alert(parent.W3CNF.getI18nString("info.commit.newone"));
         return;
     }
-    parent.W3GUI.deleteNotice(paperId);
+    parent.W3GUI.deleteArticle(paperId);
 }
 
 function onPaperResponse(){
@@ -162,11 +162,16 @@ function onPaperResponse(){
     	__PAPER_POSTER__.location="about:blank";// avoid recommit when refresh
         
         if(regexpId.test(rtv)){ // new paper,return id
-            alert(parent.W3CNF.getI18nString("info.success"));
-            window.location=self.location.href+"?"+rtv;
-        }else{ // message
-            alert(parent.W3CNF.getI18nString(rtv));
+            paperId = rtv;
+            initHead();
+            initData();
+            rtv = "info.success";
         }
+        
+        if(rtv == "info.success"){
+        	parent.W3GUI.commitArticle();
+        }
+        alert(parent.W3CNF.getI18nString(rtv));
     }
 }
 
@@ -190,7 +195,7 @@ function initEditor(isA9){
         document.getElementById("__BTN_A9TEXT__").disabled = false;
     }
 }
-// ide notice
+// ide paper
 function ideReady(){
     try{
         __EDIOR__.setText(bodyTxt);
@@ -219,6 +224,7 @@ function initHead(){
 }
 function initData(){
 	if(paperId == null || paperId == "") return;
+	docPath = parent.W3CNF.USERHOME+"article/"+paperId+"/";
     parent.W3GUI.getArticleItem(paperId,function(ai){
         document.getElementById("__TITLE__").value = ai.title;
         document.getElementById("__LABEL__").value = ai.lable.join(" ");
@@ -253,8 +259,6 @@ function init(){
     var pos = url.indexOf("?");
     if(pos>0 && regexpId.test(url.substr(pos+1))){
         paperId = url.substr(pos+1);
-        docPath = parent.W3CNF.USERHOME+"article/"+paperId+"/";
-
         initHead();
         initData();
         // body
