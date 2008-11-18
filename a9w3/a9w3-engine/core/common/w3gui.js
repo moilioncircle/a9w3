@@ -58,8 +58,10 @@ W3GUI.drawMenu = function(){
         
         if(infoType == "function"){
             infoText = eval(infoText);
-        }else if ((infoType == "config")){
+        }else if (infoType == "config.menu"){
             infoText = W3GUI.MENU.getValue(infoText);
+        }else if (infoType == "config.stat"){
+            infoText = W3GUI.STAT.getValue(infoText);
         }
         
         var linkText = W3CNF.CONF.getValue("menu.item-"+i+".link.text");
@@ -67,6 +69,8 @@ W3GUI.drawMenu = function(){
         
         if(linkType == "string"){
            linkText = W3GUI.LISTWINNAME+".location=unescape('"+escape(linkText)+"');";
+        }else{
+        	// js
         }
 
         var icon  = W3CNF.CONF.getValue("menu.item-"+i+".icon");
