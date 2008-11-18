@@ -12,31 +12,39 @@ W3GUI.MENU = new CnfReaderClass();
 W3GUI.STAT = new CnfReaderClass();
 
 W3GUI.POOL = {};
+W3GUI.KEY_PREFIX = {
+	ART:"Article.",
+	ADD:"Address.",
+	GLY:"Gallery.",
+	BRD:"Board.",
+	LNK:"Links.",
+	NTC:"Notice."
+};
 W3GUI.KEY = {
-    ART_TTL_LNK : "Article.Total.Link",
-    ART_LBL_LST : "Article.Label.List",
-    ART_LBL_LNK : "Article.Label.Link.",
-    ART_MNT_LST : "Article.Month.List",
-    ART_MNT_LNK : "Article.Month.Link.",
-    ART_ITM     : "Article.Item.",
-    ADD_TTL_LNK : "Address.Total.Link",
-    ADD_LBL_LST : "Address.Label.List",
-    ADD_LBL_LNK : "Address.Label.Link.",
-    ADD_MNT_LST : "Address.Month.List",
-    ADD_MNT_LNK : "Address.Month.Link.",
-    ADD_ITM     : "Address.Item.",
-    GLY_TTL_LNK : "Gallery.Total.Link",
-    GLY_LBL_LST : "Gallery.Label.List",
-    GLY_LBL_LNK : "Gallery.Label.Link.",
-    GLY_MNT_LST : "Gallery.Month.List",
-    GLY_MNT_LNK : "Gallery.Month.Link.",
-    GLY_ITM     : "Gallery.Item.",
-    BRD_LNK     : "Board.Link",
-    BRD_INF     : "Board.Info",
-    BRD_ITM     : "Board.Item.",
-    LNK_ITM     : "Links.Item",
-    NTC_LNK     : "Notice.Link",
-    NTC_ITM     : "Notice.Item."
+    ART_TTL_LNK : W3GUI.KEY_PREFIX.ART+"Total.Link",
+    ART_LBL_LST : W3GUI.KEY_PREFIX.ART+"Label.List",
+    ART_LBL_LNK : W3GUI.KEY_PREFIX.ART+"Label.Link.",
+    ART_MNT_LST : W3GUI.KEY_PREFIX.ART+"Month.List",
+    ART_MNT_LNK : W3GUI.KEY_PREFIX.ART+"Month.Link.",
+    ART_ITM     : W3GUI.KEY_PREFIX.ART+"Item.",
+    ADD_TTL_LNK : W3GUI.KEY_PREFIX.ADD+"Total.Link",
+    ADD_LBL_LST : W3GUI.KEY_PREFIX.ADD+"Label.List",
+    ADD_LBL_LNK : W3GUI.KEY_PREFIX.ADD+"Label.Link.",
+    ADD_MNT_LST : W3GUI.KEY_PREFIX.ADD+"Month.List",
+    ADD_MNT_LNK : W3GUI.KEY_PREFIX.ADD+"Month.Link.",
+    ADD_ITM     : W3GUI.KEY_PREFIX.ADD+"Item.",
+    GLY_TTL_LNK : W3GUI.KEY_PREFIX.GLY+"Total.Link",
+    GLY_LBL_LST : W3GUI.KEY_PREFIX.GLY+"Label.List",
+    GLY_LBL_LNK : W3GUI.KEY_PREFIX.GLY+"Label.Link.",
+    GLY_MNT_LST : W3GUI.KEY_PREFIX.GLY+"Month.List",
+    GLY_MNT_LNK : W3GUI.KEY_PREFIX.GLY+"Month.Link.",
+    GLY_ITM     : W3GUI.KEY_PREFIX.GLY+"Item.",
+    BRD_LNK     : W3GUI.KEY_PREFIX.BRD+"Link",
+    BRD_INF     : W3GUI.KEY_PREFIX.BRD+"Info",
+    BRD_ITM     : W3GUI.KEY_PREFIX.BRD+"Item.",
+    LNK_ITM     : W3GUI.KEY_PREFIX.LNK+"Item",
+    NTC_LNK     : W3GUI.KEY_PREFIX.NTC+"Link",
+    NTC_ITM     : W3GUI.KEY_PREFIX.NTC+"Item."
 };
 
 /** home */
@@ -311,61 +319,55 @@ W3GUI.editNotice = function(id){
 }
 
 // commit
-W3GUI.commitArticle = function(){
-	commitCommon("list-paper.htm","Article.");
+W3GUI.commitArticle = function(pid){
+	W3GUI.commitCommon("list-paper.htm",W3GUI.KEY_PREFIX.ART,pid);
 }
-W3GUI.commitAddress = function(){
-	commitCommon("list-links.htm","Address.");
+W3GUI.commitAddress = function(pid){
+	W3GUI.commitCommon("list-links.htm",W3GUI.KEY_PREFIX.ADD,pid);
 }
-W3GUI.commitPicture = function(){
-	commitCommon("list-album.htm","Gallery.");
+W3GUI.commitPicture = function(pid){
+	W3GUI.commitCommon("list-album.htm",W3GUI.KEY_PREFIX.GLY,pid);
 }
-W3GUI.commitNotice = function(){
-	commitCommon("list-notice.htm","Notice.");
+W3GUI.commitNotice = function(pid){
+	W3GUI.commitCommon("list-notice.htm",W3GUI.KEY_PREFIX.NTC,pid);
 }
-W3GUI.commitCommon = function(url,key){
-	if(url != null){
-		if((W3GUI.LISTWINOBJW.location+"").indexOf(url)>0){
-            W3GUI.LISTWINOBJW.update();
-	    }
-	}
-    if(key != null){
+W3GUI.commitCommon = function(url,key,pid){
+    if(key != null && pid != null){
 	    for(var pk in W3GUI.POOL){
-	        if(W3GUI.POOL[pk] instanceof Array){
-	            if(key != null && pk.indexOf(key) != 0) continue;
-	            var arr = [];
-	            for(var i=0;i<W3GUI.POOL[pk].length;i++){
-	                if(W3GUI.POOL[pk][i] != pid){
-	                    arr.push(W3GUI.POOL[pk][i]);
-	                }
-	            }
-	            W3GUI.POOL[pk] = arr;
+	        if(pk.indexOf(key) == 0 
+	        && !(W3GUI.POOL[pk] instanceof Array)){
+	           W3GUI.POOL[pk] = null;
 	        }
 	    }
+    }
+    if(url != null){
+        if((W3GUI.LISTWINOBJW.location+"").indexOf(url)>0){
+            W3GUI.LISTWINOBJW.update();
+        }
     }
 }
 // delete
 W3GUI.deleteArticle = function(id){
-    if(!W3GUI.deleteCommon("paper.edit.delete",id,"Article.")) return;
+    if(!W3GUI.deleteCommon("paper.edit.delete",id,W3GUI.KEY_PREFIX.ART)) return;
     W3GUI.LISTWINOBJW.update();
 }
 W3GUI.deleteAddress = function(id){
-    if(!W3GUI.deleteCommon("links.delete",id,"Address.")) return;
+    if(!W3GUI.deleteCommon("links.delete",id,W3GUI.KEY_PREFIX.ADD)) return;
     W3GUI.LISTWINOBJW.update();
 }
 W3GUI.deletePicture = function(id){
-    if(!W3GUI.deleteCommon("album.edit.delete",id,"Gallery.")) return;
+    if(!W3GUI.deleteCommon("album.edit.delete",id,W3GUI.KEY_PREFIX.GLY)) return;
     W3GUI.LISTWINOBJW.update();
 }
 W3GUI.deleteBoard = function(id){
-    if(!W3GUI.deleteCommon("board.delete",id,"Board.")) return;
+    if(!W3GUI.deleteCommon("board.delete",id,W3GUI.KEY_PREFIX.BRD)) return;
     W3GUI.ITEMWINOBJW.update();
     if((W3GUI.LISTWINOBJW.location+"").indexOf("list-board.htm")>0){
         W3GUI.LISTWINOBJW.update();
     }
 }
 W3GUI.deleteNotice = function(id){
-    if(!W3GUI.deleteCommon("notice.edit.delete",id,"Notice.")) return;
+    if(!W3GUI.deleteCommon("notice.edit.delete",id,W3GUI.KEY_PREFIX.NTC)) return;
     W3GUI.LISTWINOBJW.update();
 }
 
