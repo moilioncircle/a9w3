@@ -61,7 +61,9 @@ W3GUI.drawMenu = function(){
         }else if (infoType == "config.menu"){
             infoText = W3GUI.MENU.getValue(infoText);
         }else if (infoType == "config.stat"){
-            infoText = W3GUI.STAT.getValue(infoText);
+            infoText = getMenuInfoByStat(infoText);
+        }else{
+        	// string
         }
         
         var linkText = W3CNF.CONF.getValue("menu.item-"+i+".link.text");
@@ -70,7 +72,7 @@ W3GUI.drawMenu = function(){
         if(linkType == "string"){
            linkText = W3GUI.LISTWINNAME+".location=unescape('"+escape(linkText)+"');";
         }else{
-        	// js
+        	// function
         }
 
         var icon  = W3CNF.CONF.getValue("menu.item-"+i+".icon");
@@ -534,6 +536,19 @@ function readerTracer(pid,code){
     A9Loader.asyncLoadText(function(u,t){
     },W3GUI.avoidClientCache(url));
 }
+function getMenuInfoByStat(prefix){
+	var mt = W3GUI.STAT.getValue(prefix+".mtime");
+	if(mt == null){
+		mt = "";
+	}else{
+		mt = mt.replace(/\D+/g,"");
+		mt = mt.substr(2,6);
+	}
+	var cn = W3GUI.STAT.getValue(prefix+".count");
+	if(cn == null) cn = 0;
+	return mt+"<br />"+cn;
+}
+
 // init
 initLabelIndexer();
 W3GUI.MENU.loadFormFile(W3CNF.USERHOME+"profile/menu.htm");
