@@ -21,7 +21,7 @@ define('RKEY_SETPASS','warn.pass.change');
 define('RKEY_SMPPASS','info.pass.simple');
 define('RKEY_SYSDENY','warn.sysfile.deny');
 
-define('PERMIT_MODE',false);
+define('PERMIT_MODE',true);
 
 function checkRequestUID(){
     if(empty($_REQUEST['UID'])
