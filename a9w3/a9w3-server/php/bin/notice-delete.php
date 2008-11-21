@@ -29,4 +29,7 @@ if(!removeIfHasPid(PATH_ROOT.'a9w3-auhome/'.$r_uid.'/helpers/notice/000000000000
 }
 
 echo RKEY_SUCCESS;
+
+// trace stat
+require_once('writer-tracer.php');
 ?>

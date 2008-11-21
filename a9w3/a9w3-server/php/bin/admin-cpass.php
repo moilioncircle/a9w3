@@ -51,4 +51,7 @@ if(writeFile(PATH_ROOT.'a9w3-auhome/'.$r_uid.'/profile/passwd.htm',sha1($r_newp)
 }else{
     echo RKEY_UNKOWN;
 }
+
+// trace stat
+require_once('writer-tracer.php');
 ?>

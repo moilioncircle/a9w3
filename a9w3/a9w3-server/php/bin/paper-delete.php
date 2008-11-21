@@ -31,4 +31,7 @@ if(!removeIndexFromTotal(IDX_ARTICLE,$r_uid,$r_pid)
 }
 
 echo RKEY_SUCCESS;
+
+// trace stat
+require_once('writer-tracer.php');
 ?>

@@ -48,4 +48,7 @@ if(!writeFile($idx,implode("\n",$arr),'w')){
 }
 
 echo RKEY_SUCCESS;
+
+// trace stat
+require_once('writer-tracer.php');
 ?>
