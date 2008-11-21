@@ -12,7 +12,7 @@ function drawGalleryListLabelView(cur,obj,lst){
     
     if(obj == null) return;
     if(lst == null || lst.length ==0){
-        obj.innerHTML="<br />"+parent.W3CNF.getI18nString("info.list.empty");
+	    obj.innerHTML=emptyList();
         return;
     }
 
@@ -84,7 +84,7 @@ function drawGalleryListMonthView(cur,obj,lst){
     
     if(obj == null) return;
     if(lst == null || lst.length ==0){
-        obj.innerHTML="<br />"+parent.W3CNF.getI18nString("info.list.empty");
+        obj.innerHTML=emptyList();
         return;
     }
     //
@@ -156,7 +156,7 @@ function drawGalleryLinkView(page,obj,lst){
     }
     if(obj == null) return;
     if(lst == null || lst.length ==0){
-        obj.innerHTML="<br />"+parent.W3CNF.getI18nString("info.list.empty");
+        obj.innerHTML=emptyList();
         return;
     }
     //
@@ -335,6 +335,14 @@ function update(){
     if(pageCache['type'] == "label") showLabel(pageCache['name'],pageCache['page']);
     else if (pageCache['type'] == "month") showMonth(pageCache['name'],pageCache['page']);
     else showTotal(pageCache['page']);
+}
+
+function emptyList(){
+    var html ="<br />"+parent.W3CNF.getI18nString("info.list.empty");
+    if(parent.W3CNF.A9W3_RTMODE == parent.W3CNF.A9W3_WRITER){
+        html+="&nbsp;&nbsp;<a href='javascript:parent.W3GUI.editPicture()'><img onmouseover='this.className=\"a9w3_admin_on\"' onmouseout='this.className=\"a9w3_admin_off\"' src='../../data/image/icon-list-new.png' title='edit'  border=0 /></a>";
+    }
+    return html;
 }
 
 //////////// init /////////////
