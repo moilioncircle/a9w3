@@ -51,11 +51,12 @@ if(empty($r_pid)){ // new one
 	}
 
 	// save thumb
-	if($r_file['type'] == 'image/pjpeg'){
+    $extn = getExtendFileName($r_file['name']);
+	if($extn == 'jpg'){
     	$im = imagecreatefromjpeg($r_file['tmp_name']);
-	}elseif($r_file['type'] == 'image/x-png'){
+	}elseif($extn == 'png'){
 	    $im = imagecreatefrompng($r_file['tmp_name']);
-	}elseif($r_file['type'] == 'image/gif'){
+	}elseif($extn == 'gif'){
 	    $im = imagecreatefromgif($r_file['tmp_name']);
 	}
 	
