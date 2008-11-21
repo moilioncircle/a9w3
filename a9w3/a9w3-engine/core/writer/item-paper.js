@@ -169,7 +169,7 @@ function onPaperResponse(){
         }
         
         if(rtv == "info.success"){
-        	parent.W3GUI.commitArticle(paperId);
+        	parent.W3GUI.commitArticle();
         }
         alert(parent.W3CNF.getI18nString(rtv));
     }

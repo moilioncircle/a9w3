@@ -62,7 +62,7 @@ function onDataResponse(){
             updateUI();
         }
         if(rtv == "info.success"){
-            parent.W3GUI.commitAddress(linksId);
+            parent.W3GUI.commitAddress();
         }
         
         alert(parent.W3CNF.getI18nString(rtv));
