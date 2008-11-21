@@ -85,6 +85,8 @@ function deleteFile($filename){
     return unlink($filename);
 }
 function deleteTree($filepath){
+    if(!file_exists($filepath)) return false;
+    
     if (is_dir($filepath) && !is_link($filepath)){
         if ($dh = opendir($filepath)){
             while (($sf = readdir($dh)) !== false){

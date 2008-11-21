@@ -223,7 +223,7 @@ function initHead(){
     }
 }
 function initData(){
-	if(paperId == null || paperId == "") return;
+	if(isNewPaper()) return;
 	docPath = parent.W3CNF.USERHOME+"article/"+paperId+"/";
     parent.W3GUI.getArticleItem(paperId,function(ai){
         document.getElementById("__TITLE__").value = ai.title;

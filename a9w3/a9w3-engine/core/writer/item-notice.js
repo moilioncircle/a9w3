@@ -51,11 +51,13 @@ function onDataResponse(){
     
     if(rtv != ""){
         __DATA_POSTER__.location="about:blank";// avoid recommit when refresh
-        
         if(checkReplyCode(rtv)){
             return;
         }else{
-            alert(rtv);
+            if(rtv == "info.success"){
+                initData();
+            }
+            alert(parent.W3CNF.getI18nString(rtv));
         }
     }
 }
@@ -76,7 +78,7 @@ function onDelData(){
     
     var rtv = parent.A9Loader.syncLoadText(url);
     if(rtv == "info.success"){
-        alert("ok");
+        initData();
     }
     alert(parent.W3CNF.getI18nString(rtv));
 }
@@ -145,14 +147,18 @@ function onPaperResponse(){
     }
     
     if(rtv != ""){
-        alert(rtv);
+        __PAPER_POSTER__.location="about:blank";// avoid recommit when refresh
         
         if(regexpId.test(rtv)){ // new paper,return id
-            window.location=self.location.href+"?"+rtv;
-        }else{ // message
-            
+            paperId = rtv;
+            initData();
+            rtv = "info.success";
         }
-        __PAPER_POSTER__.location="about:blank";// avoid recommit when refresh
+        
+        if(rtv == "info.success"){
+            parent.W3GUI.commitNotice(paperId);
+        }
+        alert(parent.W3CNF.getI18nString(rtv));
     }
 }
 
@@ -184,13 +190,13 @@ function ideReady(){
 }
 
 // init
-function initHead(){
-    parent.W3GUI.getNoticeItem(paperId,function(ai){
+function initData(){
+	if(isNewPaper()) return;
+	docPath = parent.W3CNF.USERHOME+"helpers/notice/"+paperId+"/";
+	parent.W3GUI.getNoticeItem(paperId,function(ai){
         document.getElementById("__TITLE__").value = ai.title;
         document.getElementById("__BRIEF__").value = ai.brief;
     });
-}
-function initData(){
     parent.W3GUI.getNoticeData(paperId,function(ls){
         var datObj = document.getElementById("__DATAS__");
         var len = datObj.length;
@@ -220,10 +226,6 @@ function init(){
     var pos = url.indexOf("?");
     if(pos>0 && regexpId.test(url.substr(pos+1))){
         paperId = url.substr(pos+1);
-        docPath = parent.W3CNF.USERHOME+"helpers/notice/"+paperId+"/";
-        
-        // head
-        initHead();
         // data
         initData();
         // body
@@ -233,6 +235,8 @@ function init(){
         },docPath+"body.htm");
         
         document.getElementById("__BTN_DELETE__").disabled=false;
+    }else{
+        initEditor("");
     }
 }
 //

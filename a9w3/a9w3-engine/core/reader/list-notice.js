@@ -11,7 +11,7 @@ drawNoticeLinkView = function(page,obj,lst){
         
     if(obj == null) return;
     if(lst == null || lst.length ==0){
-        obj.innerHTML="<br />"+parent.W3CNF.getI18nString("info.list.empty");
+        obj.innerHTML=emptyList();
         return;
     }
 
@@ -103,6 +103,14 @@ function showPage(page){
 // update
 function update(){
     showPage(cachePge);
+}
+
+function emptyList(){
+    var html ="<br />"+parent.W3CNF.getI18nString("info.list.empty");
+    if(parent.W3CNF.A9W3_RTMODE == parent.W3CNF.A9W3_WRITER){
+        html+="&nbsp;&nbsp;<a href='javascript:parent.W3GUI.editNotice()'><img onmouseover='this.className=\"a9w3_admin_on\"' onmouseout='this.className=\"a9w3_admin_off\"' src='../../data/image/icon-list-new.png' title='edit'  border=0 /></a>";
+    }
+    return html;
 }
 
 //////////// init /////////////

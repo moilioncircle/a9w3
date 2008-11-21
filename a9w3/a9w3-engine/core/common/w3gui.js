@@ -340,8 +340,7 @@ W3GUI.commitNotice = function(pid){
 W3GUI.commitCommon = function(url,key,pid){
     if(key != null && pid != null){
 	    for(var pk in W3GUI.POOL){
-	        if(pk.indexOf(key) == 0 
-	        && !(W3GUI.POOL[pk] instanceof Array)){
+	        if(pk.indexOf(key) == 0){
 	           W3GUI.POOL[pk] = null;
 	        }
 	    }

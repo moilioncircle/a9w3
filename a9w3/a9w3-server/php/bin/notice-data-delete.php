@@ -3,37 +3,47 @@ require_once('common.php');
 checkRequestUID();
 checkUmodePermit(UMODE_WRITER);
 
-// check by js at client #CODE (UID,PID)
+// CODE (UID,PID,FILE)
 if(empty($_REQUEST['PID'])
-||!preg_match('/^[0-9]{4}\/[0-9]{10}$/', $_REQUEST['PID'])){
-    echo 1;
+|| empty($_REQUEST['FILE'])){
     echo RKEY_ACCDENY;
     exit;
 }
 
-// alias
 $r_uid  = $_REQUEST['UID'];
 $r_pid  = $_REQUEST['PID'];
+$r_file = $_REQUEST['FILE'];
 
-foreach(file(PATH_ROOT.'a9w3-auhome/'.$r_uid.'/gallery/info/'.$r_pid.'.htm') as $line){
-    if(strpos($line, 'ftype') !== false){
-        $ftype = trim(substr($line,strpos($line,'=')+1));
-        break;
-    }
-}
-// delete files
-if(!deleteFile(PATH_ROOT.'a9w3-auhome/'.$r_uid.'/gallery/data/'.$r_pid.'.'.$ftype)
-|| !deleteFile(PATH_ROOT.'a9w3-auhome/'.$r_uid.'/gallery/mini/'.$r_pid.'.jpg')
-|| !deleteFile(PATH_ROOT.'a9w3-auhome/'.$r_uid.'/gallery/info/'.$r_pid.'.htm')){
-    echo RKEY_UNKOWN;
+$hd = PATH_ROOT.'a9w3-auhome/'.$r_uid.'/helpers/notice/'.$r_pid.'/head.htm';
+if(!preg_match('/^[0-9]{14}$/', $r_pid)
+|| !is_file($hd)){
+    echo RKEY_ACCDENY;
     exit;
 }
-// remove index
-require_once('common-indexer.php');
-if(!removeIndexFromTotal(IDX_GALLERY,$r_uid,$r_pid)
-|| !removeIndexFromMonth(IDX_GALLERY,$r_uid,$r_pid)
-|| !removeIndexFromLabel(IDX_GALLERY,$r_uid,$r_pid)){
-    echo RKEY_UNKOWN;
+
+if($r_file === 'index.htm'){
+    echo RKEY_SYSDENY;
+    exit;
+}
+
+
+// delete
+$dst = PATH_ROOT.'a9w3-auhome/'.$r_uid.'/helpers/notice/'.$r_pid.'/data/'.$r_file;
+if(!deleteFile($dst)){
+    echo RKEY_ACCDENY;
+    exit;
+}
+
+$idx = PATH_ROOT.'a9w3-auhome/'.$r_uid.'/helpers/notice/'.$r_pid.'/data/index.htm';
+$arr = array();
+foreach(file($idx) as $line){
+    $line = trim($line);
+    if($line !== $r_file){
+        array_push($arr, $line);
+    }
+}
+if(!writeFile($idx,implode("\n",$arr),'w')){
+    echo RKEY_ACCDENY;
     exit;
 }
 
