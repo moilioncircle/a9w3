@@ -5,7 +5,7 @@ checkUmodePermit(UMODE_WRITER);
 
 // check by js at client #CODE (UID,PID)
 if(empty($_REQUEST['PID'])
-|| !preg_match('/^[0-9]{14}$/', $r_pid)){
+|| !preg_match('/^[0-9]{14}$/', $_REQUEST['PID'])){
     echo RKEY_ACCDENY;
     exit;
 }
@@ -30,4 +30,7 @@ if(!removeIndexFromTotal(IDX_ADDRESS,$r_uid,$r_pid)
 }
 
 echo RKEY_SUCCESS;
+
+// trace stat
+require_once('writer-tracer.php');
 ?>

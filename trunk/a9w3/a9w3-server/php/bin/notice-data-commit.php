@@ -48,4 +48,7 @@ if(!writeFile($dt.'/index.htm',$r_file['name']."\n",'a+')){
 }
 
 echo RKEY_SUCCESS;
+
+// trace stat
+require_once('writer-tracer.php');
 ?>

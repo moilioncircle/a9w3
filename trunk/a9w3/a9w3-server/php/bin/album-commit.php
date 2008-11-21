@@ -187,4 +187,7 @@ if($isNew){ //new
 }else{
     echo RKEY_SUCCESS;
 }
+
+// trace stat
+require_once('writer-tracer.php');
 ?>
