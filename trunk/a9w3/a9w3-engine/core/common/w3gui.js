@@ -325,26 +325,34 @@ W3GUI.editNotice = function(id){
 }
 
 // commit
-W3GUI.commitArticle = function(pid){
-	W3GUI.commitCommon("list-paper.htm",W3GUI.KEY_PREFIX.ART,pid);
+W3GUI.commitArticle = function(){
+    W3GUI.ARTICLE_LABEL.clear();
+    W3GUI.ARTICLE_LABEL.loadFormFile(W3GUI.avoidClientCache(W3CNF.USERHOME+"indexer/article/label/item.htm"));
+	W3GUI.commitCommon("list-paper.htm",W3GUI.KEY_PREFIX.ART);
+
 }
-W3GUI.commitAddress = function(pid){
-	W3GUI.commitCommon("list-links.htm",W3GUI.KEY_PREFIX.ADD,pid);
+W3GUI.commitAddress = function(){
+    W3GUI.ADDRESS_LABEL.clear();
+    W3GUI.ADDRESS_LABEL.loadFormFile(W3GUI.avoidClientCache(W3CNF.USERHOME+"indexer/address/label/item.htm"));
+	W3GUI.commitCommon("list-links.htm",W3GUI.KEY_PREFIX.ADD);
 }
-W3GUI.commitPicture = function(pid){
-	W3GUI.commitCommon("list-album.htm",W3GUI.KEY_PREFIX.GLY,pid);
+W3GUI.commitPicture = function(){
+    W3GUI.GALLERY_LABEL.clear();
+    W3GUI.GALLERY_LABEL.loadFormFile(W3GUI.avoidClientCache(W3CNF.USERHOME+"indexer/gallery/label/item.htm"));
+	W3GUI.commitCommon("list-album.htm",W3GUI.KEY_PREFIX.GLY);
 }
-W3GUI.commitNotice = function(pid){
-	W3GUI.commitCommon("list-notice.htm",W3GUI.KEY_PREFIX.NTC,pid);
+W3GUI.commitNotice = function(){
+	W3GUI.commitCommon("list-notice.htm",W3GUI.KEY_PREFIX.NTC);
 }
-W3GUI.commitCommon = function(url,key,pid){
-    if(key != null && pid != null){
+W3GUI.commitCommon = function(url,key){
+    if(key != null){
 	    for(var pk in W3GUI.POOL){
-	        if(pk.indexOf(key) == 0){
+	        if(pk.indexOf(key) >= 0){
 	           W3GUI.POOL[pk] = null;
 	        }
 	    }
     }
+    
     if(url != null){
         if((W3GUI.LISTWINOBJW.location+"").indexOf(url)>0){
             W3GUI.LISTWINOBJW.update();

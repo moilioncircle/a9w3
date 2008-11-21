@@ -71,7 +71,7 @@ function onDataResponse(){
 	        }
 	        
 	        if(rtv == "info.success"){
-	            parent.W3GUI.commitPicture(albumId);
+	            parent.W3GUI.commitPicture();
 	        }
 	        
 	        alert(parent.W3CNF.getI18nString(rtv));

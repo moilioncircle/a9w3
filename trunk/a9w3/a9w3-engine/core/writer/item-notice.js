@@ -156,7 +156,7 @@ function onPaperResponse(){
         }
         
         if(rtv == "info.success"){
-            parent.W3GUI.commitNotice(paperId);
+            parent.W3GUI.commitNotice();
         }
         alert(parent.W3CNF.getI18nString(rtv));
     }
