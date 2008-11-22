@@ -14,6 +14,15 @@ function traceReader($tp,$uid,$pid){
     if(!is_dir($bdr) && !mkdir($bdr)){ // mkdir if not exist
         return false;
     }
+    //
+    $ttl = PATH_ROOT.'a9w3-auhome/'.$uid.'/helpers/status/read/'.$tp.'/0000.htm';
+    $cnt = 1;
+    if(is_file($ttl)){
+    	$cnt = intval(trim(file_get_contents($ttl)))+1;
+    }
+    if(!writeFile($ttl,$cnt,'w')){
+        return false;
+    }
     
     // log
     $lnm = $fnm.'-log.htm';
@@ -24,10 +33,9 @@ function traceReader($tp,$uid,$pid){
     
     // hit
     $hnm = $fnm.'-hit.htm';
+    $hit = 1;
     if(is_file($hnm)){
         $hit = intval(trim(file_get_contents($hnm)))+1;
-    }else{
-        $hit = 1;
     }
     if(!writeFile($hnm,$hit,'w')){
         return false;
