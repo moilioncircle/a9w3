@@ -520,23 +520,6 @@ W3GUI.asyncLoadText = function(func,url){
     },url);
 }
 
-function initLabelIndexer(){
-    A9Loader.asyncLoadText(function(u,t){
-        W3GUI.ARTICLE_LABEL.clear();
-        W3GUI.ARTICLE_LABEL.loadFromText(t)
-    },W3GUI.avoidClientCache(W3CNF.USERHOME+"indexer/article/label/item.htm"));
-
-    A9Loader.asyncLoadText(function(u,t){
-        W3GUI.GALLERY_LABEL.clear();
-        W3GUI.GALLERY_LABEL.loadFromText(t)
-    },W3GUI.avoidClientCache(W3CNF.USERHOME+"indexer/gallery/label/item.htm"));
-
-    A9Loader.asyncLoadText(function(u,t){
-        W3GUI.ADDRESS_LABEL.clear();
-        W3GUI.ADDRESS_LABEL.loadFromText(t)
-    },W3GUI.avoidClientCache(W3CNF.USERHOME+"indexer/address/label/item.htm"));
-}
-
 function readerTracer(pid,code){
     var url = W3CNF.getServerURL(code);
     url += (url.indexOf("?")>0?"&":"?")+"UID="+W3CNF.USER+"&PID="+pid;
@@ -557,6 +540,8 @@ function getMenuInfoByStat(prefix){
 }
 
 // init
-initLabelIndexer();
 W3GUI.MENU.loadFormFile(W3CNF.USERHOME+"profile/menu.htm");
 W3GUI.STAT.loadFormFile(W3CNF.USERHOME+"helpers/status/info/stat.htm");
+W3GUI.ARTICLE_LABEL.loadFormFile(W3CNF.USERHOME+"indexer/article/label/item.htm");
+W3GUI.GALLERY_LABEL.loadFormFile(W3CNF.USERHOME+"indexer/gallery/label/item.htm");
+W3GUI.ADDRESS_LABEL.loadFormFile(W3CNF.USERHOME+"indexer/address/label/item.htm");
