@@ -105,6 +105,7 @@ W3CNF.getI18nString = function(){
     return function(key){
         var str = lc.getValue(key);
         if(str == null || str.length ==0) str = en.getValue(key);
-        return key+"\n"+str;
+        //return key+"\n"+str;
+        return str;
     }
 }();
