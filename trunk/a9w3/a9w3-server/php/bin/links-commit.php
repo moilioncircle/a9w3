@@ -31,7 +31,7 @@ if(empty($r_pid)){ // new
     $r_pid = date('YmdHis');
     $dst = PATH_ROOT.'a9w3-auhome/'.$r_uid.'/address/'.$r_pid.'.htm';
     
-    if(!is_file($dst)){
+    if(is_file($dst)){
     	echo RKEY_ACCDENY;
         exit;
     }
