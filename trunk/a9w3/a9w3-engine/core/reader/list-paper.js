@@ -189,7 +189,7 @@ function drawArticleLinkView(page,obj,lst){
     buff.push("<div class='a9w3_text_page_box'>");
     if(parent.W3CNF.A9W3_RTMODE == parent.W3CNF.A9W3_WRITER){
         buff.push("<a href='javascript:parent.W3GUI.editArticle()'><img onmouseover='this.className=\"a9w3_admin_on\"' onmouseout='this.className=\"a9w3_admin_off\"' src='../../data/image/icon-list-new.png' title='edit'  border=0 /></a>");
-        buff.push("&nbsp;&nbsp;");
+        buff.push("&nbsp;");
     }
     for(var j=0;j<show.length;j++){
         if(j>0 && show[j]-show[j-1]>1)buff.push("--");
@@ -220,7 +220,7 @@ function drawArticleLinkView(page,obj,lst){
             buff.push("<td class='a9w3_text_plain'>");
             if(parent.W3CNF.A9W3_RTMODE == parent.W3CNF.A9W3_WRITER){
                 buff.push("<a href='javascript:parent.W3GUI.editArticle(\""+ai.id+"\")'><img onmouseover='this.className=\"a9w3_admin_on\"' onmouseout='this.className=\"a9w3_admin_off\"' src='../../data/image/icon-list-edit.png' title='edit'  border=0 /></a>");
-                buff.push("&nbsp;<a href='javascript:parent.W3GUI.deleteArticle(\""+ai.id+"\")'><img onmouseover='this.className=\"a9w3_admin_on\"' onmouseout='this.className=\"a9w3_admin_off\"' src='../../data/image/icon-list-delete.png' title='delete'  border=0 /></a>&nbsp;&nbsp;");
+                buff.push("&nbsp;<a href='javascript:parent.W3GUI.deleteArticle(\""+ai.id+"\")'><img onmouseover='this.className=\"a9w3_admin_on\"' onmouseout='this.className=\"a9w3_admin_off\"' src='../../data/image/icon-list-delete.png' title='delete'  border=0 /></a>&nbsp;");
             }
             buff.push("<img src='../../data/image/icon-list-ctime.png' title='created' /> "+cdt);
             buff.push("&nbsp;<img src='../../data/image/icon-list-sizeb.png' title='size' /> "+ai.sizeb);
@@ -233,7 +233,7 @@ function drawArticleLinkView(page,obj,lst){
             buff.push("<tr>");
             buff.push("<td><img src='../../data/image/icon-list-label.png' title='label'/> ");
             for(var k=0;k<ai.lable.length;k++){
-                buff.push("<a href='javascript:showPage(\"label\",\""+parent.W3GUI.ARTICLE_LABEL.getKey(ai.lable[k])+"\")' class='a9w3_link_infos'>"+ai.lable[k]+"</a>. ");
+                buff.push("<a href='javascript:showPage(\"label\",\""+parent.W3GUI.ARTICLE_LABEL.getKey(ai.lable[k])+"\")' class='a9w3_link_infos'>"+ai.lable[k]+"</a> ");
             }
             buff.push("</td>");
             buff.push("</tr>");
@@ -326,7 +326,7 @@ function update(){
 function emptyList(){
     var html ="<br />"+parent.W3CNF.getI18nString("info.list.empty");
     if(parent.W3CNF.A9W3_RTMODE == parent.W3CNF.A9W3_WRITER){
-        html+="&nbsp;&nbsp;<a href='javascript:parent.W3GUI.editArticle()'><img onmouseover='this.className=\"a9w3_admin_on\"' onmouseout='this.className=\"a9w3_admin_off\"' src='../../data/image/icon-list-new.png' title='edit'  border=0 /></a>";
+        html+="&nbsp;<a href='javascript:parent.W3GUI.editArticle()'><img onmouseover='this.className=\"a9w3_admin_on\"' onmouseout='this.className=\"a9w3_admin_off\"' src='../../data/image/icon-list-new.png' title='edit'  border=0 /></a>";
     }
     return html;
 }

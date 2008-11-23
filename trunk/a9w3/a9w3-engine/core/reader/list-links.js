@@ -222,7 +222,7 @@ function drawAddressLinkView(page,obj,lst){
             buff.push("<td class='a9w3_text_plain'>");
             if(parent.W3CNF.A9W3_RTMODE == parent.W3CNF.A9W3_WRITER){
                 buff.push("<a href='javascript:parent.W3GUI.editAddress(\""+ai.id+"\")'><img onmouseover='this.className=\"a9w3_admin_on\"' onmouseout='this.className=\"a9w3_admin_off\"' src='../../data/image/icon-list-edit.png' title='edit'  border=0 /></a>");
-                buff.push("&nbsp;<a href='javascript:parent.W3GUI.deleteAddress(\""+ai.id+"\")'><img onmouseover='this.className=\"a9w3_admin_on\"' onmouseout='this.className=\"a9w3_admin_off\"' src='../../data/image/icon-list-delete.png' title='delete'  border=0 /></a>&nbsp;&nbsp;");
+                buff.push("&nbsp;<a href='javascript:parent.W3GUI.deleteAddress(\""+ai.id+"\")'><img onmouseover='this.className=\"a9w3_admin_on\"' onmouseout='this.className=\"a9w3_admin_off\"' src='../../data/image/icon-list-delete.png' title='delete'  border=0 /></a>&nbsp;");
             }
             buff.push("<img src='../../data/image/icon-list-ctime.png' title='created' /> "+cdt);
             buff.push("</td>");
@@ -233,7 +233,7 @@ function drawAddressLinkView(page,obj,lst){
             buff.push("<tr>");
             buff.push("<td><img src='../../data/image/icon-list-label.png' title='label'/> ");
             for(var k=0;k<ai.lable.length;k++){
-                buff.push("<a href='javascript:showPage(\"label\",\""+parent.W3GUI.ADDRESS_LABEL.getKey(ai.lable[k])+"\")' class='a9w3_link_infos'>"+ai.lable[k]+"</a>. ");
+                buff.push("<a href='javascript:showPage(\"label\",\""+parent.W3GUI.ADDRESS_LABEL.getKey(ai.lable[k])+"\")' class='a9w3_link_infos'>"+ai.lable[k]+"</a> ");
             }
             buff.push("</td>");
             buff.push("</tr>");

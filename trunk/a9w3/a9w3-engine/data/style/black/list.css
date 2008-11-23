@@ -3,8 +3,8 @@ BODY {
 }
 BODY,TD{
 	font-size: 12px;
-	font-family:Arial, sans-serifarial, Verdana, Helvetica;
-    line-height: 150%;
+	font-family:"Courier New",Courier,"ËÎÌו",Simsun,Monaco;
+    line-height: 120%;
     text-align:left;
 	vertical-align: top;
     white-space:normal;
@@ -13,7 +13,7 @@ BODY,TD{
 }
 PRE{
 	font-size: 12px;
-	font-family:Arial, sans-serifarial, Verdana, Helvetica;
+	font-family:"Courier New",Courier,"ËÎÌו",Simsun,Monaco;
     line-height: 150%;
     text-align:left;
 	vertical-align: top;
