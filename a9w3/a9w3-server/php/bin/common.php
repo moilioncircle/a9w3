@@ -55,6 +55,8 @@ function checkUmodePermit($group){
     }else{
         // ADMIN(=ADMIN) > WRITER(!=WRITER)
     }
+    // touch time
+    $_SESSION[SKEY_UTIME]=time();
 }
 
 function writeFile($filename,$content,$mode){
