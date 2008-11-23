@@ -439,7 +439,7 @@ W3GUI._callbackObject_ = function(id,clzz,key,urls,func){
                         var pos = tmp[i].indexOf("=");
                         if(pos <0) continue;
                         var key = tmp[i].substr(0,pos).replace(/^[ \t]+/g,"").replace(/[ \t]+$/g,"");
-                        var val = tmp[i].substr(pos+1);
+                        var val = tmp[i].substr(pos+1).replace(/^[ \t]+/g,"");
                         map[key] = val;
                     }
                 }else{

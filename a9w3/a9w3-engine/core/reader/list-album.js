@@ -193,7 +193,7 @@ function drawGalleryLinkView(page,obj,lst){
     buff.push("<div class='a9w3_text_page_box'>");
     if(parent.W3CNF.A9W3_RTMODE == parent.W3CNF.A9W3_WRITER){
         buff.push("<a href='javascript:parent.W3GUI.editPicture()'><img onmouseover='this.className=\"a9w3_admin_on\"' onmouseout='this.className=\"a9w3_admin_off\"' src='../../data/image/icon-list-new.png' title='edit'  border=0 /></a>");
-        buff.push("&nbsp;&nbsp;");
+        buff.push("&nbsp;");
     }
 
     for(var j=0;j<show.length;j++){
@@ -218,31 +218,32 @@ function drawGalleryLinkView(page,obj,lst){
             buff.push("<tr height='2'><td></td></tr>");
             buff.push("<tr>");
             buff.push("<td>");
-            var cdt = ai.ctime
-            if(cdt != null)cdt = cdt.substring(0,cdt.lastIndexOf(' '));
+
             buff.push("<table width='100%'  border='0' cellspacing='0' cellpadding='2'><tr>");
             buff.push("<td class='a9w3_picture_box' onmouseover='document.getElementById(\"ITEM_"+ai.id+"\").style.display=\"\"' onmouseout='document.getElementById(\"ITEM_"+ai.id+"\").style.display=\"none\"'>");
             buff.push("<a href='javascript:parent.W3GUI.showPicture(\""+ai.id+"\")' class='a9w3_link_infos'>");
             buff.push("<img src='"+parent.W3CNF.USERHOME+"gallery/mini/"+ai.id+".jpg' border=1 /> ");
             buff.push("</a>");
             buff.push("</td>");
-            buff.push("<td><table width='100%'  border='0' cellspacing='0' cellpadding='0' class='a9w3_text_plain'>");
+            buff.push("<td><table width='100%' border='0' cellspacing='0' cellpadding='0' class='a9w3_text_plain'>");
             if(parent.W3CNF.A9W3_RTMODE == parent.W3CNF.A9W3_WRITER){
                 buff.push("<tr><td>");
                 buff.push("<a href='javascript:parent.W3GUI.editPicture(\""+ai.id+"\")'><img onmouseover='this.className=\"a9w3_admin_on\"' onmouseout='this.className=\"a9w3_admin_off\"' src='../../data/image/icon-list-edit.png' title='edit'  border=0 /></a>");
                 buff.push("&nbsp;<a href='javascript:parent.W3GUI.deletePicture(\""+ai.id+"\")'><img onmouseover='this.className=\"a9w3_admin_on\"' onmouseout='this.className=\"a9w3_admin_off\"' src='../../data/image/icon-list-delete.png' title='delete' border=0 /></a>");
                 buff.push("</td></tr>");
             }
+            var cdt = ai.ctime
+            if(cdt != null)cdt = cdt.substring(0,cdt.lastIndexOf(' ')).substr(2);
             buff.push("<tr><td><img src='../../data/image/icon-list-ctime.png' title='created' /> "+cdt+"</td></tr>");
             buff.push("<tr><td><img src='../../data/image/icon-list-pixel.png' title='pixel' /> "+ai.pixel+"</td></tr>");
-            buff.push("<tr><td><img src='../../data/image/icon-list-sizeb.png' title='size' /> "+ai.sizeb);
-            buff.push("&nbsp;&nbsp;<img src='../../data/image/icon-list-views.png' title='view' /> "+ai.views+"</td></tr>");
+            buff.push("<tr><td><img src='../../data/image/icon-list-sizeb.png' title='size' /> "+ai.sizeb+"</td></tr>");
+            buff.push("<tr><td><img src='../../data/image/icon-list-views.png' title='view' /> "+ai.views+"</td></tr>");
             buff.push("<tr><td><img src='../../data/image/icon-list-label.png' title='label'/> ");
             if(ai.lable ==null || ai.lable.length ==0){
                 ai.lable=[parent.W3GUI.GALLERY_LABEL.getValue("000")];
             }
             for(var k=0;k<ai.lable.length;k++){
-                buff.push("<a href='javascript:showPage(\"label\",\""+parent.W3GUI.GALLERY_LABEL.getKey(ai.lable[k])+"\")' class='a9w3_link_infos'>"+ai.lable[k]+"</a>. ");
+                buff.push("<a href='javascript:showPage(\"label\",\""+parent.W3GUI.GALLERY_LABEL.getKey(ai.lable[k])+"\")' class='a9w3_link_infos'>"+ai.lable[k]+"</a> ");
             }
             buff.push("</td></tr>");
             buff.push("</table></td>");
@@ -340,7 +341,7 @@ function update(){
 function emptyList(){
     var html ="<br />"+parent.W3CNF.getI18nString("info.list.empty");
     if(parent.W3CNF.A9W3_RTMODE == parent.W3CNF.A9W3_WRITER){
-        html+="&nbsp;&nbsp;<a href='javascript:parent.W3GUI.editPicture()'><img onmouseover='this.className=\"a9w3_admin_on\"' onmouseout='this.className=\"a9w3_admin_off\"' src='../../data/image/icon-list-new.png' title='edit'  border=0 /></a>";
+        html+="&nbsp;<a href='javascript:parent.W3GUI.editPicture()'><img onmouseover='this.className=\"a9w3_admin_on\"' onmouseout='this.className=\"a9w3_admin_off\"' src='../../data/image/icon-list-new.png' title='edit'  border=0 /></a>";
     }
     return html;
 }

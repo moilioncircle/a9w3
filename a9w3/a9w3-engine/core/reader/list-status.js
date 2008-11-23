@@ -12,12 +12,12 @@ function initReader(){
 function initStatus(){
     var keys = ["admin","address","article","gallery","board","notice"];
     var html= "<table border='0' cellspacing='0' cellpadding='0' width='100%'>";
-        html+="<tr height='"+lineHeight+"'><td width='60'>Channel</td><td width='30'>Cnt</td><td>Last Time</td></tr>";
+        html+="<tr height='"+lineHeight+"'><td width='80'>Channel</td><td width='40'>Cnt</td><td>Last Date</td></tr>";
 	for(var i=0;i<keys.length;i++){
 		html+="<tr height='"+lineHeight+"'>";
 		html+="<td>"+keys[i]+"</td>";
         html+="<td>"+parent.W3GUI.STAT.getValue(keys[i]+".count")+"</td>";
-		html+="<td>"+parent.W3GUI.STAT.getValue(keys[i]+".mtime")+"</td>";
+		html+="<td>"+parent.W3GUI.STAT.getValue(keys[i]+".mtime").substr(0,10)+"</td>";
 		html+="</tr>";
 	}
 	html+="</table><br/>";
