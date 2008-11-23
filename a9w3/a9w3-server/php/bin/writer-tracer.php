@@ -84,9 +84,10 @@ function autoTrace(){
 	);
 	
 	// key YmdHis $UID $PID $IP\n
+    $r_pid = empty($_REQUEST['PID'])?"":$_REQUEST['PID'];
 	foreach($eventkey as $v){
 		if(strpos($v,$server_key) !== false){
-			$evenline = date('YmdHis').'|'.$v.'|'.$_REQUEST['PID'].'|'.$_SERVER['REMOTE_ADDR'];
+			$evenline = date('YmdHis').'|'.$v.'|'.$r_pid.'|'.$_SERVER['REMOTE_ADDR'];
 			break;
 		}
 	}
