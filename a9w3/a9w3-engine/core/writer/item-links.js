@@ -103,8 +103,8 @@ function init(){
     var pos = url.indexOf("?");
     if(pos>0 && regexpId.test(url.substr(pos+1))){
         linksId = url.substr(pos+1);
-        updateUI();
     }
+    updateUI();
 }
 //
 init();
