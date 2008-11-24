@@ -104,7 +104,7 @@ var A9TextRender = function()
         if(jimg != null && jimg != '')__join_extn__['img'] = jimg;
         if(jswf != null && jswf != '')__join_extn__['swf'] = jswf;
 
-        __render_css__.push(A9Conf.getConf("render.html.common.css.a9text"));        
+        __render_css__.push(A9Conf.getConf("render.html.common.css.a9text"));
         //
         __total_doms__ = A9Dom.__counter__ - a9dom.getId();
         __root_domid__ = a9dom.getId();
@@ -113,7 +113,9 @@ var A9TextRender = function()
         __domManager__(a9dom);
         
         A9Loader.runAfterClassLoaded(function(){
-            a9dom.setData({'htmltext':__render_htm__.join(''),'linkjs':__render_js__,'linkcss':__render_css__});
+            a9dom.setData({'htmltext':__render_htm__.join(''),
+                           'linkjs'  :__uniqueArray__(__render_js__),
+                           'linkcss' :__uniqueArray__(__render_css__)});
             func(a9dom);
         });
     }
@@ -799,5 +801,22 @@ var A9TextRender = function()
         }
         
         return buffer.join('');
+    }
+    
+    function __uniqueArray__(arr){
+        var rst = [];
+        for(var m=0;m<arr.length;m++){
+            var has = false;
+            for(var n=0;n<rst.length;n++){
+                if(rst[n] == arr[m]){
+                    has = true;
+                    break;
+                }
+            }
+            if(!has){
+                rst.push(arr[m]);
+            }
+        }
+        return rst;
     }
 }
