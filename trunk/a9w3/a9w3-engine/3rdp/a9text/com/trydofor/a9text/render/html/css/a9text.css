@@ -44,7 +44,8 @@ table{
     margin:4ex;
 }
 .a9text_sect_head{
-    margin:1ex;
+    margin:0px;
+    padding:0px;
 }
 .a9text_sect_1{
     white-space:normal;
