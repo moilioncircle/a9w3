@@ -23,7 +23,7 @@ if(empty($_SESSION[SKEY_IMGSN.$r_uid])
 unset($_SESSION[SKEY_IMGSN.$r_uid]); // clear imgsn
 
 // check passwd
-$pass = file_get_contents(PATH_ROOT.'a9w3-auhome/'.$r_uid.'/profile/passwd.htm');
+$pass = trim(file_get_contents(PATH_ROOT.'a9w3-auhome/'.$r_uid.'/profile/passwd.htm'));
 if($pass === '' && DEFAULT_PASS === $r_pass){
     echo RKEY_SETPASS;
 }else if($pass === sha1($r_pass)){
