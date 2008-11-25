@@ -96,7 +96,7 @@ W3GUI.drawLogo = function(){
     
     var html = "<table width='100%' height='100%'  border='0' cellpadding='0' cellspacing='0'>";
         html+= "<tr>";
-        html+= "<td width='220'><img src='"+icon+"' /></td>";
+        html+= "<td width='220'><a href='javascript:W3GUI.showHome()'><img src='"+icon+"' border='0'/></a></td>";
         html+= "<td style='vertical-align:middle;'>"+text+"</td>";
         html+= "</tr>";
         html+= "</table>";
@@ -116,8 +116,12 @@ W3GUI.drawPage = function(){
     W3GUI.ITEMWINOBJW = eval(W3GUI.ITEMWINNAME);
 }
 
-W3GUI.changeCss = function(obj,cname){
-    obj.className = cname;
+W3GUI.showHome = function(){
+    try{
+	    W3GUI.LISTWINOBJW.location = W3CNF.CONF.getValue("page.list.url");
+	    W3GUI.ITEMWINOBJW.location = W3CNF.CONF.getValue("page.item.url");
+    }catch(e){
+    }
 }
 
 /** event */
@@ -513,13 +517,6 @@ W3GUI._getDocumentByObject_ = function(obj){
     return doc;
 }
 
-//
-W3GUI.asyncLoadText = function(func,url){
-    A9Loader.asyncLoadText(function(u,t){
-        func(t);
-    },url);
-}
-
 function readerTracer(pid,code){
     var url = W3CNF.getServerURL(code);
     url += (url.indexOf("?")>0?"&":"?")+"UID="+W3CNF.USER+"&PID="+pid;
@@ -537,6 +534,16 @@ function getMenuInfoByStat(prefix){
 	var cn = W3GUI.STAT.getValue(prefix+".count");
 	if(cn == null) cn = 0;
 	return mt+"<br />"+cn;
+}
+
+//
+W3GUI.asyncLoadText = function(func,url){
+    A9Loader.asyncLoadText(function(u,t){
+        func(t);
+    },url);
+}
+W3GUI.changeCss = function(obj,cname){
+    obj.className = cname;
 }
 
 // init
