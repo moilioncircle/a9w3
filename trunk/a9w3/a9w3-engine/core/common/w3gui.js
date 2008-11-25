@@ -97,7 +97,7 @@ W3GUI.drawLogo = function(){
     var html = "<table width='100%' height='100%'  border='0' cellpadding='0' cellspacing='0'>";
         html+= "<tr>";
         html+= "<td width='220'><a href='javascript:W3GUI.showHome()'><img src='"+icon+"' border='0'/></a></td>";
-        html+= "<td style='vertical-align:middle;'>"+text+"</td>";
+        html+= "<td style='vertical-align:middle;text-align:left;'>"+text+"</td>";
         html+= "</tr>";
         html+= "</table>";
     
