@@ -315,6 +315,15 @@ W3GUI.showPicture = function(id){
 }
 
 /** admin */
+W3GUI.onAdminLogin = function(){
+    parent.W3CNF.A9W3_RTMODE = parent.W3CNF.A9W3_WRITER;
+    W3GUI.LISTWINOBJW.location=W3CNF.A9W3HOME+"a9w3-engine/view/writer/list-admin.htm";
+}
+W3GUI.onAdminLogout = function(){
+    parent.W3CNF.A9W3_RTMODE = parent.W3CNF.A9W3_READER;
+    W3GUI.LISTWINOBJW.location=W3CNF.A9W3HOME+"a9w3-engine/view/reader/list-admin.htm";
+}
+// edit
 W3GUI.editArticle = function(id){
     W3GUI.ITEMWINOBJW.location=W3CNF.A9W3HOME+"a9w3-engine/view/writer/item-paper.htm?"+id;
 }
