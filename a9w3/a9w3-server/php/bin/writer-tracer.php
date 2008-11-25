@@ -20,7 +20,7 @@ function autoTrace(){
 	
 	/* status info */
 	$infokey = array(
-		'admin'   => 'admin.login',
+		'admin'   => 'admin.login admin.cpass admin.sitefp',
 		'address' => 'links.commit links.delete',
 		'article' => 'paper.edit.commit paper.edit.delete',
 		'gallery' => 'album.edit.commit album.edit.delete',
@@ -80,7 +80,8 @@ function autoTrace(){
 		'notice.edit.commit',
 		'notice.edit.delete',
 		'admin.login',
-		'admin.cpass'
+		'admin.cpass',
+        'admin.sitefp'
 	);
 	
 	// key YmdHis $UID $PID $IP\n
