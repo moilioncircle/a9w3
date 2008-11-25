@@ -1,0 +1,45 @@
+﻿<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="../../data/style/black/list.css" rel="stylesheet" type="text/css">
+<link href="../../data/style/black/board.css" rel="stylesheet" type="text/css">
+<table border='0' cellspacing='2' cellpadding='0' width='100%'>
+<form target="__DATA_POSTER__" id="__DATA_FORM__" method="POST"  enctype="multipart/form-data">
+<tr>
+	<td width="30">&nbsp;</td>
+	<td>&nbsp;</td>
+</tr>
+<tr>
+	<td><strong>Pass</strong></td>
+	<td><input type="password" name="PASS" id="PASS" class="a9w3_board_from"></td>
+</tr>
+<tr>
+	<td width="30"><strong>New</strong></td>
+	<td><input type="password" name="NEWP" id="NEWP" class="a9w3_board_from"></td>
+</tr>
+<tr>
+	<td width="30"><strong>Re</strong></td>
+	<td><input type="password" name="RENP" id="RENP" class="a9w3_board_from"></td>
+</tr>
+
+<tr>
+	<td><strong>Code</strong></td>
+	<td><table width="100%"  border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="50%"><input type="text"  name="CODE" id="CODE"  class="a9w3_board_code"></td>
+		<td width="12">&nbsp;</td>
+        <td style="vertical-align: middle;"><img onclick="loadCode()" title="change code" src="../../data/image/loading-circle-grace-m.gif" id="__CODE__" alt="random code"></td>
+      </tr>
+    </table>
+	</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+  <td>
+    <input type="button" onclick="onChpass()" name="chPass" value="chPass"  class="a9w3_board_button">
+    <input type="button" onclick="onLogout()" name="Logout" value="Logout" style="background-color:#99CCFF" class="a9w3_board_button">
+  </td>
+</tr>
+</form>
+</table>
+
+<iframe onload="try{onDataResponse()}catch(e){}" onreadystatechange="try{onDataResponse()}catch(e){}" id="__DATA_POSTER__" name="__DATA_POSTER__" width='0px' height='0' frameborder='0' src="about:blank"  style="display:none"></iframe>
+<script type="text/javascript" src="../../core/writer/list-admin.js"></script>
