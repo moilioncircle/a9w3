@@ -1,19 +1,18 @@
 <?php
 require_once('common.php');
 checkRequestUID();
-//checkUmodePermit(UMODE_WRITER);
+checkUmodePermit(UMODE_WRITER);
 
 //
 $treeDir = array(
 PATH_ROOT.'index.htm',
 PATH_ROOT.'a9w3-engine',
 PATH_ROOT.'a9w3-server',
-PATH_ROOT.'a9w3-auhome/'.$_REQUEST['UID'],
-PATH_ROOT.'index.htm'
+PATH_ROOT.'a9w3-auhome/'.$_REQUEST['UID']
 );
 
 foreach($treeDir as $v){
-	echo fingerprintTree("D:/workspace/a9w3/a9w3-server/php");
+	echo fingerprintTree($v);
 }
 
 // trace stat
@@ -33,7 +32,7 @@ function fingerprintTree($fn){
             closedir($dh);
         }
     }else if(is_file($fn)){
-        $result.=$fn.'|'.
+        $result.=str_replace(PATH_ROOT, '',$fn).'|'.
             filesize($fn).'|'.
             date('YmdHis',filemtime($fn)).'|'.
             md5_file($fn)."\n";
