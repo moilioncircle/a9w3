@@ -4,12 +4,15 @@ if(!empty($_SERVER['REQUEST_URI'])){
     echo "can not run on server side";
     exit;
 }
-define('PATH_ROOT','../../../');
+//
+$self = __FILE__;
+for($i=0;$i<4;$i++) $self = dirname($self);
+define('PATH_ROOT',$self.'/');
 parseCommand($argv);
 
 //////////////////////// Function ///////////////////////////
 function parseCommand($argv){
-    if(empty($argv)){command_help();exit;}
+    if(count($argv)<2){command_help();exit;}
     //
     $cmndarg = array();
     $options = array();
@@ -47,16 +50,15 @@ function parseCommand($argv){
 } 
 //////////////////////// Command ///////////////////////////
 function command_sitefp($cmndarg,$options){
-    $uid = $cmndarg[0];
-    if(!is_dir(PATH_ROOT.'a9w3-auhome/'.$uid)){
-        echo 'bad uid:'.$uid;
+    if(empty($cmndarg[0]) || !is_dir(PATH_ROOT.'a9w3-auhome/'.$cmndarg[0])){
+        echo 'bad parameter: uid';
         exit;
     }
     $treeDir = array(
         PATH_ROOT.'index.htm',
         PATH_ROOT.'a9w3-engine',
         PATH_ROOT.'a9w3-server',
-        PATH_ROOT.'a9w3-auhome/'.$uid
+        PATH_ROOT.'a9w3-auhome/'.$cmndarg[0]
     );
     
     foreach($treeDir as $v){
@@ -64,7 +66,25 @@ function command_sitefp($cmndarg,$options){
     }
 }
 function command_difffp($cmndarg,$options){
+    if(empty($cmndarg[0]) 
+    ||empty($cmndarg[1])
+    ||!is_file($cmndarg[0])
+    ||!is_file($cmndarg[1])){
+        command_help();
+        exit;
+    }
+    if($cmndarg[0] == $cmndarg[1]) return;
     
+    $inFile = array_key_exists('in', $options)?explode(',',$options['in']):array();
+    $exFile = array_key_exists('ex', $options)?explode(',',$options['ex']):array();
+    
+    $lfplines = fpfile2array($cmndarg[0],$inFile,$exFile);
+    $rfplines = fpfile2array($cmndarg[1],$inFile,$exFile);
+    
+    // local >> remote
+    // local << remote
+    // local <> remote
+    // local == remote
 }
 function command_ftpsfp($cmndarg,$options){
 }
@@ -82,11 +102,8 @@ function command_help(){
             make difffp by fingerprint between local and remote.
             lfp         local fingerprint.
             rfp         remote fingerprint.
-            -in=p1,p2   included file pattens. ','-splited.
-            -ex=p1,p2   excluded file pattens. ','-splited.
-            -size       compare size
-            -time       compare time
-            -md5        compare md5 [default]
+            -in=p1,p2   included file pattens(regexp). ','-splited.
+            -ex=p1,p2   excluded file pattens(regexp). ','-splited.
         * ftpsfp [option] difffp user[:passwd]@server[:port]/a9w3
             useing ftp to put/get/del file on local/remote by difffp.
             difffp      made by 'difffp'.
@@ -123,5 +140,41 @@ function fingerprintTree($fn){
     }
     return $result;
 }
-
+function fpfile2array($fn,$in,$ex){
+    $fpa = array();
+    
+    $is_in = !(empty($in)||count($in)==0);
+    if($is_in) $in = array_map("escape_preg", $in);
+    $is_ex = !(empty($ex)||count($ex)==0);
+    if($is_ex) $ex = array_map("escape_preg", $ex);
+    
+    foreach(file($fn) as $ln){
+        $pts = explode('|',trim($ln));
+        if(count($pts) != 4) continue;
+        
+        if($is_in){
+            $gt = false;
+            foreach($in as $p){
+                $gt = preg_match($p,$pts[0]);
+                if($gt) break;
+            }
+            if(!$gt) continue;
+        }
+        
+        if($is_ex){
+            $gt = true;
+            foreach($ex as $p){
+                $gt = preg_match($p,$pts[0]);
+                if($gt) break;
+            }
+            if($gt) continue;
+        }
+        
+        $fpa[$pts[0]] = array('size'=>$pts[1],'time'=>$pts[2],'md5'=>$pts[3]);
+    }
+    return $fpa;
+}
+function escape_preg($v){
+    return empty($v)?'':'@'.str_replace('@','\\@',$v).'@';
+}
 ?>
