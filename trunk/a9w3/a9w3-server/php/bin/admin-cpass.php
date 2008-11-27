@@ -5,7 +5,6 @@ checkUmodePermit(UMODE_WRITER);
 
 // check by js at client
 if(empty($_REQUEST['PASS']) 
-|| empty($_REQUEST['CODE'])
 || empty($_REQUEST['NEWP'])){
     echo RKEY_ACCDENY;
     exit;
@@ -14,17 +13,7 @@ if(empty($_REQUEST['PASS'])
 // alias
 $r_uid  = $_REQUEST['UID'];
 $r_pass  = $_REQUEST['PASS'];
-$r_code  = $_REQUEST['CODE'];
 $r_newp  = $_REQUEST['NEWP'];
-
-// check imgsn
-session_start();
-if(empty($_SESSION[SKEY_IMGSN.$r_uid])
-|| strcasecmp($r_code,$_SESSION[SKEY_IMGSN.$r_uid]) != 0){
-    echo RKEY_WRIMGSN;
-    exit;
-}
-unset($_SESSION[SKEY_IMGSN.$r_uid]);  // clear imgsn
 
 // check passwd
 $pass = file_get_contents(PATH_ROOT.'a9w3-auhome/'.$r_uid.'/profile/passwd.htm');
