@@ -11,7 +11,6 @@ function onDataResponse(){
     }
     
     if(rtv != ""){
-        loadCode();
         __DATA_POSTER__.location="about:blank";// avoid recommit when refresh
         alert(parent.W3CNF.getI18nString(rtv));
     }
@@ -35,11 +34,6 @@ function onChpass(){
         return;
     }
     
-    if(document.getElementById("CODE").value ==""){
-        alert(parent.W3CNF.getI18nString("info.item.empty"));
-        document.getElementById("CODE").focus();
-        return;
-    }
     var url = parent.W3CNF.getServerURL("admin.cpass");
     url = parent.W3GUI.wrapUID(url);
 
@@ -54,10 +48,7 @@ function onLogout(){
 
     var rtv = parent.A9Loader.syncLoadText(url);
     alert(parent.W3CNF.getI18nString(rtv));
-    if(rtv == "info.success"){
-        parent.W3GUI.onAdminLogout();
-    }
-
+    parent.W3GUI.onAdminLogout();
 }
 
 function isSimplePass(pass){
@@ -65,13 +56,3 @@ function isSimplePass(pass){
     if(pass.replace(/[0-9a-zA-Z]/g,"").length<=0) return true;
     return false;
 }
-
-function loadCode(){
-    var url = parent.W3CNF.getServerURL("admin.random");
-    url = parent.W3GUI.avoidClientCache(parent.W3GUI.wrapUID(url));
-
-    document.getElementById("__CODE__").src=url;
-}
-
-loadCode();
-

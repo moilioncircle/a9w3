@@ -40,6 +40,10 @@ function onLogin(){
     fm.submit();
 }
 
+function onSwitch(){
+    parent.W3GUI.onAdminLogin();
+}
+
 function isSimplePass(pass){
     if(pass == null || pass.length<10) return true;
     if(pass.replace(/[0-9a-zA-Z]/g,"").length<=0) return true;
