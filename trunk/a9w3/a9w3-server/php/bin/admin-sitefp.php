@@ -13,7 +13,7 @@ PATH_ROOT.'a9w3-auhome/'.$_REQUEST['UID']
 
 header('Content-type: application/force-download');
 header('Content-Transfer-Encoding: Binary');
-header('Content-disposition: attachment;filename=\"sitefp-'.date('YmdHis').'.txt\";');
+header('Content-disposition: attachment;filename=\"'.$_REQUEST['UID'].'-sitefp-'.date('YmdHis').'.txt\";');
 
 foreach($treeDir as $v){
 	echo fingerprintTree($v);
