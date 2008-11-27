@@ -66,11 +66,12 @@ function command_sitefp($cmndarg,$options){
     }
 }
 function command_difffp($cmndarg,$options){
-    if(empty($cmndarg[0]) 
-    ||empty($cmndarg[1])
-    ||!is_file($cmndarg[0])
-    ||!is_file($cmndarg[1])){
-        command_help();
+    if(empty($cmndarg[0])||empty($cmndarg[1])){
+        echo 'argument missed';
+        exit;
+    }
+    if(!is_file($cmndarg[0])||!is_file($cmndarg[1])){
+        echo 'file not existed :'.$cmndarg[0].' or '.$cmndarg[1];
         exit;
     }
     if($cmndarg[0] == $cmndarg[1]) return;
@@ -81,10 +82,50 @@ function command_difffp($cmndarg,$options){
     $lfplines = fpfile2array($cmndarg[0],$inFile,$exFile);
     $rfplines = fpfile2array($cmndarg[1],$inFile,$exFile);
     
-    // local >> remote
-    // local << remote
-    // local <> remote
-    // local == remote
+    //token | filename | lsize | ltime | rsize | rtime
+    $tk_lcl = '>> ';// >> : local  only / !md5 && ltime>=rtime
+    $tk_rmt = '<< ';// << : remote only / !md5 && ltime<rtime
+    $tk_eql = '== ';// == : equal (md5 && size)
+    $tk_unk = '<> ';// <> : unknown,none of above
+    $tk_spl = ' | ';
+    
+    //based on local
+    foreach($lfplines as $fn=>$op){
+        if(!array_key_exists($fn,$rfplines)){
+            echo $tk_rmt.$tk_spl.       // token
+                 $fn.$tk_spl.           // filename
+                 $op['size'].$tk_spl.   // lsize
+                 $op['time'].$tk_spl.   // ltime
+                 $tk_spl.               // rsize
+                 "\n";                  // rtime
+        }else{
+            $rop = $rfplines[$fn];
+            $tk_its = $tk_unk;
+            if($op['md5'] !== $rop['md5']){
+                $tk_its = $op['time'] >= $rop['time']?$tk_lcl:$tk_rmt;
+            }else{
+                if($op['size'] === $rop['size']) $tk_its=$tk_eql;
+            }
+            echo $tk_its.$tk_spl.       // token
+                 $fn.$tk_spl.           // filename
+                 $op['size'].$tk_spl.   // lsize
+                 $op['time'].$tk_spl.   // ltime
+                 $rop['size'].$tk_spl.  // rsize
+                 $rop['time']."\n";     // rtime
+        }
+    }
+    
+    //remote only
+    foreach($rfplines as $fn=>$op){
+        if(!array_key_exists($fn,$lfplines)){
+            echo $tk_rmt.$tk_spl.     // token
+                 $fn.$tk_spl.         // filename
+                     $tk_spl.         // lsize
+                     $tk_spl.         // ltime
+                 $op['size'].$tk_spl. // rsize
+                 $op['time']."\n";    // rtime
+        }
+    }
 }
 function command_ftpsfp($cmndarg,$options){
 }
