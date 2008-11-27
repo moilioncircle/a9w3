@@ -83,10 +83,10 @@ function command_difffp($cmndarg,$options){
     $rfplines = fpfile2array($cmndarg[1],$inFile,$exFile);
     
     //token | filename | lsize | ltime | rsize | rtime
-    $tk_lcl = '>> ';// >> : local  only / !md5 && ltime>=rtime
-    $tk_rmt = '<< ';// << : remote only / !md5 && ltime<rtime
-    $tk_eql = '== ';// == : equal (md5 && size)
-    $tk_unk = '<> ';// <> : unknown,none of above
+    $tk_lcl = '>>';// >> : local  only / !md5 && ltime>=rtime
+    $tk_rmt = '<<';// << : remote only / !md5 && ltime<rtime
+    $tk_eql = '==';// == : equal (md5 && size)
+    $tk_unk = '<>';// <> : unknown,none of above
     $tk_spl = ' | ';
     
     //based on local
