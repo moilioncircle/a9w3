@@ -10,6 +10,7 @@ function onDataResponse(){
         __DATA_POSTER__.document.body.innerHTML = "";
     }
     
+    rtv = parent.W3TXT.trimEmpty(rtv);
     if(rtv != ""){
         alert(parent.W3CNF.getI18nString(rtv));
         if(rtv == "warn.pass.change" || rtv == "info.success"){

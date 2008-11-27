@@ -200,3 +200,8 @@ W3TXT.text2html = function(text){
         
     return text;
 };
+W3TXT.trimEmpty = function(text){
+    if(text == null || text =="") return "";
+    text = text.replace(/[ ¡¡\t\r\n]+/g,"");
+    return text;
+};

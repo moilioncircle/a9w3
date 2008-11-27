@@ -10,6 +10,7 @@ function onDataResponse(){
         __DATA_POSTER__.document.body.innerHTML = "";
     }
     
+    rtv = parent.W3TXT.trimEmpty(rtv);
     if(rtv != ""){
         alert(rtv);
         __DATA_POSTER__.location="about:blank";// avoid recommit when refresh
