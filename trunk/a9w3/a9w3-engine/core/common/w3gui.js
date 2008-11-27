@@ -410,6 +410,7 @@ W3GUI.deleteCommon = function(code,pid,key){
     url = W3GUI.wrapUID(url)+"&PID="+pid;
     
     var rtv = A9Loader.syncLoadText(url);
+    rtv = parent.W3TXT.trimEmpty(rtv);
     if(rtv == "info.success"){
     	if(key != null){
 	        for(var pk in W3GUI.POOL){

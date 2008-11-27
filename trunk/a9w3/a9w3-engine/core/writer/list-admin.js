@@ -9,7 +9,8 @@ function onDataResponse(){
         rtv = __DATA_POSTER__.document.body.innerHTML;
         __DATA_POSTER__.document.body.innerHTML = "";
     }
-    
+
+    rtv = parent.W3TXT.trimEmpty(rtv);
     if(rtv != ""){
         __DATA_POSTER__.location="about:blank";// avoid recommit when refresh
         alert(parent.W3CNF.getI18nString(rtv));
@@ -42,11 +43,19 @@ function onChpass(){
     fm.submit();
 }
 
+function onSitefp(){
+    var url = parent.W3CNF.getServerURL("admin.sitefp");
+    url = parent.W3GUI.wrapUID(url);
+    window.open(url);
+}
+
 function onLogout(){
     var url = parent.W3CNF.getServerURL("admin.logout");
     url = parent.W3GUI.wrapUID(url);
 
     var rtv = parent.A9Loader.syncLoadText(url);
+    rtv = parent.W3TXT.trimEmpty(rtv);
+
     alert(parent.W3CNF.getI18nString(rtv));
     parent.W3GUI.onAdminLogout();
 }

@@ -60,6 +60,7 @@ function onDataResponse(){
         __DATA_POSTER__.document.body.innerHTML = "";
     }
     
+    rtv = parent.W3TXT.trimEmpty(rtv);
     if(rtv != ""){
         __DATA_POSTER__.location="about:blank";// avoid recommit when refresh
         if(checkReplyCode(rtv)){
@@ -88,6 +89,8 @@ function onDelData(){
     url = parent.W3GUI.wrapUID(url)+"&PID="+paperId+"&FILE="+id;
     
     var rtv = parent.A9Loader.syncLoadText(url);
+    rtv = parent.W3TXT.trimEmpty(rtv);
+
     if(rtv == "info.success"){
         initData();
     }
@@ -161,7 +164,8 @@ function onPaperResponse(){
         rtv = __PAPER_POSTER__.document.body.innerHTML;
         __PAPER_POSTER__.document.body.innerHTML = "";
     }
-    
+
+    rtv = parent.W3TXT.trimEmpty(rtv);
     if(rtv != ""){
     	__PAPER_POSTER__.location="about:blank";// avoid recommit when refresh
         
