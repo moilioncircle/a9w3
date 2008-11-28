@@ -75,7 +75,7 @@ function command_difffp($cmndarg,$options){
         exit;
     }
     if(!is_file($cmndarg[0])||!is_file($cmndarg[1])){
-        echo 'file not existed :'.$cmndarg[0].' or '.$cmndarg[1];
+        echo 'file not found :'.$cmndarg[0].' or '.$cmndarg[1];
         exit;
     }
     if($cmndarg[0] == $cmndarg[1]) return;
@@ -97,7 +97,7 @@ function command_difffp($cmndarg,$options){
     $showEq = array_key_exists('eq', $options);
     foreach($lfplines as $fn=>$op){
         if(!array_key_exists($fn,$rfplines)){
-            echo $tk_rmt.$tk_spl.       // token
+            echo $tk_lcl.$tk_spl.       // token
                  $fn.$tk_spl.           // filename
                  $op['size'].$tk_spl.   // lsize
                  $op['time'].$tk_spl.   // ltime
@@ -136,6 +136,91 @@ function command_difffp($cmndarg,$options){
     }
 }
 function command_ftpsfp($cmndarg,$options){
+    if(count($cmndarg)<2){
+        echo 'bad parameter: difffp';
+        exit;
+    }
+    
+    $fpfile = $cmndarg[0];
+    if(!is_file($fpfile)){
+        echo 'file not found: '.$fpfile;
+        exit;
+    }
+    
+    //loop in fp file
+    $tk_put = '>>';// >> : upload/del
+    $tk_get = '<<';// << : download/del
+    $tk_spl = '|';
+    
+    $put_arr = array();
+    $get_arr = array();
+    foreach(file($fpfile) as $line){
+        $pts = explode($tk_spl,$line);
+        if(count($pts) != 6){
+            echo 'skipe line:'.$line."\n";
+            continue;
+        }
+        if($pts[0] === $tk_put){
+            $put_arr[$pts[1]]=empty($pts[5]);
+        }else if($pts[0] === $tk_get){
+            $get_arr[$pts[1]]=empty($pts[3]);
+        }else{
+            echo 'skipe line:'.$line."\n";
+        }
+    }
+	if(empty($put_arr) && empty($get_arr)){
+        echo 'difffp list is empty,skip it';
+        exit;
+    }
+    
+    $ftpstr = $cmndarg[1];//"user[:passwd]@server[:port] a9w3"
+    $ps_at = strpos($ftpstr,'@');
+    if($ps_at>0){
+        $user=substr($ftpstr,0,$ps_at);
+        $ps_ps=strpos($user,':');
+        if($ps_ps){
+            $pass=substr($user,$ps_ps+1);
+            $user=substr($user,0,$ps_ps);
+        }
+        echo 'ftp user: '.$user.(empty($pass)?'(no passwd)':'(with passwd)')."\n";
+        $ftpstr= substr($ftpstr,$ps_at+1);
+    }else{
+        echo 'bad parameter: ftp_server_string';
+        exit;
+    }
+
+    $port=21;
+    $host=$ftpstr;
+    $ps_at = strpos($host,':');
+    if($ps_at>0){
+        $port=substr($host,$ps_at+1);
+        $host=intval(substr($host,0,$ps_at));
+    }
+    if(empty($host)||empty($port)){
+    	echo 'bad parameter: ftp_server_string';
+    	exit;
+    }
+    echo 'ftp host: '.$host.':'.$port."\n";
+      
+    // open ftp
+	$conn_id = ftp_connect($host,$port);
+	if(!ftp_login($conn_id,$user,$pass)){
+		echo 'failed to login';
+		exit;
+	}
+	
+	// check home
+	echo 'current pwd: '.ftp_pwd($conn_id)."\n";
+	if(!empty($cmndarg[2])){
+		echo 'change to a9w3 home: '.$cmndarg[2]."\n";
+		if(!ftp_chdir($conn_id, $cmndarg[2])){
+			echo 'failed to change to a9w3home dir';
+			exit;
+		}
+	}
+	// close ftp
+	ftp_close($conn_id);
+    
 }
 function command_help(){
     echo "
@@ -156,7 +241,7 @@ function command_help(){
             -eq         show equal-files(default no)
             -in=p1,p2   included file pattens(regexp). ','-splited.
             -ex=p1,p2   excluded file pattens(regexp). ','-splited.
-        * ftpsfp [option] difffp user[:passwd]@server[:port]/a9w3
+        * ftpsfp [option] difffp user[:passwd]@server[:port] a9w3
             useing ftp to put/get/del file on local/remote by difffp.
             difffp      made by 'difffp'.
             user        ftp login user.
@@ -164,10 +249,14 @@ function command_help(){
             server      ftp server.
             port        ftp server port,default is 21.
             a9w3        the a9w3 home path on server.
-            -dell       delete local file instead of uploading.
-            -delr       delete remote file instead of downloading.
+            -lcl=op     op=put|del ,put by default ('>>' operation).
+                           put: put every file to remote
+                           del: del local file which not exist at remote
+            -rmt=op     op=get|del ,get by default ('<<' operation).
+                           get: download every file from remote
+                           del: del remote file which not exist at local
         * help
-            what you see right now.
+            what you see just now.
     ";
 }
 
