@@ -1,7 +1,7 @@
 <?php
 require_once('common.php');
-//checkRequestUID();
-//checkUmodePermit(UMODE_WRITER);
+checkRequestUID();
+checkUmodePermit(UMODE_WRITER);
 
 //
 $treeDir = array(
@@ -25,7 +25,7 @@ foreach($treeDir as $v){
 }
 
 // trace stat
-//require_once('writer-tracer.php');
+require_once('writer-tracer.php');
 
 /* helper */
 class SiteFp{
