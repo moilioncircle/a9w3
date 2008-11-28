@@ -26,7 +26,8 @@ function parseCommand($argv){
                 $vl=substr($v,$es+1);
                 $options[$ok]=$vl;
             }else{
-                $options[$v]=$v;
+                $ok = substr($v,1);
+                $options[$ok]=$ok;
             }
         }else{ // arguments
             array_push($cmndarg, $v);
@@ -93,6 +94,7 @@ function command_difffp($cmndarg,$options){
     $tk_spl = '|';
     
     //based on local
+    $showEq = array_key_exists('eq', $options);
     foreach($lfplines as $fn=>$op){
         if(!array_key_exists($fn,$rfplines)){
             echo $tk_rmt.$tk_spl.       // token
@@ -107,7 +109,10 @@ function command_difffp($cmndarg,$options){
             if($op['md5'] !== $rop['md5']){
                 $tk_its = $op['time'] >= $rop['time']?$tk_lcl:$tk_rmt;
             }else{
-                if($op['size'] === $rop['size']) $tk_its=$tk_eql;
+                if($op['size'] === $rop['size']){
+                    if(!$showEq) continue;
+                    $tk_its=$tk_eql;
+                }
             }
             echo $tk_its.$tk_spl.       // token
                  $fn.$tk_spl.           // filename
@@ -148,6 +153,7 @@ function command_help(){
             make difffp by fingerprint between local and remote.
             lfp         local fingerprint.
             rfp         remote fingerprint.
+            -eq         show equal-files(default no)
             -in=p1,p2   included file pattens(regexp). ','-splited.
             -ex=p1,p2   excluded file pattens(regexp). ','-splited.
         * ftpsfp [option] difffp user[:passwd]@server[:port]/a9w3
