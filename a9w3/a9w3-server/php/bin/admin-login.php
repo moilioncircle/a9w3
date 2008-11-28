@@ -9,9 +9,9 @@ if(empty($_REQUEST['PASS']) || empty($_REQUEST['CODE'])){
 }
 
 // alias
-$r_uid  = $_REQUEST['UID'];
-$r_pass  = $_REQUEST['PASS'];
-$r_code  = $_REQUEST['CODE'];
+$r_uid   = getNoMagicRequest('UID');
+$r_pass  = getNoMagicRequest('PASS');
+$r_code  = getNoMagicRequest('CODE');
 
 // check imgsn
 session_start();

@@ -168,13 +168,14 @@ W3TXT.line2text = function(line){
         if((j-i)%2 == 1){
             if(c == "\r") buf.push("\\r");
             else if (c == "\n") buf.push("\\n");
+            else buf.push(c);
         }else{
             buf.push(line.substr(i,(j-i)/2));
         }
         
         i = line.indexOf("\\",j);
     }
-    if(j<line.length-1) buf.push(line.substr(j));
+    if(j<line.length) buf.push(line.substr(j));
     
     return buf.join('');
 };

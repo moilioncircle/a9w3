@@ -61,8 +61,11 @@ function command_sitefp($cmndarg,$options){
         PATH_ROOT.'a9w3-auhome/'.$cmndarg[0]
     );
     
+    $siteFp = new SiteFp(PATH_ROOT);
+    $siteFp->setInclude($options['in']);
+    $siteFp->setExclude($options['ex']);
     foreach($treeDir as $v){
-        echo fingerprintTree($v);
+        echo $siteFp->makeFp($v);
     }
 }
 function command_difffp($cmndarg,$options){
@@ -87,7 +90,7 @@ function command_difffp($cmndarg,$options){
     $tk_rmt = '<<';// << : remote only / !md5 && ltime<rtime
     $tk_eql = '==';// == : equal (md5 && size)
     $tk_unk = '<>';// <> : unknown,none of above
-    $tk_spl = ' | ';
+    $tk_spl = '|';
     
     //based on local
     foreach($lfplines as $fn=>$op){
@@ -139,6 +142,8 @@ function command_help(){
         * sitefp uid
             make local site fingerprint of a9user.
             uid         a9user id.
+            -in=p1,p2   included file pattens(regexp). ','-splited.
+            -ex=p1,p2   excluded file pattens(regexp). ','-splited.
         * difffp [option] lfp rfp
             make difffp by fingerprint between local and remote.
             lfp         local fingerprint.
@@ -161,39 +166,94 @@ function command_help(){
 }
 
 //////////////////////// Helper ///////////////////////////
-function fingerprintTree($fn){
-    if(!file_exists($fn)) return '';
-    $result = '';
-    if (is_dir($fn)){
-        if ($dh = opendir($fn)){
-            while (($sf = readdir($dh)) !== false){
-                if ($sf != '.' && $sf != '..'){
-                    $result.=fingerprintTree($fn.'/'.$sf);
-                }
-            }
-            closedir($dh);
-        }
-    }else if(is_file($fn)){
-        $result.=str_replace(PATH_ROOT, '',$fn).'|'.
-            filesize($fn).'|'.
-            date('YmdHis',filemtime($fn)).'|'.
-            md5_file($fn)."\n";
+class SiteFp{
+    
+    var $root = NULL;
+    var $inar = NULL;
+    var $exar = NULL;
+    var $tkns = '|';
+    
+    function SiteFp($root){
+        $this->root = $root?trim($root):NULL;
     }
-    return $result;
+    function setInclude($expstrs){
+        $this->inar = $this->transExpstr($expstrs);
+    }
+    function setExclude($expstrs){
+        $this->exar = $this->transExpstr($expstrs);
+    }
+    function transExpstr($expstrs){
+        if(!$expstrs) return NULL;
+        $exparr = array();
+        foreach(explode(',',$expstrs) as $v){
+            if(!$v) continue;
+            array_push($exparr, '@'.str_replace('@','\@',$v).'@');
+        }
+        return $exparr?$exparr:NULL;
+    }
+    function makeFp($path){
+        if(!file_exists($path)) return '';
+        
+        $result = '';
+        if (is_dir($path)){
+            if ($dh = opendir($path)){
+                while (($sf = readdir($dh)) !== false){
+                    if ($sf != '.' && $sf != '..'){
+                        $result.=$this->makeFp($path.'/'.$sf);
+                    }
+                }
+                closedir($dh);
+            }
+        }else if(is_file($path)){
+            // filter
+            if($this->inar){
+                $gt = false;
+                foreach($this->inar as $p){
+                    $gt = preg_match($p,$path);
+                    if($gt) break;
+                }
+                if(!$gt) return '';
+            }
+            if($this->exar){
+                $gt = true;
+                foreach($this->exar as $p){
+                    $gt = preg_match($p,$path);
+                    if($gt) break;
+                }
+                if($gt) return '';
+            }
+            $result.=str_replace($this->root,'',$path).$this->tkns.
+                filesize($path).$this->tkns.
+                date('YmdHis',filemtime($path)).$this->tkns.
+                md5_file($path)."\n";
+        }
+        return $result;
+    }
 }
+
 function fpfile2array($fn,$in,$ex){
     $fpa = array();
     
-    $is_in = !(empty($in)||count($in)==0);
-    if($is_in) $in = array_map("escape_preg", $in);
-    $is_ex = !(empty($ex)||count($ex)==0);
-    if($is_ex) $ex = array_map("escape_preg", $ex);
+    if($in){
+        foreach($in as $k=>$v){
+            if($v){
+                $in[$k]='@'.str_replace('@','\@',$v).'@';
+            }
+        }
+    }
+    if($ex){
+        foreach($ex as $k=>$v){
+            if($v){
+                $ex[$k]='@'.str_replace('@','\@',$v).'@';
+            }
+        }
+    }
     
     foreach(file($fn) as $ln){
         $pts = explode('|',trim($ln));
         if(count($pts) != 4) continue;
         
-        if($is_in){
+        if($in){
             $gt = false;
             foreach($in as $p){
                 $gt = preg_match($p,$pts[0]);
@@ -202,7 +262,7 @@ function fpfile2array($fn,$in,$ex){
             if(!$gt) continue;
         }
         
-        if($is_ex){
+        if($ex){
             $gt = true;
             foreach($ex as $p){
                 $gt = preg_match($p,$pts[0]);
@@ -214,8 +274,5 @@ function fpfile2array($fn,$in,$ex){
         $fpa[$pts[0]] = array('size'=>$pts[1],'time'=>$pts[2],'md5'=>$pts[3]);
     }
     return $fpa;
-}
-function escape_preg($v){
-    return empty($v)?'':'@'.str_replace('@','\\@',$v).'@';
 }
 ?>

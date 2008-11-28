@@ -10,11 +10,11 @@ if(empty($_REQUEST['FROM'])
     exit;
 }
 // alias
-$r_uid  = $_REQUEST['UID'];
-$r_pid  = $_REQUEST['PID'];
-$r_from  = $_REQUEST['FROM'];
-$r_text  = $_REQUEST['TEXT'];
-$r_code  = $_REQUEST['CODE'];
+$r_uid  = getNoMagicRequest('UID');
+$r_pid  = getNoMagicRequest('PID');
+$r_from  = getNoMagicRequest('FROM');
+$r_text  = getNoMagicRequest('TEXT');
+$r_code  = getNoMagicRequest('CODE');
 
 // check imgsn
 session_start();

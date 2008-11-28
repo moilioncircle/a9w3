@@ -11,9 +11,9 @@ if(empty($_REQUEST['PASS'])
 }
 
 // alias
-$r_uid  = $_REQUEST['UID'];
-$r_pass  = $_REQUEST['PASS'];
-$r_newp  = $_REQUEST['NEWP'];
+$r_uid  = getNoMagicRequest('UID');
+$r_pass  = getNoMagicRequest('PASS');
+$r_newp  = getNoMagicRequest('NEWP');
 
 // check passwd
 $pass = file_get_contents(PATH_ROOT.'a9w3-auhome/'.$r_uid.'/profile/passwd.htm');

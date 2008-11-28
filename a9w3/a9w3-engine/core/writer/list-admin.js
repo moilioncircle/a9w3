@@ -46,7 +46,9 @@ function onChpass(){
 function onSitefp(){
     var url = parent.W3CNF.getServerURL("admin.sitefp");
     url = parent.W3GUI.wrapUID(url);
-    window.open(url);
+    var fm = document.getElementById("__DATA_FORM__");
+    fm.action=url;
+    fm.submit();
 }
 
 function onLogout(){
