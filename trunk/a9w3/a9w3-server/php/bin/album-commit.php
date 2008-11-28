@@ -12,10 +12,10 @@ if(empty($_REQUEST['BRIEF'])
 }
 
 // alias
-$r_uid  = $_REQUEST['UID'];
-$r_pid  = $_REQUEST['PID'];
-$r_label = $_REQUEST['LABEL'];
-$r_brief = $_REQUEST['BRIEF'];
+$r_uid  = getNoMagicRequest('UID');
+$r_pid  = getNoMagicRequest('PID');
+$r_label = getNoMagicRequest('LABEL');
+$r_brief = getNoMagicRequest('BRIEF');
 
 // 
 $newFields = array(

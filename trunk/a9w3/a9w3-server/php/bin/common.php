@@ -111,6 +111,11 @@ function text2line($text){
     return str_replace(array("\\","\n","\r"),array("\\\\","\\n","\\r"),$text);
 }
 
+function getNoMagicRequest($key){
+	if(empty($_REQUEST[$key])) return '';
+	return get_magic_quotes_gpc()?stripslashes($_REQUEST[$key]):$_REQUEST[$key];
+}
+
 function formatSize($size){
     if($size == 0) return '0B';
     $sizename = array('?','B', 'K', 'M');
