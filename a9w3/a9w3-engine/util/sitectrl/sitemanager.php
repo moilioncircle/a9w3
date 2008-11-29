@@ -147,11 +147,41 @@ function command_ftpsfp($cmndarg,$options){
         exit;
     }
     
-    //loop in fp file
+    $op_put = 'put';
+    $op_get = 'get';
+    $op_del = 'del';
+    $op_nop = 'nop';
+    
+    $lcl_opr = $op_put;
+    $rmt_opr = $op_get;
+    
+    if(array_key_exists('lcl', $options)){
+        $op = $options['lcl'];
+        if($op == $op_put
+        || $op == $op_del
+        || $op == $op_nop){
+            $lcl_opr = $op;
+        }else{
+            echo 'bad parameter -lcl:'.$op;
+            exit;
+        }
+    }
+    if(array_key_exists('rmt', $options)){
+        $op = $options['rmt'];
+        if($op == $op_get
+        || $op == $op_del
+        || $op == $op_nop){
+            $rmt_opr = $op;
+        }else{
+            echo 'bad parameter -rmt:'.$op;
+            exit;
+        }
+    }
+    
     $tk_put = '>>';// >> : upload/del
     $tk_get = '<<';// << : download/del
     $tk_spl = '|';
-    
+    //loop in fp file
     $put_arr = array();
     $get_arr = array();
     foreach(file($fpfile) as $line){
@@ -160,9 +190,9 @@ function command_ftpsfp($cmndarg,$options){
             echo 'skipe line:'.$line."\n";
             continue;
         }
-        if($pts[0] === $tk_put){
+        if($pts[0] === $tk_put && $lcl_opr != $op_nop){
             $put_arr[$pts[1]]=empty($pts[5]);
-        }else if($pts[0] === $tk_get){
+        }else if($pts[0] === $tk_get && $rmt_opr != $op_nop){
             $get_arr[$pts[1]]=empty($pts[3]);
         }else{
             echo 'skipe line:'.$line."\n";
@@ -218,6 +248,30 @@ function command_ftpsfp($cmndarg,$options){
 			exit;
 		}
 	}
+    // do put
+    foreach($put_arr as $k=>$v){
+        $lclfile = PATH_ROOT.$k;
+        if($v && $lcl_opr == $op_del){//del
+            $ok = unlink($lclfile);
+            echo ($ok?'OK ':"ERR").' LCL_DEL '.$k."\n";
+        }else{//put
+            // check and make dir on remote
+            echo ($ok?'OK ':"ERR").' LCL_PUT '.$k."\n";
+        }
+    }
+    // do get
+    foreach($get_arr as $k=>$v){
+        $lclfile = PATH_ROOT.$k;
+        if($v && $rmt_opr == $op_del){//del
+            $ok = ftp_delete($conn_id, $k));
+            echo ($ok?'OK ':"ERR").' RMT_DEL '.$k."\n";
+        }else{//get
+            // check and make dir on local
+            mkdir(dirname($lclfile),0700,TRUE);
+            $ok = ftp_get($conn_id, $lclfile,$k,FTP_BINARY);
+            echo ($ok?'OK ':"ERR").' RMT_GET '.$k."\n";
+        }
+    }
 	// close ftp
 	ftp_close($conn_id);
     
@@ -249,12 +303,14 @@ function command_help(){
             server      ftp server.
             port        ftp server port,default is 21.
             a9w3        the a9w3 home path on server.
-            -lcl=op     op=put|del ,put by default ('>>' operation).
-                           put: put every file to remote
-                           del: del local file which not exist at remote
-            -rmt=op     op=get|del ,get by default ('<<' operation).
-                           get: download every file from remote
-                           del: del remote file which not exist at local
+            -lcl=op     op=put|del|nop ,put by default ('>>' operation).
+                           put: put every file to remote.
+                           del: del local file which not exist at remote.
+                           nop: skip all.
+            -rmt=op     op=get|del|nop ,get by default ('<<' operation).
+                           get: download every file from remote.
+                           del: del remote file which not exist at local.
+                           nop: skip all.
         * help
             what you see just now.
     ";
