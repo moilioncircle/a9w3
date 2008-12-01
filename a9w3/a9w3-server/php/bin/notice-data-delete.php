@@ -30,7 +30,7 @@ if($r_file === 'index.htm'){
 // delete
 $dst = PATH_ROOT.'a9w3-auhome/'.$r_uid.'/helpers/notice/'.$r_pid.'/data/'.$r_file;
 if(!deleteFile($dst)){
-    echo RKEY_ACCDENY;
+    echo RKEY_UNKOWN;
     exit;
 }
 
@@ -38,13 +38,20 @@ $idx = PATH_ROOT.'a9w3-auhome/'.$r_uid.'/helpers/notice/'.$r_pid.'/data/index.ht
 $arr = array();
 foreach(file($idx) as $line){
     $line = trim($line);
-    if($line !== $r_file){
+    if($line !== '' && $line !== $r_file){
         array_push($arr, $line);
     }
 }
-if(!writeFile($idx,implode("\n",$arr),'w')){
-    echo RKEY_ACCDENY;
-    exit;
+if(count($arr) == 0){
+	if(!deleteTree(PATH_ROOT.'a9w3-auhome/'.$r_uid.'/article/'.$r_pid.'/data')){
+	    echo RKEY_UNKOWN;
+	    exit;
+	}
+}else{
+	if(!writeFile($idx,implode("\n",$arr),'w')){
+	    echo RKEY_UNKOWN;
+	    exit;
+	}
 }
 
 echo RKEY_SUCCESS;

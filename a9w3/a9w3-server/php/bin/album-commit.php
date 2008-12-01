@@ -46,7 +46,7 @@ if(empty($r_pid)){ // new one
 	|| (!is_dir($i_dir) && !mkdir($i_dir))
 	|| (!is_dir($m_dir) && !mkdir($m_dir))
 	|| is_file($g_dir.'info/'.$r_pid.'.htm')){
-	    echo RKEY_ACCDENY;
+	    echo RKEY_UNKOWN;
 	    exit;
 	}
 
@@ -62,7 +62,7 @@ if(empty($r_pid)){ // new one
 	
 	if(empty($im)){
 		if (!copy(PATH_ROOT.'a9w3-engine/data/image/default-album-mini.jpg', $g_dir.'mini/'.$r_pid.'.jpg')) {
-		    echo RKEY_ACCDENY;
+		    echo RKEY_UNKOWN;
 	    	exit;
 		}
 		$newFields['pixel']='unknown';
@@ -99,7 +99,7 @@ if(empty($r_pid)){ // new one
     
 	if ($r_file['error'] !== UPLOAD_ERR_OK
 	||	move_uploaded_file($r_file['tmp_name'], $g_dir.'data/'.$r_pid.'.'.$newFields['ftype']) === false){
-   	    echo RKEY_ACCDENY;
+   	    echo RKEY_UNKOWN;
 	    exit;
 	}
     
