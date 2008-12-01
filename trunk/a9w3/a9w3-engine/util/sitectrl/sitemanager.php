@@ -256,6 +256,20 @@ function command_ftpsfp($cmndarg,$options){
             echo ($ok?'OK ':"ERR").' LCL_DEL '.$k."\n";
         }else{//put
             // check and make dir on remote
+            $ok = ftp_put($conn_id, $k, $lclfile, FTP_BINARY);
+            if(!$ok){ // maybe need mkdir
+                $tkpt = '/';
+                $crpt = '';
+                foreach(explode($tkpt,dirname($k)) as $dn){
+                    if(empty($dn)) continue;
+                    $crpt.= $dn.$tkpt;
+                    $ok = ftp_mkdir($conn_id, $crpt);
+                    if($ok === FALSE) break;
+                }
+                if($ok){
+                    $ok = ftp_put($conn_id, $k, $lclfile, FTP_BINARY);
+                }
+            }
             echo ($ok?'OK ':"ERR").' LCL_PUT '.$k."\n";
         }
     }
@@ -263,7 +277,7 @@ function command_ftpsfp($cmndarg,$options){
     foreach($get_arr as $k=>$v){
         $lclfile = PATH_ROOT.$k;
         if($v && $rmt_opr == $op_del){//del
-            $ok = ftp_delete($conn_id, $k));
+            $ok = ftp_delete($conn_id, $k);
             echo ($ok?'OK ':"ERR").' RMT_DEL '.$k."\n";
         }else{//get
             // check and make dir on local
