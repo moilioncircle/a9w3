@@ -46,7 +46,7 @@ if(empty($r_pid)){ // new
     
     if((!is_dir($yyyy) && !mkdir($yyyy))
     ||(!is_dir($mdhx) && !mkdir($mdhx))){
-        echo RKEY_ACCDENY;
+        echo RKEY_UNKOWN;
         exit;
     }
     

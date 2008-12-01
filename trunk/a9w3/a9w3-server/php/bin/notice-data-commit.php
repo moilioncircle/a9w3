@@ -32,13 +32,13 @@ checkUploadFileDeny($r_file['name']);
 // save
 $dt = PATH_ROOT.'a9w3-auhome/'.$r_uid.'/helpers/notice/'.$r_pid.'/data';
 if(!is_dir($dt) && !mkdir($dt)){
-    echo RKEY_ACCDENY;
+    echo RKEY_UNKOWN;
     exit;
 }
 
 if ($r_file['error'] !== UPLOAD_ERR_OK
 ||  move_uploaded_file($r_file['tmp_name'], $dt.'/'.$r_file['name']) === false){
-    echo RKEY_ACCDENY;
+    echo RKEY_UNKOWN;
     exit;
 }
 

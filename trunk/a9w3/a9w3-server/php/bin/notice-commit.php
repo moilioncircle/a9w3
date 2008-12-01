@@ -39,7 +39,7 @@ if(empty($r_pid)){ // new
     }
     
     if(!is_dir($ndir) && !mkdir($ndir)){
-        echo RKEY_ACCDENY;
+        echo RKEY_UNKOWN;
         exit;
     }
     
