@@ -41,8 +41,8 @@ function parseCommand($argv){
         case 'difffp':
             command_difffp($cmndarg,$options);
             break;
-        case 'ftpsfp':
-            command_ftpsfp($cmndarg,$options);
+        case 'ftpxfp':
+            command_ftpxfp($cmndarg,$options);
             break;
         case 'help':
         default:
@@ -135,7 +135,7 @@ function command_difffp($cmndarg,$options){
         }
     }
 }
-function command_ftpsfp($cmndarg,$options){
+function command_ftpxfp($cmndarg,$options){
     if(count($cmndarg)<2){
         echo 'bad parameter: difffp';
         exit;
@@ -281,7 +281,17 @@ function command_ftpsfp($cmndarg,$options){
             echo ($ok?'OK ':"ERR").' RMT_DEL '.$k."\n";
         }else{//get
             // check and make dir on local
-            mkdir(dirname($lclfile),0700,TRUE);
+            if(!is_dir(dirname($lclfile))){
+                $tkpt = '/';
+                $crpt = PATH_ROOT;
+                foreach(explode($tkpt,dirname($k)) as $dn){
+                    if(empty($dn)) continue;
+                    $crpt.= $dn.$tkpt;
+                    if(!is_dir($crpt)){
+                        mkdir($crpt);
+                    }
+                }
+            }
             $ok = ftp_get($conn_id, $lclfile,$k,FTP_BINARY);
             echo ($ok?'OK ':"ERR").' RMT_GET '.$k."\n";
         }
@@ -309,7 +319,7 @@ function command_help(){
             -eq         show equal-files(default no)
             -in=p1,p2   included file pattens(regexp). ','-splited.
             -ex=p1,p2   excluded file pattens(regexp). ','-splited.
-        * ftpsfp [option] difffp user[:passwd]@server[:port] a9w3
+        * ftpxfp [option] difffp user[:passwd]@server[:port] a9w3
             useing ftp to put/get/del file on local/remote by difffp.
             difffp      made by 'difffp'.
             user        ftp login user.
