@@ -237,7 +237,7 @@ function drawGalleryLinkView(page,obj,lst){
             buff.push("<tr><td><img src='../../data/image/icon-list-ctime.png' title='created' /> "+cdt+"</td></tr>");
             buff.push("<tr><td><img src='../../data/image/icon-list-pixel.png' title='pixel' /> "+ai.pixel+"</td></tr>");
             buff.push("<tr><td><img src='../../data/image/icon-list-sizeb.png' title='size' /> "+ai.sizeb+"</td></tr>");
-            buff.push("<tr><td><img src='../../data/image/icon-list-views.png' title='view' /> "+ai.views+"</td></tr>");
+            buff.push("<tr><td><a href='javascript:parent.W3GUI.seeHitLogPicture(\""+ai.id+"\")'><img src='../../data/image/icon-list-views.png' title='view' border=0 /></a> "+ai.views+"</td></tr>");
             buff.push("<tr><td><img src='../../data/image/icon-list-label.png' title='label'/> ");
             if(ai.lable ==null || ai.lable.length ==0){
                 ai.lable=[parent.W3GUI.GALLERY_LABEL.getValue("000")];
