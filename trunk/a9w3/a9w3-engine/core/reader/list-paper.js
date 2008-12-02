@@ -224,7 +224,7 @@ function drawArticleLinkView(page,obj,lst){
             }
             buff.push("<img src='../../data/image/icon-list-ctime.png' title='created' /> "+cdt);
             buff.push("&nbsp;<img src='../../data/image/icon-list-sizeb.png' title='size' /> "+ai.sizeb);
-            buff.push("&nbsp;<img src='../../data/image/icon-list-views.png' title='view' /> "+ai.views);
+            buff.push("&nbsp;<a href='javascript:parent.W3GUI.seeHitLogArticle(\""+ai.id+"\")'><img src='../../data/image/icon-list-views.png' title='view' border=0 /></a> "+ai.views);
             buff.push("</td>");
             buff.push("</tr>");
             if(ai.lable ==null || ai.lable.length ==0){

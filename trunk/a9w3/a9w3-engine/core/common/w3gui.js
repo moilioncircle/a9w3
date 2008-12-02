@@ -313,6 +313,13 @@ W3GUI.showPicture = function(id){
     W3GUI.ITEMWINOBJW.location=W3CNF.A9W3HOME+"a9w3-engine/view/reader/item-album.htm?"+id;
     readerTracer(id,"album.view.tracer");
 }
+////
+W3GUI.seeHitLogArticle = function(id){
+    W3GUI.ITEMWINOBJW.location=W3CNF.A9W3HOME+"a9w3-engine/view/reader/item-hitlog.htm?article/"+id;
+}
+W3GUI.seeHitLogPicture = function(id){
+    W3GUI.ITEMWINOBJW.location=W3CNF.A9W3HOME+"a9w3-engine/view/reader/item-hitlog.htm?gallery/"+id;
+}
 
 /** admin */
 W3GUI.onAdminLogin = function(){

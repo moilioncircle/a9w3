@@ -1,24 +1,29 @@
 var lineHeight=16;
+var splitbg = "#EFEFEF";
+var blankbg = "#FFFFFF";
 
 parent.W3GUI.asyncLoadText(function(t){
-	var html = "";
+	var html = [];
     if(t != null){
     	//20081122114739|admin.login||127.0.0.9
-        var html= "<table border='0' cellspacing='0' cellpadding='0' width='100%'>";
-            html+="<tr height='"+lineHeight+"'><td width='20'>Id</td><td width='130'>Date</td><td>Name</td><td>PID</td><td>From</td></tr>";
+        html.push("<table border='0' cellspacing='1' cellpadding='2' width='100%'>");
+        html.push("<tr height='"+lineHeight+"'><td width='20'>Id</td><td width='130'>Date</td><td>Name</td><td>PID</td><td>From</td></tr>");
+        var j=1;
         var lines = t.split(/[\r\n]+/).reverse();
         for(var i=0;i<lines.length;i++){
             var parts = lines[i].split("|");
             if(parts.length != 4) continue;
-            html+="<tr height='"+lineHeight+"'>";
-            html+="<td>"+(i+1)+"</td>";
-            html+="<td>"+parts[0]+"</td>";
-            html+="<td>"+parts[1]+"</td>";
-            html+="<td>"+parts[2]+"</td>";
-            html+="<td>"+parts[3]+"</td>";
-            html+="</tr>";
+            html.push("<tr height='"+lineHeight+"' style='background-color:"+(j%5 ==0?splitbg:blankbg)+"'>");
+            html.push("<td>"+j+"</td>");
+            html.push("<td>"+parts[0]+"</td>");
+            html.push("<td>"+parts[1]+"</td>");
+            html.push("<td>"+parts[2]+"</td>");
+            html.push("<td>"+parts[3]+"</td>");
+            html.push("</tr>");
+            j++;
         }
-        html+="</table><br/>";
+        html.push("<tr height='"+lineHeight+"'><td width='20'></td><td width='130'></td><td></td><td></td><td></td></tr>");
+        html.push("</table>");
     }
-    document.getElementById("ACTION").innerHTML=html;
+    document.getElementById("ACTION").innerHTML=html.join("");
 },parent.W3CNF.USERHOME+"helpers/status/write/event.htm")
