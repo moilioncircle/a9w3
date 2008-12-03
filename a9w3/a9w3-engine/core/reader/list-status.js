@@ -4,9 +4,9 @@ var blankbg = "#FFFFFF";
 
 function initReader(){
 	var html = [];
-	html.push("PagerHits: "+parent.A9Loader.syncLoadText(parent.W3CNF.USERHOME+"helpers/status/read/article/0000.htm"));
+	html.push("Pager:"+parent.A9Loader.syncLoadText(parent.W3CNF.USERHOME+"helpers/status/read/article/0000.htm"));
 	html.push("&nbsp;&nbsp;");
-	html.push("AlbumHits: "+parent.A9Loader.syncLoadText(parent.W3CNF.USERHOME+"helpers/status/read/gallery/0000.htm"));
+	html.push("Album:"+parent.A9Loader.syncLoadText(parent.W3CNF.USERHOME+"helpers/status/read/gallery/0000.htm"));
 	html.push("</br>");
     document.getElementById("READER").innerHTML=html.join("");
 }
