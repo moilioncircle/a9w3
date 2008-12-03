@@ -109,6 +109,7 @@ function onViewData(){
 
 function onViewPaper(){
     var win = window.open('about:blank','newwindow', 'height=600, width=600, top=0, left=0, toolbar=no,scrollbars=yes, resizable=yes, menubar=no,location=no, status=no');
+    win.document.write("<meta content='text/html; charset=utf-8' http-equiv='content-type'>");
     if(isNewPaper()){
     	win.document.write("<base href='"+parent.W3CNF.USERHOME+"indexer/article/label/'>");
     }else{

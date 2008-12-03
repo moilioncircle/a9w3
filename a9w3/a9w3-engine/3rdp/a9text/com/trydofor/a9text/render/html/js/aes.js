@@ -9,7 +9,10 @@ var __A9TEXT_AAES__ = {
     decrypt:function(obj)
     {
         if(obj == null) return;
-        var encryptStr = obj.innerHTML.replace(/<.+?>/gim,'').replace(/--.+--/gi,'').replace(/\s/g,'');
+        var encryptStr = obj.innerHTML;
+            encryptStr=encryptStr.replace(/<.+?>/gim,'');// html tag
+            encryptStr=encryptStr.replace(/--.+\s/gi,'');// ruler
+            encryptStr=encryptStr.replace(/\s/g,'');// blank
         if(encryptStr.length>0){
             var passwd = window.prompt('please input your passwd','');
             if(passwd != null && passwd != ''){

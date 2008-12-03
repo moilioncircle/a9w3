@@ -34,7 +34,7 @@ try{
                 
                 // ie problem
                 window.setTimeout(function (){
-                    var baseHtm = "<base href='";
+                    var baseHtm = "<meta content='text/html; charset=utf-8' http-equiv='content-type'><base href='";
                     var basetags = document.getElementsByTagName("base");
                     if(basetags != null && basetags.length>0){
                         baseHtm+=basetags[0].href;
