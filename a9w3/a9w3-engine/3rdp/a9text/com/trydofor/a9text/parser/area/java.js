@@ -32,12 +32,13 @@ var AreaJavaParser = function()
         __ascp__.putPairing(A9Dom.type.area_java.bracket_bg,'{','}');
         
         __ascp__.putKeyword(A9Dom.type.area_java.word_bldtype,['boolean','byte','char','const','double','final','float','int','long','short','static','void']);
-        __ascp__.putKeyword(A9Dom.type.area_java.word_keyword,['abstract','break','case','catch','class','continue','default','do',
-                                                                'else','enum','extends','false','finally','for','goto','if','implements',
-                                                                'instanceof','@interface','interface','native','new','null','private',
-                                                                'protected','public','return','super','strictfp','switch','synchronized',
-                                                                'this','throws','throw','transient','true','try','volatile','while']);
-        
+        __ascp__.putKeyword(A9Dom.type.area_java.word_keyword,['abstract','boolean','break','byte','case','catch','char',
+                                                               'class','continue','default','do','double','else','extends',
+                                                               'false','final','finally','float','for','if','implements',
+                                                               'import','instanceof','int','interface','long','native','new',
+                                                               'null','package','private','protected','public','return','short',
+                                                               'static','super','switch','synchronized','this','throw','throws',
+                                                               'transient','true','try','void','volatile','while','const','goto']);
     }
     ////
     this.parse = function(a9dom,func)
