@@ -62,6 +62,16 @@ function onLogout(){
     parent.W3GUI.onAdminLogout();
 }
 
+function onRenew(){
+    var url = parent.W3CNF.getServerURL("admin.renew");
+    url = parent.W3GUI.wrapUID(url);
+
+    var rtv = parent.A9Loader.syncLoadText(url);
+    rtv = parent.W3TXT.trimEmpty(rtv);
+
+    alert(parent.W3CNF.getI18nString(rtv));
+}
+
 function isSimplePass(pass){
     if(pass == null || pass.length<10) return true;
     if(pass.replace(/[0-9a-zA-Z]/g,"").length<=0) return true;
