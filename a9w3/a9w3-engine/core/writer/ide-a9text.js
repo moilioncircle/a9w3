@@ -124,6 +124,10 @@ function insertText(t){
 // helper
 function wrapA9text(text){
     if(text == null) text = "";
+    text = text.replace(/&/g,"&amp;");
+    text = text.replace(/</g,"&lt;");
+    text = text.replace(/>/g,"&gt;");
+    
     var buff = [];
     buff.push("<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />");
     buff.push("<pre>");
