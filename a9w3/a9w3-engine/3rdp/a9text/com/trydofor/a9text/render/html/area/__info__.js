@@ -10,4 +10,5 @@ __info__('js.js',['AreaJsRender'],['com.trydofor.a9text.render.html.area.common.
 __info__('sql.js',['AreaSQLRender'],['com.trydofor.a9text.render.html.area.common.syntaxcode']);
 __info__('table.js',['AreaTableRender']);
 __info__('tty.js',['AreaTTYRender'],['com.trydofor.a9text.render.html.area.common.syntaxcode']);
+__info__('xml.js',['AreaXMLRender'],['com.trydofor.a9text.render.html.area.common.syntaxcode']);
 

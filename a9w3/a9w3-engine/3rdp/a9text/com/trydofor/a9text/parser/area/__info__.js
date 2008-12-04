@@ -9,3 +9,4 @@ __info__('js.js',['AreaJsParser'],['com.trydofor.a9text.parser.area.common.synta
 __info__('sql.js',['AreaSQLParser'],['com.trydofor.a9text.parser.area.common.syntaxcode']);
 __info__('table.js',['AreaTableParser']);
 __info__('tty.js',['AreaTTYParser'],['com.trydofor.a9text.parser.area.common.syntaxcode']);
+__info__('xml.js',['AreaXMLParser'],['com.trydofor.a9text.parser.area.common.syntaxcode']);

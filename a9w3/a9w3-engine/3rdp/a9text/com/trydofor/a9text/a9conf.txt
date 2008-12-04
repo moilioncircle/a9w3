@@ -39,6 +39,9 @@ parser.area.table.ball = com.trydofor.a9text.parser.area.table
 parser.area.table.clzz = AreaTableParser
 parser.area.tty.ball   = com.trydofor.a9text.parser.area.tty
 parser.area.tty.clzz   = AreaTTYParser
+parser.area.xml.ball   = com.trydofor.a9text.parser.area.xml
+parser.area.xml.clzz   = AreaXMLParser
+
 
 #render
 render.html.common.css.a9text = $CORE_PATH/com/trydofor/a9text/render/html/css/a9text.css
@@ -70,3 +73,5 @@ render.html.area.table.ball  = com.trydofor.a9text.render.html.area.table
 render.html.area.table.clzz  = AreaTableRender
 render.html.area.tty.ball  = com.trydofor.a9text.render.html.area.tty
 render.html.area.tty.clzz  = AreaTTYRender
+render.html.area.xml.ball  = com.trydofor.a9text.render.html.area.xml
+render.html.area.xml.clzz  = AreaXMLRender
