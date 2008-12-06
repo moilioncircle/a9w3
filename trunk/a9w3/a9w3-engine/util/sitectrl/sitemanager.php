@@ -63,8 +63,12 @@ function command_sitefp($cmndarg,$options){
     );
     
     $siteFp = new SiteFp(PATH_ROOT);
-    $siteFp->setInclude($options['in']);
-    $siteFp->setExclude($options['ex']);
+    if(!empty($options['in'])){
+	    $siteFp->setInclude($options['in']);
+    }
+    if(!empty($options['ex'])){
+	    $siteFp->setExclude($options['ex']);
+    }
     foreach($treeDir as $v){
         echo $siteFp->makeFp($v);
     }
