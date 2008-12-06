@@ -189,10 +189,7 @@ function onSwitchEditor(isA9){
     initEditor(isA9);
 }
 // helper
-function isA9text(text){
-    if(text == null) return true;
-    return text.indexOf("a9w3-engine/core/reader/item-a9text.js")>0;
-}
+
 function initEditor(isA9){
     if(isA9){
         __EDIOR__.location = parent.W3CNF.A9W3HOME+"a9w3-engine/view/writer/ide-a9text.htm?"+docPath;
