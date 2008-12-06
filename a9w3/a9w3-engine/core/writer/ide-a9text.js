@@ -5,8 +5,10 @@ function getText(){
 
 function setText(text){
     if(text == null) return;
-    
-    text = unwrapA9text(text);
+    alert(text)
+    if(isA9text(text)){
+    	text = unwrapA9text(text);
+    }
     var obj = document.getElementById("__ART_TEXT__");
     obj.focus();
     obj.value=text;
@@ -147,6 +149,9 @@ function unwrapA9text(text){
     else pos1 = pos1 + pret.length;
     if(pos2<0) pos2 = text.length;
     text = text.substring(pos1,pos2);
+    text = text.replace(/&lt;/ig,"<");
+    text = text.replace(/&gt;/ig,">");
+    text = text.replace(/&amp;/ig,"&");
     text = text.replace(/^[\r\n]+/,"");
     text = text.replace(/[\r\n]+$/,"");
     return text;
