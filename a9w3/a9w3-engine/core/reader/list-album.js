@@ -162,7 +162,7 @@ function drawGalleryLinkView(page,obj,lst){
     //
     obj.innerHTML="<img alt='loading ...' src='../../data/image/loading-circle-red-s.gif' />";
 
-    var pall = Math.floor((lst.length-1)/parent.W3CNF.PAGE_SIZE)+1;
+    var pall = Math.floor((lst.length-1)/parent.W3CNF.PAGE_SIZE_ALBUM)+1;
     if(page == null || page< 1) page = 1;
     if(page>pall) page = pall;
     
@@ -178,8 +178,8 @@ function drawGalleryLinkView(page,obj,lst){
         }
     }
     
-    var poff = parent.W3CNF.PAGE_SIZE*(page-1);
-    var size = lst.length-poff>parent.W3CNF.PAGE_SIZE?parent.W3CNF.PAGE_SIZE:lst.length-poff;
+    var poff = parent.W3CNF.PAGE_SIZE_ALBUM*(page-1);
+    var size = lst.length-poff>parent.W3CNF.PAGE_SIZE_ALBUM?parent.W3CNF.PAGE_SIZE_ALBUM:lst.length-poff;
     
     // draw box
     var buff = [];

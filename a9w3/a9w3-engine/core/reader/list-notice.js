@@ -15,7 +15,7 @@ drawNoticeLinkView = function(page,obj,lst){
         return;
     }
 
-    var pall = Math.floor((lst.length-1)/parent.W3CNF.PAGE_SIZE)+1;
+    var pall = Math.floor((lst.length-1)/parent.W3CNF.PAGE_SIZE_NOTICE)+1;
     if(page == null || page< 1) page = 1;
     if(page>pall) page = pall;
     
@@ -31,8 +31,8 @@ drawNoticeLinkView = function(page,obj,lst){
         }
     }
     
-    var poff = parent.W3CNF.PAGE_SIZE*(page-1);
-    var size = lst.length-poff>parent.W3CNF.PAGE_SIZE?parent.W3CNF.PAGE_SIZE:lst.length-poff;
+    var poff = parent.W3CNF.PAGE_SIZE_NOTICE*(page-1);
+    var size = lst.length-poff>parent.W3CNF.PAGE_SIZE_NOTICE?parent.W3CNF.PAGE_SIZE_NOTICE:lst.length-poff;
     //
     // draw box
     var buff = [];

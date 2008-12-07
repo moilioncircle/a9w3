@@ -158,7 +158,7 @@ function drawArticleLinkView(page,obj,lst){
     //
     obj.innerHTML="<img alt='loading ...' src='../../data/image/loading-circle-red-s.gif' />";
 
-    var pall = Math.floor((lst.length-1)/parent.W3CNF.PAGE_SIZE)+1;
+    var pall = Math.floor((lst.length-1)/parent.W3CNF.PAGE_SIZE_PAPER)+1;
     if(page == null || page< 1) page = 1;
     if(page>pall) page = pall;
     
@@ -174,8 +174,8 @@ function drawArticleLinkView(page,obj,lst){
         }
     }
     
-    var poff = parent.W3CNF.PAGE_SIZE*(page-1);
-    var size = lst.length-poff>parent.W3CNF.PAGE_SIZE?parent.W3CNF.PAGE_SIZE:lst.length-poff;
+    var poff = parent.W3CNF.PAGE_SIZE_PAPER*(page-1);
+    var size = lst.length-poff>parent.W3CNF.PAGE_SIZE_PAPER?parent.W3CNF.PAGE_SIZE_PAPER:lst.length-poff;
     
     // draw box
     var buff = [];
