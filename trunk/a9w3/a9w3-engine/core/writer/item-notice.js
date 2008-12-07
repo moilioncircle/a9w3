@@ -112,7 +112,7 @@ function onOpenSetTool(){
     window.open('../../3rdp/a9text/tools/minitools/set-util.htm','newwindow', 'height=600, width=600, top=0, left=0, toolbar=no,scrollbars=yes, resizable=yes, menubar=no,location=no, status=no');
 }
 
-function onSavePaper(){
+function onSavePaper(isAs){
     var title = document.getElementById("__TITLE__").value;
     if(title ==""){
         alert(parent.W3CNF.getI18nString("info.item.empty"));
@@ -125,7 +125,7 @@ function onSavePaper(){
     document.getElementById("XTEXT").value = __EDIOR__.getText();
     
     var url = parent.W3CNF.getServerURL("notice.edit.commit");
-    url = parent.W3GUI.wrapUID(url)+"&PID="+paperId;
+    url = parent.W3GUI.wrapUID(url)+"&PID="+(isAs?"":paperId);
 
     var fm = document.getElementById("__PAPER_FORM__");
     fm.action=url;
