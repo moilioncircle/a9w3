@@ -23,7 +23,7 @@ function initStatus(){
 		html.push("<td>"+parent.W3GUI.STAT.getValue(keys[i]+".mtime").substr(0,10)+"</td>");
 		html.push("</tr>");
 	}
-	html.push("</table><br/>");
+	html.push("</table>");
 	document.getElementById("STATUS").innerHTML=html.join("");
 }
 
