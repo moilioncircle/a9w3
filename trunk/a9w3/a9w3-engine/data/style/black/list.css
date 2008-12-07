@@ -1,9 +1,9 @@
-BODY {
+ï»¿BODY {
 	margin: 5px;
 }
 BODY,TD{
 	font-size: 12px;
-	font-family:"Courier New",Courier,"ËÎÌå",Simsun,Monaco;
+	font-family:"å®‹ä½“",Simsun;
     line-height: 120%;
     text-align:left;
 	vertical-align: top;
@@ -13,7 +13,7 @@ BODY,TD{
 }
 PRE{
 	font-size: 12px;
-	font-family:"Courier New",Courier,"ËÎÌå",Simsun,Monaco;
+	font-family:"å®‹ä½“",Simsun;
     line-height: 150%;
     text-align:left;
 	vertical-align: top;
