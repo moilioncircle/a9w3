@@ -15,7 +15,7 @@ function initStatus(){
     var keys = ["admin","address","article","gallery","board","notice"];
     var html = [];
     html.push("<table border='0' cellspacing='1' cellpadding='2' width='100%'>");
-    html.push("<tr height='"+lineHeight+"'><td width='80'>Channel</td><td width='40'>Cnt</td><td>Last Date</td></tr>");
+    html.push("<tr height='"+lineHeight+"'><td width='55'>Channel</td><td width='35'>Cnt</td><td>Last Date</td></tr>");
 	for(var i=0;i<keys.length;i++){
 		html.push("<tr height='"+lineHeight+"' style='background-color:"+blankbg+"'>");
 		html.push("<td>"+keys[i]+"</td>");
@@ -32,7 +32,7 @@ function initAction(){
 	var html = [];
 	var acts = parent.A9Loader.syncLoadText(parent.W3CNF.USERHOME+"helpers/status/write/top30.htm");
 	if(acts != null){
-		html.push("<table border='0' cellspacing='1' cellpadding='2' width='100%'>");
+		html.push("<table border='0' cellspacing='1' cellpadding='2' width='100%' style='overflow:hidden;'>");
 		html.push("<tr height='"+lineHeight+"'><td width='20'>Id</td><td width='70'>Date</td><td>Name</td></tr>");
 		var lines = acts.split(/[\r\n]+/).reverse();
 		var cnt = lines.length>maxl?maxl:lines.length;
