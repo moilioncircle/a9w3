@@ -5,7 +5,7 @@ function getText(){
 
 function setText(text){
     if(text == null) return;
-    alert(text)
+    
     if(isA9text(text)){
     	text = unwrapA9text(text);
     }
