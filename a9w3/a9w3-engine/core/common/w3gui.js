@@ -313,6 +313,28 @@ W3GUI.showPicture = function(id){
     W3GUI.ITEMWINOBJW.location=W3CNF.A9W3HOME+"a9w3-engine/view/reader/item-album.htm?"+id;
     readerTracer(id,"album.view.tracer");
 }
+W3GUI.showNotice = function(id){
+    W3GUI.ITEMWINOBJW.location=W3CNF.USERHOME+"helpers/notice/"+id+"/body.htm";
+}
+
+W3GUI.showArticleURL = function(id){
+    var url = W3CNF.USERHOME+"article/"+id+"/body.htm";
+    if(window.prompt("do you want to open in new window ?",url)){
+        window.open(url);
+    }
+}
+W3GUI.showPictureURL = function(id,tp){
+    var url = W3CNF.USERHOME+"gallery/data/"+id+"."+tp;
+    if(window.prompt("do you want to open in new window ?",url)){
+        window.open(url);
+    }
+}
+W3GUI.showNoticeURL = function(id){
+    var url = W3CNF.USERHOME+"helpers/notice/"+id+"/body.htm";
+    if(window.prompt("do you want to open in new window ?",url)){
+        window.open(url);
+    }
+}
 ////
 W3GUI.seeHitLogArticle = function(id){
     W3GUI.ITEMWINOBJW.location=W3CNF.A9W3HOME+"a9w3-engine/view/reader/item-hitlog.htm?article/"+id;

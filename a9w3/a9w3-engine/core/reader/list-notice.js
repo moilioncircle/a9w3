@@ -70,8 +70,9 @@ drawNoticeLinkView = function(page,obj,lst){
             buff.push("<table border='0' cellspacing='0' cellpadding='0' width='100%' class='a9w3_article_item'>");
             buff.push("<tr height='5'><td></td></tr>");
             buff.push("<tr>");
-            buff.push("<td onmouseover='document.getElementById(\"ITEM_"+ai.id+"\").style.display=\"\"' onmouseout='document.getElementById(\"ITEM_"+ai.id+"\").style.display=\"none\"'><a href='"+
-                   parent.W3CNF.USERHOME+"helpers/notice/"+ai.id+"/body.htm"+"' target='A9W3_ITEM_WIN' class='a9w3_link_title'>"+parent.W3TXT.html2text(ai.title)+"</a></td>");
+            buff.push("<td onmouseover='document.getElementById(\"ITEM_"+ai.id+"\").style.display=\"\"' onmouseout='document.getElementById(\"ITEM_"+ai.id+"\").style.display=\"none\"'>");
+            buff.push("<a href='javascript:parent.W3GUI.showNoticeURL(\""+ai.id+"\")'><img src='../../data/image/icon-list-url.png' title='url' border=0 /></a>&nbsp;");
+            buff.push("<a href='javascript:parent.W3GUI.showNotice(\""+ai.id+"\")' class='a9w3_link_title'>"+parent.W3TXT.html2text(ai.title)+"</a></td>");
             buff.push("</tr>");
             buff.push("<tr>");
             buff.push("<td class='a9w3_text_plain'>");

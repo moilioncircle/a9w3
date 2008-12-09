@@ -212,6 +212,7 @@ function drawArticleLinkView(page,obj,lst){
             buff.push("<tr height='2'><td></td></tr>");
             buff.push("<tr>");
             buff.push("<td onmouseover='document.getElementById(\"ITEM_"+ai.id+"\").style.display=\"\"' onmouseout='document.getElementById(\"ITEM_"+ai.id+"\").style.display=\"none\"'>");
+            buff.push("<a href='javascript:parent.W3GUI.showArticleURL(\""+ai.id+"\")'><img src='../../data/image/icon-list-url.png' title='url' border=0 /></a>&nbsp;");
             buff.push("<a href='javascript:parent.W3GUI.showArticle(\""+ai.id+"\")' class='a9w3_link_title'>"+parent.W3TXT.html2text(ai.title)+"</a></td>");
             buff.push("</tr>");
             buff.push("<tr>");
