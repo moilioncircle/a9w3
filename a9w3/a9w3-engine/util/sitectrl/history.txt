@@ -1,3 +1,3 @@
-php -f sitemanager.php sitefp trydofor -in=.*/a9w3-auhome/.*  -ex=.*/CVS/.* >c:\lf.txt
-php -f sitemanager.php difffp c:\lf.txt c:\rf.txt >c:\df.txt
-php -f sitemanager.php ftpxfp c:\df.txt trydofor:---@--- web
+php -f sitemanager.php sitefp trydofor -in=.*/a9w3-auhome/.*  -ex=.*/CVS/.* >./lf.txt
+php -f sitemanager.php difffp ./lf.txt ./rf.txt >./df.txt
+php -f sitemanager.php ftpxfp ./df.txt trydofor:---@--- web
