@@ -109,7 +109,11 @@ var __A9Loader__ = function()
             xhr.open("GET",url,false);
             xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=UTF-8');
             xhr.send(null);
-            resText = xhr.responseText;
+            if (xhr.status == 0 || xhr.status == 200 || xhr.status == 304 ){
+                resText = xhr.responseText;
+            }else{
+            	resText=null;
+            }
         }catch(e){
             __stderr__("__syncLoadText__:"+url)
         }finally{
