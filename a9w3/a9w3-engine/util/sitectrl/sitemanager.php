@@ -267,8 +267,7 @@ function command_ftpxfp($cmndarg,$options){
                 foreach(explode($tkpt,dirname($k)) as $dn){
                     if(empty($dn)) continue;
                     $crpt.= $dn.$tkpt;
-                    $ok = ftp_mkdir($conn_id, $crpt);
-                    if($ok === FALSE) break;
+                    $ok = @ftp_mkdir($conn_id, $crpt);
                 }
                 if($ok){
                     $ok = ftp_put($conn_id, $k, $lclfile, FTP_BINARY);
