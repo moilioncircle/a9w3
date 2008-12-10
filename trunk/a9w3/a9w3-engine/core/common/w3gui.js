@@ -486,7 +486,8 @@ W3GUI._callbackObject_ = function(id,clzz,key,urls,func){
                         map[key] = val;
                     }
                 }else{
-                    map["views"] = (ts[x]==null||ts[x]=="")?0:ts[x];
+                	ts[x] = W3TXT.trimEmpty(ts[x]);
+                    map["views"] = (/^\d+$/.test(ts[x]))?0:ts[x];
                 }
             }
             W3GUI.POOL[key] = clzz == null?map:new clzz(map);
