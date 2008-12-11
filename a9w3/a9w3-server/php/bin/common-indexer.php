@@ -103,17 +103,13 @@ function removeIndexFromMonth($tp,$uid,$pid,$mth=''){
     if(!isValidType($tp)){
         return false;
     }
-    $idir = PATH_ROOT.'a9w3-auhome/'.$uid.'/indexer/'.$tp; //address
+    $idir = PATH_ROOT.'a9w3-auhome/'.$uid.'/indexer/'.$tp;
     //month
-    if(empty($mth)){
-        $mths = file($idir.'/month/item.htm');
-    }else{
-        $mths = array($mth);
-    }
-    
-    foreach($mths as $line){
-        if(!removeIfHasPid($idir.'/month/'.trim($line).'/item.htm',$pid)){
-            return false;
+    foreach(readKeyValues($idir.'/month/item.htm') as $k=>$v){
+    	if($mth === '' || $mth === $v){
+	        if(!removeIfHasPid($idir.'/month/'.$k.'/item.htm',$pid)){
+	            return false;
+	        }
         }
     }
     return true;
@@ -123,18 +119,13 @@ function removeIndexFromLabel($tp,$uid,$pid,$lbl=''){
     if(!isValidType($tp)){
         return false;
     }
-    $idir = PATH_ROOT.'a9w3-auhome/'.$uid.'/indexer/'.$tp; //address
+    $idir = PATH_ROOT.'a9w3-auhome/'.$uid.'/indexer/'.$tp;
     //label
-    if(empty($lbl)){
-        $lbls = file($idir.'/label/item.htm');
-    }else{
-        $lbls = array($lbl);
-    }
-    
-    foreach($lbls as $line){
-        $line = substr($line, 0, strpos($line,'='));
-        if(!removeIfHasPid($idir.'/label/'.trim($line).'/item.htm',$pid)){
-            return false;
+    foreach(readKeyValues($idir.'/label/item.htm') as $k=>$v){
+    	if($lbl === '' || $lbl === $v){
+	        if(!removeIfHasPid($idir.'/label/'.$k.'/item.htm',$pid)){
+	            return false;
+	        }
         }
     }
     return true;
