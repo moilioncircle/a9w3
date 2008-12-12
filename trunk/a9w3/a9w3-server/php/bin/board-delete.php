@@ -32,4 +32,7 @@ if(!writeFile($idxfile,implode('', $idxlines),'w')){
     exit;
 }
 echo RKEY_SUCCESS;
+
+// trace stat
+require_once('writer-tracer.php');
 ?>

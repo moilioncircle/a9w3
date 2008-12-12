@@ -42,5 +42,9 @@ if(!writeFile(PATH_ROOT.'a9w3-auhome/'.$r_uid.'/helpers/board/00000000000000000.
     echo RKEY_UNKOWN;
     exit;
 }
+
+require_once('common-infostat.php');
+updateInfoStat($r_uid,INF_BOARD,1);
+
 echo RKEY_SUCCESS;
 ?>
