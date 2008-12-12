@@ -19,47 +19,45 @@ function autoTrace(){
 	if(empty($server_key)) return;
 	
 	/* status info */
-	$infokey = array(
-		'admin'   => 'admin.login admin.cpass admin.sitefp',
-		'address' => 'links.commit links.delete',
-		'article' => 'paper.edit.commit paper.edit.delete',
-		'gallery' => 'album.edit.commit album.edit.delete',
-		'board'   => 'board.commit board.delete',
-		'notice'  => 'notice.edit.commit notice.edit.delete'
+	require_once('common-infostat.php');
+	$infokey_add = array(
+		INF_ADMIN   => 'admin.login admin.cpass admin.sitefp',
+		INF_ADDRESS => 'links.commit',
+		INF_ARTICLE => 'paper.edit.commit',
+		INF_GALLERY => 'album.edit.commit',
+		INF_BOARD   => 'board.commit',
+		INF_NOTICE  => 'notice.edit.commit'
 	);
-	$infokv = array();
-	$mtime = date('Y-m-d H:i:s');
-	foreach($infokey as $k => $v){
-		$infokv[$k.'.mtime']=$mtime;
-		$infokv[$k.'.count']='0';
+	$infokey_sub = array(
+		INF_ADMIN   => '',
+		INF_ADDRESS => 'links.delete',
+		INF_ARTICLE => 'paper.edit.delete',
+		INF_GALLERY => 'album.edit.delete',
+		INF_BOARD   => 'board.delete',
+		INF_NOTICE  => 'notice.edit.delete'
+	);
+
+	$ikey = null;
+	$icnt = 0;
+	
+	foreach($infokey_add as $k => $v){
+		if(strpos($v,$server_key) !== false
+		&& empty($_REQUEST['PID'])){ // new one
+			$ikey = $k;
+			$icnt = 1;
+			break;
+		}
 	}
-	foreach($infokey as $k => $v){
+	foreach($infokey_sub as $k => $v){
 		if(strpos($v,$server_key) !== false){
-			$keymtime = $k.'.mtime';
-			$keycount = $k.'.count';
+			$ikey = $k;
+			$icnt = -1;
 			break;
 		}
 	}
 	
-	if(!empty($keymtime)){
-	    $infofile = PATH_ROOT.'a9w3-auhome/'.$_REQUEST['UID'].'/helpers/status/info/stat.htm';
-	    foreach(file($infofile) as $line){
-	        $kv = explode("=", $line);
-	        if(count($kv) !=2) continue;
-	        if($kv[0] === $keymtime){
-	            continue;
-	        }else if($kv[0] === $keycount){
-	            $infokv[$kv[0]] = intval(trim($kv[1]))+1;
-	        }else{
-	            $infokv[$kv[0]] = trim($kv[1]);
-	        }
-	    }
-	    // write file
-	    $lines='';
-	    foreach($infokv as $k => $v){
-	        $lines.=$k.'='.$v."\n";
-	    }
-	    writeFile($infofile,trim($lines),'w');
+	if(!empty($ikey)){
+		updateInfoStat($_REQUEST['UID'],$ikey,$icnt);
 	}
 	
 	/* write event */

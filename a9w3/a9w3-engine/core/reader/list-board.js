@@ -12,7 +12,7 @@ function onDataResponse(){
     
     rtv = parent.W3TXT.trimEmpty(rtv);
     if(rtv != ""){
-        alert(rtv);
+        alert(parent.W3CNF.getI18nString(rtv));
         __DATA_POSTER__.location="about:blank";// avoid recommit when refresh
         init();
     }
