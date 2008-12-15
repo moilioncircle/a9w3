@@ -234,13 +234,13 @@ function drawGalleryLinkView(page,obj,lst){
             }
             var cdt = ai.ctime
             if(cdt != null)cdt = cdt.substring(0,cdt.lastIndexOf(' ')).substr(2);
-            buff.push("<tr><td><img src='../../data/image/icon-list-ctime.png' title='created' /> "+cdt+"</td></tr>");
-            buff.push("<tr><td><img src='../../data/image/icon-list-pixel.png' title='pixel' /> "+ai.pixel+"</td></tr>");
-            buff.push("<tr><td><img src='../../data/image/icon-list-sizeb.png' title='size' /> "+ai.sizeb+"</td></tr>");
             buff.push("<tr><td>");
             buff.push("<a href='javascript:parent.W3GUI.showPictureURL(\""+ai.id+"\",\""+ai.ftype+"\")'><img src='../../data/image/icon-list-url.png' title='url' border=0 /></a>&nbsp;");
             buff.push("<a href='javascript:parent.W3GUI.seeHitLogPicture(\""+ai.id+"\")'><img src='../../data/image/icon-list-views.png' title='view' border=0 /></a> "+ai.views);
             buff.push("</td></tr>");
+            buff.push("<tr><td><img src='../../data/image/icon-list-ctime.png' title='created' /> "+cdt+"</td></tr>");
+            buff.push("<tr><td><img src='../../data/image/icon-list-pixel.png' title='pixel' /> "+ai.pixel+"</td></tr>");
+            buff.push("<tr><td><img src='../../data/image/icon-list-sizeb.png' title='size' /> "+ai.sizeb+"</td></tr>");
             buff.push("<tr><td><img src='../../data/image/icon-list-label.png' title='label'/> ");
             if(ai.lable ==null || ai.lable.length ==0){
                 ai.lable=[parent.W3GUI.GALLERY_LABEL.getValue("000")];
