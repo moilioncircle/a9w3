@@ -3,6 +3,61 @@ var listCache = {'obj':null,'lst':null};
 var linkCache = {'obj':null,'lst':null};
 var pageCache = {'type':null,'name':null,'page':1};
 
+var filterStr = {'label':'','month':''};
+var objectIds = {'LIST_ICN':'LIST_ICN','LIST_ALL':'LIST_ALL','LIST_FLT':'LIST_FLT'};
+
+function switchListView(show){
+    if(show){
+        document.getElementById(objectIds.LIST_ALL).style.display="";
+        document.getElementById(objectIds.LIST_ICN).src="../../data/image/icon-list-tobottom.png";
+        document.getElementById(objectIds.LIST_FLT).value=(pageCache.type == 'label')?filterStr.label:filterStr.month;
+    }else{
+        document.getElementById(objectIds.LIST_ALL).style.display="none";
+        document.getElementById(objectIds.LIST_ICN).src="../../data/image/icon-list-toright.png";
+    }
+}
+
+function filterList(name){
+    if(name == null || name == "") return true;
+    var flts = [];
+    if(pageCache.type == 'label'){
+        flts = filterStr.label.split(/\s+/);
+    }else{
+        flts = filterStr.month.split(/\s+/);
+    }
+    var isFlt = true
+    var ctFlt = 0;
+    for(var i=0;i<flts.length;i++){
+        if(flts[i]=="") continue;
+        if(name.indexOf(flts[i])>=0){
+            isFlt = false;
+            break;
+        }
+        ctFlt++;
+    }
+    return isFlt && ctFlt>0;
+}
+function onInputFilter(event){
+    var keynum = -1;
+    if(window.event){
+        keynum = event.keyCode;
+    }else if(event.which){ // Netscape/Firefox/Opera
+        keynum = event.which;
+    }else{
+        alert("Not Support");
+    }
+    if(keynum == 13){
+        update();
+        switchListView(true);
+    }else{
+        if(pageCache.type == 'label'){
+            filterStr.label=document.getElementById(objectIds.LIST_FLT).value;
+        }else{
+            filterStr.month=document.getElementById(objectIds.LIST_FLT).value;
+        }
+    }
+}
+
 function drawGalleryListLabelView(cur,obj,lst){
     if(obj != null) listCache['obj']=obj;
     else obj = listCache['obj'];
@@ -37,11 +92,11 @@ function drawGalleryListLabelView(cur,obj,lst){
     
     var buff = [];
     buff.push("<table width='100%' border='0' cellspacing='0' cellpadding='0'  ");
-    buff.push("onmouseover='document.getElementById(\"LIST_ALL\").style.display=\"\";document.getElementById(\"LIST_ICN\").src=\"../../data/image/icon-list-tobottom.png\"' ");
-    buff.push("onmouseout='document.getElementById(\"LIST_ALL\").style.display=\"none\";document.getElementById(\"LIST_ICN\").src=\"../../data/image/icon-list-toright.png\"'>");
+    buff.push("onmouseover='switchListView(true)' ");
+    buff.push("onmouseout='switchListView(false)'>");
     buff.push("<tr>");
     buff.push("<td width='12' class='a9w3_text_list_box'>");
-    buff.push("<img id='LIST_ICN' src='../../data/image/icon-list-toright.png' />");
+    buff.push("<img id='"+objectIds.LIST_ICN+"' src='../../data/image/icon-list-toright.png' />");
     buff.push("</td>");
     buff.push("<td  class='a9w3_text_list_box'>");
     for(var i=0;i<show.length;i++){
@@ -55,14 +110,18 @@ function drawGalleryListLabelView(cur,obj,lst){
     
     buff.push("</td>");
     buff.push("</tr>");
-    buff.push("<tr id='LIST_ALL' style='display:none'>");
+    buff.push("<tr id='"+objectIds.LIST_ALL+"' style='display:none'>");
     buff.push("<td></td>");
     buff.push("<td class='a9w3_text_list_box'>");
+    buff.push("<input type='text' id='"+objectIds.LIST_FLT+"' ondblclick='this.value=\"\"' onkeyup='onInputFilter(event)'  style='border:1px solid #996633;height:14px;width:60px;font-size:10px;color:#996633;margin:0px;padding:0px;'/> ");
+
     for(var i=0;i<lst.length;i++){
+        var lblName = parent.W3GUI.GALLERY_LABEL.getValue(lst[i]);
+        if(filterList(lblName)) continue;
         if(cur != lst[i]){
-            buff.push("<a href='javascript:{showPage(\"label\",\""+lst[i]+"\")}' class='a9w3_link_infos'>"+parent.W3GUI.GALLERY_LABEL.getValue(lst[i])+"</a>");
+            buff.push("<a href='javascript:{showPage(\"label\",\""+lst[i]+"\")}' class='a9w3_link_infos'>"+lblName+"</a>");
         }else{
-            buff.push(parent.W3GUI.GALLERY_LABEL.getValue(lst[i]));
+            buff.push(lblName);
         }
         buff.push(" ");
     }
@@ -108,11 +167,11 @@ function drawGalleryListMonthView(cur,obj,lst){
     
     var buff = [];
     buff.push("<table width='100%' border='0' cellspacing='0' cellpadding='0'  ");
-    buff.push("onmouseover='document.getElementById(\"LIST_ALL\").style.display=\"\";document.getElementById(\"LIST_ICN\").src=\"../../data/image/icon-list-tobottom.png\"' ");
-    buff.push("onmouseout='document.getElementById(\"LIST_ALL\").style.display=\"none\";document.getElementById(\"LIST_ICN\").src=\"../../data/image/icon-list-toright.png\"'>");
+    buff.push("onmouseover='switchListView(true)' ");
+    buff.push("onmouseout='switchListView(false)'>");
     buff.push("<tr>");
     buff.push("<td width='12' class='a9w3_text_list_box'>");
-    buff.push("<img id='LIST_ICN' src='../../data/image/icon-list-toright.png' />");
+    buff.push("<img id='"+objectIds.LIST_ICN+"' src='../../data/image/icon-list-toright.png' />");
     buff.push("</td>");
     buff.push("<td  class='a9w3_text_list_box'>");
     for(var i=0;i<show.length;i++){
@@ -126,10 +185,12 @@ function drawGalleryListMonthView(cur,obj,lst){
     
     buff.push("</td>");
     buff.push("</tr>");
-    buff.push("<tr id='LIST_ALL' style='display:none'>");
+    buff.push("<tr id='"+objectIds.LIST_ALL+"' style='display:none'>");
     buff.push("<td></td>");
     buff.push("<td class='a9w3_text_list_box'>");
+    buff.push("<input type='text' id='"+objectIds.LIST_FLT+"' ondblclick='this.value=\"\"' onkeyup='onInputFilter(event)'  style='border:1px solid #996633;height:14px;width:60px;font-size:10px;color:#996633;margin:0px;padding:0px;'/> ");
     for(var i=0;i<lst.length;i++){
+        if(filterList(lst[i])) continue;
         if(cur != lst[i]){
             buff.push("<a href='javascript:{showPage(\"month\",\""+lst[i]+"\")}' class='a9w3_link_infos'>"+lst[i]+"</a>");
         }else{
