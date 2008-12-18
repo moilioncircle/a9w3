@@ -51,6 +51,16 @@ function onSitefp(){
     fm.submit();
 }
 
+function onSitemap()
+{
+    var url = parent.W3CNF.getServerURL("admin.sitemap");
+    url = parent.W3GUI.wrapUID(url);
+
+    var rtv = parent.A9Loader.syncLoadText(url);
+    rtv = parent.W3TXT.trimEmpty(rtv);
+
+    alert(parent.W3CNF.getI18nString(rtv));
+}
 function onLogout(){
     var url = parent.W3CNF.getServerURL("admin.logout");
     url = parent.W3GUI.wrapUID(url);
