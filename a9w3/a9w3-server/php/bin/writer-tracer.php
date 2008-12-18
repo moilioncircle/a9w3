@@ -21,7 +21,7 @@ function autoTrace(){
 	/* status info */
 	require_once('common-infostat.php');
 	$infokey_add = array(
-		INF_ADMIN   => 'admin.login admin.cpass admin.sitefp',
+		INF_ADMIN   => 'admin.login admin.cpass admin.sitefp admin.sitemap',
 		INF_ADDRESS => 'links.commit',
 		INF_ARTICLE => 'paper.edit.commit',
 		INF_GALLERY => 'album.edit.commit',
@@ -79,7 +79,8 @@ function autoTrace(){
 		'notice.edit.delete',
 		'admin.login',
 		'admin.cpass',
-        'admin.sitefp'
+        'admin.sitefp',
+        'admin.sitemap'
 	);
 	
 	// key YmdHis $UID $PID $IP\n
