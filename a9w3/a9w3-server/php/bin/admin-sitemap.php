@@ -21,7 +21,7 @@ $keyvals  = array(
     array('site'=>$r_site,'a9user'=>$r_uid),
     array('site'=>$r_site,'a9user'=>$r_uid,'index_pids'=>getFileVars(PATH_ROOT.'a9w3-auhome/'.$r_uid.'/indexer/article/total/item.htm')),
     array('site'=>$r_site,'a9user'=>$r_uid,'index_pids'=>getFileVars(PATH_ROOT.'a9w3-auhome/'.$r_uid.'/indexer/gallery/total/item.htm')),
-    array('site'=>$r_site,'a9user'=>$r_uid,'index_pids'=>getFileVars(PATH_ROOT.'a9w3-auhome/'.$r_uid.'/helpers/board/00000000000000000.htm'))
+    array('site'=>$r_site,'a9user'=>$r_uid,'index_pids'=>getFileVars(PATH_ROOT.'a9w3-auhome/'.$r_uid.'/helpers/notice/00000000000000.htm'))
 );
 $cnt = count($sitemaps);
 for($i=0;$i<$cnt;$i++){
