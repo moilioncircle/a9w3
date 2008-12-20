@@ -28,9 +28,9 @@ function initStatus(){
 }
 
 function initAction(){
-	var maxl =12;
+	var maxl =10;
 	var html = [];
-	var acts = parent.A9Loader.syncLoadText(parent.W3CNF.USERHOME+"helpers/status/write/top30.htm");
+	var acts = parent.A9Loader.syncLoadText(parent.W3CNF.USERHOME+"helpers/status/write/top10.htm");
 	if(acts != null){
 		html.push("<table border='0' cellspacing='1' cellpadding='2' width='100%' style='overflow:hidden;'>");
 		html.push("<tr height='"+lineHeight+"'><td width='20'>Id</td><td width='70'>Date</td><td>Name</td></tr>");
