@@ -1,20 +1,34 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<fieldset style="padding:10px;">
-<legend>SiteSearch</legend>
-<form action="http://www.baidu.com/baidu" method="get" target="_BLANK">
-    <input type="hidden" name="si"   value="www.trydofor.com">
+<link href="../../data/style/black/board.css" rel="stylesheet" type="text/css">
+<form id="BAIDU_FORM" action="http://www.baidu.com/baidu" method="get" target="_BLANK">
+    <input id="SITE_NAME_1" type="hidden" name="si"   value="">
     <input type="hidden" name="tn"   value="bds">
     <input type="hidden" name="cl"   value="3">
     <input type="hidden" name="ct"   value="2097152">
-    <input type="text"   name="word" value="" size="20">
-    <input type="submit" value="Baidu">
+    <input id="BAIDU_WORD" type="hidden"   name="word">
 </form>
-<form action="http://www.google.com/search" method="get" target="_BLANK">
-    <input type="hidden" name="domains" value="www.trydofor.com">
-    <input type="hidden" name="sitesearch" value="www.trydofor.com">
+<form id="GOOGLE_FORM" action="http://www.google.com/search" method="get" target="_BLANK">
+    <input id="SITE_NAME_2" type="hidden" name="domains" value="">
+    <input id="SITE_NAME_3" type="hidden" name="sitesearch" value="">
     <input type="hidden" name="hl" value="zh-CN">
     <input type="hidden" name="ie" value="UTF-8">
-    <input type="text"   name="q"  value="" size="20">
-    <input type="submit" value="Google">
+    <input id="GOOGLE_WORD" type="hidden"   name="q"  value="">
 </form>
+<!-- -->
+<fieldset style="padding:10px;">
+<legend>SiteSearch</legend>
+<table width="100%" border="0">
+  <tr>
+    <td>
+        <input id="KEYWORD" name="" type="text" class="a9w3_board_from">
+    </td>
+  </tr>
+  <tr>
+    <td>
+        <input type="image" onClick="onSearch('BAIDU')"  src="../../data/image/btn-search-baidu.png" class="a9w3_board_button">
+        <input type="image" onClick="onSearch('GOOGLE')" src="../../data/image/btn-search-google.png" class="a9w3_board_button">
+    </td>
+  </tr>
+</table>
 </fieldset>
+<script type="text/javascript" src="../../core/reader/list-search.js"></script>
