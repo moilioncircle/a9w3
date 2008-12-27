@@ -94,7 +94,7 @@ function autoTrace(){
     
     if(!empty($evenline)){
         // event
-        $maxbs = 1024;
+        $maxbs = 1024*500; // 500k
         $inuse = PATH_ROOT.'a9w3-auhome/'.$_REQUEST['UID'].'/helpers/status/write/inuse.htm';
         if(filesize($inuse) > $maxbs){
             $index = PATH_ROOT.'a9w3-auhome/'.$_REQUEST['UID'].'/helpers/status/write/index.htm';
