@@ -1,7 +1,38 @@
+PHP Server Implementation
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1. Local VHost Config
+^^^^^^^^^^^^^^^^^^^^^
+=================== txt : httpd.conf =====================
 <VirtualHost *:80>
-    ServerAdmin a9w3@trydofor.com
+    BandwidthModule On
+    ForceBandWidthModule On
+    Bandwidth all 1000
+    MinBandwidth all 1000
+    ServerAdmin admin@a9w3.com
+    DocumentRoot D:\workspace\a9w3
+    ServerName 127.0.0.8
+    ErrorLog logs/sugarcrm-error_log
+    CustomLog logs/sugarcrm-access_log common
+</VirtualHost>
+<VirtualHost *:80>
+    ServerAdmin admin@a9w3.com
     DocumentRoot D:\workspace\a9w3
     ServerName 127.0.0.9
     ErrorLog logs/a9w3-error_log
     CustomLog logs/a9w3-access_log common
 </VirtualHost>
+==========================================================
+
+2. ISP VHost Config
+^^^^^^^^^^^^^^^^^^^
+if you can set the permission of directory,set them as follows.
+
+=================== txt : dir mod =====================
+|- a9w3-auhome       --- +write (recursive)
+|- a9w3-engine       --- read-only  (recursive)
+|- a9w3-server       --- read-only  (recursive)
+|  |- php            
+|  |  |- bin         --- +execute
+(read-only by default)
+=======================================================
