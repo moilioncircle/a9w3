@@ -126,6 +126,11 @@ function insertText(t){
 // helper
 function wrapA9text(text){
     if(text == null) text = "";
+    
+    // replace \r to \n
+    text = text.replace(/\r\n/g,"\n");
+    text = text.replace(/\r/g,"\n");
+    // html
     text = text.replace(/&/g,"&amp;");
     text = text.replace(/</g,"&lt;");
     text = text.replace(/>/g,"&gt;");
