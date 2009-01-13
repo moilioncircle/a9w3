@@ -49,6 +49,9 @@ function initEdit(docPath){
 function addUTF8Meta(text){
     if(text == null || text =="") return text;
     
+    // replace \r to \n
+    text = text.replace(/\r\n/g,"\n");
+    text = text.replace(/\r/g,"\n");
     // add charset
     var regm = /<\s*meta\s+.*content\s*=\s*['"]\s*text\/html\s*;\s*charset\s*=\s*[\w\d-]+\s*['"]\s*\/?>/i;
     var pos = text.search(regm);
