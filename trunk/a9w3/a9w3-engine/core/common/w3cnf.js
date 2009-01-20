@@ -11,7 +11,6 @@ W3CNF.A9W3_READER = "reader";
 W3CNF.A9W3_WRITER = "writer";
 W3CNF.A9W3_RTMODE = W3CNF.A9W3_READER;
 
-/** sync */
 W3CNF.A9W3HOME = function(){
     var rs = A9Loader.getPagePath();
     var cp = A9Loader.getCorePath();
@@ -24,6 +23,7 @@ W3CNF.A9W3HOME = function(){
     return rs;
 }();
 
+/** sync */
 W3CNF.USER = function(){
     var userCnf = new CnfReaderClass();
     userCnf.loadFormFile(W3CNF.A9W3HOME+"a9w3-engine/conf/users.htm");
@@ -65,6 +65,7 @@ W3CNF.USER = function(){
 
 W3CNF.USERHOME = W3CNF.A9W3HOME+"a9w3-auhome/"+W3CNF.USER+"/";
 
+/** sync */
 W3CNF.CONF = new CnfReaderClass();
 W3CNF.CONF.loadFormFile(W3CNF.USERHOME+"profile/config.htm");
 
@@ -72,12 +73,12 @@ W3CNF.LANG = W3CNF.CONF.getValue("lang");
 
 /** async */
 W3CNF.UPLOAD = new CnfReaderClass();
-//W3CNF.UPLOAD.loadFormFile(W3CNF.USERHOME+"a9w3-server/upload.htm");
 A9Loader.asyncLoadText(function(u,t){
     W3CNF.UPLOAD.clear();
     W3CNF.UPLOAD.loadFromText(t);
 },W3CNF.A9W3HOME+"a9w3-server/upload.htm");
-//
+
+/** async */
 W3CNF.getServerURL = function(){
     var sf = new CnfReaderClass();
     A9Loader.asyncLoadText(function(u,t){
@@ -95,17 +96,12 @@ W3CNF.getServerURL = function(){
     }
 }();
 
+/** async */
 W3CNF.getI18nString = function(){
-    var en = new CnfReaderClass();
-    en.loadFormFile(W3CNF.A9W3HOME+"a9w3-engine/i18n/en.htm");
-    
-    var lc = en;
-    if(W3CNF.LANG != 'en'){
-        lc = new CnfReaderClass();
-        A9Loader.asyncLoadText(function(u,t){
-            lc.loadFromText(t)
-        },W3CNF.A9W3HOME+"a9w3-engine/i18n/"+W3CNF.LANG+".htm");
-    }
+    var lc = new CnfReaderClass();
+    A9Loader.asyncLoadText(function(u,t){
+        lc.loadFromText(t)
+    },W3CNF.A9W3HOME+"a9w3-engine/i18n/"+W3CNF.LANG+".htm");
     
     return function(key){
         var str = lc.getValue(key);
