@@ -371,7 +371,6 @@ W3GUI.commitArticle = function(){
     W3GUI.ARTICLE_LABEL.clear();
     W3GUI.ARTICLE_LABEL.loadFormFile(W3GUI.avoidClientCache(W3CNF.USERHOME+"indexer/article/label/item.htm"));
 	W3GUI.commitCommon("list-paper.htm",W3GUI.KEY_PREFIX.ART);
-
 }
 W3GUI.commitAddress = function(){
     W3GUI.ADDRESS_LABEL.clear();
@@ -576,19 +575,45 @@ function getMenuInfoByStat(prefix){
 	return mt+"<br />"+cn;
 }
 
-//
+W3GUI.changeCss = function(obj,cname){
+    obj.className = cname;
+}
+// for child window(iframe)
 W3GUI.asyncLoadText = function(func,url){
     A9Loader.asyncLoadText(function(u,t){
         func(t);
     },url);
 }
-W3GUI.changeCss = function(obj,cname){
-    obj.className = cname;
-}
 
-// init
-W3GUI.MENU.loadFormFile(W3CNF.USERHOME+"profile/menu.htm");
-W3GUI.STAT.loadFormFile(W3CNF.USERHOME+"helpers/status/info/stat.htm");
-W3GUI.ARTICLE_LABEL.loadFormFile(W3CNF.USERHOME+"indexer/article/label/item.htm");
-W3GUI.GALLERY_LABEL.loadFormFile(W3CNF.USERHOME+"indexer/gallery/label/item.htm");
-W3GUI.ADDRESS_LABEL.loadFormFile(W3CNF.USERHOME+"indexer/address/label/item.htm");
+// sync init
+W3GUI.asyncInit = function(func){
+    var rUrls = [
+        W3CNF.USERHOME+"profile/menu.htm",
+        W3CNF.USERHOME+"helpers/status/info/stat.htm",
+        W3CNF.USERHOME+"indexer/article/label/item.htm",
+        W3CNF.USERHOME+"indexer/gallery/label/item.htm",
+        W3CNF.USERHOME+"indexer/address/label/item.htm"
+    ];
+    var rCnfs = [
+        W3GUI.MENU,
+        W3GUI.STAT,
+        W3GUI.ARTICLE_LABEL,
+        W3GUI.GALLERY_LABEL,
+        W3GUI.ADDRESS_LABEL
+    ];
+    A9Loader.asyncLoadText(function(urls,txts){
+        for(var i=0;i<urls.length;i++){
+            for(var j=0;j<rUrls.length;j++){
+                if(rUrls[j]==urls[i]){
+                    rCnfs[j].loadFromText(txts[i]);
+                    break;
+                }
+            }
+        }
+        // callback
+        if(func != null){
+            func();
+        }
+    },rUrls
+    );
+}
