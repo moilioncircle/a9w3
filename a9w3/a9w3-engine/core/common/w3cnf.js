@@ -65,9 +65,14 @@ W3CNF.USER = function(){
 
 W3CNF.USERHOME = W3CNF.A9W3HOME+"a9w3-auhome/"+W3CNF.USER+"/";
 
-/** sync */
+/** sync and test speed */
+var tmsta = (new Date()).getTime();
+var uconf = A9Loader.syncLoadText(W3CNF.USERHOME+"profile/config.htm");
+var tmcst = (new Date()).getTime()-tmsta;
+W3CNF.SPEED_CHAR_BS = tmcst>0?Math.ceil(uconf.length*1000/tmcst):-1;
+
 W3CNF.CONF = new CnfReaderClass();
-W3CNF.CONF.loadFormFile(W3CNF.USERHOME+"profile/config.htm");
+W3CNF.CONF.loadFromText(uconf);
 
 W3CNF.LANG = W3CNF.CONF.getValue("lang");
 
