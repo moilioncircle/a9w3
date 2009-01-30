@@ -53,8 +53,8 @@ menu.item-6.link.text = a9w3-engine/view/reader/list-search.htm
 
 menu.item-7.name = status
 menu.item-7.icon = a9w3-engine/data/image/menu-status.png
-menu.item-7.info.type = string
-menu.item-7.info.text = 
+menu.item-7.info.type = function
+menu.item-7.info.text = function(){return ((new Date())-__TIME_START__)+"<br>"+(W3CNF.SPEED_CHAR_BS<0?"&lg;1m":(W3CNF.SPEED_CHAR_BS>1000?Math.ceil(W3CNF.SPEED_CHAR_BS/1000)+"k":W3CNF.SPEED_CHAR_BS+"b"));}
 menu.item-7.link.type = string
 menu.item-7.link.text = a9w3-engine/view/reader/list-status.htm
 

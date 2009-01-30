@@ -57,7 +57,7 @@ W3GUI.drawMenu = function(){
         if(infoText == null) break;
         
         if(infoType == "function"){
-            infoText = eval(infoText);
+            eval("infoText="+infoText+"();");
         }else if (infoType == "config.menu"){
             infoText = W3GUI.MENU.getValue(infoText);
         }else if (infoType == "config.stat"){
