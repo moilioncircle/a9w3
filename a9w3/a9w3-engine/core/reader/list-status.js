@@ -7,15 +7,6 @@ function initReader(){
     html.push("Pager:"+parent.A9Loader.syncLoadText(parent.W3CNF.USERHOME+"helpers/status/read/article/0000.htm"));
     html.push("&nbsp;&nbsp;");
     html.push("Album:"+parent.A9Loader.syncLoadText(parent.W3CNF.USERHOME+"helpers/status/read/gallery/0000.htm"));
-    html.push("&nbsp;");
-    html.push("@ ");
-    if(parent.W3CNF.SPEED_CHAR_BS<0){
-        html.push("fast");
-    }else if(parent.W3CNF.SPEED_CHAR_BS>1000){
-        html.push(Math.ceil(parent.W3CNF.SPEED_CHAR_BS/1000)+"k/s");
-    }else{
-        html.push(parent.W3CNF.SPEED_CHAR_BS+"b/s");
-    }
     html.push("</br>");
     document.getElementById("READER").innerHTML=html.join("");
 }
