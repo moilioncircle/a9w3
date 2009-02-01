@@ -3,26 +3,12 @@ PHP Server Implementation
 
 1. Local VHost Config
 ^^^^^^^^^^^^^^^^^^^^^
-=================== txt : httpd.conf =====================
-<VirtualHost *:80>
-    BandwidthModule On
-    ForceBandWidthModule On
-    Bandwidth all 1000
-    MinBandwidth all 1000
-    ServerAdmin admin@a9w3.com
-    DocumentRoot D:\workspace\a9w3
-    ServerName 127.0.0.8
-    ErrorLog logs/sugarcrm-error_log
-    CustomLog logs/sugarcrm-access_log common
-</VirtualHost>
-<VirtualHost *:80>
-    ServerAdmin admin@a9w3.com
-    DocumentRoot D:\workspace\a9w3
-    ServerName 127.0.0.9
-    ErrorLog logs/a9w3-error_log
-    CustomLog logs/a9w3-access_log common
-</VirtualHost>
-==========================================================
+  1. unzip apache2.zip to $TEMP_DIR
+  2. copy $TEMP_DIR/mod_bw/Release/mod_bw.so to $APACHE2_HOME/modules/
+  3. append $TEMP_DIR/conf/httpd.conf's content to $APACHE2_HOME/conf/httpd.conf
+     (edit a9w3 home according to yourself)
+  4. restart apache2(httpd)
+  5. visit http://127.0.0.8(with bw) and http://127.0.0.9
 
 2. ISP VHost Config
 ^^^^^^^^^^^^^^^^^^^
