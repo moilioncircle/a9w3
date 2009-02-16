@@ -26,7 +26,7 @@ function appendIndexToMonth($tp,$uid,$pid,$mth=''){
     
     // month
     if(empty($mth)){
-        $mth = date('Y').'$'.ceil(date('m')/3); //2008$3
+        $mth = getUserDate('Y',$uid).'$'.ceil(getUserDate('m',$uid)/3); //2008$3
     }
     $itemdir = $idir.'/month/'.$mth; //month/2008$3/
     if(!is_dir($itemdir)

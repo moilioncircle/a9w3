@@ -26,7 +26,7 @@ function traceReader($tp,$uid,$pid){
     
     // log
     $lnm = $fnm.'-log.htm';
-    $lgt = date('YmdHis').'|'.$_SERVER["REMOTE_ADDR"]."\n";
+    $lgt = getUserDate('YmdHis',$uid).'|'.$_SERVER["REMOTE_ADDR"]."\n";
     if(!writeFile($lnm,$lgt,'a+')){
         return false;
     }

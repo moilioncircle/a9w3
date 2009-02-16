@@ -28,7 +28,7 @@ $newFields = array(
 $isNew = false;
 if(empty($r_pid)){ // new
     $isNew = true;
-    $r_pid = date('YmdHis');
+    $r_pid = getUserDate('YmdHis',$r_uid);
     $ndir = PATH_ROOT.'a9w3-auhome/'.$r_uid.'/helpers/notice/'.$r_pid;
     $head = $ndir.'/head.htm';
     $doby = $ndir.'/body.htm';
@@ -43,7 +43,7 @@ if(empty($r_pid)){ // new
         exit;
     }
     
-    $newFields['mtime'] = date('Y-m-d H:i:s');
+    $newFields['mtime'] = getUserDate('Y-m-d H:i:s',$r_uid);
     $newFields['ctime'] = $newFields['mtime'];
     
     // add index
@@ -64,7 +64,7 @@ if(empty($r_pid)){ // new
     
     // check field changement
     $oldFields = readKeyValues($head);
-    $newFields['mtime'] = date('Y-m-d H:i:s');
+    $newFields['mtime'] = getUserDate('Y-m-d H:i:s',$r_uid);
     $newFields['ctime'] = $oldFields['ctime'];
 }
 

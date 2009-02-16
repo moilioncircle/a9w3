@@ -24,7 +24,7 @@ function updateInfoStat($uid,$key,$cnt){
     $infofile = PATH_ROOT.'a9w3-auhome/'.$uid.'/helpers/status/info/stat.htm';
     if(is_file($infofile)){
     	$infokv = readKeyValues($infofile);
-    	$infokv[$key.'.mtime'] = date('Y-m-d H:i:s');
+    	$infokv[$key.'.mtime'] = getUserDate('Y-m-d H:i:s',$uid);
     	$infokv[$key.'.count'] = intval($infokv[$key.'.count'])+$cnt;
 
 	    // write file

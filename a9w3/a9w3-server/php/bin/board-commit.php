@@ -26,9 +26,9 @@ if(empty($_SESSION[SKEY_IMGSN.$r_uid])
 unset($_SESSION[SKEY_IMGSN.$r_uid]); // clear imgsn
 
 // write board
-$boardid = date('YmdHis').sprintf("%03s",rand(1,999));
+$boardid = getUserDate('YmdHis',$r_uid).sprintf("%03s",rand(1,999));
 $boardtx  = '
-time='.date('Y-m-d H:i:s').'
+time='.getUserDate('Y-m-d H:i:s',$r_uid).'
 user='.text2line($r_from).'
 from='.$_SERVER['REMOTE_ADDR'].'
 text='.text2line($r_text);

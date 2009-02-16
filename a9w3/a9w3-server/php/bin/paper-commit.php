@@ -30,8 +30,8 @@ $newFields = array(
 $isNew = false;
 if(empty($r_pid)){ // new
     $isNew = true;
-    $y4 = date('Y');
-    $m8 = date('/mdHis');
+    $y4 = getUserDate('Y',$r_uid);
+    $m8 = getUserDate('/mdHis',$r_uid);
     $r_pid = $y4.$m8;
     $head = PATH_ROOT.'a9w3-auhome/'.$r_uid.'/article/'.$r_pid.'/head.htm';
     $doby = PATH_ROOT.'a9w3-auhome/'.$r_uid.'/article/'.$r_pid.'/body.htm';
@@ -50,7 +50,7 @@ if(empty($r_pid)){ // new
         exit;
     }
     
-    $newFields['mtime'] = date('Y-m-d H:i:s');
+    $newFields['mtime'] = getUserDate('Y-m-d H:i:s',$r_uid);
     $newFields['ctime'] = $newFields['mtime'];
     
     // add index
@@ -96,7 +96,7 @@ if(empty($r_pid)){ // new
         }
     }
     
-    $newFields['mtime'] = date('Y-m-d H:i:s');
+    $newFields['mtime'] = getUserDate('Y-m-d H:i:s',$r_uid);
     $newFields['ctime'] = $oldFields['ctime'];
 }
 
