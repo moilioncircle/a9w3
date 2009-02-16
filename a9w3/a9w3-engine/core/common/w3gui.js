@@ -535,7 +535,6 @@ W3GUI.avoidClientCache = function(urls){
 
 W3GUI.wrapUID = function(urls){
     if(urls == null) return null;
-    var tm = new Date().getTime();
     if(typeof(urls) == "string"){
         urls += (urls.indexOf("?")>0?"&":"?")+"UID="+W3CNF.USER;
     }else{

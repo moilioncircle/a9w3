@@ -87,3 +87,17 @@ function isSimplePass(pass){
     if(pass.replace(/[0-9a-zA-Z]/g,"").length<=0) return true;
     return false;
 }
+
+function initTimeOffet(){
+    var url = parent.W3CNF.getServerURL("admin.sertime");
+    url = parent.W3GUI.avoidClientCache(parent.W3GUI.wrapUID(url));
+    var sertime = parent.A9Loader.syncLoadText(url);
+    var lcltime = Math.floor((new Date()).getTime()/1000);
+    //
+    var seroffset = lcltime - sertime;
+    var lcloffset = parent.A9Loader.syncLoadText(parent.W3CNF.USERHOME+"profile/timeoffset.htm");
+    var obj = document.getElementById("__TIME_OFFSET__");
+    obj.innerHTML=lcloffset+"/"+seroffset;
+}
+
+initTimeOffet();
