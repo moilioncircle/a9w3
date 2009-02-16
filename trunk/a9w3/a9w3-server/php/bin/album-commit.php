@@ -33,7 +33,7 @@ if(empty($r_pid)){ // new one
     $r_file  = $_FILES['FILE'];
 	require_once('common-upload.php');
     checkUploadFileOnly($r_file['name']);
-    $r_pid  = date('Y/mdHis');
+    $r_pid  = getUserDate('Y/mdHis',$r_uid);
     $g_dir  = PATH_ROOT.'a9w3-auhome/'.$r_uid.'/gallery/';
     
 	// check and mkdir
@@ -94,7 +94,7 @@ if(empty($r_pid)){ // new one
 	// save image
 	$newFields['ftype'] = getExtendFileName($r_file['name']);
 	$newFields['sizeb'] = formatSize($r_file['size']);
-    $newFields['mtime'] = date('Y-m-d H:i:s');
+    $newFields['mtime'] = getUserDate('Y-m-d H:i:s',$r_uid);
     $newFields['ctime'] = $newFields['mtime'];
     
 	if ($r_file['error'] !== UPLOAD_ERR_OK
@@ -162,7 +162,7 @@ if(empty($r_pid)){ // new one
         $newFields['ftype'] = $oldFields['ftype'];
         $newFields['sizeb'] = $oldFields['sizeb'];
         $newFields['ctime'] = $oldFields['ctime'];
-        $newFields['mtime'] = date('Y-m-d H:i:s');
+        $newFields['mtime'] = getUserDate('Y-m-d H:i:s',$r_uid);
     }else{
         echo RKEY_SUCCESS;
         exit;

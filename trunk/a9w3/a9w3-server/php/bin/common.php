@@ -145,4 +145,14 @@ function readKeyValues($fn){
     }
     return $rs;
 }
+
+function getUserDate($format,$uid){
+    $tof = PATH_ROOT.'a9w3-auhome/'.$uid.'/profile/timeoffset.htm';
+    if(is_file($tof)){
+        $offset = intval(file_get_contents($tof));
+        return date($format,time()+$offset);
+    }else{
+        return date($format);
+    }
+}
 ?>

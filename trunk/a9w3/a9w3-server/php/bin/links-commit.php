@@ -28,7 +28,7 @@ $newFields = array(
 $isNew = false;
 if(empty($r_pid)){ // new
     $isNew = true;
-    $r_pid = date('YmdHis');
+    $r_pid = getUserDate('YmdHis',$r_uid);
     $dst = PATH_ROOT.'a9w3-auhome/'.$r_uid.'/address/'.$r_pid.'.htm';
     
     if(is_file($dst)){
@@ -36,7 +36,7 @@ if(empty($r_pid)){ // new
         exit;
     }
     
-    $newFields['mtime'] = date('Y-m-d H:i:s');
+    $newFields['mtime'] = getUserDate('Y-m-d H:i:s',$r_uid);
     $newFields['ctime'] = $newFields['mtime'];
     
     // add index
@@ -94,7 +94,7 @@ if(empty($r_pid)){ // new
         }
     }
     if($changed){
-        $newFields['mtime'] = date('Y-m-d H:i:s');
+        $newFields['mtime'] = getUserDate('Y-m-d H:i:s',$r_uid);
         $newFields['ctime'] = $oldFields['ctime'];
     }else{
         echo RKEY_SUCCESS;
