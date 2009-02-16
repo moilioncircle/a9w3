@@ -3,11 +3,21 @@ var splitbg = "#EFEFEF";
 var blankbg = "#FFFFFF";
 
 function initReader(){
+    var totalpap=parent.A9Loader.syncLoadText(parent.W3CNF.USERHOME+"helpers/status/read/article/0000.htm");
+    var totalabm=parent.A9Loader.syncLoadText(parent.W3CNF.USERHOME+"helpers/status/read/gallery/0000.htm");
+    var keys = ["total","year","month","today"];
     var html = [];
-    html.push("Pager:"+parent.A9Loader.syncLoadText(parent.W3CNF.USERHOME+"helpers/status/read/article/0000.htm"));
-    html.push("&nbsp;&nbsp;");
-    html.push("Album:"+parent.A9Loader.syncLoadText(parent.W3CNF.USERHOME+"helpers/status/read/gallery/0000.htm"));
-    html.push("</br>");
+    html.push("<table border='0' cellspacing='1' cellpadding='2' width='100%'>");
+    html.push("<tr height='"+lineHeight+"'><td width='55'>Reader</td><td>Paper</td><td>Album</td></tr>");
+
+    for(var i=0;i<keys.length;i++){
+        html.push("<tr height='"+lineHeight+"' style='background-color:"+blankbg+"'>");
+        html.push("<td>"+keys[i]+"</td>");
+        html.push("<td>"+totalpap+"</td>");
+        html.push("<td>"+totalabm+"</td>");
+        html.push("</tr>");
+    }
+    html.push("</table>");
     document.getElementById("READER").innerHTML=html.join("");
 }
 
@@ -15,7 +25,7 @@ function initStatus(){
     var keys = ["admin","address","article","gallery","board","notice"];
     var html = [];
     html.push("<table border='0' cellspacing='1' cellpadding='2' width='100%'>");
-    html.push("<tr height='"+lineHeight+"'><td width='55'>Channel</td><td width='35'>Cnt</td><td>Last Date</td></tr>");
+    html.push("<tr height='"+lineHeight+"'><td width='60'>Channel</td><td width='50'>Count</td><td>Modified</td></tr>");
     for(var i=0;i<keys.length;i++){
         html.push("<tr height='"+lineHeight+"' style='background-color:"+blankbg+"'>");
         html.push("<td>"+keys[i]+"</td>");
@@ -33,7 +43,7 @@ function initAction(){
         var html = [];
         if(acts != null){
             html.push("<table border='0' cellspacing='1' cellpadding='2' width='100%' style='overflow:hidden;'>");
-            html.push("<tr height='"+lineHeight+"'><td width='20'>Id</td><td width='70'>Date</td><td>Name</td></tr>");
+            html.push("<tr height='"+lineHeight+"'><td width='20'></td><td width='70'>Date</td><td>Action</td></tr>");
             var lines = acts.split(/[\r\n]+/).reverse();
             var cnt = lines.length>maxl?maxl:lines.length;
             var j=1;
