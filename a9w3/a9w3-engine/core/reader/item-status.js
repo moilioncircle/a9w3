@@ -6,7 +6,7 @@ function listEvent(fn){
     if(fn ==null || fn == ""){
         fn = "inuse.htm";
     }
-    parent.W3GUI.asyncLoadText(function(t){
+    parent.A9Loader.asyncLoadText(function(u,t){
     	var html = [];
         if(t != null){
         	//20081122114739|admin.login||127.0.0.9
@@ -34,7 +34,7 @@ function listEvent(fn){
 }
 
 function initIndex(){
-    parent.W3GUI.asyncLoadText(function(t){
+    parent.A9Loader.asyncLoadText(function(u,t){
     	var html = [];
         if(t != null){
             html.push("<select onchange='listEvent(this.value)'>");

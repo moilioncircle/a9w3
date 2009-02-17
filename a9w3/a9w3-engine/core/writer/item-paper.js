@@ -268,7 +268,7 @@ function init(){
         initHead();
         initData();
         // body
-        parent.W3GUI.asyncLoadText(function(t){
+        parent.A9Loader.asyncLoadText(function(u,t){
             bodyTxt = t;
             initEditor(isA9text(t));
         },docPath+"body.htm");
