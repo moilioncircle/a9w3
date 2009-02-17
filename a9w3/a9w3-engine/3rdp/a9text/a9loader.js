@@ -464,7 +464,10 @@ var __A9Loader__ = function()
     {
         var mess = "para:"+para+" should be "+type+" ::"+info;
         if(para == null) throw mess;
-        if(para instanceof Array && type != "array"){
+        if(typeof(para)=='object' && 
+           typeof(para.sort)=='function' &&
+           typeof(para.length) == 'number'&& 
+           type != "array"){
             for(var i=0; i<para.length; i++) {
                 if(typeof(para[i]) == type) continue;
                 try{
