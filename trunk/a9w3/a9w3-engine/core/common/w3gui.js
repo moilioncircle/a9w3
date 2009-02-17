@@ -577,12 +577,6 @@ function getMenuInfoByStat(prefix){
 W3GUI.changeCss = function(obj,cname){
     obj.className = cname;
 }
-// for child window(iframe)
-W3GUI.asyncLoadText = function(func,url){
-    A9Loader.asyncLoadText(function(u,t){
-        func(t);
-    },url);
-}
 
 // sync init
 W3GUI.asyncInit = function(func){

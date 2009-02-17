@@ -39,7 +39,7 @@ function initStatus(){
 
 function initAction(){
     var maxl =10;
-    parent.W3GUI.asyncLoadText(function(acts){
+    parent.A9Loader.asyncLoadText(function(url,acts){
         var html = [];
         if(acts != null){
             html.push("<table border='0' cellspacing='1' cellpadding='2' width='100%' style='overflow:hidden;'>");

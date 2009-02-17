@@ -1,7 +1,6 @@
 var lineHeight=16;
 var splitbg = "#EFEFEF";
 var blankbg = "#FFFFFF";
-
 var logpath="";
 
 //
@@ -11,7 +10,7 @@ if(pos>0){
     logpath = url.substr(pos+1);
 }
 
-parent.W3GUI.asyncLoadText(function(t){
+parent.A9Loader.asyncLoadText(function(u,t){
 	var html = [];
     if(t != null){
     	//20081123131747|127.0.0.9
