@@ -3,22 +3,32 @@ var splitbg = "#EFEFEF";
 var blankbg = "#FFFFFF";
 
 function initReader(){
-    var totalpap=parent.A9Loader.syncLoadText(parent.W3CNF.USERHOME+"helpers/status/read/article/0000.htm");
-    var totalabm=parent.A9Loader.syncLoadText(parent.W3CNF.USERHOME+"helpers/status/read/gallery/0000.htm");
-    var keys = ["total","year","month","today"];
-    var html = [];
-    html.push("<table border='0' cellspacing='1' cellpadding='2' width='100%'>");
-    html.push("<tr height='"+lineHeight+"'><td width='55'>Reader</td><td>Paper</td><td>Album</td></tr>");
+    var rUrls = [
+        parent.W3CNF.USERHOME+"helpers/status/read/article/0000.htm",
+        parent.W3CNF.USERHOME+"helpers/status/read/gallery/0000.htm"
+    ];
+    parent.A9Loader.asyncLoadText(function(urls,txts){
+        var totalpap=txts[0];
+        var totalabm=txts[1];
+        if(urls[0] == rUrls[1]){
+            totalpap=txts[1];
+            totalabm=txts[0];
+        }
+        var keys = ["total","year","month","today"];
+        var html = [];
+        html.push("<table border='0' cellspacing='1' cellpadding='2' width='100%'>");
+        html.push("<tr height='"+lineHeight+"'><td width='55'>Reader</td><td>Paper</td><td>Album</td></tr>");
 
-    for(var i=0;i<keys.length;i++){
-        html.push("<tr height='"+lineHeight+"' style='background-color:"+blankbg+"'>");
-        html.push("<td>"+keys[i]+"</td>");
-        html.push("<td>"+totalpap+"</td>");
-        html.push("<td>"+totalabm+"</td>");
-        html.push("</tr>");
-    }
-    html.push("</table>");
-    document.getElementById("READER").innerHTML=html.join("");
+        for(var i=0;i<keys.length;i++){
+            html.push("<tr height='"+lineHeight+"' style='background-color:"+blankbg+"'>");
+            html.push("<td>"+keys[i]+"</td>");
+            html.push("<td>"+totalpap+"</td>");
+            html.push("<td>"+totalabm+"</td>");
+            html.push("</tr>");
+        }
+        html.push("</table>");
+        document.getElementById("READER").innerHTML=html.join("");
+    },rUrls);
 }
 
 function initStatus(){
