@@ -93,7 +93,7 @@ var __A9Loader__ = function()
     
     function __runAfterClassLoaded__(func)
     {
-        __checkType__(func,"Function","func@__runAfterClassLoaded__");
+        __checkType__(func,"function","func@__runAfterClassLoaded__");
         __stdout__("__runAfterClassLoaded__:"+func);
         __asyncClzzTask__.func.push(func);
         __clzzTaskCallback__();
@@ -131,7 +131,7 @@ var __A9Loader__ = function()
      */
     function __asyncLoadText__(func,urls)
     {
-        __checkType__(func,"Function","func@__asyncLoadText__");
+        __checkType__(func,"function","func@__asyncLoadText__");
         __checkType__(urls,"string","urls@__asyncLoadText__");
         
         __asyncTextTask__.num++;
@@ -464,7 +464,7 @@ var __A9Loader__ = function()
     {
         var mess = "para:"+para+" should be "+type+" ::"+info;
         if(para == null) throw mess;
-        if(para instanceof Array && type != "Array"){
+        if(para instanceof Array && type != "array"){
             for(var i=0; i<para.length; i++) {
                 if(typeof(para[i]) == type) continue;
                 try{
