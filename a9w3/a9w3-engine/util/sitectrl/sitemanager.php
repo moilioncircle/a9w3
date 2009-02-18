@@ -5,7 +5,7 @@ if(!empty($_SERVER['REQUEST_URI'])){
     exit;
 }
 //
-$self = __FILE__;
+$self = str_replace("\\", '/', __FILE__);
 for($i=0;$i<4;$i++) $self = dirname($self);
 define('PATH_ROOT',$self.'/');
 parseCommand($argv);
