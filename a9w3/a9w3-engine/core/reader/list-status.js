@@ -3,17 +3,35 @@ var splitbg = "#EFEFEF";
 var blankbg = "#FFFFFF";
 
 function initReader(){
+    var myd = new Date();
+    var y4 = myd.getFullYear();
+    var m2 = myd.getMonth()<9?'0'+(myd.getMonth()+1):(myd.getMonth()+1);
+    var d2 = myd.getDate()<10?'0'+myd.getDate():myd.getDate();
     var rUrls = [
         parent.W3CNF.USERHOME+"helpers/status/read/article/0000.htm",
-        parent.W3CNF.USERHOME+"helpers/status/read/gallery/0000.htm"
+        parent.W3CNF.USERHOME+"helpers/status/read/gallery/0000.htm",
+        parent.W3CNF.USERHOME+"helpers/status/stat/article/year/" +y4+"-hit.htm",
+        parent.W3CNF.USERHOME+"helpers/status/stat/gallery/year/" +y4+"-hit.htm",
+        parent.W3CNF.USERHOME+"helpers/status/stat/article/month/"+y4+"/"+m2+"-hit.htm",
+        parent.W3CNF.USERHOME+"helpers/status/stat/gallery/month/"+y4+"/"+m2+"-hit.htm",
+        parent.W3CNF.USERHOME+"helpers/status/stat/article/date/" +y4+"/"+m2+"/"+d2+"-hit.htm",
+        parent.W3CNF.USERHOME+"helpers/status/stat/gallery/date/" +y4+"/"+m2+"/"+d2+"-hit.htm"
     ];
     parent.A9Loader.asyncLoadText(function(urls,txts){
-        var totalpap=txts[0];
-        var totalabm=txts[1];
-        if(urls[0] == rUrls[1]){
-            totalpap=txts[1];
-            totalabm=txts[0];
+        var vals = [];
+        for(var i=0;i<urls.length;i++){
+            for(var j=0;j<rUrls.length;j++){
+                if(urls[i] == rUrls[j]){
+                    if(txts[i] != null && txts[i].length>0){
+                        vals[j] = txts[i].replace(/\D+/,'');
+                    }else{
+                        vals[j]=0;
+                    }
+                    break;
+                }
+            }
         }
+        
         var keys = ["total","year","month","today"];
         var html = [];
         html.push("<table border='0' cellspacing='1' cellpadding='2' width='100%'>");
@@ -22,8 +40,8 @@ function initReader(){
         for(var i=0;i<keys.length;i++){
             html.push("<tr height='"+lineHeight+"' style='background-color:"+blankbg+"'>");
             html.push("<td>"+keys[i]+"</td>");
-            html.push("<td>"+totalpap+"</td>");
-            html.push("<td>"+totalabm+"</td>");
+            html.push("<td>"+vals[i*2]+"</td>");
+            html.push("<td>"+vals[i*2+1]+"</td>");
             html.push("</tr>");
         }
         html.push("</table>");
@@ -69,7 +87,7 @@ function initAction(){
                 html.push("</tr>");
                 j++;
             }
-            html.push("</table><br/>");
+            html.push("</table>");
         }
         document.getElementById("ACTION").innerHTML=html.join("");
     },parent.W3CNF.USERHOME+"helpers/status/write/top10.htm");
