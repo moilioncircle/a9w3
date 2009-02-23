@@ -110,7 +110,7 @@ function loadData(){
         
         dateFr.setDate(dateFr.getDate() + 1);
         if(!isStop && dateFr<dateTo){
-            loadData();
+            window.setTimeout(loadData,500);
         }else{
             isStop = true;
             document.getElementById("__SHOW__").disabled = !isStop;
