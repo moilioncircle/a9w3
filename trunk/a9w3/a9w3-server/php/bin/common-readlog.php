@@ -63,7 +63,7 @@ function traceReader($tp,$uid,$pid){
     
         // log
     $lnm = $sdf.'-log.htm';
-    $lgt = $tp.'|'.$pid.'|'.$ymdhis.'|'.$_SERVER["REMOTE_ADDR"]."\n";
+    $lgt = $pid.'|'.$ymdhis.'|'.$_SERVER["REMOTE_ADDR"]."\n";
     if(!writeFile($lnm,$lgt,'a+')){
         return false;
     }

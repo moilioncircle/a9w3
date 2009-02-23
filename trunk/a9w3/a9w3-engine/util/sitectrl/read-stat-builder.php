@@ -103,7 +103,7 @@ function generateLog($tp,$hm,$pid,$txt){
     
         // log
     $lnm = $sdf.'-log.htm';
-    $lgt = $tp.'|'.$pid.'|'.$txt."\n";
+    $lgt = $pid.'|'.$txt."\n";
     if(!writeFile($lnm,$lgt,'a+')){
         return false;
     }
