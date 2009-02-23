@@ -69,13 +69,14 @@ function loadData(){
     var dstr = dateFr.getFullYear()+"/"+
         (dateFr.getMonth()<9?('0'+(dateFr.getMonth()+1)):(dateFr.getMonth()+1))+"/"+
         (dateFr.getDate()<10?('0'+dateFr.getDate()):dateFr.getDate());
-    
+    var uhd = parent.W3CNF.USERHOME+"helpers/status/stat/";
+    var uft = "/date/"+dstr+"-log.htm";
     var durl = [];
     if(typeHr == ''){
-        durl.push(parent.W3CNF.USERHOME+"helpers/status/stat/article/date/"+dstr+"-log.htm");
-        durl.push(parent.W3CNF.USERHOME+"helpers/status/stat/gallery/date/"+dstr+"-log.htm");
+        durl.push(uhd+"article"+uft);
+        durl.push(uhd+"gallery"+uft);
     }else{
-        durl.push(parent.W3CNF.USERHOME+"helpers/status/stat/"+typeHr+"/date/"+dstr+"-log.htm");
+        durl.push(uhd+typeHr+uft);
     }
     
     parent.A9Loader.asyncLoadText(function(us,ts){
@@ -84,17 +85,18 @@ function loadData(){
         for(var x=0;x<ts.length;x++){
             if(ts[x] == null) continue;
             hasx = true;
-            //article|2009/0113075318|20090202133859|59.46.193.226
+            var tp = us[x].substring(uhd.length,us[x].lastIndexOf(uft));
+            //2009/0113075318|20090202133859|59.46.193.226
             var lines = ts[x].split(/[\r\n]+/);
             for(var i=0;i<lines.length;i++){
                 var parts = lines[i].split("|");
-                if(parts.length != 4) continue;
+                if(parts.length != 3) continue;
                 tcnt++;
                 html.push("<tr height='"+lineHeight+"' style='background-color:"+(tcnt%5==0?splitbg:blankbg)+"'>");
-                html.push("<td>&nbsp;"+parts[0]+"</td>"); // type
-                html.push("<td>&nbsp;"+getHead(parts[0],parts[1])+"</td>"); // pid
-                html.push("<td>&nbsp;"+parts[2]+"</td>"); // time
-                html.push("<td>&nbsp;"+parts[3]+"</td>"); // from
+                html.push("<td>&nbsp;"+tp+"</td>"); // type
+                html.push("<td>&nbsp;"+getHead(tp,parts[0])+"</td>"); // pid
+                html.push("<td>&nbsp;"+parts[1]+"</td>"); // time
+                html.push("<td>&nbsp;"+parts[2]+"</td>"); // from
                 html.push("</tr>");
             }
         }
