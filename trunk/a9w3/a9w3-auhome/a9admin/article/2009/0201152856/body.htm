@@ -25,15 +25,87 @@ Quick start in 5 minuts
 
 2.1. 文件夹模式
 ^^^^^^^^^^^^^^^
-
+  a9w3的特殊之一就是可以不是用服务器而达到阅读级别的动态性.
+  双击或者以file方式访问 $A9W3_HOME/index.htm 即可.
+  
 2.2. 服务器模式
 ^^^^^^^^^^^^^^^
-
-3. 管理与维护
+  服务器脚本在 $A9W3_HOME/a9w3-server/下,默认提供php(4+)实现.
+  $A9W3_HOME/a9w3-server/php/doc/install.htm 提供了apache 2.0.x的手册.
+  成功运行apache后,通过浏览器访问以下地址验证,
+      限速模式: http://127.0.0.8
+      正常模式: http://127.0.0.9
+  
+3. 结构与规则
 ^^^^^^^^^^^^^
+  a9w3 的目录结构如下:
+  ...........................
+  $A9W3_HOME/
+  ├─a9w3-auhome/    用户和用户数据目录(文件模式:rw-)
+  ├─a9w3-engine/    JS/CSS/HTML引擎目录(文件模式:r--)
+  ├─a9w3-server/    服务器脚本实现(文件模式:r-x)
+  ├─index.htm       首页(r--)
+  ..........................
+  
+  a9w3设计上有以下几条默认规则,
+  * 编码必须是utf8
+  * 供浏览器访问的文本内容,命名为 *.htm
+  * 非浏览器访问的文本内容,命名为 *.txt
+  * 配置文件使用key=value格式,不是用xml.
 
-4. 多用户使用
+4. 配置与管理
 ^^^^^^^^^^^^^
+既定功能下的配置和管理,主要是如何使用各个配置文件.
+
+4.1. a9user的配置
+^^^^^^^^^^^^^^^^^
+a9user 都在a9w3-auhome目录下,用户名和目录名是一致的.
+用户名的命名规则,要求必须是Ascii的英文字母,数字和下划线(_).
+
+以默认用户a9admin为例,配置文件都在a9admin/profile目录下.
+  config.htm 是用户主配置文件.
+  passwd.htm 是用户的密码文件.
+  timeoffset.htm 是用户时间减去服务器时间的差(秒,有符号)
+
+4.2. engine的配置
+^^^^^^^^^^^^^^^^^
+引擎的配置文件在 a9w3-engine/conf 目录下.
+  group.htm  将a9user分到3个层次的组中,用以权限管理.
+  permit.htm 细化服务器URL的组与用户级别权限.(@表示组,逗号分隔).
+  users.htm  用户的URL表达式,用来区分多用户.
+
+4.3. server的配置
+^^^^^^^^^^^^^^^^^
+服务器的配置共有以下2个,
+  a9w3-server/server.htm 定义各功能对应的URL.
+  a9w3-server/upload.htm 定义上传数据的安全限制.
+
+5. 多用户使用
+^^^^^^^^^^^^^
+  a9w3是多用户的,并进行了用户间的隔离.
+  初始化一个a9w3用户,需要把以下完成以下步骤.
+  
+  1. 解压以下文件到a9w3-auhome/$newuser
+     a9w3-engine/util/inituser/default-a9user.zip
+  2. 设置用户的URL表达式.
+     a9w3-engine/conf/users.htm
+  3. 设置用户组,或访问权限.
+     a9w3-engine/conf/group.htm
+     a9w3-engine/conf/permit.htm
+  
+完成以上步骤,就可以在浏览器里访问了.
+比如, http://127.0.0.9?a9user=trydofor
+
+6. 备份与同步
+^^^^^^^^^^^^^
+备份数据,直接备份用户目录即可,a9w3-auhome/$a9user
+
+同步数据,一般用于本地文件和远程服务器间(ftp方式).
+本地功能于以下位置,
+a9w3-engine/util/sitectrl/sitemanager.php   本地脚本
+a9w3-engine/util/sitectrl/history.txt       操作历史/手册
+
+服务器功能在a9w3-server/server.htm 由"admin.sitefp" 定义.
 
 </pre>
 <script type='text/javascript' src='../../../../../a9w3-engine/3rdp/a9text/a9loader.js'></script>
