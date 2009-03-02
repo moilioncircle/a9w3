@@ -49,7 +49,7 @@ var itemvw = function(ai){
 };
 
 var INITOBJ = {
-    'VAR_EMPTYF':'parent.W3GUI.editPicture',
+    'VAR_FUNNEW':'parent.W3GUI.editPicture',
     'VAR_PCOUNT':parent.W3CNF.PAGE_SIZE_ALBUM,
     'FNC_LABELV':parent.W3GUI.GALLERY_LABEL,
     'FNC_TTLLNK':parent.W3GUI.getGalleryTotalLink,

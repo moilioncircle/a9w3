@@ -35,7 +35,7 @@ var itemvw = function(ai){
     drawCommonItem(ai.id,buff.join(""));
 };
 var INITOBJ = {
-    'VAR_EMPTYF':'parent.W3GUI.editAddress',
+    'VAR_FUNNEW':'parent.W3GUI.editAddress',
     'VAR_PCOUNT':parent.W3CNF.PAGE_SIZE_LINKS,
     'FNC_LABELV':parent.W3GUI.ADDRESS_LABEL,
     'FNC_TTLLNK':parent.W3GUI.getAddressTotalLink,
