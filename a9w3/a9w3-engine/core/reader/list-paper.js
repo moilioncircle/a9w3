@@ -39,7 +39,7 @@ var itemvw = function(ai){
 };
 
 var INITOBJ = {
-    'VAR_EMPTYF':'parent.W3GUI.editArticle',
+    'VAR_FUNNEW':'parent.W3GUI.editArticle',
     'VAR_PCOUNT':parent.W3CNF.PAGE_SIZE_PAPER,
     'FNC_LABELV':parent.W3GUI.ARTICLE_LABEL,
     'FNC_TTLLNK':parent.W3GUI.getArticleTotalLink,
