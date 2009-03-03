@@ -6,8 +6,8 @@ var datexbg = "#DDDDEF";
 var isStop = true;
 var isHead = false;
 var typeHr = '';
-var dateFr = new Date();
-var dateTo = new Date();
+var dateFr = new Date(1234567800000); // default date
+var dateTo = new Date(1234567800000); // default date
 
 var HEAD_POOL = {};
 
@@ -51,6 +51,7 @@ function listEvent(){
         dateTo.setFullYear(document.getElementById("__Y4_TO__").value);
         dateTo.setMonth(document.getElementById("__M2_TO__").value);
         dateTo.setDate(document.getElementById("__D2_TO__").value);
+        dateTo.setDate(dateTo.getDate() + 1);
         
         typeHr = document.getElementById("__TYPE__").value;
     }catch(E){
