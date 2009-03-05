@@ -30,11 +30,11 @@ var A9TextRender = function()
     
     __const_htm__.list_head = ["<div class='a9text_breakall' style='margin-left:","$tier","ex'>"];;
     __const_htm__.list_foot = "</div>";
-    __const_htm__.list_item_head   = "<ul>";
-    __const_htm__.list_step_head = "<ol>";
+    __const_htm__.list_item_head   = "<ul class='a9text_list_item'>";
+    __const_htm__.list_step_head = "<ol class='a9text_list_step'>";
     __const_htm__.list_item_foot  = "</ul>";
     __const_htm__.list_step_foot  = "</ol>";
-    __const_htm__.list_entry_head = ["<li type='","$type","'>"];
+    __const_htm__.list_entry_head = ["<li class='a9text_list_entry' type='","$type","'>"];
     __const_htm__.list_entry_foot = "</li>";
     __const_htm__.list_line_token = "<br />";
     
