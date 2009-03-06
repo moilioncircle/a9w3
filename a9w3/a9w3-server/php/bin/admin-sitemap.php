@@ -94,8 +94,8 @@ $templet = array(
     'rss.xml'
 );
 $keyvals = array(
-    array('site'=>$r_site,'a9user'=>$r_uid,'time'=>$rss_time,'item_list'=>$all_item),
-    array('site'=>$r_site,'a9user'=>$r_uid,'time'=>$atm_time,'item_list'=>$all_item)
+    array('site'=>$r_site,'a9user'=>$r_uid,'time'=>$atm_time,'item_list'=>$all_item),
+    array('site'=>$r_site,'a9user'=>$r_uid,'time'=>$rss_time,'item_list'=>$all_item)
 );
 
 $cnt = count($templet);

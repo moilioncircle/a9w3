@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.google.com/schemas/sitemap/0.84">
-    <sitemap><loc>http://${site}/a9w3-auhome/${a9user}/helpers/sitemap/sitemap-article.xml</loc></sitemap>
-    <sitemap><loc>http://${site}/a9w3-auhome/${a9user}/helpers/sitemap/sitemap-gallery.xml</loc></sitemap>
-    <sitemap><loc>http://${site}/a9w3-auhome/${a9user}/helpers/sitemap/sitemap-notice.xml</loc></sitemap>
+    <sitemap><loc>http://a9w3.sf.net/a9w3-auhome/a9admin/helpers/sitemap/sitemap-article.xml</loc></sitemap>
+    <sitemap><loc>http://a9w3.sf.net/a9w3-auhome/a9admin/helpers/sitemap/sitemap-gallery.xml</loc></sitemap>
+    <sitemap><loc>http://a9w3.sf.net/a9w3-auhome/a9admin/helpers/sitemap/sitemap-notice.xml</loc></sitemap>
 </sitemapindex>
