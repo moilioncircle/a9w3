@@ -1,19 +1,25 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="../../data/style/black/board.css" rel="stylesheet" type="text/css">
+<form id="GOOGLE_FORM" action="http://www.google.com/search" method="GET" target="_BLANK">
+    <input id="SITE_NAME_1" type="hidden" name="domains" value="">
+    <input id="SITE_NAME_2" type="hidden" name="sitesearch" value="">
+    <input type="hidden" name="hl" value="zh-CN">
+    <input type="hidden" name="ie" value="UTF-8">
+    <input id="GOOGLE_WORD" type="hidden" name="q" value="">
+</form>
+<form id="YAHOO_FORM" action="http://search.cn.yahoo.com/search" method="GET" target="_BLANK">
+    <input id="YAHOO_WORD" type="hidden" name="p" value=""> 
+    <input id="SITE_NAME_3" type="hidden" name="vs" value="">
+    <input type="hidden" name="ei" value="UTF-8">
+    <input type="hidden" name="f" value="D6_5">
+</form>
 <form id="BAIDU_FORM" action="http://www.baidu.com/baidu" method="GET" target="_BLANK">
     <input id="BAIDU_WORD" type="hidden"  name="word">
-    <input id="SITE_NAME_1" type="hidden" name="si"   value="">
+    <input id="SITE_NAME_4" type="hidden" name="si" value="">
     <input type="hidden" name="tn"   value="bds">
     <input type="hidden" name="cl"   value="3">
     <input type="hidden" name="ct"   value="2097152">
     <input type="hidden" name="ie"   value="UTF-8">
-</form>
-<form id="GOOGLE_FORM" action="http://www.google.com/search" method="GET" target="_BLANK">
-    <input id="SITE_NAME_2" type="hidden" name="domains" value="">
-    <input id="SITE_NAME_3" type="hidden" name="sitesearch" value="">
-    <input type="hidden" name="hl" value="zh-CN">
-    <input type="hidden" name="ie" value="UTF-8">
-    <input id="GOOGLE_WORD" type="hidden"   name="q"  value="">
 </form>
 <!-- -->
 <fieldset style="padding:10px;">
@@ -27,6 +33,7 @@
   <tr>
     <td>
         <input type="image" onClick="onSearch('GOOGLE')" src="../../data/image/btn-search-google.png" class="a9w3_board_button">
+        <input type="image" onClick="onSearch('YAHOO')"  src="../../data/image/btn-search-yahoo.png"  class="a9w3_board_button">
         <input type="image" onClick="onSearch('BAIDU')"  src="../../data/image/btn-search-baidu.png"  class="a9w3_board_button">
     </td>
   </tr>
