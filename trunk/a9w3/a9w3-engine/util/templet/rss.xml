@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+  <channel>
+    <title>${site}</title>
+    <link>http://${site}</link>
+    <description>${site}/${a9user}</description>
+    <lastBuildDate>${time}</lastBuildDate>
+    <!-- foreach ${item} in ${item_list} -->
+    <item>
+       <title>${item:title}</title>
+       <link>http://${site}/${item:ulink}</link>
+       <guid>${item:ulink}</guid>
+       <category>${item:label}</category>
+       <description>${item:brief}</description>
+       <pubDate>${item:mtime_rss}</pubDate>
+    </item>
+    <!-- endeach -->
+  </channel>
+</rss>

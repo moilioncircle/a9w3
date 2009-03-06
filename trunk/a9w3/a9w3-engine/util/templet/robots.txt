@@ -3,5 +3,7 @@ Disallow: /index.htm
 Disallow: /a9w3-engine/
 Disallow: /a9w3-server/
 # foreach ${a9user} in ${a9w3-auhome}
+Allow: /a9w3-auhome/${a9user}/helpers/sitemap/atom.xml
+Allow: /a9w3-auhome/${a9user}/helpers/sitemap/rss.xml
 Allow: /a9w3-auhome/${a9user}/helpers/sitemap/sitemap.xml
 # endeach

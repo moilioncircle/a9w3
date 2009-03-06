@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.google.com/schemas/sitemap/0.84">
-    <!-- foreach ${pid} in ${index_pids} -->
-    <url><loc>http://${site}/a9w3-auhome/${a9user}/article/${pid}/body.htm</loc></url>
-    <!-- endeach -->
+    <url><loc>http://a9w3.sf.net/a9w3-auhome/a9admin/article/2009/0201152719/body.htm</loc></url>
+    <url><loc>http://a9w3.sf.net/a9w3-auhome/a9admin/article/2009/0201152856/body.htm</loc></url>
 </urlset>

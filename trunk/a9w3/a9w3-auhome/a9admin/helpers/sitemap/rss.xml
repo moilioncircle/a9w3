@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+  <channel>
+    <title>a9w3.sf.net</title>
+    <link>http://a9w3.sf.net</link>
+    <description>a9w3.sf.net/a9admin</description>
+    <lastBuildDate>Fri, 06 Mar 2009 16:12:19 GMT</lastBuildDate>
+    <item>
+       <title>Changelog of Development</title>
+       <link>http://a9w3.sf.net/a9w3-auhome/a9admin/article/2009/0201152719/body.htm</link>
+       <guid>a9w3-auhome/a9admin/article/2009/0201152719/body.htm</guid>
+       <category>article develop</category>
+       <description>changelog of a9w3 development</description>
+       <pubDate>Sun, 01 Feb 2009 15:27:20 GMT</pubDate>
+    </item>
+    <item>
+       <title>Quick start in 5 minuts</title>
+       <link>http://a9w3.sf.net/a9w3-auhome/a9admin/article/2009/0201152856/body.htm</link>
+       <guid>a9w3-auhome/a9admin/article/2009/0201152856/body.htm</guid>
+       <category>article manual</category>
+       <description>5 minutes manual of a9w3</description>
+       <pubDate>Sun, 01 Feb 2009 16:14:38 GMT</pubDate>
+    </item>
+    <item>
+       <title>trydofor at home (2009)</title>
+       <link>http://a9w3.sf.net/a9w3-auhome/a9admin/gallery/data/2009/0212100905.jpg</link>
+       <guid>a9w3-auhome/a9admin/gallery/data/2009/0212100905.jpg</guid>
+       <category>gallery trydofor author</category>
+       <description>pixel:768*1024 size:152K type:jpg</description>
+       <pubDate>Thu, 12 Feb 2009 10:10:00 GMT</pubDate>
+    </item>
+    <item>
+       <title>License Notice</title>
+       <link>http://a9w3.sf.net/a9w3-auhome/a9admin/helpers/notice/20090212110514/body.htm</link>
+       <guid>a9w3-auhome/a9admin/helpers/notice/20090212110514/body.htm</guid>
+       <category>notice</category>
+       <description>A9W3 is under LGPL</description>
+       <pubDate>Thu, 12 Feb 2009 11:05:16 GMT</pubDate>
+    </item>
+  </channel>
+</rss>
