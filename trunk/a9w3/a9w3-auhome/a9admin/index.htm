@@ -1,0 +1,26 @@
+<script type="text/javascript">
+function onDataResponse(){
+    var rtv = "";
+    if(__DATA_POSTER__.document.readyState){// onreadystatechange
+        if(__DATA_POSTER__.document.readyState == "complete"){
+            rtv = __DATA_POSTER__.document.body.innerHTML;
+            __DATA_POSTER__.document.body.innerHTML = "";
+        }
+    }else{ // onload
+        rtv = __DATA_POSTER__.document.body.innerHTML;
+        __DATA_POSTER__.document.body.innerHTML = "";
+    }
+    
+    if(rtv == null || rtv =="") return;
+    
+    if(/.*querykey\s*=\s*(\S+).*/g.test(rtv)){
+        var a9key = RegExp.$1;
+        if(/a9w3-auhome[\\\/]+([^\\\/]+)/g.test(window.location.href)){
+            var a9val = RegExp.$1;
+            window.location ="../../index.htm?"+a9key+"="+a9val;
+        }
+    }
+}
+</script>
+<iframe onload="try{onDataResponse()}catch(e){}" onreadystatechange="try{onDataResponse()}catch(e){}" id="__DATA_POSTER__" name="__DATA_POSTER__" width='0px' height='0' frameborder='0' src="../../a9w3-engine/conf/users.htm" style="display:none"></iframe>
+<a href="../../index.htm">../../index.htm</a>
