@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>${site}</title> 
+  <link href="http://${site}"/>
+  <updated>${time}</updated>
+  <author><name>${a9user}</name></author>
+  <id>http://${site}/a9w3-auhome/${a9user}</id>
+  <!-- foreach ${item} in ${item_list} -->
+  <entry>
+    <title>${item:title}</title>
+    <link href="http://${site}/${item:ulink}"/>
+    <id>${item:ulink}</id>
+    <category>${item:label}</category>
+    <updated>${item:mtime_atom}</updated>
+    <summary>${item:brief}</summary>
+  </entry>
+  <!-- endeach -->
+</feed>
