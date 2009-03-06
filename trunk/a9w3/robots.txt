@@ -2,5 +2,11 @@ User-Agent: *
 Disallow: /a9w3-engine/
 Disallow: /index.htm
 Disallow: /a9w3-server/
+
+Allow: /a9w3-auhome/a9admin/helpers/sitemap/atom.xml
+Allow: /a9w3-auhome/a9admin/helpers/sitemap/rss.xml
 Allow: /a9w3-auhome/a9admin/helpers/sitemap/sitemap.xml
+
+Allow: /a9w3-auhome/trydofor/helpers/sitemap/atom.xml
+Allow: /a9w3-auhome/trydofor/helpers/sitemap/rss.xml
 Allow: /a9w3-auhome/trydofor/helpers/sitemap/sitemap.xml

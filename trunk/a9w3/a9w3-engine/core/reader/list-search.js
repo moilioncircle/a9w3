@@ -5,6 +5,13 @@ function onSearch(prefix){
     fm.submit();
 }
 
+function onFeed(type){
+    var url = parent.W3CNF.USERHOME+"helpers/sitemap/"+type+".xml";
+    if(window.prompt("copy the url or open in new window",url)){
+        window.open(url);
+    }
+}
+
 function init(){
     var siteval = parent.W3CNF.CONF.getValue("search.site");
     for(var i=1;;i++){
