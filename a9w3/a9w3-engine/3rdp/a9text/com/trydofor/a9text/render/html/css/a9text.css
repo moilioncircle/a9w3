@@ -99,18 +99,18 @@ table{
 }
 .a9text_list_item {
     margin:0ex;
-    padding:0ex;
+    padding:4ex;
     list-style-position: outside;
 }
 .a9text_list_step {
     margin:0ex;
-    padding:0ex;
+    padding:4ex;
     list-style-position: outside;
 }
 .a9text_list_entry {
     margin:0ex;
     padding:0ex;
-    list-style-position: inside;
+    list-style-position: outside;
 }
 .a9text_anchor {
     text-decoration: none;
