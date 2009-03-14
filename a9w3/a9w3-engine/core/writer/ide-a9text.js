@@ -1,5 +1,8 @@
 function getText(){
     var text = document.getElementById("__ART_TEXT__").value;
+    if(document.getElementById('ENCRYPT_ALL').checked){
+        text = encryptText(text);
+    }
     return wrapA9text(text);
 }
 
@@ -7,8 +10,9 @@ function setText(text){
     if(text == null) return;
     
     if(isA9text(text)){
-    	text = unwrapA9text(text);
+        text = unwrapA9text(text);
     }
+    text = decryptText(text);
     var obj = document.getElementById("__ART_TEXT__");
     obj.focus();
     obj.value=text;
@@ -98,8 +102,11 @@ function initEdit(){
             buff.push("<option value=\""+escape(btn[ks])+"\">"+ks+"</option>");
         }
         buff.push("</select>");
-
+    
     }
+    
+    //
+    buff.push("&nbsp;<input id='ENCRYPT_ALL' type='checkbox'><label style='font-size:12px;color:green' for='ENCRYPT_ALL'>Encrypt!</label>");
     document.getElementById("__ART_BTNS__").innerHTML=buff.join("");
 }
 
