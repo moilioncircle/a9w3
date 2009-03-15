@@ -4,7 +4,8 @@ var itemvw = function(ai){
     buff.push("<tr height='2'><td></td></tr>");
     buff.push("<tr>");
     buff.push("<td onmouseover='document.getElementById(\"ITEM_"+ai.id+"\").style.display=\"\"' onmouseout='document.getElementById(\"ITEM_"+ai.id+"\").style.display=\"none\"'>");
-    buff.push("<a href='javascript:parent.W3GUI.showArticleURL(\""+ai.id+"\")'><img src='../../data/image/icon-list-url.png' title='url' border=0 /></a>&nbsp;");
+    buff.push("<a href='javascript:parent.W3GUI.showArticleURL(\""+ai.id+"\")'><img src='../../data/image/icon-list-url.png' title='url' border=0 /></a>");
+    buff.push("<img src='../../data/image/icon-list-star-"+(parent.W3GUI.isStarArticle(ai.id)?"t":"f")+".png' onclick='this.src=\"../../data/image/icon-list-star-\"+(parent.W3GUI.starArticle(\""+ai.id+"\")?\"t\":\"f\")+\".png\"' style='cursor:hand' title='stars' border=0 />&nbsp;");
     buff.push("<a href='javascript:parent.W3GUI.showArticle(\""+ai.id+"\")' class='a9w3_link_title'>"+parent.W3TXT.html2text(ai.title)+"</a></td>");
     buff.push("</tr>");
     buff.push("<tr>");
@@ -47,6 +48,7 @@ var INITOBJ = {
     'FNC_LBLLNK':parent.W3GUI.getArticleLabelLink,
     'FNC_MNTLST':parent.W3GUI.getArticleMonthList,
     'FNC_MNTLNK':parent.W3GUI.getArticleMonthLink,
+    'FNC_STRLNK':parent.W3GUI.getArticleStarsLink,
     'FNC_ITEMAI':parent.W3GUI.getArticleItem,
     'FNC_ITEMVW':itemvw
 };

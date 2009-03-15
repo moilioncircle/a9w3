@@ -12,18 +12,17 @@ var itemvw = function(ai){
     buff.push("</a>");
     buff.push("</td>");
     buff.push("<td><table width='100%' border='0' cellspacing='0' cellpadding='0' class='a9w3_text_plain'>");
+    buff.push("<tr><td>");
     if(parent.W3CNF.A9W3_RTMODE == parent.W3CNF.A9W3_WRITER){
-        buff.push("<tr><td>");
-        buff.push("<a href='javascript:parent.W3GUI.editPicture(\""+ai.id+"\")'><img onmouseover='this.className=\"a9w3_admin_on\"' onmouseout='this.className=\"a9w3_admin_off\"' src='../../data/image/icon-list-edit.png' title='edit'  border=0 /></a>");
-        buff.push("&nbsp;<a href='javascript:parent.W3GUI.deletePicture(\""+ai.id+"\")'><img onmouseover='this.className=\"a9w3_admin_on\"' onmouseout='this.className=\"a9w3_admin_off\"' src='../../data/image/icon-list-delete.png' title='delete' border=0 /></a>");
-        buff.push("</td></tr>");
+        buff.push("<a href='javascript:parent.W3GUI.editPicture(\""+ai.id+"\")'><img onmouseover='this.className=\"a9w3_admin_on\"' onmouseout='this.className=\"a9w3_admin_off\"' src='../../data/image/icon-list-edit.png' title='edit'  border=0 /></a>&nbsp;");
+        buff.push("<a href='javascript:parent.W3GUI.deletePicture(\""+ai.id+"\")'><img onmouseover='this.className=\"a9w3_admin_on\"' onmouseout='this.className=\"a9w3_admin_off\"' src='../../data/image/icon-list-delete.png' title='delete' border=0 /></a>&nbsp;");
     }
     var cdt = ai.ctime
     if(cdt != null)cdt = cdt.substring(0,cdt.lastIndexOf(' ')).substr(2);
-    buff.push("<tr><td>");
     buff.push("<a href='javascript:parent.W3GUI.showPictureURL(\""+ai.id+"\",\""+ai.ftype+"\")'><img src='../../data/image/icon-list-url.png' title='url' border=0 /></a>&nbsp;");
-    buff.push("<a href='javascript:parent.W3GUI.seeHitLogPicture(\""+ai.id+"\")'><img src='../../data/image/icon-list-views.png' title='view' border=0 /></a> "+ai.views);
+    buff.push("<img src='../../data/image/icon-list-star-"+(parent.W3GUI.isStarPicture(ai.id)?"t":"f")+".png' onclick='this.src=\"../../data/image/icon-list-star-\"+(parent.W3GUI.starPicture(\""+ai.id+"\")?\"t\":\"f\")+\".png\"' style='cursor:hand' title='stars' border=0 />&nbsp;");
     buff.push("</td></tr>");
+    buff.push("<tr><td><a href='javascript:parent.W3GUI.seeHitLogPicture(\""+ai.id+"\")'><img src='../../data/image/icon-list-views.png' title='view' border=0 /></a> "+ai.views+"</td></tr>");
     buff.push("<tr><td><img src='../../data/image/icon-list-ctime.png' title='created' /> "+cdt+"</td></tr>");
     buff.push("<tr><td><img src='../../data/image/icon-list-pixel.png' title='pixel' /> "+ai.pixel+"</td></tr>");
     buff.push("<tr><td><img src='../../data/image/icon-list-sizeb.png' title='size' /> "+ai.sizeb+"</td></tr>");
@@ -57,6 +56,7 @@ var INITOBJ = {
     'FNC_LBLLNK':parent.W3GUI.getGalleryLabelLink,
     'FNC_MNTLST':parent.W3GUI.getGalleryMonthList,
     'FNC_MNTLNK':parent.W3GUI.getGalleryMonthLink,
+    'FNC_STRLNK':parent.W3GUI.getGalleryStarsLink,
     'FNC_ITEMAI':parent.W3GUI.getGalleryItem,
     'FNC_ITEMVW':itemvw
 };
