@@ -4,6 +4,7 @@ var itemvw = function(ai){
     buff.push("<tr height='2'><td></td></tr>");
     buff.push("<tr>");
     buff.push("<td onmouseover='document.getElementById(\"ITEM_"+ai.id+"\").style.display=\"\"' onmouseout='document.getElementById(\"ITEM_"+ai.id+"\").style.display=\"none\"'>");
+    buff.push("<img src='../../data/image/icon-list-star-"+(parent.W3GUI.isStarAddress(ai.id)?"t":"f")+".png' onclick='this.src=\"../../data/image/icon-list-star-\"+(parent.W3GUI.starAddress(\""+ai.id+"\")?\"t\":\"f\")+\".png\"' style='cursor:hand' title='stars' border=0 />&nbsp;");
     buff.push("<a href=\""+ai.addrs+"\" class='a9w3_link_title' target='_blank'>"+parent.W3TXT.html2text(ai.title)+"</a></td>");
     buff.push("</tr>");
     buff.push("<tr>");
@@ -43,6 +44,7 @@ var INITOBJ = {
     'FNC_LBLLNK':parent.W3GUI.getAddressLabelLink,
     'FNC_MNTLST':parent.W3GUI.getAddressMonthList,
     'FNC_MNTLNK':parent.W3GUI.getAddressMonthLink,
+    'FNC_STRLNK':parent.W3GUI.getAddressStarsLink,
     'FNC_ITEMAI':parent.W3GUI.getAddressItem,
     'FNC_ITEMVW':itemvw
 };

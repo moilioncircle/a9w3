@@ -327,10 +327,17 @@ function showTotal(page){
         drawCommonLinkView(page,document.getElementById("ARTLINKS"),ls);
     });
 }
+// stars
+function showStars(page){
+    INITOBJ['FNC_STRLNK'](function(ls){
+        document.getElementById("ARTLISTS").innerHTML="";
+        drawCommonLinkView(page,document.getElementById("ARTLINKS"),ls);
+    });
+}
 
 // showpage
 function showPage(t,p){
-    if(t !="label" && t != "month") t = "total";
+    if(t !="label" && t != "month" && t != "stars") t = "total";
     
     // cache
     pageCache['type']=t;
@@ -351,9 +358,14 @@ function showPage(t,p){
         buff.push("<td style='text-align:center;'><a href='javascript:showPage(\"label\")' class='a9w3_type_link'><img alt='label' src='../../data/image/type-label.png' border=0/></a></td>");
     }
     if (t == "month"){
-        buff.push("<td style='text-align:center;'><span class='a9w3_type_on'><img alt='label' src='../../data/image/type-month.png' border=0/></span></td>");
+        buff.push("<td style='text-align:center;'><span class='a9w3_type_on'><img alt='month' src='../../data/image/type-month.png' border=0/></span></td>");
     }else{
         buff.push("<td style='text-align:center;'><a href='javascript:showPage(\"month\")' class='a9w3_type_link'><img alt='month' src='../../data/image/type-month.png' border=0/></a></td>");
+    }
+    if (t == "stars"){
+        buff.push("<td style='text-align:center;'><span class='a9w3_type_on'><img alt='month' src='../../data/image/type-stars.png' border=0/></span></td>");
+    }else{
+        buff.push("<td style='text-align:center;'><a href='javascript:showPage(\"stars\")' class='a9w3_type_link'><img alt='stars' src='../../data/image/type-stars.png' border=0/></a></td>");
     }
     buff.push("</tr>");
     buff.push("</table>");
@@ -366,6 +378,7 @@ function showPage(t,p){
 function update(){
     if(pageCache['type'] == "label") showLabel(pageCache['name'],pageCache['page']);
     else if (pageCache['type'] == "month") showMonth(pageCache['name'],pageCache['page']);
+    else if (pageCache['type'] == "stars") showStars(pageCache['name'],pageCache['page']);
     else showTotal(pageCache['page']);
 }
 
