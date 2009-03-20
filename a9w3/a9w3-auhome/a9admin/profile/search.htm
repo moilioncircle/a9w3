@@ -1,5 +1,5 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="../../data/style/black/board.css" rel="stylesheet" type="text/css">
+<link href="../../../../a9w3-engine/data/style/black/board.css" rel="stylesheet" type="text/css">
 <form id="GOOGLE_FORM" action="http://www.google.com/search" method="GET" target="_BLANK">
     <input id="SITE_NAME_1" type="hidden" name="domains" value="">
     <input id="SITE_NAME_2" type="hidden" name="sitesearch" value="">
@@ -23,7 +23,7 @@
 </form>
 <!-- -->
 <fieldset style="padding:10px;">
-<legend>SiteSearch</legend>
+<legend>3rd Search</legend>
 <table width="100%" border="0">
   <tr>
     <td>
@@ -32,21 +32,27 @@
   </tr>
   <tr>
     <td>
-        <input type="image" onClick="onSearch('GOOGLE')" src="../../data/image/btn-search-google.png" class="a9w3_board_button">
-        <input type="image" onClick="onSearch('YAHOO')"  src="../../data/image/btn-search-yahoo.png"  class="a9w3_board_button">
-        <input type="image" onClick="onSearch('BAIDU')"  src="../../data/image/btn-search-baidu.png"  class="a9w3_board_button">
+        <input type="image" onClick="onSearch('GOOGLE')" src="../../../../a9w3-engine/data/image/btn-search-google.png" class="a9w3_board_button">
+        <input type="image" onClick="onSearch('YAHOO')"  src="../../../../a9w3-engine/data/image/btn-search-yahoo.png"  class="a9w3_board_button">
+        <input type="image" onClick="onSearch('BAIDU')"  src="../../../../a9w3-engine/data/image/btn-search-baidu.png"  class="a9w3_board_button">
     </td>
   </tr>
 </table>
 </fieldset>
-<br/>
-<fieldset style="padding:10px;">
-<legend><img src='../../data/image/img-feed.png' title='rss' border=0 /></legend>
-<table width="100%" border="0">
-  <tr><td>
-    <input type="image" onClick="onFeed('atom')"  src="../../data/image/img-atom.png">
-    <input type="image" onClick="onFeed('rss')" src="../../data/image/img-rss.png">
-  </td></tr>
-</table>
-</fieldset>
-<script type="text/javascript" src="../../core/reader/list-search.js"></script>
+<script type="text/javascript">
+function onSearch(prefix){
+    var fm = document.getElementById(prefix+"_FORM");
+    document.getElementById(prefix+"_WORD").value=document.getElementById("KEYWORD").value;
+    fm.target="_BLANK";
+    fm.submit();
+}
+function init(){
+    var siteval = parent.W3CNF.CONF.getValue("search.site");
+    for(var i=1;;i++){
+        var obj = document.getElementById("SITE_NAME_"+i);
+        if(obj == null) break;
+        obj.value=siteval;
+    }
+}
+init();
+</script>

@@ -73,7 +73,10 @@ W3GUI.drawMenu = function(){
         var linkType = W3CNF.CONF.getValue("menu.item-"+i+".link.type");
         
         if(linkType == "string"){
-           linkText = W3GUI.LISTWINNAME+".location=unescape('"+escape(linkText)+"');";
+            if(linkText.indexOf('${USER_HOME}')>=0){
+                linkText = linkText.replace(/\$\{USER_HOME\}/g,W3CNF.USERHOME);
+            }
+            linkText = W3GUI.LISTWINNAME+".location=unescape('"+escape(linkText)+"');";
         }else{
             // function
         }
