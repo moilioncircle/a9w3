@@ -1,11 +1,5 @@
 ﻿<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="../../../a9w3-engine/data/style/black/board.css" rel="stylesheet" type="text/css">
-<fieldset style="padding:10px;">
-<legend>Summary Feed</legend>
-    <br/>
-    <input type="image" onClick="onFeed('atom')" src="../../../a9w3-engine/data/image/img-atom.png">
-    <input type="image" onClick="onFeed('rss')" src="../../../a9w3-engine/data/image/img-rss.png">
-</fieldset>
 <script type="text/javascript">
 function onFeed(type){
     var url = parent.W3CNF.USERHOME+"helpers/sitemap/"+type+".xml";
@@ -14,3 +8,8 @@ function onFeed(type){
     }
 }
 </script>
+<fieldset style="padding:10px;padding-top:0px">
+<legend style="padding:10px;">Summary Feed</legend>
+    <input type="image" onClick="onFeed('atom')" src="../../../a9w3-engine/data/image/img-atom.png">
+    <input type="image" onClick="onFeed('rss')" src="../../../a9w3-engine/data/image/img-rss.png">
+</fieldset>
