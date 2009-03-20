@@ -120,14 +120,25 @@ function insertText(t){
     }else if(obj.selectionStart && obj.selectionEnd){
         var at = obj.value;
         var st = at.substring(obj.selectionStart,obj.selectionEnd);
-        obj.value = at.substring(0,obj.selectionStart)+t.replace("|",st)+at.substr(obj.selectionEnd);
+        obj.value = at.substring(0,obj.selectionStart)+mergeText(t,st)+at.substr(obj.selectionEnd);
     }else if(document.selection){
         var st=document.selection.createRange().text;
         if(st == null) st = "";
-        document.selection.createRange().text = t.replace("|",st);
+        document.selection.createRange().text = mergeText(t,st);
     }else{
-        obj.value += t.replace("|","");
+        obj.value += mergeText(t,'');
     }
+}
+
+function mergeText(temp,text){
+    try{
+        if(temp.indexOf('b64')>0){
+            text = enB64(text);
+        }else if (temp.indexOf('aes')>0){
+            text = enAes(text);
+        }
+    }catch(e){};
+    return temp.replace("|",text);
 }
 
 // helper
