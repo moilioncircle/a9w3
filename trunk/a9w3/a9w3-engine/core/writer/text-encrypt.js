@@ -25,6 +25,16 @@ function decryptText(text){
     }
 }
 
+function enB64(text){
+    if(text == null || text == "") return "";
+    return format(b64Impl.encode(text));
+}
+
+function deB64(text){
+    if(text == null || text == "") return "";
+    return b64Impl.decode(text.replace(/\s/gm,''));
+}
+
 function enAes(text){
     if(text == null || text == "") return "";
     try{
@@ -44,7 +54,7 @@ function deAes(text){
         var passwd = window.prompt('please input your passwd','');
         if(passwd ==null || passwd =='') return "";
         
-        return aesImpl.decrypt(b64Impl.decode(text.replace(/\s/gm,'')),passwd,256);
+        return aesImpl.decrypt(deB64(text),passwd,256);
     }catch(e){
         alert("failed to get base64 decode:"+e);
     }
