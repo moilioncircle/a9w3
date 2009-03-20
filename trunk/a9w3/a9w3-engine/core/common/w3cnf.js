@@ -66,14 +66,21 @@ W3CNF.USER = function(){
 W3CNF.USERHOME = W3CNF.A9W3HOME+"a9w3-auhome/"+W3CNF.USER+"/";
 
 /** sync and test speed */
+W3CNF.transSysVar = function(text){
+    if(text == null) return text;
+    if(text.indexOf('${USER_HOME}')>=0){
+        text = text.replace(/\$\{USER_HOME\}/g,W3CNF.USERHOME.substr(0,W3CNF.USERHOME.length-1)); // without '/'
+    }
+    return text;
+}
 var tmsta = (new Date()).getTime();
 var uconf = A9Loader.syncLoadText(W3CNF.USERHOME+"profile/config.htm");
+    uconf = W3CNF.transSysVar(uconf);
 var tmcst = (new Date()).getTime()-tmsta;
 W3CNF.SPEED_CHAR_BS = tmcst>0?Math.ceil(uconf.length*1000/tmcst):-1;
 
 W3CNF.CONF = new CnfReaderClass();
 W3CNF.CONF.loadFromText(uconf);
-
 W3CNF.LANG = W3CNF.CONF.getValue("lang");
 
 /** async */
