@@ -49,18 +49,25 @@ menu.item-6.icon = a9w3-engine/data/image/menu-search.png
 menu.item-6.info.type = string
 menu.item-6.info.text = 
 menu.item-6.link.type = string
-menu.item-6.link.text = a9w3-engine/view/reader/list-search.htm
+menu.item-6.link.text = ${USER_HOME}/profile/search.htm
 
-menu.item-7.name = status
-menu.item-7.icon = a9w3-engine/data/image/menu-status.png
-menu.item-7.info.type = function
-menu.item-7.info.text = function(){return ((new Date())-__TIME_START__)+"<br>"+(W3CNF.SPEED_CHAR_BS<0?"&gt;&gt;1m":(W3CNF.SPEED_CHAR_BS>1000?Math.ceil(W3CNF.SPEED_CHAR_BS/1000)+"k":W3CNF.SPEED_CHAR_BS+"b"));}
+menu.item-7.name = search
+menu.item-7.icon = a9w3-engine/data/image/menu-feeds.png
+menu.item-7.info.type = string
+menu.item-7.info.text = 
 menu.item-7.link.type = string
-menu.item-7.link.text = a9w3-engine/view/reader/list-status.htm
+menu.item-7.link.text = ${USER_HOME}/profile/feed.htm
 
-menu.item-8.name = admin
-menu.item-8.icon = a9w3-engine/data/image/menu-admin.png
-menu.item-8.info.type = config.stat
-menu.item-8.info.text = admin
+menu.item-8.name = status
+menu.item-8.icon = a9w3-engine/data/image/menu-status.png
+menu.item-8.info.type = function
+menu.item-8.info.text = function(){return ((new Date())-__TIME_START__)+"<br>"+(W3CNF.SPEED_CHAR_BS<0?"&gt;&gt;1m":(W3CNF.SPEED_CHAR_BS>1000?Math.ceil(W3CNF.SPEED_CHAR_BS/1000)+"k":W3CNF.SPEED_CHAR_BS+"b"));}
 menu.item-8.link.type = string
-menu.item-8.link.text = a9w3-engine/view/reader/list-admin.htm
+menu.item-8.link.text = a9w3-engine/view/reader/list-status.htm
+
+menu.item-9.name = admin
+menu.item-9.icon = a9w3-engine/data/image/menu-admin.png
+menu.item-9.info.type = config.stat
+menu.item-9.info.text = admin
+menu.item-9.link.type = string
+menu.item-9.link.text = a9w3-engine/view/reader/list-admin.htm
