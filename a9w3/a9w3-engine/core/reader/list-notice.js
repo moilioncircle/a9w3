@@ -47,7 +47,6 @@ drawNoticeLinkView = function(page,obj,lst){
     buff.push("<div class='a9w3_text_page_box'>");
     if(parent.W3CNF.A9W3_RTMODE == parent.W3CNF.A9W3_WRITER){
         buff.push("<a href='javascript:parent.W3GUI.editNotice()'><img onmouseover='this.className=\"a9w3_admin_on\"' onmouseout='this.className=\"a9w3_admin_off\"' src='../../data/image/icon-list-new.png' title='edit'  border=0 /></a>");
-        buff.push("&nbsp;");
     }
 
     for(var j=0;j<show.length;j++){
@@ -77,8 +76,8 @@ drawNoticeLinkView = function(page,obj,lst){
             buff.push("<tr>");
             buff.push("<td class='a9w3_text_plain'>");
             if(parent.W3CNF.A9W3_RTMODE == parent.W3CNF.A9W3_WRITER){
-                buff.push("<a href='javascript:parent.W3GUI.editNotice(\""+ai.id+"\")'><img onmouseover='this.className=\"a9w3_admin_on\"' onmouseout='this.className=\"a9w3_admin_off\"' src='../../data/image/icon-list-edit.png' title='edit'  border=0 /></a>");
-                buff.push("&nbsp;<a href='javascript:parent.W3GUI.deleteNotice(\""+ai.id+"\")'><img onmouseover='this.className=\"a9w3_admin_on\"' onmouseout='this.className=\"a9w3_admin_off\"' src='../../data/image/icon-list-delete.png' title='delete'  border=0 /></a>&nbsp;");
+                buff.push("<img onclick='parent.W3GUI.editNotice(\""+ai.id+"\")' onmouseover='this.className=\"a9w3_admin_on\"' onmouseout='this.className=\"a9w3_admin_off\"' src='../../data/image/icon-list-edit.png' title='edit'  border=0 />");
+                buff.push("<img onclick='parent.W3GUI.deleteNotice(\""+ai.id+"\")' onmouseover='this.className=\"a9w3_admin_on\"' onmouseout='this.className=\"a9w3_admin_off\"' src='../../data/image/icon-list-delete.png' title='delete'  border=0 />");
             }
             var cdt = ai.ctime
             if(cdt != null)cdt = cdt.substring(0,cdt.lastIndexOf(' '));
