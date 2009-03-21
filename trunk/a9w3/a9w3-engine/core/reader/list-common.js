@@ -268,7 +268,6 @@ function drawCommonLinkView(page,obj,lst){
     buff.push("<div class='a9w3_text_page_box'>");
     if(parent.W3CNF.A9W3_RTMODE == parent.W3CNF.A9W3_WRITER){
         buff.push("<a href='javascript:"+INITOBJ['VAR_FUNNEW']+"()'><img onmouseover='this.className=\"a9w3_admin_on\"' onmouseout='this.className=\"a9w3_admin_off\"' src='../../data/image/icon-list-new.png' title='edit'  border=0 /></a>");
-        buff.push("&nbsp;&nbsp;");
     }
 
     for(var j=0;j<show.length;j++){
