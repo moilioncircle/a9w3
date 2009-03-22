@@ -169,8 +169,11 @@ W3GUI.getCommonTotalLink = function(topk,ttlk,allk,url,func){
         if(W3GUI.POOL[allk] == null){
             var arr=[];
             for(var i=0;i<W3GUI.POOL[topk].length;i++){
-                arr.push(W3GUI.POOL[topk][i]);
+                if(W3GUI.POOL[topk][i] != ''){
+                    arr.push(W3GUI.POOL[topk][i]);
+                }
             }
+            
             for(var j=0;j<ls.length;j++){
                 var more = false;
                 for(var i=0;i<W3GUI.POOL[topk].length;i++){
@@ -181,6 +184,7 @@ W3GUI.getCommonTotalLink = function(topk,ttlk,allk,url,func){
                 }
                 if(!more) arr.push(ls[j]);
             }
+
             W3GUI.POOL[allk]=arr;
         }
         func(W3GUI.POOL[allk]);
@@ -400,15 +404,101 @@ W3GUI.isStarPicture = function(id){
 W3GUI.isStarAddress = function(id){
     return W3GUI._isStarItem_(W3GUI.KEY.ADD_STR_LNK,id);
 }
+W3GUI._isStarItem_ = function(key,id){
+    if(key == null) return false;
+    
+    if(W3GUI.POOL[key] == null){
+        W3GUI._readCookie_(key,null);
+    }
+    for(var i=0;i<W3GUI.POOL[key].length;i++){
+        if(W3GUI.POOL[key][i] == id) return true;
+    }
+    return false;
+}
+
+W3GUI._readCookie_ = function(key,func){
+    if(key == null){alert("key@_starCookie_ is null");return;}
+    var ckkeys = [W3GUI.KEY.ART_STR_LNK,W3GUI.KEY.ADD_STR_LNK,W3GUI.KEY.GLY_STR_LNK];
+    try{
+        if(W3GUI.POOL[key] == null){
+            // get cookie
+            var ckarr = document.cookie.split(/; */);
+            for(var i=0;i<ckarr.length;i++){
+                var pos = ckarr[i].indexOf('=');
+                if(pos<0) continue;
+                var k = ckarr[i].substr(0,pos).replace(/\s*/g,'');
+                var v = unescape(ckarr[i].substr(pos+1));
+                for(var j=0;j<ckkeys.length;j++){
+                    if(k==ckkeys[j]){
+                        W3GUI.POOL[k]=v.split("|");
+                        break;
+                    }
+                }
+            }
+            for(var i=0;i<ckkeys.length;i++){
+                if(W3GUI.POOL[ckkeys[i]] == null){
+                    W3GUI.POOL[ckkeys[i]] = [];
+                }
+            }
+        }
+    }catch(e){
+        alert(e);
+        for(var i=0;i<ckkeys.length;i++){
+            W3GUI.POOL[ckkeys[i]] = [];
+        }
+    }
+    if(func != null){
+        func(W3GUI.POOL[key]);
+    }
+}
+W3GUI._writeCookie_ = function(key,id){
+    if(key == null) return false;
+    var isStar = false;
+    if(W3GUI.POOL[key] == null){
+        W3GUI._readCookie_(key,null);
+    }
+    var arr = [];
+    for(var i=0;i<W3GUI.POOL[key].length;i++){
+        if(W3GUI.POOL[key][i] == id){
+            isStar = true;
+        }
+        arr.push(W3GUI.POOL[key][i]);
+    }
+    if(!isStar){
+        arr.push(id);
+    }
+    
+    W3GUI.POOL[key]=arr;
+    
+    var ckkeys = [W3GUI.KEY.ART_STR_LNK,W3GUI.KEY.ADD_STR_LNK,W3GUI.KEY.GLY_STR_LNK];
+    var ckbuff = [];
+    for(var i=0;i<ckkeys.length;i++){
+        ckbuff.push(ckkeys[i]+"="+escape(W3GUI.POOL[ckkeys[i]].join("|"))); // key:escape(val)
+    }
+    var days  = 360;
+    var expd = new Date();
+        expd.setTime(expd.getTime() + days*24*60*60*1000);
+    var expstr = ";expires=" + expd.toGMTString();
+    try{
+        for(var i=0;i<ckbuff.length;i++){
+            document.cookie = ckbuff[i]+expstr;
+        }
+    }catch(e){
+        alert(e);
+        return false;
+    }
+    return !isStar;
+}
+
 // top
 W3GUI.topArticle = function(id){
-    return W3GUI._topItem_(W3GUI.KEY.ART_TOP_LNK,id);
+    return W3GUI._topItem_(W3GUI.KEY.ART_TOP_LNK,id,'paper.edit.settop');
 }
 W3GUI.topPicture = function(id){
-    return W3GUI._topItem_(W3GUI.KEY.GLY_TOP_LNK,id);
+    return W3GUI._topItem_(W3GUI.KEY.GLY_TOP_LNK,id,'album.edit.settop');
 }
 W3GUI.topAddress = function(id){
-    return W3GUI._topItem_(W3GUI.KEY.ADD_TOP_LNK,id);
+    return W3GUI._topItem_(W3GUI.KEY.ADD_TOP_LNK,id,'links.edit.settop');
 }
 W3GUI.isTopArticle = function(id){
     return W3GUI._isTopItem_(W3GUI.KEY.ART_TOP_LNK,id);
@@ -420,7 +510,73 @@ W3GUI.isTopAddress = function(id){
     return W3GUI._isTopItem_(W3GUI.KEY.ADD_TOP_LNK,id);
 }
 
-////
+W3GUI._isTopItem_ = function(key,id){
+    if(key == null) return false;
+    W3GUI._initTopLink_(key);
+    for(var i=0;i<W3GUI.POOL[key].length;i++){
+        if(W3GUI.POOL[key][i] == id) return true;
+    }
+    return false;
+}
+
+W3GUI._topItem_ = function(key,id,code){
+    if(key == null) return false;
+    W3GUI._initTopLink_(key);
+    var isTop = false;
+    var arr = [];
+    for(var i=W3GUI.POOL[key].length-1;i>=0;i--){
+        if(W3GUI.POOL[key][i] == id){
+            isTop = true;
+            continue;
+        }
+        arr.push(W3GUI.POOL[key][i]);
+    }
+    if(!isTop){
+        arr.push(id);
+    }
+    
+    var url = W3CNF.getServerURL(code);
+    url = W3GUI.wrapUID(url)+"&PID="+id;
+    
+    var rtv = A9Loader.syncLoadText(url);
+    rtv = W3TXT.trimEmpty(rtv);
+    if(rtv == "info.success"){
+        W3GUI.POOL[key] = arr.reverse();
+        return !isTop;
+    }else{
+        alert(W3CNF.getI18nString(rtv));
+    }
+    return isTop;
+}
+
+W3GUI._initTopLink_ = function(key){
+    if(key == null) return;
+    if(W3GUI.POOL[key] == null){
+        var url;
+        if(key==W3GUI.KEY.ART_TOP_LNK){
+            url = W3CNF.USERHOME+"indexer/article/total/top.htm";
+        }else if(key==W3GUI.KEY.ADD_TOP_LNK){
+            url = W3CNF.USERHOME+"indexer/address/total/top.htm";
+        }else if(key==W3GUI.KEY.GLY_TOP_LNK){
+            url = W3CNF.USERHOME+"indexer/gallery/total/top.htm";
+        }else{
+            W3GUI.POOL[key]=[];
+            return;
+        }
+        var rtv = A9Loader.syncLoadText(url);
+        var arr = [];
+        if(rtv != null && rtv != ""){
+            var tmp = rtv.split(/[\r\n]+/);
+            for(var i=0; i<tmp.length; i++) {
+                if(tmp[i] != "")
+                arr.push(W3TXT.line2text(tmp[i]));
+            }
+        }
+        W3GUI.POOL[key]=arr;
+    }
+}
+
+// hitlog
 W3GUI.seeHitLogArticle = function(id){
     W3GUI.ITEMWINOBJW.location=W3CNF.A9W3HOME+"a9w3-engine/view/reader/item-hitlog.htm?article/"+id;
 }
@@ -548,7 +704,7 @@ W3GUI.deleteCommon = function(code,pid,key){
     }
 }
 
-/** private */
+/** */
 W3GUI._callbackObject_ = function(id,clzz,key,urls,func){
     if(key == null){alert("key@_callbackObject_ is null");return;}
     if(W3GUI.POOL[key] == null){
@@ -603,138 +759,6 @@ W3GUI._callbackArray_ = function(key,url,func){
     }else{
         func(W3GUI.POOL[key]);
     }
-}
-W3GUI._isStarItem_ = function(key,id){
-    if(key == null) return false;
-    
-    if(W3GUI.POOL[key] == null){
-        W3GUI._readCookie_(key,null);
-    }
-    for(var i=0;i<W3GUI.POOL[key].length;i++){
-        if(W3GUI.POOL[key][i] == id) return true;
-    }
-    return false;
-}
-
-W3GUI._isTopItem_ = function(key,id){
-    if(key == null) return false;
-    W3GUI._initTopLink_(key);
-    for(var i=0;i<W3GUI.POOL[key].length;i++){
-        if(W3GUI.POOL[key][i] == id) return true;
-    }
-    return false;
-}
-
-W3GUI._topItem_ = function(key,id){
-    alert('not impl');
-    return true;
-}
-
-W3GUI._initTopLink_ = function(key){
-    if(key == null) return;
-    if(W3GUI.POOL[key] == null){
-        var url;
-        if(key==W3GUI.KEY.ART_TOP_LNK){
-            url = W3CNF.USERHOME+"indexer/article/total/top.htm";
-        }else if(key==W3GUI.KEY.ADD_TOP_LNK){
-            url = W3CNF.USERHOME+"indexer/address/total/top.htm";
-        }else if(key==W3GUI.KEY.GLY_TOP_LNK){
-            url = W3CNF.USERHOME+"indexer/gallery/total/top.htm";
-        }else{
-            W3GUI.POOL[key]=[];
-            return;
-        }
-        var rtv = A9Loader.syncLoadText(url);
-        rtv = W3TXT.trimEmpty(rtv);
-        var arr = [];
-        if(rtv != null && rtv != ""){
-            var tmp = rtv.split(/[\r\n]+/);
-            for(var i=0; i<tmp.length; i++) {
-                if(tmp[i] != "")
-                arr.push(W3TXT.line2text(tmp[i]));
-            }
-        }
-        W3GUI.POOL[key]=arr;
-    }
-}
-
-W3GUI._readCookie_ = function(key,func){
-    if(key == null){alert("key@_starCookie_ is null");return;}
-    var ckkeys = [W3GUI.KEY.ART_STR_LNK,W3GUI.KEY.ADD_STR_LNK,W3GUI.KEY.GLY_STR_LNK];
-    try{
-        if(W3GUI.POOL[key] == null){
-            // get cookie
-            var ckarr = document.cookie.split(/; */);
-            for(var i=0;i<ckarr.length;i++){
-                var pos = ckarr[i].indexOf('=');
-                if(pos<0) continue;
-                var k = ckarr[i].substr(0,pos).replace(/\s*/g,'');
-                var v = unescape(ckarr[i].substr(pos+1));
-                for(var j=0;j<ckkeys.length;j++){
-                    if(k==ckkeys[j]){
-                        W3GUI.POOL[k]=v.split("|");
-                        break;
-                    }
-                }
-            }
-            for(var i=0;i<ckkeys.length;i++){
-                if(W3GUI.POOL[ckkeys[i]] == null){
-                    W3GUI.POOL[ckkeys[i]] = [];
-                }
-            }
-        }
-    }catch(e){
-        alert(e);
-        for(var i=0;i<ckkeys.length;i++){
-            W3GUI.POOL[ckkeys[i]] = [];
-        }
-    }
-    if(func != null){
-        func(W3GUI.POOL[key]);
-    }
-}
-W3GUI._writeCookie_ = function(key,id){
-    if(key == null) return false;
-    var isStar = false;
-    if(W3GUI.POOL[key] == null){
-        W3GUI._readCookie_(key,null);
-    }
-    
-    for(var i=0;i<W3GUI.POOL[key].length;i++){
-        if(W3GUI.POOL[key][i] == id){
-            W3GUI.POOL[key][i] = null;
-            isStar = true;
-            break;
-        }
-    }
-
-    if(isStar){
-        var tmparr = [];
-        for(var i=0;i<W3GUI.POOL[key].length;i++){
-            if(W3GUI.POOL[key][i] != null) tmparr.push(W3GUI.POOL[key][i]);
-        }
-        W3GUI.POOL[key]=tmparr;
-    }else{
-        W3GUI.POOL[key].push(id);
-    }
-    var ckkeys = [W3GUI.KEY.ART_STR_LNK,W3GUI.KEY.ADD_STR_LNK,W3GUI.KEY.GLY_STR_LNK];
-    var ckbuff = [];
-    for(var i=0;i<ckkeys.length;i++){
-        ckbuff.push(ckkeys[i]+"="+escape(W3GUI.POOL[ckkeys[i]].join("|"))); // key:escape(val)
-    }
-    var days  = 360;
-    var expd = new Date();
-        expd.setTime(expd.getTime() + days*24*60*60*1000);
-    var expstr = ";expires=" + expd.toGMTString();
-    try{
-        for(var i=0;i<ckbuff.length;i++){
-            document.cookie = ckbuff[i]+expstr;
-        }
-    }catch(e){
-        alert(e);
-        return false;
-    }
-    return !isStar;
 }
 
 W3GUI.avoidClientCache = function(urls){

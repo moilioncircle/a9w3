@@ -117,8 +117,7 @@ W3CNF.getI18nString = function(){
     
     return function(key){
         var str = lc.getValue(key);
-        if(str == null || str.length ==0) str = en.getValue(key);
-        //return key+"\n"+str;
+        if(str == null || str.length ==0) str = "key not found:\n"+key;
         return str;
     }
 }();
