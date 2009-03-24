@@ -7,7 +7,7 @@
     <lastBuildDate>${time}</lastBuildDate>
     <!-- foreach ${item} in ${item_list} -->
     <item>
-       <title>${item:title}</title>
+       <title>${item:type}:${item:title}</title>
        <link>http://${site}/${item:ulink}</link>
        <guid>${item:ulink}</guid>
        <category>${item:label}</category>
