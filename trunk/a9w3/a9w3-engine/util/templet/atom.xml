@@ -7,7 +7,7 @@
   <id>http://${site}/a9w3-auhome/${a9user}</id>
   <!-- foreach ${item} in ${item_list} -->
   <entry>
-    <title>${item:title}</title>
+    <title>${item:type}:${item:title}</title>
     <link href="http://${site}/${item:ulink}"/>
     <id>${item:ulink}</id>
     <category>${item:label}</category>

@@ -51,6 +51,7 @@ foreach($art_ls as $pid){ // article
     $kval = readKeyValues($hdfl);
     $mtme = filemtime($hdfl);
     $item = array(
+        'type'      =>'article',
         'title'     =>htmlspecialchars($kval['title']),
         'brief'     =>htmlspecialchars($kval['brief']),
         'label'     =>'article '.htmlspecialchars($kval['label']),
@@ -65,6 +66,7 @@ foreach($gal_ls as $pid){ // gallery
     $kval = readKeyValues($hdfl);
     $mtme = filemtime($hdfl);
     $item = array(
+        'type'      =>'gallery',
         'title'     =>htmlspecialchars($kval['brief']),
         'brief'     =>'pixel:'.$kval['pixel'].' size:'.$kval['sizeb'].' type:'.$kval['ftype'],
         'label'     =>'gallery '.htmlspecialchars($kval['label']),
@@ -79,6 +81,7 @@ foreach($ntc_ls as $pid){ // notice
     $kval = readKeyValues($hdfl);
     $mtme = filemtime($hdfl);
     $item = array(
+        'type'      =>'notice',
         'title'     =>htmlspecialchars($kval['title']),
         'brief'     =>htmlspecialchars($kval['brief']),
         'label'     =>'notice',
