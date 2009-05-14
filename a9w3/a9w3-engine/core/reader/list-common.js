@@ -314,7 +314,7 @@ function showMonth(par,page){
             par = ls[0];
         }
         drawCommonListMonthView(par,document.getElementById("ARTLISTS"),ls);
-        INITOBJ['FNC_MNTLST'](par,function(ls2){
+        INITOBJ['FNC_MNTLNK'](par,function(ls2){
             drawCommonLinkView(page,document.getElementById("ARTLINKS"),ls2);
         });
     });
