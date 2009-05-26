@@ -14,7 +14,7 @@ var itemvw = function(ai){
     if(parent.W3CNF.A9W3_RTMODE == parent.W3CNF.A9W3_WRITER){
         buff.push("<img onclick='parent.W3GUI.editAddress(\""+ai.id+"\")' onmouseover='this.className=\"a9w3_admin_on\"' onmouseout='this.className=\"a9w3_admin_off\"' src='../../data/image/icon-list-edit.png' title='edit'  border=0 />");
         buff.push("<img onclick='parent.W3GUI.deleteAddress(\""+ai.id+"\")' onmouseover='this.className=\"a9w3_admin_on\"' onmouseout='this.className=\"a9w3_admin_off\"' src='../../data/image/icon-list-delete.png' title='delete'  border=0 />");
-        buff.push("<img onclick='this.src=\"../../data/image/icon-list-top-\"+(parent.W3GUI.topAddress(\""+ai.id+"\")?\"t\":\"f\")+\".png\"' onmouseover='this.className=\"a9w3_admin_on\"' onmouseout='this.className=\"a9w3_admin_off\"' src='../../data/image/icon-list-top-"+(parent.W3GUI.isTopAddress(ai.id)?'t':'f')+".png' title='delete' border=0 />");
+        buff.push("<img onclick='this.src=\"../../data/image/icon-list-top-\"+(parent.W3GUI.topAddress(\""+ai.id+"\")?\"t\":\"f\")+\".png\"' onmouseover='this.className=\"a9w3_admin_on\"' onmouseout='this.className=\"a9w3_admin_off\"' src='../../data/image/icon-list-top-"+(parent.W3GUI.isTopAddress(ai.id)?'t':'f')+".png' title='top' border=0 />");
     }
     buff.push("<img src='../../data/image/icon-list-ctime.png' title='created' /> "+cdt);
     buff.push("</td>");
