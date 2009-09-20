@@ -184,21 +184,28 @@ function onPaperResponse(){
     }
 }
 
-function onSwitchEditor(isA9){
+function onSwitchEditor(name){
     bodyTxt = __EDIOR__.getText();
-    initEditor(isA9);
+    initEditor(name);
 }
 // helper
 
-function initEditor(isA9){
-    if(isA9){
+function initEditor(name){
+    if(name=="a9text"){
         __EDIOR__.location = parent.W3CNF.A9W3HOME+"a9w3-engine/view/writer/ide-a9text.htm?"+docPath;
-        document.getElementById("__BTN_TINYMCE__").disabled = false;
-        document.getElementById("__BTN_A9TEXT__").disabled = true;
-    }else{
+        document.getElementById("__BTN_TINYMCE__").disabled  = false;
+        document.getElementById("__BTN_PURETEXT__").disabled = false;
+        document.getElementById("__BTN_A9TEXT__").disabled   = true;
+    }else if (name=="tinymce"){
         __EDIOR__.location = parent.W3CNF.A9W3HOME+"a9w3-engine/view/writer/ide-tinymce.htm?"+docPath;
-        document.getElementById("__BTN_TINYMCE__").disabled = true;
-        document.getElementById("__BTN_A9TEXT__").disabled = false;
+        document.getElementById("__BTN_TINYMCE__").disabled  = true;
+        document.getElementById("__BTN_PURETEXT__").disabled = false;
+        document.getElementById("__BTN_A9TEXT__").disabled   = false;
+    }else{
+        __EDIOR__.location = parent.W3CNF.A9W3HOME+"a9w3-engine/view/writer/ide-puretext.htm?"+docPath;
+        document.getElementById("__BTN_PURETEXT__").disabled = true;
+        document.getElementById("__BTN_TINYMCE__").disabled  = false;
+        document.getElementById("__BTN_A9TEXT__").disabled   = false;
     }
 }
 // ide paper
@@ -270,7 +277,7 @@ function init(){
         // body
         parent.A9Loader.asyncLoadText(function(u,t){
             bodyTxt = t;
-            initEditor(isA9text(t));
+            initEditor(isA9text(t)?"a9text":"puretext");
         },docPath+"body.htm");
         
         document.getElementById("__BTN_DELETE__").disabled=false;
