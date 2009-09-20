@@ -1,0 +1,16 @@
+﻿BODY {
+	overflow:hidden;
+	margin: 0px;
+    width:600px;
+	font-size:12px;
+}
+TEXTAREA
+{
+    overflow:auto;
+	width:100%;
+	height:575px;
+	margin: 0px;
+	padding: 0px;
+    font-family: "宋体",Simsun;
+	border: 1px solid #44aadd;
+}
