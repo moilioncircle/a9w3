@@ -281,8 +281,8 @@ var A9TextParser = function()
         for(var i = tier + token.length; i>=0; i--) headBlank += " ";
         
         // organise line
-        var cut = pos+1;
-        for(var i = pos+1; i<para.length;i++)
+        var cut = pos+token.length;
+        for(var i = cut; i<para.length;i++)
             if(".) 　\t".indexOf(para.charAt(i)) < 0)
             {
                 cut = i;
