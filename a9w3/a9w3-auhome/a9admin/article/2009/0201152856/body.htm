@@ -64,8 +64,10 @@ a9user 都在a9w3-auhome目录下,用户名和目录名是一致的.
 
 以默认用户a9admin为例,配置文件都在a9admin/profile目录下.
   config.htm 是用户主配置文件.
-  passwd.htm 是用户的密码文件.
+  passwd.htm 是用户的密码文件（初始为A9w3_Can_Not_Do_Evil）.
   timeoffset.htm 是用户时间减去服务器时间的差(秒,有符号)
+
+注：密码为SHA1散列。[[生产密码的工具=&gt;/a9w3-engine/3rdp/a9text/tools/minitools/code-util.htm]]
 
 4.2. engine的配置
 ^^^^^^^^^^^^^^^^^
@@ -99,8 +101,9 @@ a9user 都在a9w3-auhome目录下,用户名和目录名是一致的.
 6. 备份与同步
 ^^^^^^^^^^^^^
 备份数据,直接备份用户目录即可,a9w3-auhome/$a9user
+Web功能是通过管理员页面，对用户目录进行备份(Backup)。
 
-同步数据,一般用于本地文件和远程服务器间(ftp方式).
+同步数据,一般用于本地文件和远程服务器间(仅限于ftp方式).
 本地功能于以下位置,
 a9w3-engine/util/sitectrl/sitemanager.php   本地脚本
 a9w3-engine/util/sitectrl/history.txt       操作历史/手册
