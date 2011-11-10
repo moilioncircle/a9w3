@@ -51,6 +51,14 @@ function onSitefp(){
     fm.submit();
 }
 
+function onBackup(){
+    var url = parent.W3CNF.getServerURL("admin.backup");
+    url = parent.W3GUI.wrapUID(url);
+    var fm = document.getElementById("__DATA_FORM__");
+    fm.action=url;
+    fm.submit();
+}
+
 function onSitemap()
 {
     var url = parent.W3CNF.getServerURL("admin.sitemap");
