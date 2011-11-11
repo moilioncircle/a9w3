@@ -1,0 +1,34 @@
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+<pre>
+Manual for Admin
+^^^^^^^^^^^^^^^^
+ - 作者：臭豆腐[trydofor.com]
+ - 日期：2011-11-11
+ - 授权：署名-非商业-保持一致 1.0 协议
+ - 声明：拷贝、分发、呈现和表演本作品，请保留以上全部信息。
+
+================== tty: ssh ======================
+# ssh login
+# http://sourceforge.net/apps/trac/sourceforge/wiki/Shell%20service
+ssh -t trydofor,a9w3@shell.sourceforge.net create
+
+# clear the workspace
+cd workspace
+rm -rf a9w3
+
+# zip the head version
+svn export https://a9w3.svn.sourceforge.net/svnroot/a9w3/trunk/a9w3 a9w3
+cd a9w3
+zip -r /home/project-web/a9w3/htdocs/a9w3.zip *
+
+# deploy to web
+cd /home/project-web/a9w3/htdocs/
+unzip -o a9w3.zip
+
+# logout
+shutdown
+exit
+==================================================
+</pre>
+<script type='text/javascript' src='../../../../../a9w3-engine/3rdp/a9text/a9loader.js'></script>
+<script type='text/javascript' src='../../../../../a9w3-engine/core/reader/item-a9text.js'></script>
