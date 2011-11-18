@@ -1,0 +1,31 @@
+==================== sync data manual ====================
+WARN: 
+1) sync will overwrite data without any warning.
+2) backup a9user is recommended
+
+STEP:
+A) steps at your a9w3 website. eg www.trydofor.com
+   1) lognin to your a9w3 website. eg www.trydofor.com
+   2) make the fingerprint at admin page and save it as 'rf.txt'
+B) steps at your local a9we-home dir. eg D:/a9zones/a9w3/
+   1) cd a9w3-engine/util/sitectrl/
+   2) make local fingerprint and save it as 'lf.txt'
+      php -f sitemanager.php sitefp trydofor -ex=.*/\.svn/.* >./lf.txt
+   3) make the diff and save it as 'df.txt'
+      php -f sitemanager.php difffp ./lf.txt ./rf.txt -ex=.*/sitectrl/.*>./df.txt
+   4) sync all by ftp or http
+      php -f sitemanager.php ftpxfp ./df.txt trydofor:---@--- web
+      or
+      php -f sitemanager.php httpfp ./df.txt http://www.trydofor.com
+
+==================== usefull commands ====================
+# make all fingerprint to ./lf.txt
+php -f sitemanager.php sitefp trydofor -ex=.*/\.svn/.* >./lf.txt
+# make home fingerprint to ./lf.txt
+php -f sitemanager.php sitefp trydofor -in=.*/a9w3-auhome/.*  -ex=.*/\.svn/.* >./lf.txt
+# make diff with remote(rf.txt) to ./df.txt
+php -f sitemanager.php difffp ./lf.txt ./rf.txt -ex=.*/sitectrl/.*>./df.txt
+# sync by ftp (put/get/delete)
+php -f sitemanager.php ftpxfp ./df.txt trydofor:---@--- web
+# sync by http (get only)
+php -f sitemanager.php httpfp ./df.txt http://www.trydofor.com
